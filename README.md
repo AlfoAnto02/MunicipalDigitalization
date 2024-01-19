@@ -1,11 +1,26 @@
-# MunicipalDigitalization
-A Software Engineering project for university for the digitalization of a municipal area.
+# api
 
-This Project is developed following the Unified Process Model. The total number of Iteration of this project are 4 because the first one (Studying the fattibility of the project) isn't necessary.
-As a common UP model Project, we defined a TimeStamp for each Iteration and some goals to follow.
-The first One iteration was a 1 week Iteration, we analyzed the Actors of the Project and defined a total of 30 use cases and 20% of those were specified (Flow of events, analysis Mode and Project Model). We also created a first base version of the code.
-The second Iteration was a 2 week Iteration. We decided that this iteration should be the longest one because is the most important in the project. In this Iteration we had to define and create an executable Baseline. We had to specified the 70/80% of the use cases
-and we also had to add new ones. As required from the UP, we created the core code of the project.
-Third Iteration ->
-Fourth Itertaion ->
+This is a Java/Kotlin project managed with Gradle. The project is under the group "it.cs.unicam" and the current version is "1.0-SNAPSHOT".
 
+## Project Structure
+
+The project is structured as follows:
+
+- `settings.gradle.kts`: This file sets the root project name.
+- `build.gradle.kts`: This file contains the project's build configurations, including plugins, repositories, dependencies, and tasks.
+
+## Dependencies
+
+The project uses the following dependencies:
+
+- JUnit for testing.
+
+## Java Version
+
+The project is set to use Java language version 21.
+
+## MunicipalDigitalization
+
+This project is part of a Software Engineering university project for the digitalization of a municipal area.
+
+The project follows the Unified Process Model with a total of four iterations. The first iteration involved analyzing the project's actors and defining use cases. The second iteration, the longest, involved defining and creating an executable baseline and specifying the majority of the use cases. The third and fourth iterations are yet to be defined.
