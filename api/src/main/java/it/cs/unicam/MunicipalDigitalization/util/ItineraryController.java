@@ -1,7 +1,8 @@
 package it.cs.unicam.MunicipalDigitalization.util;
 
-import it.cs.unicam.MunicipalDigitalization.io.IItinerary;
-import it.cs.unicam.MunicipalDigitalization.io.IPOI;
+import it.cs.unicam.MunicipalDigitalization.io.IContributorsView;
+import it.cs.unicam.MunicipalDigitalization.model.IItinerary;
+import it.cs.unicam.MunicipalDigitalization.model.IPOI;
 import it.cs.unicam.MunicipalDigitalization.model.PendingItinerary;
 import it.cs.unicam.MunicipalDigitalization.model.Platform;
 

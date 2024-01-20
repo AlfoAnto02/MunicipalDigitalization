@@ -1,6 +1,7 @@
 package it.cs.unicam.MunicipalDigitalization.util;
 
-import it.cs.unicam.MunicipalDigitalization.io.IPOI;
+import it.cs.unicam.MunicipalDigitalization.io.IContributorsView;
+import it.cs.unicam.MunicipalDigitalization.model.IPOI;
 import it.cs.unicam.MunicipalDigitalization.model.PendingPOI;
 import it.cs.unicam.MunicipalDigitalization.model.Platform;
 

@@ -1,7 +1,5 @@
 package it.cs.unicam.MunicipalDigitalization.model;
 
-import it.cs.unicam.MunicipalDigitalization.io.IItinerary;
-import it.cs.unicam.MunicipalDigitalization.io.IPOI;
 import it.cs.unicam.MunicipalDigitalization.util.Coordinates;
 import it.cs.unicam.MunicipalDigitalization.util.ID;
 
