@@ -1,7 +1,10 @@
 package it.cs.unicam.MunicipalDigitalization.io;
 
+import it.cs.unicam.MunicipalDigitalization.model.Platform;
+import it.cs.unicam.MunicipalDigitalization.util.Coordinates;
 import it.cs.unicam.MunicipalDigitalization.util.ItineraryController;
 import it.cs.unicam.MunicipalDigitalization.util.POIController;
+import it.cs.unicam.MunicipalDigitalization.util.Type;
 
 import java.util.List;
 import java.util.Scanner;

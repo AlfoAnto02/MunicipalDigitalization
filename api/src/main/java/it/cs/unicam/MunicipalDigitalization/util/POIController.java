@@ -1,5 +1,9 @@
 package it.cs.unicam.MunicipalDigitalization.util;
 
+import it.cs.unicam.MunicipalDigitalization.io.IPOI;
+import it.cs.unicam.MunicipalDigitalization.model.PendingPOI;
+import it.cs.unicam.MunicipalDigitalization.model.Platform;
+
 import java.util.List;
 import java.util.Optional;
 

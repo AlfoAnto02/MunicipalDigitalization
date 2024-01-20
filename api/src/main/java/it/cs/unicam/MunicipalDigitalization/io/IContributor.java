@@ -1,5 +1,9 @@
 package it.cs.unicam.MunicipalDigitalization.io;
 
+import it.cs.unicam.MunicipalDigitalization.model.PendingItinerary;
+import it.cs.unicam.MunicipalDigitalization.model.PendingPOI;
+import it.cs.unicam.MunicipalDigitalization.model.Platform;
+import it.cs.unicam.MunicipalDigitalization.util.Coordinates;
 import it.cs.unicam.MunicipalDigitalization.util.ItineraryController;
 import it.cs.unicam.MunicipalDigitalization.util.POIController;
 
