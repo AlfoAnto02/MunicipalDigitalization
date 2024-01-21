@@ -2,6 +2,8 @@ package it.cs.unicam.MunicipalDigitalization.model;
 
 import it.cs.unicam.MunicipalDigitalization.util.ID;
 
+import java.util.Objects;
+
 /**
  * This abstract class represents a general user.
  * It implements the User interface.
@@ -82,5 +84,23 @@ public abstract class AbstractUser implements User {
      */
     public Platform getPlatform() {
         return this.platform;
+    }
+
+    /**
+     * Equals of the class based on the ID and Platform.
+     * @param o
+     * @return True if they are the same user.
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AbstractUser that = (AbstractUser) o;
+        return Objects.equals(id, that.id) && Objects.equals(platform, that.platform);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, platform);
     }
 }

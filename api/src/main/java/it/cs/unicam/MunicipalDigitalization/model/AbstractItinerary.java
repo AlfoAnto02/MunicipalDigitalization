@@ -5,6 +5,7 @@ import it.cs.unicam.MunicipalDigitalization.util.ID;
 import java.time.Instant;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * This abstract class represents a general itinerary.
@@ -160,5 +161,24 @@ public abstract class AbstractItinerary implements IItinerary {
      */
     public void addPOI(IPOI poi) {
         this.listOfPOIs.add(poi);
+    }
+
+    /**
+     * Equals of the class based on the name and ListOfPOIs of the itinerary
+     * @param o
+     * @return true if the itineraries are equals.
+     */
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AbstractItinerary that = (AbstractItinerary) o;
+        return Objects.equals(name, that.name) && Objects.equals(listOfPOIs, that.listOfPOIs);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, listOfPOIs);
     }
 }

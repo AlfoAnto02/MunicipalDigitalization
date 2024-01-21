@@ -6,6 +6,7 @@ import it.cs.unicam.MunicipalDigitalization.util.Type;
 
 import java.time.Instant;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * This abstract class represents a general point of interest (POI).
@@ -128,5 +129,24 @@ public abstract class AbstractPOI implements IPOI {
      */
     public Date getCreationDate() {
         return this.creationDate;
+    }
+
+    /**
+     * Equals of the class based on the coordinates, name and type of the POI
+     * @param o
+     * @return true if the POIs are equals
+     */
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AbstractPOI that = (AbstractPOI) o;
+        return Objects.equals(coordinates, that.coordinates) && Objects.equals(name, that.name) && type == that.type;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(coordinates, name, type);
     }
 }
