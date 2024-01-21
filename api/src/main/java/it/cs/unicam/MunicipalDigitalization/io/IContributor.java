@@ -173,7 +173,7 @@ public class IContributor implements IContributorsView {
         List<IPOI> poiList = this.itineraryController.getPOIList();
         System.out.println("Please, Select the number of which Poi do you wanna add to your itinerary !!! ");
         for (int i = 0; i < poiList.size(); i++) {
-            System.out.println(i + " " + poiList.get(i).getName());
+            System.out.println(String.format("%d %s", i, poiList.get(i).getName()));
         }
     }
 
@@ -200,13 +200,20 @@ public class IContributor implements IContributorsView {
      * This method is used to get input from the user.
      *
      * @param message The message to be displayed to the user.
-     * @return The input from the user.
+     * @return The input from the user, a double
      */
     private double getInput(String message) {
         System.out.println(message);
         return inputScanner.nextDouble();
     }
 
+
+    /**
+     * This method is used to get input from the user
+     *
+     * @param message The message to be displayed to the user.
+     * @return the input from the user, a string
+     */
     @Override
     public String getStringInput(String message) {
         System.out.println(message);

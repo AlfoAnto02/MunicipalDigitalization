@@ -83,7 +83,7 @@ public class ICurator extends IAuthorizedContributor {
      * This method is used to start the process of validating an itinerary.
      * It prompts the curator to select an itinerary and decide whether to validate it.
      */
-    private void startValidateItinerary() {
+    public void startValidateItinerary() {
         List<PendingItinerary> list = showPendingItineraries();
         PendingItinerary selectedItinerary = list.get(inputScanner.nextInt());
         showItineraryInfo(selectedItinerary);
@@ -139,7 +139,7 @@ public class ICurator extends IAuthorizedContributor {
         StringBuilder result = new StringBuilder();
         int i = 0;
         for (Object item : list) {
-            result.append(i++).append(") ").append(item.toString()).append(" \n");
+            result.append(String.format("%d) %s%n", i++, String.valueOf(item)));
         }
         System.out.println(result);
     }
