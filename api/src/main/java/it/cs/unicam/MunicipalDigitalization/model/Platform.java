@@ -102,15 +102,6 @@ public class Platform {
     }
 
     /**
-     * This method is used to get the list of POIs.
-     *
-     * @return The list of POIs.
-     */
-    public List<IPOI> getPOIList() {
-        return this.listOfPOIs;
-    }
-
-    /**
      * This method is used to upload an itinerary to the platform.
      *
      * @param itinerary The itinerary to upload.
@@ -127,6 +118,16 @@ public class Platform {
     public void appendItinerary(PendingItinerary pendingItinerary) {
         this.pendingManager.addPendingItinerary(pendingItinerary);
     }
+
+    /**
+     * This method is used to get the list of POIs.
+     *
+     * @return The list of POIs.
+     */
+    public List<IPOI> getPOIList() {
+        return this.listOfPOIs;
+    }
+
 
     /**
      * This method is used to get the list of pending POIs.
