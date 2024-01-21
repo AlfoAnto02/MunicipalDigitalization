@@ -20,7 +20,7 @@ public class POIController {
     private final IContributorsView contributorView;
 
     /**
-     * The platform.
+     * The platform associated with the Controller.
      */
     private final Platform platform;
 
@@ -34,6 +34,36 @@ public class POIController {
     public POIController(IContributorsView view, Platform platform) {
         this.contributorView = view;
         this.platform = platform;
+    }
+
+
+    /**
+     * This method is used to validate a Pending POI.
+     *
+     * @param poi The POI to be validated.
+     */
+    public void validatePOI(PendingPOI poi) {
+        this.platform.getPendingPoiList().remove(poi);
+        this.platform.getPOIList().add(poi);
+    }
+
+    /**
+     * This method is used to invalidate a Pending POI.
+     *
+     * @param poi The POI to be invalidated.
+     */
+    public void invalidatePOI(PendingPOI poi) {
+        this.getPendingPoiList().remove(poi);
+    }
+
+    /**
+     * This method is used to append a pending POI to the pending Manager of the Platform
+     * using the Append Method present in the Platform.
+     *
+     * @param poi The pending POI to append.
+     */
+    public void append(PendingPOI poi) {
+        this.platform.appendPOI(poi);
     }
 
     /**
@@ -75,14 +105,6 @@ public class POIController {
         poi.setName(name);
     }
 
-    /**
-     * This method is used to append a pending POI to the platform.
-     *
-     * @param poi The pending POI to append.
-     */
-    public void append(PendingPOI poi) {
-        this.platform.appendPOI(poi);
-    }
 
     /**
      * This method is used to get a list of pending POIs.
@@ -93,23 +115,5 @@ public class POIController {
         return this.platform.getPendingPoiList();
     }
 
-    /**
-     * This method is used to validate a POI.
-     *
-     * @param poi The POI to be validated.
-     */
-    public void validatePOI(PendingPOI poi) {
-        this.platform.getPendingPoiList().remove(poi);
-        this.platform.getPOIList().add(poi);
-    }
-
-    /**
-     * This method is used to invalidate a POI.
-     *
-     * @param poi The POI to be invalidated.
-     */
-    public void invalidatePOI(PendingPOI poi) {
-        this.getPendingPoiList().remove(poi);
-    }
 
 }

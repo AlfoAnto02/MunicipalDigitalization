@@ -1,5 +1,6 @@
 package it.cs.unicam.MunicipalDigitalization.util;
 
+import java.util.Objects;
 import java.util.Random;
 
 /**
@@ -22,10 +23,10 @@ public class ID {
     }
 
     /**
-     * This method generates a random string of 6 characters.
-     * The characters are selected from a predefined string of alphanumeric characters.
+     * This method generates a random string of 16 characters using alphanumerics
+     * characters
      *
-     * @return A random string of 6 characters.
+     * @return A random string of 16 characters.
      */
     private String generateRandomString() {
         String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxys0123456789";
@@ -45,5 +46,23 @@ public class ID {
      */
     public String getId() {
         return id;
+    }
+
+    /**
+     * Equals method of the class using only the id parameter
+     * @param o
+     * @return true if the coordinates are equals, false otherwise
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ID id1 = (ID) o;
+        return Objects.equals(id, id1.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

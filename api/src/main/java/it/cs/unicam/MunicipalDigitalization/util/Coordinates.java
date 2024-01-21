@@ -1,5 +1,7 @@
 package it.cs.unicam.MunicipalDigitalization.util;
 
+import java.util.Objects;
+
 /**
  * This class represents a set of coordinates.
  * A coordinate has an x and y value.
@@ -61,5 +63,23 @@ public class Coordinates {
      */
     public void setY(double y) {
         this.y = y;
+    }
+
+    /**
+     * Equals method of the class using the x and y of a coordinate.
+     * @param o
+     * @return true if the coordinates are equals, false otherwise
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Coordinates that = (Coordinates) o;
+        return Double.compare(that.x, x) == 0 && Double.compare(that.y, y) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
     }
 }

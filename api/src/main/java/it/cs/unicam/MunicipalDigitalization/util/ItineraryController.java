@@ -25,7 +25,7 @@ public class ItineraryController {
 
     /**
      * Constructor for the ItineraryController class.
-     *
+     * It initializes the ItineraryController with the provided view and platform.
      * @param contributorView The contributor's view.
      * @param platform        The platform.
      */
@@ -35,7 +35,37 @@ public class ItineraryController {
     }
 
     /**
-     * This method is used to get a list of POIs.
+     * This method is used to append an itinerary to the Pending manager
+     * using the appendItinerary Method of the Platform.
+     *
+     * @param itinerary The itinerary to be appended.
+     */
+    public void append(PendingItinerary itinerary) {
+        this.platform.appendItinerary(itinerary);
+    }
+
+
+    /**
+     * This method is used to validate an itinerary.
+     *
+     * @param itinerary The itinerary to be validated.
+     */
+    public void validateItinerary(PendingItinerary itinerary) {
+        this.platform.getPendingItineraryList().remove(itinerary);
+        this.platform.getItineraryList().add(itinerary);
+    }
+
+    /**
+     * This method is used to invalidate an itinerary.
+     *
+     * @param itinerary The itinerary to be invalidated.
+     */
+    public void invalidateItinerary(PendingItinerary itinerary) {
+        this.platform.getPendingItineraryList().remove(itinerary);
+    }
+
+    /**
+     * This method is used to get the list of POIs published on the Platform.
      *
      * @return A list of POIs.
      */
@@ -44,7 +74,8 @@ public class ItineraryController {
     }
 
     /**
-     * This method is used to select a POI to add to an itinerary.
+     * This method is used to add a poi to the Itinerary. This method also
+     * checks if the POI is already present in the itinerary.
      *
      * @param itinerary The itinerary to which the POI is to be added.
      * @param poi       The POI to be added.
@@ -84,7 +115,8 @@ public class ItineraryController {
     }
 
     /**
-     * This method is used to get a list of pending itineraries.
+     * This method is used to get a list of pending itineraries present
+     * in the Pending Manager of the Platfrom.
      *
      * @return A list of pending itineraries.
      */
@@ -92,24 +124,6 @@ public class ItineraryController {
         return this.platform.getPendingItineraryList();
     }
 
-    /**
-     * This method is used to validate an itinerary.
-     *
-     * @param itinerary The itinerary to be validated.
-     */
-    public void validateItinerary(PendingItinerary itinerary) {
-        this.platform.getPendingItineraryList().remove(itinerary);
-        this.platform.getItineraryList().add(itinerary);
-    }
-
-    /**
-     * This method is used to invalidate an itinerary.
-     *
-     * @param itinerary The itinerary to be invalidated.
-     */
-    public void invalidateItinerary(PendingItinerary itinerary) {
-        this.platform.getPendingItineraryList().remove(itinerary);
-    }
 
     /**
      * This method is used to set the description of an itinerary and its type.
@@ -122,12 +136,4 @@ public class ItineraryController {
         this.setItineraryType(itinerary);
     }
 
-    /**
-     * This method is used to append an itinerary to the platform.
-     *
-     * @param itinerary The itinerary to be appended.
-     */
-    public void append(PendingItinerary itinerary) {
-        this.platform.appendItinerary(itinerary);
-    }
 }
