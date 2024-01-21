@@ -5,6 +5,7 @@ import it.cs.unicam.MunicipalDigitalization.util.ID;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * This class represents a platform for managing points of interest (POIs) and itineraries.
@@ -154,5 +155,24 @@ public class Platform {
      */
     public List<IItinerary> getItineraryList() {
         return this.listOfItineraries;
+    }
+
+    /**
+     * equals of the class based on the ID of the Platform and the territory where is situated
+     * @param o
+     * @return true if they are equals.
+     */
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Platform platform = (Platform) o;
+        return Objects.equals(id, platform.id) && Objects.equals(territory, platform.territory);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, territory);
     }
 }
