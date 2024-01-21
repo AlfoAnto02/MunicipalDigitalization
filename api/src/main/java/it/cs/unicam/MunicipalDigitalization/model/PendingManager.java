@@ -12,12 +12,54 @@ public class PendingManager {
     /**
      * List of pending POIs.
      */
-    private ArrayList<PendingPOI> listOfPendingPOI = new ArrayList<>();
+    private ArrayList<PendingPOI> listOfPendingPOI;
 
     /**
      * List of pending itineraries.
      */
-    private ArrayList<PendingItinerary> listOfPendingItinerary = new ArrayList<>();
+    private ArrayList<PendingItinerary> listOfPendingItinerary;
+
+    public PendingManager(){
+        this.listOfPendingPOI = new ArrayList<>();
+        this.listOfPendingItinerary = new ArrayList<>();
+    }
+
+    /**
+     * This method is used to remove a specific POI from the list of pending POIs.
+     *
+     * @param poi The POI to remove.
+     */
+    public void removePOI(PendingPOI poi) {
+        this.listOfPendingPOI.remove(poi);
+    }
+
+
+    /**
+     * This method is used to remove a specific itinerary from the list of pending itineraries.
+     *
+     * @param itinerary The itinerary to remove.
+     */
+    public void removeItinerary(PendingItinerary itinerary) {
+        this.listOfPendingItinerary.remove(itinerary);
+    }
+
+    /**
+     * This method is used to add a specific POI to the list of pending POIs.
+     *
+     * @param poi The POI to add.
+     */
+    public void addPOI(PendingPOI poi) {
+        this.listOfPendingPOI.add(poi);
+    }
+
+    /**
+     * This method is used to add a specific itinerary to the list of pending itineraries.
+     *
+     * @param pendingItinerary The itinerary to add.
+     */
+    public void addPendingItinerary(PendingItinerary pendingItinerary) {
+        this.listOfPendingItinerary.add(pendingItinerary);
+    }
 
     /**
      * This method is used to get the list of pending POIs.
@@ -66,14 +108,6 @@ public class PendingManager {
         else throw new IllegalArgumentException("Not present");
     }
 
-    /**
-     * This method is used to remove a specific POI from the list of pending POIs.
-     *
-     * @param poi The POI to remove.
-     */
-    public void removePOI(PendingPOI poi) {
-        this.listOfPendingPOI.remove(poi);
-    }
 
     /**
      * This method is used to get a specific itinerary from the list of pending itineraries.
@@ -86,30 +120,4 @@ public class PendingManager {
         else throw new IllegalArgumentException("Not present");
     }
 
-    /**
-     * This method is used to remove a specific itinerary from the list of pending itineraries.
-     *
-     * @param itinerary The itinerary to remove.
-     */
-    public void removeItinerary(PendingItinerary itinerary) {
-        this.listOfPendingItinerary.remove(itinerary);
-    }
-
-    /**
-     * This method is used to add a specific POI to the list of pending POIs.
-     *
-     * @param poi The POI to add.
-     */
-    public void addPOI(PendingPOI poi) {
-        this.listOfPendingPOI.add(poi);
-    }
-
-    /**
-     * This method is used to add a specific itinerary to the list of pending itineraries.
-     *
-     * @param pendingItinerary The itinerary to add.
-     */
-    public void addPendingItinerary(PendingItinerary pendingItinerary) {
-        this.listOfPendingItinerary.add(pendingItinerary);
-    }
 }
