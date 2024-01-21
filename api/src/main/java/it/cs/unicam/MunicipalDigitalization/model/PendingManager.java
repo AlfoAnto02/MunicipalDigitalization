@@ -19,9 +19,12 @@ public class PendingManager {
      */
     private ArrayList<PendingItinerary> listOfPendingItinerary;
 
-    public PendingManager(){
+    private Platform platformRef;
+
+    public PendingManager(Platform platform){
         this.listOfPendingPOI = new ArrayList<>();
         this.listOfPendingItinerary = new ArrayList<>();
+        this.platformRef=platform;
     }
 
     /**

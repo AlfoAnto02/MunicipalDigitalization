@@ -60,6 +60,7 @@ public class Platform {
         this.listOfItineraries = new ArrayList<>();
         this.territory = territory;
         this.id = new ID();
+        this.pendingManager = new PendingManager(this);
     }
 
     /**
