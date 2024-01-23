@@ -8,18 +8,18 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * This class represents a platform for managing points of interest (POIs) and itineraries.
+ * This class represents a municipality for managing points of interest (POIs) and itineraries.
  * It provides methods to check coordinates and names, append and upload POIs and itineraries, and get lists of POIs.
  */
 public class Municipality {
 
     /**
-     * The id of the platform.
+     * The id of the municipality.
      */
     private final ID id;
 
     /**
-     * The territory of the platform.
+     * The territory of the municipality.
      */
     private final Coordinates territory;
 
@@ -34,7 +34,7 @@ public class Municipality {
     private final List<IItinerary> listOfItineraries;
 
     /**
-     * The name of the platform.
+     * The name of the municipality.
      */
     private final String name;
     /**
@@ -50,7 +50,7 @@ public class Municipality {
      * Constructor for the Municipality class.
      * It initializes the Municipality with the provided territory.
      *
-     * @param territory The territory of the platform.
+     * @param territory The territory of the municipality.
      */
     public Municipality(Coordinates territory, String name) {
         this.name = name;
@@ -93,7 +93,7 @@ public class Municipality {
     }
 
     /**
-     * This method is used to upload a POI to the platform.
+     * This method is used to upload a POI to the municipality.
      *
      * @param poi The POI to upload.
      */
@@ -102,7 +102,7 @@ public class Municipality {
     }
 
     /**
-     * This method is used to upload an itinerary to the platform.
+     * This method is used to upload an itinerary to the municipality.
      *
      * @param itinerary The itinerary to upload.
      */

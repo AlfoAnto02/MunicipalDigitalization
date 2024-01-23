@@ -82,7 +82,7 @@ public abstract class AbstractUser implements User {
      *
      * @return The municipality of the user.
      */
-    public Municipality getPlatform() {
+    public Municipality getMunicipality() {
         return this.municipality;
     }
 

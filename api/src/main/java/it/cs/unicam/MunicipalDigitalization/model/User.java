@@ -5,7 +5,7 @@ import it.cs.unicam.MunicipalDigitalization.util.ID;
 /**
  * This interface represents a user in the system.
  * It provides methods to get the id, name, and password of the user, and to set the password of the user.
- * It also provides a method to get the platform associated with the user.
+ * It also provides a method to get the municipality associated with the user.
  */
 public interface User {
 
@@ -38,10 +38,10 @@ public interface User {
     void setPassword(String password);
 
     /**
-     * This method is used to get the platform associated with the user.
+     * This method is used to get the municipality associated with the user.
      *
-     * @return The platform associated with the user.
+     * @return The municipality associated with the user.
      */
-    Municipality getPlatform();
+    Municipality getMunicipality();
 
 }
