@@ -37,16 +37,14 @@ public class Platform {
      * The name of the platform.
      */
     private final String name;
-
+    /**
+     * The manager for pending POIs and itineraries.
+     */
+    private final PendingManager pendingManager;
     /**
      * List of users.
      */
     private List<User> listOfUsers;
-
-    /**
-     * The manager for pending POIs and itineraries.
-     */
-    private PendingManager pendingManager;
 
     /**
      * Constructor for the Platform class.
@@ -160,7 +158,8 @@ public class Platform {
 
     /**
      * equals of the class based on the ID of the Platform and the territory where is situated
-     * @param o
+     *
+     * @param o the object to compare
      * @return true if they are equals.
      */
 

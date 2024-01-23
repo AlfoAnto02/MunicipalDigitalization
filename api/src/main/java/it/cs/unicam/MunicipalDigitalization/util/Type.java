@@ -71,7 +71,7 @@ public enum Type {
      * @param line The string to be checked.
      * @return True if the string starts with the code of a type, false otherwise.
      */
-    public boolean isTypeOfLine(String line) {
+    private boolean isTypeOfLine(String line) {
         return line.startsWith(this.code);
     }
 }

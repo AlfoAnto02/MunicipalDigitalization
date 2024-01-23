@@ -28,14 +28,14 @@ public class Curator extends AuthorizedContributor {
     /**
      * This method is used to validate a point of interest (POI) using the view.
      */
-    public void validatePOI() {
+    private void validatePOI() {
         view.startValidatePOI();
     }
 
     /**
      * This method is used to validate an Itinerary using the view.
      */
-    public void validateItinerary(){
+    private void validateItinerary() {
         view.startValidateItinerary();
     }
 }

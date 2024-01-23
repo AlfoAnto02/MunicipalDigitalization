@@ -8,7 +8,7 @@ import java.util.Random;
  * The ID is a randomly generated string of 6 characters.
  */
 public class ID {
-    
+
     /**
      * The ID string
      */
@@ -50,7 +50,8 @@ public class ID {
 
     /**
      * Equals method of the class using only the id parameter
-     * @param o
+     *
+     * @param o The object to be compared
      * @return true if the coordinates are equals, false otherwise
      */
     @Override

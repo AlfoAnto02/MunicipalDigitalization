@@ -150,7 +150,7 @@ public class IAuthorizedContributor implements IContributorsView {
         List<IPOI> poiList = this.itineraryController.getPOIList();
         System.out.println("Please, Select the number of which Poi do you wanna add to your itinerary !!! ");
         for (int i = 0; i < poiList.size(); i++) {
-            System.out.println(String.format("%d %s", i, poiList.get(i).getName()));
+            System.out.printf("%d %s%n", i, poiList.get(i).getName());
         }
     }
 

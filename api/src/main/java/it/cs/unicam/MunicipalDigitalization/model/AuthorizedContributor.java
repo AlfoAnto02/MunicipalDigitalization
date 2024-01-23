@@ -30,7 +30,7 @@ public class AuthorizedContributor extends AbstractUser {
      * This method is used to create a point of interest (POI).
      * It delegates the creation of POI to the view.
      */
-    public void createPOI() {
+    private void createPOI() {
         view.createPendingPOI();
     }
 
@@ -38,7 +38,7 @@ public class AuthorizedContributor extends AbstractUser {
      * This method is used to create an itinerary.
      * It delegates the creation of itinerary to the view.
      */
-    public void createItinerary() {
+    private void createItinerary() {
         view.createPendingItinerary();
     }
 }

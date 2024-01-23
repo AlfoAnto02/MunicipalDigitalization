@@ -165,6 +165,7 @@ public abstract class AbstractItinerary implements IItinerary {
 
     /**
      * Equals of the class based on the name and ListOfPOIs of the itinerary
+     *
      * @param o
      * @return true if the itineraries are equals.
      */

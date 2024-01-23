@@ -67,7 +67,8 @@ public class Coordinates {
 
     /**
      * Equals method of the class using the x and y of a coordinate.
-     * @param o
+     *
+     * @param o The object to compare.
      * @return true if the coordinates are equals, false otherwise
      */
     @Override

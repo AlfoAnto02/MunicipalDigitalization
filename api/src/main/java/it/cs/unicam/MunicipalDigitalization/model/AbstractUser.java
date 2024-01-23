@@ -57,7 +57,7 @@ public abstract class AbstractUser implements User {
      *
      * @param name The new name of the user.
      */
-    public void setName(String name) {
+    private void setName(String name) {
         if (name == null || name.isEmpty()) {
             throw new IllegalArgumentException("Name cannot be null or empty");
         }
@@ -88,7 +88,8 @@ public abstract class AbstractUser implements User {
 
     /**
      * Equals of the class based on the ID and Platform.
-     * @param o
+     *
+     * @param o The object to compare.
      * @return True if they are the same user.
      */
     @Override

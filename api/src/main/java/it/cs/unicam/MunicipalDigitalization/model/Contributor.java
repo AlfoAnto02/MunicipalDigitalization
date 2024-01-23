@@ -30,7 +30,7 @@ public class Contributor extends AbstractUser {
      * This method is used to create a pending point of interest (POI).
      * It delegates the creation to the view.
      */
-    public void createPendingPOI() {
+    private void createPendingPOI() {
         view.createPendingPOI();
     }
 
@@ -38,7 +38,7 @@ public class Contributor extends AbstractUser {
      * This method is used to create a pending itinerary.
      * It delegates the creation to the view.
      */
-    public void createPendingItinerary() {
+    private void createPendingItinerary() {
         view.createPendingItinerary();
     }
 

@@ -9,22 +9,20 @@ import java.util.List;
  */
 public class PendingManager {
 
+    private final Platform platformRef;
     /**
      * List of pending POIs.
      */
     private ArrayList<PendingPOI> listOfPendingPOI;
-
     /**
      * List of pending itineraries.
      */
     private ArrayList<PendingItinerary> listOfPendingItinerary;
 
-    private Platform platformRef;
-
-    public PendingManager(Platform platform){
+    public PendingManager(Platform platform) {
         this.listOfPendingPOI = new ArrayList<>();
         this.listOfPendingItinerary = new ArrayList<>();
-        this.platformRef=platform;
+        this.platformRef = platform;
     }
 
     /**
@@ -32,7 +30,7 @@ public class PendingManager {
      *
      * @param poi The POI to remove.
      */
-    public void removePOI(PendingPOI poi) {
+    private void removePOI(PendingPOI poi) {
         this.listOfPendingPOI.remove(poi);
     }
 
@@ -42,7 +40,7 @@ public class PendingManager {
      *
      * @param itinerary The itinerary to remove.
      */
-    public void removeItinerary(PendingItinerary itinerary) {
+    private void removeItinerary(PendingItinerary itinerary) {
         this.listOfPendingItinerary.remove(itinerary);
     }
 
@@ -51,7 +49,7 @@ public class PendingManager {
      *
      * @param poi The POI to add.
      */
-    public void addPOI(PendingPOI poi) {
+    protected void addPOI(PendingPOI poi) {
         this.listOfPendingPOI.add(poi);
     }
 
@@ -60,7 +58,7 @@ public class PendingManager {
      *
      * @param pendingItinerary The itinerary to add.
      */
-    public void addPendingItinerary(PendingItinerary pendingItinerary) {
+    protected void addPendingItinerary(PendingItinerary pendingItinerary) {
         this.listOfPendingItinerary.add(pendingItinerary);
     }
 
@@ -78,7 +76,7 @@ public class PendingManager {
      *
      * @param listOfPendingPOI The list of pending POIs to be set.
      */
-    public void setListOfPendingPOI(ArrayList<PendingPOI> listOfPendingPOI) {
+    private void setListOfPendingPOI(ArrayList<PendingPOI> listOfPendingPOI) {
         this.listOfPendingPOI = listOfPendingPOI;
     }
 
@@ -96,7 +94,7 @@ public class PendingManager {
      *
      * @param listOfPendingItinerary The list of pending itineraries to be set.
      */
-    public void setListOfPendingItinerary(ArrayList<PendingItinerary> listOfPendingItinerary) {
+    private void setListOfPendingItinerary(ArrayList<PendingItinerary> listOfPendingItinerary) {
         this.listOfPendingItinerary = listOfPendingItinerary;
     }
 

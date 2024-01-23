@@ -26,6 +26,7 @@ public class ItineraryController {
     /**
      * Constructor for the ItineraryController class.
      * It initializes the ItineraryController with the provided view and platform.
+     *
      * @param contributorView The contributor's view.
      * @param platform        The platform.
      */
@@ -100,7 +101,7 @@ public class ItineraryController {
      *
      * @param itinerary The itinerary whose type is to be set.
      */
-    public void setItineraryType(IItinerary itinerary) {
+    private void setItineraryType(IItinerary itinerary) {
         itinerary.setTypes(this.getPOIsType(itinerary));
     }
 

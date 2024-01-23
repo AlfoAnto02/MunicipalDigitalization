@@ -133,7 +133,8 @@ public abstract class AbstractPOI implements IPOI {
 
     /**
      * Equals of the class based on the coordinates, name and type of the POI
-     * @param o
+     *
+     * @param o The object to compare
      * @return true if the POIs are equals
      */
 

@@ -139,7 +139,7 @@ public class ICurator extends IAuthorizedContributor {
         StringBuilder result = new StringBuilder();
         int i = 0;
         for (Object item : list) {
-            result.append(String.format("%d) %s%n", i++, String.valueOf(item)));
+            result.append(String.format("%d) %s%n", i++, item));
         }
         System.out.println(result);
     }
