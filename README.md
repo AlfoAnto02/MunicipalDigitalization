@@ -20,12 +20,7 @@ The project is set to use Java language version 21.
 
 ## Development Process
 
-The project follows the Unified Process Model with a total of four iterations:
-
-1. Analyzing the project's actors and defining use cases.
-2. Defining and creating an executable baseline and specifying the majority of the use cases.
-3. To be defined.
-4. To be defined.
+The project follows the Unified Process Model
 
 ## Getting Started
 
