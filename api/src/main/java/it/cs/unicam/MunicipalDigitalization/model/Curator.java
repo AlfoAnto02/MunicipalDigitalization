@@ -19,10 +19,10 @@ public class Curator extends AuthorizedContributor {
      *
      * @param name     The name of the curator.
      * @param password The password of the curator.
-     * @param platform The platform of the curator.
+     * @param municipality The municipality of the curator.
      */
-    public Curator(String name, String password, Platform platform) {
-        super(name, password, platform);
+    public Curator(String name, String password, Municipality municipality) {
+        super(name, password, municipality);
     }
 
     /**

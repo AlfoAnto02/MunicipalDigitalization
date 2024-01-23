@@ -30,9 +30,9 @@ public class IAuthorizedContributor implements IContributorsView {
      */
     private final ItineraryController itineraryController;
     /**
-     * The platform of the authorized contributor.
+     * The municipality of the authorized contributor.
      */
-    private final Platform platform;
+    private final Municipality municipality;
     /**
      * The authorized contributor.
      */
@@ -41,15 +41,15 @@ public class IAuthorizedContributor implements IContributorsView {
     /**
      * Constructor for the IAuthorizedContributor class.
      *
-     * @param platform    The platform of the authorized contributor.
+     * @param municipality    The municipality of the authorized contributor.
      * @param contributor The authorized contributor.
      */
-    public IAuthorizedContributor(Platform platform, AuthorizedContributor contributor) {
+    public IAuthorizedContributor(Municipality municipality, AuthorizedContributor contributor) {
         this.contributor = contributor;
-        this.platform = platform;
+        this.municipality = municipality;
         this.inputScanner = new Scanner(System.in);
-        this.poiController = new POIController(this, platform);
-        this.itineraryController = new ItineraryController(this, platform);
+        this.poiController = new POIController(this, municipality);
+        this.itineraryController = new ItineraryController(this, municipality);
     }
 
     @Override

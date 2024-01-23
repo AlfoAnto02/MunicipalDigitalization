@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class PendingManager {
 
-    private final Platform platformRef;
+    private final Municipality municipalityRef;
     /**
      * List of pending POIs.
      */
@@ -19,10 +19,10 @@ public class PendingManager {
      */
     private ArrayList<PendingItinerary> listOfPendingItinerary;
 
-    public PendingManager(Platform platform) {
+    public PendingManager(Municipality municipality) {
         this.listOfPendingPOI = new ArrayList<>();
         this.listOfPendingItinerary = new ArrayList<>();
-        this.platformRef = platform;
+        this.municipalityRef = municipality;
     }
 
     /**

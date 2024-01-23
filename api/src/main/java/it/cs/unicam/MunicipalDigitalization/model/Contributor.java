@@ -19,11 +19,11 @@ public class Contributor extends AbstractUser {
      *
      * @param name     The name of the contributor.
      * @param password The password of the contributor.
-     * @param platform The platform of the contributor.
+     * @param municipality The municipality of the contributor.
      */
-    public Contributor(String name, String password, Platform platform) {
-        super(name, password, platform);
-        this.view = new IContributor(platform, this);
+    public Contributor(String name, String password, Municipality municipality) {
+        super(name, password, municipality);
+        this.view = new IContributor(municipality, this);
     }
 
     /**

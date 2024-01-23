@@ -42,6 +42,6 @@ public interface User {
      *
      * @return The platform associated with the user.
      */
-    Platform getPlatform();
+    Municipality getPlatform();
 
 }

@@ -3,8 +3,8 @@ package it.cs.unicam.MunicipalDigitalization.util;
 import it.cs.unicam.MunicipalDigitalization.io.IContributorsView;
 import it.cs.unicam.MunicipalDigitalization.model.IItinerary;
 import it.cs.unicam.MunicipalDigitalization.model.IPOI;
+import it.cs.unicam.MunicipalDigitalization.model.Municipality;
 import it.cs.unicam.MunicipalDigitalization.model.PendingItinerary;
-import it.cs.unicam.MunicipalDigitalization.model.Platform;
 
 import java.util.List;
 
@@ -19,30 +19,30 @@ public class ItineraryController {
      */
     private final IContributorsView contributorView;
     /**
-     * The platform.
+     * The municipality.
      */
-    private final Platform platform;
+    private final Municipality municipality;
 
     /**
      * Constructor for the ItineraryController class.
-     * It initializes the ItineraryController with the provided view and platform.
+     * It initializes the ItineraryController with the provided view and municipality.
      *
      * @param contributorView The contributor's view.
-     * @param platform        The platform.
+     * @param municipality        The municipality.
      */
-    public ItineraryController(IContributorsView contributorView, Platform platform) {
+    public ItineraryController(IContributorsView contributorView, Municipality municipality) {
         this.contributorView = contributorView;
-        this.platform = platform;
+        this.municipality = municipality;
     }
 
     /**
      * This method is used to append an itinerary to the Pending manager
-     * using the appendItinerary Method of the Platform.
+     * using the appendItinerary Method of the Municipality.
      *
      * @param itinerary The itinerary to be appended.
      */
     public void append(PendingItinerary itinerary) {
-        this.platform.appendItinerary(itinerary);
+        this.municipality.appendItinerary(itinerary);
     }
 
 
@@ -52,8 +52,8 @@ public class ItineraryController {
      * @param itinerary The itinerary to be validated.
      */
     public void validateItinerary(PendingItinerary itinerary) {
-        this.platform.getPendingItineraryList().remove(itinerary);
-        this.platform.getItineraryList().add(itinerary);
+        this.municipality.getPendingItineraryList().remove(itinerary);
+        this.municipality.getItineraryList().add(itinerary);
     }
 
     /**
@@ -62,16 +62,16 @@ public class ItineraryController {
      * @param itinerary The itinerary to be invalidated.
      */
     public void invalidateItinerary(PendingItinerary itinerary) {
-        this.platform.getPendingItineraryList().remove(itinerary);
+        this.municipality.getPendingItineraryList().remove(itinerary);
     }
 
     /**
-     * This method is used to get the list of POIs published on the Platform.
+     * This method is used to get the list of POIs published on the Municipality.
      *
      * @return A list of POIs.
      */
     public List<IPOI> getPOIList() {
-        return this.platform.getPOIList();
+        return this.municipality.getPOIList();
     }
 
     /**
@@ -122,7 +122,7 @@ public class ItineraryController {
      * @return A list of pending itineraries.
      */
     public List<PendingItinerary> getPendingItineraryList() {
-        return this.platform.getPendingItineraryList();
+        return this.municipality.getPendingItineraryList();
     }
 
 

@@ -11,7 +11,7 @@ import java.util.Objects;
  * This class represents a platform for managing points of interest (POIs) and itineraries.
  * It provides methods to check coordinates and names, append and upload POIs and itineraries, and get lists of POIs.
  */
-public class Platform {
+public class Municipality {
 
     /**
      * The id of the platform.
@@ -47,12 +47,12 @@ public class Platform {
     private List<User> listOfUsers;
 
     /**
-     * Constructor for the Platform class.
-     * It initializes the Platform with the provided territory.
+     * Constructor for the Municipality class.
+     * It initializes the Municipality with the provided territory.
      *
      * @param territory The territory of the platform.
      */
-    public Platform(Coordinates territory, String name) {
+    public Municipality(Coordinates territory, String name) {
         this.name = name;
         this.listOfPOIs = new ArrayList<>();
         this.listOfItineraries = new ArrayList<>();
@@ -68,7 +68,7 @@ public class Platform {
      * @return True if the coordinates are valid, false otherwise.
      */
     public boolean checkCoordinates(Coordinates coordinates) {
-        // TODO - implement Platform.checkCoordinates
+        // TODO - implement Municipality.checkCoordinates
         throw new UnsupportedOperationException();
     }
 
@@ -79,7 +79,7 @@ public class Platform {
      * @return True if the name is valid, false otherwise.
      */
     private boolean checkName(String name) {
-        // TODO - implement Platform.checkName
+        // TODO - implement Municipality.checkName
         throw new UnsupportedOperationException();
     }
 
@@ -157,7 +157,7 @@ public class Platform {
     }
 
     /**
-     * equals of the class based on the ID of the Platform and the territory where is situated
+     * equals of the class based on the ID of the Municipality and the territory where is situated
      *
      * @param o the object to compare
      * @return true if they are equals.
@@ -167,8 +167,8 @@ public class Platform {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Platform platform = (Platform) o;
-        return Objects.equals(id, platform.id) && Objects.equals(territory, platform.territory);
+        Municipality municipality = (Municipality) o;
+        return Objects.equals(id, municipality.id) && Objects.equals(territory, municipality.territory);
     }
 
     @Override

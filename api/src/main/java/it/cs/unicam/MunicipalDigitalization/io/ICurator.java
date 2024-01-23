@@ -3,7 +3,7 @@ package it.cs.unicam.MunicipalDigitalization.io;
 import it.cs.unicam.MunicipalDigitalization.model.Curator;
 import it.cs.unicam.MunicipalDigitalization.model.PendingItinerary;
 import it.cs.unicam.MunicipalDigitalization.model.PendingPOI;
-import it.cs.unicam.MunicipalDigitalization.model.Platform;
+import it.cs.unicam.MunicipalDigitalization.model.Municipality;
 
 import java.util.List;
 
@@ -21,11 +21,11 @@ public class ICurator extends IAuthorizedContributor {
     /**
      * Constructor for the ICurator class.
      *
-     * @param platform The platform of the curator.
+     * @param municipality The municipality of the curator.
      * @param curator  The curator.
      */
-    public ICurator(Platform platform, Curator curator) {
-        super(platform, curator);
+    public ICurator(Municipality municipality, Curator curator) {
+        super(municipality, curator);
     }
 
     /**

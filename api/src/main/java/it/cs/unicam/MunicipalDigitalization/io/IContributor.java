@@ -27,9 +27,9 @@ public class IContributor implements IContributorsView {
     private final ItineraryController itineraryController;
 
     /**
-     * The platform of the contributor.
+     * The municipality of the contributor.
      */
-    private final Platform platform;
+    private final Municipality municipality;
 
     /**
      * The contributor.
@@ -44,15 +44,15 @@ public class IContributor implements IContributorsView {
     /**
      * Constructor for the IContributor class.
      *
-     * @param platform    The platform of the contributor.
+     * @param municipality    The municipality of the contributor.
      * @param contributor The contributor.
      */
-    public IContributor(Platform platform, Contributor contributor) {
+    public IContributor(Municipality municipality, Contributor contributor) {
         this.contributor = contributor;
-        this.platform = platform;
+        this.municipality = municipality;
         this.inputScanner = new Scanner(System.in);
-        this.poiController = new POIController(this, platform);
-        this.itineraryController = new ItineraryController(this, platform);
+        this.poiController = new POIController(this, municipality);
+        this.itineraryController = new ItineraryController(this, municipality);
     }
 
     @Override

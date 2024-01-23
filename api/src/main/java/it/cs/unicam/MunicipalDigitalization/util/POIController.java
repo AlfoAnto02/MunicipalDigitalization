@@ -3,7 +3,7 @@ package it.cs.unicam.MunicipalDigitalization.util;
 import it.cs.unicam.MunicipalDigitalization.io.IContributorsView;
 import it.cs.unicam.MunicipalDigitalization.model.IPOI;
 import it.cs.unicam.MunicipalDigitalization.model.PendingPOI;
-import it.cs.unicam.MunicipalDigitalization.model.Platform;
+import it.cs.unicam.MunicipalDigitalization.model.Municipality;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,20 +20,20 @@ public class POIController {
     private final IContributorsView contributorView;
 
     /**
-     * The platform associated with the Controller.
+     * The municipality associated with the Controller.
      */
-    private final Platform platform;
+    private final Municipality municipality;
 
     /**
      * Constructor for the POIController class.
-     * It initializes the POIController with the provided view and platform.
+     * It initializes the POIController with the provided view and municipality.
      *
      * @param view     The contributor's view.
-     * @param platform The platform.
+     * @param municipality The municipality.
      */
-    public POIController(IContributorsView view, Platform platform) {
+    public POIController(IContributorsView view, Municipality municipality) {
         this.contributorView = view;
-        this.platform = platform;
+        this.municipality = municipality;
     }
 
 
@@ -43,8 +43,8 @@ public class POIController {
      * @param poi The POI to be validated.
      */
     public void validatePOI(PendingPOI poi) {
-        this.platform.getPendingPoiList().remove(poi);
-        this.platform.getPOIList().add(poi);
+        this.municipality.getPendingPoiList().remove(poi);
+        this.municipality.getPOIList().add(poi);
     }
 
     /**
@@ -57,13 +57,13 @@ public class POIController {
     }
 
     /**
-     * This method is used to append a pending POI to the pending Manager of the Platform
-     * using the Append Method present in the Platform.
+     * This method is used to append a pending POI to the pending Manager of the Municipality
+     * using the Append Method present in the Municipality.
      *
      * @param poi The pending POI to append.
      */
     public void append(PendingPOI poi) {
-        this.platform.appendPOI(poi);
+        this.municipality.appendPOI(poi);
     }
 
     /**
@@ -73,7 +73,7 @@ public class POIController {
      * @param poi         The POI whose coordinates are to be set.
      */
     public void setPOICoordinates(Coordinates coordinates, IPOI poi) {
-        if (platform.checkCoordinates(coordinates)) {
+        if (municipality.checkCoordinates(coordinates)) {
             poi.setCoordinates(coordinates);
         } else throw new IllegalArgumentException("Coordinates error");
     }
@@ -112,7 +112,7 @@ public class POIController {
      * @return A list of pending POIs.
      */
     public List<PendingPOI> getPendingPoiList() {
-        return this.platform.getPendingPoiList();
+        return this.municipality.getPendingPoiList();
     }
 
 

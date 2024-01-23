@@ -20,10 +20,10 @@ public class AuthorizedContributor extends AbstractUser {
      *
      * @param name     The name of the authorized contributor.
      * @param password The password of the authorized contributor.
-     * @param platform The platform of the authorized contributor.
+     * @param municipality The municipality of the authorized contributor.
      */
-    public AuthorizedContributor(String name, String password, Platform platform) {
-        super(name, password, platform);
+    public AuthorizedContributor(String name, String password, Municipality municipality) {
+        super(name, password, municipality);
     }
 
     /**
