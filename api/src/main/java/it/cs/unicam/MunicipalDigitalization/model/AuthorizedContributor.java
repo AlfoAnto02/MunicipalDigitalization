@@ -7,7 +7,7 @@ import it.cs.unicam.MunicipalDigitalization.io.IAuthorizedContributor;
  * It extends the AbstractUser class.
  * An authorized contributor has a view and can create points of interest (POIs) and itineraries.
  */
-public class AuthorizedContributor extends AbstractUser {
+public class AuthorizedContributor extends AbstractAuthUser {
 
     /**
      * The view of the authorized contributor.

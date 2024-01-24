@@ -7,7 +7,7 @@ import it.cs.unicam.MunicipalDigitalization.io.IContributor;
  * It extends the AbstractUser class.
  * A contributor has a view and can create pending points of interest (POIs) and itineraries.
  */
-public class Contributor extends AbstractUser {
+public class Contributor extends AbstractAuthUser {
 
     /**
      * The view of the contributor.

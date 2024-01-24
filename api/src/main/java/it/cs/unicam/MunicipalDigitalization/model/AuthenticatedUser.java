@@ -1,5 +1,10 @@
 package it.cs.unicam.MunicipalDigitalization.model;
 
+/**
+ * This interface represents an Authenticated user in the system.
+ * It provides methods to get thE name, and password of the user, and to set the password of the user.
+ * It also extends the User Interface.
+ */
 public interface AuthenticatedUser extends User {
 
 
