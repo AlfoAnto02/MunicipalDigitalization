@@ -10,62 +10,53 @@ import java.util.List;
 
 public class ContentController {
 
-    private final IContributorsView contributorsView;
+    private final IContributorsView contributorView;
 
     private final Municipality municipality;
 
-    public ContentController(IContributorsView contributorsView, Municipality municipality) {
-        this.contributorsView = contributorsView;
+    public ContentController(IContributorsView contributorView, Municipality municipality) {
+        this.contributorView = contributorView;
         this.municipality = municipality;
     }
 
     private void selectType(ContentType type, IContent content) {
-        // TODO implement here
-        throw new UnsupportedOperationException("The method is not implemented yet.");
+        content.setType(type);
     }
 
-    private void setDescription(String description, IContent content) {
-        // TODO implement here
-        throw new UnsupportedOperationException("The method is not implemented yet.");
+    private void setDescription(ContentType description, IContent content) {
+        content.setDescription(String.valueOf(description));
     }
 
-    private void setLink(Link link, IContent content) {
-        // TODO implement here
-        throw new UnsupportedOperationException("The method is not implemented yet.");
+    private void setLink(ContentType link, IContent content) {
+        content.setLink(String.valueOf(link));
     }
 
-    private void setPhoto(Photo photo, IContent content) {
-        // TODO implement here
-        throw new UnsupportedOperationException("The method is not implemented yet.");
+    private void setPhoto(ContentType photo, IContent content) {
+        content.setPhoto(String.valueOf(photo));
     }
 
     private void upload(AuthorizedContent content) {
-        // TODO implement here
-        throw new UnsupportedOperationException("The method is not implemented yet.");
+        this.municipality.uploadContent(content);
     }
 
     private void append(PendingContent content) {
-        // TODO implement here
-        throw new UnsupportedOperationException("The method is not implemented yet.");
+        this.municipality.appendContent(content);
     }
 
     public List<PendingContent> getPendingContents() {
-        // TODO implement here
-        throw new UnsupportedOperationException("The method is not implemented yet.");
+        return this.municipality.getPendingManager().getPendingContents();
     }
 
     private void selectContent(PendingContent content) {
-        // TODO implement here
-        throw new UnsupportedOperationException("The method is not implemented yet.");
+
     }
 
     private void validateContent(PendingContent content) {
-        // TODO implement here
-        throw new UnsupportedOperationException("The method is not implemented yet.");
+        this.municipality.getPendingManager().removeContent(content);
+        this.municipality.uploadContent(content);
     }
 
     private void invalidateContent(PendingContent content) {
-        // TODO implement here
-        throw new UnsupportedOperationException("The method is not implemented yet.");
+        this.municipality.getPendingManager().removeContent(content);
     }
 }
