@@ -157,6 +157,55 @@ public class Municipality {
     }
 
     /**
+     * This method is used to get the specific details of a POI present in the Municipality
+     *
+     * @return a String with the specific Details of the POI
+     */
+
+    public String getPOIInformation(String id){
+       return "ciao";
+    }
+
+    /**
+     * This method is used to get the specific Details of an Itinerary present in the Municipality
+     *
+     * @return a String with the specific Details of the POI.
+     */
+    public String getItineraryInformation(String id){
+        return "ciao";
+    }
+
+    /**
+     * This method is used to get the general information of the POIs present in the Municipality
+     *
+     * @return a String with the Name, Coordinates and ID of every POI.
+     */
+    public String getPOIsInformations(){
+        StringBuilder informations = new StringBuilder();
+        for (IPOI p : this.listOfPOIs) {
+            informations.append("Name: ").append(p.getName())
+                    .append("\nID: ").append(p.getId())
+                    .append("\n\n");
+        }
+
+        return informations.toString();
+    }
+    /**
+     * This method is used to get the information of the Itineraries present in the Municipality
+     *
+     * @return a String with the Name and ID of every itinerary-
+     */
+    public String getItinerariesInformations(){
+        StringBuilder informations = new StringBuilder();
+        for (IItinerary i : this.listOfItineraries) {
+            informations.append("Name: ").append(i.getName())
+                    .append("\nID: ").append(i.getId())
+                    .append("\n\n");
+        }
+        return informations.toString();
+    }
+
+    /**
      * equals of the class based on the ID of the Municipality and the territory where is situated
      *
      * @param o the object to compare
