@@ -19,6 +19,11 @@ public class PendingManager {
      */
     private ArrayList<PendingItinerary> listOfPendingItinerary;
 
+    /**
+     * List of pending contents.
+     */
+    private ArrayList<PendingContent> listOfPendingContent;
+
     public PendingManager(Municipality municipality) {
         this.listOfPendingPOI = new ArrayList<>();
         this.listOfPendingItinerary = new ArrayList<>();

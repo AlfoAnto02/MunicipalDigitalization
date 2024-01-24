@@ -35,11 +35,11 @@ public class ContentController {
         content.setPhoto(String.valueOf(photo));
     }
 
-    private void upload(AuthorizedContent content) {
+    public void upload(AuthorizedContent content) {
         this.municipality.uploadContent(content);
     }
 
-    private void append(PendingContent content) {
+    public void append(PendingContent content) {
         this.municipality.appendContent(content);
     }
 

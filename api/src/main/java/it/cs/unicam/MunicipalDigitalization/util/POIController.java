@@ -66,6 +66,8 @@ public class POIController {
         this.municipality.appendPOI(poi);
     }
 
+    public void upload(IPOI poi) { this.municipality.uploadPOI(poi);}
+
     /**
      * This method is used to set the coordinates of a POI.
      *

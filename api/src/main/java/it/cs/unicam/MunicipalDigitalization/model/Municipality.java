@@ -99,18 +99,10 @@ public class Municipality {
      *
      * @param poi The POI to upload.
      */
-    private void uploadPOI(IPOI poi) {
+    public void uploadPOI(IPOI poi) {
         if (!this.listOfPOIs.contains(poi)) this.listOfPOIs.add(poi);
     }
 
-    /**
-     * This method is used to upload an itinerary to the municipality.
-     *
-     * @param itinerary The itinerary to upload.
-     */
-    private void uploadItinerary(IItinerary itinerary) {
-        if (!listOfItineraries.contains(itinerary)) listOfItineraries.add(itinerary);
-    }
 
     /**
      * This method is used to append a pending itinerary to the list of itineraries.
@@ -119,6 +111,28 @@ public class Municipality {
      */
     public void appendItinerary(PendingItinerary pendingItinerary) {
         this.pendingManager.addPendingItinerary(pendingItinerary);
+    }
+
+    /**
+     * This method is used to upload an itinerary to the municipality.
+     *
+     * @param itinerary The itinerary to upload.
+     */
+    public void uploadItinerary(IItinerary itinerary) {
+        if (!listOfItineraries.contains(itinerary)) listOfItineraries.add(itinerary);
+    }
+
+   /**
+     * This method is used to append a pending content to the list of contents.
+     *
+     * @param pendingContent The pending content to append.
+     */
+    public void appendContent(PendingContent pendingContent) {
+        this.pendingManager.addPendingContent(pendingContent);
+    }
+
+    public void uploadContent(IContent content) {
+        if (!listOfContents.contains(content)) listOfContents.add(content);
     }
 
     /**
@@ -140,6 +154,15 @@ public class Municipality {
     }
 
     /**
+     * This method is used to get the list of contents.
+     *
+     * @return The list of contents.
+     */
+    public List<IContent> getContentList() {
+        return this.listOfContents;
+    }
+
+    /**
      * This method is used to get the specific details of a POI present in the Municipality
      *
      * @return a String with the specific Details of the POI
@@ -157,6 +180,13 @@ public class Municipality {
     public String getItineraryInformation(String id){
         return "ciao";
     }
+
+    /**
+     * This method is used to get the specific Details of a Content present in the Municipality
+     *
+     * @return a String with the specific Details of the Content.
+     */
+    public String getContentInformation(String id){ return "ciao"; }
 
     /**
      * This method is used to get the general information of the POIs present in the Municipality

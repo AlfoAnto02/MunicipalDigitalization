@@ -1,5 +1,6 @@
 package it.cs.unicam.MunicipalDigitalization.io;
 
+import it.cs.unicam.MunicipalDigitalization.util.ContentController;
 import it.cs.unicam.MunicipalDigitalization.util.ItineraryController;
 import it.cs.unicam.MunicipalDigitalization.util.POIController;
 
@@ -22,6 +23,12 @@ public interface IContributorsView {
     void createItinerary();
 
     /**
+     * This method is used to create a content.
+     * The implementation should handle the creation of a new content.
+     */
+    void createContent();
+
+    /**
      * This method is used to get the POI controller.
      * The implementation should return the POI controller.
      *
@@ -36,6 +43,14 @@ public interface IContributorsView {
      * @return The itinerary controller.
      */
     ItineraryController getItineraryController();
+
+    /**
+     * This method is used to get the content controller.
+     * The implementation should return the content controller.
+     *
+     * @return The content controller.
+     */
+    ContentController getContentController();
 
     /**
      * This method is used to get string input from the user.

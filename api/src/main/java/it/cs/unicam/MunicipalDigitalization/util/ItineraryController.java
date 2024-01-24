@@ -45,6 +45,10 @@ public class ItineraryController {
         this.municipality.appendItinerary(itinerary);
     }
 
+    public void upload(IItinerary itinerary) {
+        this.municipality.getItineraryList().add(itinerary);
+    }
+
 
     /**
      * This method is used to validate an itinerary.
