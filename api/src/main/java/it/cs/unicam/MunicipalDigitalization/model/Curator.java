@@ -21,6 +21,7 @@ public class Curator extends AuthorizedContributor {
      * @param password The password of the curator.
      * @param municipality The municipality of the curator.
      */
+
     public Curator(String name, String password, Municipality municipality) {
         super(name, password, municipality);
     }
@@ -28,6 +29,7 @@ public class Curator extends AuthorizedContributor {
     /**
      * This method is used to validate a point of interest (POI) using the view.
      */
+
     private void validatePOI() {
         view.startValidatePOI();
     }
@@ -35,6 +37,7 @@ public class Curator extends AuthorizedContributor {
     /**
      * This method is used to validate an Itinerary using the view.
      */
+
     private void validateItinerary() {
         view.startValidateItinerary();
     }

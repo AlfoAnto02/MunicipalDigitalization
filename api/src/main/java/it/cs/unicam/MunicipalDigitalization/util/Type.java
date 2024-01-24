@@ -13,19 +13,24 @@ public enum Type {
     /**
      * Represents a bookshop POI.
      */
+
     BookShop("Bookshop"),
+
     /**
      * Represents a town hall POI.
      */
     TownHall("TownHall"),
+
     /**
      * Represents a church POI.
      */
     Church("Church"),
+
     /**
      * Represents a cinema POI.
      */
     Cinema("Cinema"),
+
     /**
      * Represents a school POI.
      */
