@@ -7,14 +7,16 @@ public abstract class AbstractContent implements IContent {
 
     private final ID id;
 
-    private final ContentType type;
+    private ContentType type;
 
-    private final IMunicipalElement municipalElement;
+    private final IMunicipalElements referredMunicipalElement;
 
-    public AbstractContent(ID id, ContentType type, IMunicipalElement municipalElement) {
-        this.id = id;
-        this.type = type;
-        this.municipalElement = municipalElement;
+    private final AuthenticatedUser author;
+
+    public AbstractContent(AuthenticatedUser author, IMunicipalElements municipalElement) {
+        this.author = author;
+        this.referredMunicipalElement = municipalElement;
+        this.id = new ID();
     }
 
     @Override
