@@ -2,11 +2,26 @@ package it.cs.unicam.MunicipalDigitalization.model;
 
 import it.cs.unicam.MunicipalDigitalization.util.ID;
 
+/**
+ * This class Represent an Authenticated User.
+ * Differently from a User, the Authenticated User has a name and a Password.
+ */
 public class AbstractAuthUser extends AbstractUser implements AuthenticatedUser  {
 
-    private String name ;
+    /**
+     * Name of the User
+     */
+    private String name;
+
+    /**
+     * Password of the User
+     */
 
     private String password;
+
+    /**
+     * Municipality of the User where he will operate
+     */
 
     private Municipality municipality;
 

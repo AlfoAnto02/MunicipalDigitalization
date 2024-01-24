@@ -1,7 +1,10 @@
 package it.cs.unicam.MunicipalDigitalization.model;
 
+import it.cs.unicam.MunicipalDigitalization.util.Coordinates;
 import it.cs.unicam.MunicipalDigitalization.util.ID;
 
+import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -11,29 +14,40 @@ import java.util.Objects;
  * It implements the IItinerary interface.
  * An itinerary has an id, name, description, author, creation date, the types of the points of interest, and a list of points of interest (POIs).
  */
-public abstract class AbstractItinerary extends AbstractMunicipalElement implements IItinerary {
+public abstract class AbstractItinerary extends MunicipalElements implements IItinerary {
 
     /**
-     * A brief description of the itinerary.
+     * List of POIs that composed the Itinerary
+     */
+    private List<IPOI> listOfPOIs;
+
+    /**
+     * The types of the Itinerary. The types depend on the Types of the POIs
+     * that composed the Itinerary
+     */
+
+    private String types;
+
+    /**
+     * A general Description of the Itinerary
      */
     private String description;
 
     /**
-     * A list of points of interest (POIs) included in the itinerary.
+     * The coordinates where the Itinerary is situated.
      */
-    private final List<IPOI> listOfPOIs;
+
+    private Coordinates coordinates;
 
     /**
-     * The types of the itinerary.
+     * The constructor of the class
+     *
+     * @param author of the Itinerary
      */
-    private String types;
 
-    public AbstractItinerary(ID id, String name, Date creationDate, AuthenticatedUser author, String description, List<IPOI> listOfPOIs, String types) {
-        super(id, name, creationDate, author, null);
-        this.setDescription(description);
-        this.listOfPOIs = listOfPOIs;
-        this.setTypes(types);
-        setCoordinates(null);
+    public AbstractItinerary(AuthenticatedUser author) {
+        super(author);
+        this.listOfPOIs=new ArrayList<>();
     }
 
     /**
@@ -41,6 +55,7 @@ public abstract class AbstractItinerary extends AbstractMunicipalElement impleme
      *
      * @return The types of the itinerary.
      */
+
     public String getTypes() {
         return this.types;
     }
@@ -50,6 +65,7 @@ public abstract class AbstractItinerary extends AbstractMunicipalElement impleme
      *
      * @param types The types of the itinerary.
      */
+
     public void setTypes(String types) {
         if (types == null) {
             throw new NullPointerException("The types cannot be null.");
@@ -58,26 +74,15 @@ public abstract class AbstractItinerary extends AbstractMunicipalElement impleme
         this.types = types;
     }
 
-    @Override
-    public String getId() {
-        return super.getID();
-    }
-
     /**
-     * Setter for the name of the itinerary.
+     * get the description of the Itinerary
      *
-     * @param name The name of the itinerary.
+     * @return a string that contains the description of the itinerary.
      */
-    public void setName(String name) {
-        if (name == null || name.isEmpty()) {
-            throw new IllegalArgumentException("The name cannot be null or empty.");
-        }
-        this.name = name;
-    }
 
     @Override
     public String getDescription() {
-        return description;
+        return this.description;
     }
 
     /**
@@ -85,6 +90,7 @@ public abstract class AbstractItinerary extends AbstractMunicipalElement impleme
      *
      * @param description The description of the itinerary.
      */
+
     public void setDescription(String description) {
         if (description == null || description.isEmpty()) {
             throw new IllegalArgumentException("The description cannot be null or empty.");
@@ -93,22 +99,10 @@ public abstract class AbstractItinerary extends AbstractMunicipalElement impleme
     }
 
     /**
-     * Getter for the author of the itinerary.
+     * get the List of the POIs that composes the itinerary
      *
-     * @return The author of the itinerary.
+     * @return a list of POIs
      */
-    public AuthenticatedUser getAuthor() {
-        return this.getAuthor();
-    }
-
-    /**
-     * Getter for the creation date of the itinerary.
-     *
-     * @return The creation date of the itinerary.
-     */
-    public Date getCreationDate() {
-        return this.creationDate;
-    }
 
     @Override
     public List<IPOI> getListOfPOIs() {
@@ -121,6 +115,7 @@ public abstract class AbstractItinerary extends AbstractMunicipalElement impleme
      * @param poi The POI to check.
      * @return True if the POI is in the itinerary, false otherwise.
      */
+
     public boolean check(IPOI poi) {
         return this.getListOfPOIs().contains(poi);
     }
@@ -130,6 +125,7 @@ public abstract class AbstractItinerary extends AbstractMunicipalElement impleme
      *
      * @param poi The POI to add.
      */
+
     public void addPOI(IPOI poi) {
         this.listOfPOIs.add(poi);
     }
@@ -146,11 +142,16 @@ public abstract class AbstractItinerary extends AbstractMunicipalElement impleme
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AbstractItinerary that = (AbstractItinerary) o;
-        return Objects.equals(name, that.name) && Objects.equals(listOfPOIs, that.listOfPOIs);
+        return Objects.equals(super.getName(), that.getName()) && Objects.equals(listOfPOIs, that.listOfPOIs);
     }
+
+    /**
+     *
+     * @return the Hashcode of the Object based on the Name and on the List of POIs.
+     */
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, listOfPOIs);
+        return Objects.hash(super.getName(), listOfPOIs);
     }
 }
