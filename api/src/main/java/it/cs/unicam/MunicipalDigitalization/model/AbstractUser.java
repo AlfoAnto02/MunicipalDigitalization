@@ -82,7 +82,7 @@ public abstract class AbstractUser implements User {
      * It uses the ITourist General View.
      */
     public void viewPOI() {
-        this.generalView.getPOIs();
+        this.generalView.viewPOI();
     }
 
     /**
@@ -91,6 +91,6 @@ public abstract class AbstractUser implements User {
      */
 
     public void viewItinerary(){
-        this.generalView.getItineraries();
+        this.generalView.viewItinerary();
     }
 }

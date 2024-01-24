@@ -7,34 +7,44 @@ import it.cs.unicam.MunicipalDigitalization.util.ViewController;
 import java.util.Scanner;
 
 public class ITourist {
-    private ViewController viewController;
-    private User tourist;
-    private Municipality municipality;
+    private final ViewController viewController;
+    private final User tourist;
+    private final Municipality municipality;
 
-    private Scanner inputScanner;
+    private final Scanner inputScanner;
     public ITourist(Municipality municipality, User tourist){
         this.municipality=municipality;
         this.tourist=tourist;
         this.viewController=new ViewController(this,this.municipality);
-        Scanner inputScanner = new Scanner(System.in);
+        this.inputScanner = new Scanner(System.in);
     }
 
-    public void getPOIs() {
+    public void viewPOI() {
+        this.getPOIs();
+        this.selectPOI();
+    }
+
+    public void viewItinerary() {
+        this.getItineraries();
+        this.viewItinerary();
+    }
+
+    private void getPOIs() {
         System.out.println("This are the POIs Present in the Municipality");
         System.out.println(this.viewController.getPOIsInformation());
     }
 
-    public void selectPOI(String id){
-        System.out.println("Select a POI using the ID for see the Specific Details of that POI");
-        
-    }
-
-    public void getItineraries(){
-        this.viewController.getItineraryDetails(this.getStringInput("Please Select an Itinerary using an ID"));
-    }
-
-    public void selectItinerary(String id){
+    private void selectPOI(){
         this.viewController.getPOIDetails(this.getStringInput("Please Select a POI using an ID"));
+    }
+
+    private void getItineraries(){
+        System.out.println("This are the Itineraries Present in the Municipality");
+        System.out.println(this.viewController.getItinerariesInformation());
+    }
+
+    private void selectItinerary(){
+        this.viewController.getItineraryDetails(this.getStringInput("Please Select a POI using an ID"));
     }
 
     /**
