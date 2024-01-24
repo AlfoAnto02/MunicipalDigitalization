@@ -8,13 +8,17 @@ import it.cs.unicam.MunicipalDigitalization.model.Municipality;
  * all the POIs and Itineraries stored in the Municipality
  */
 public class ViewController {
+
     /**
      * The tourist View
      */
+
     private ITourist touristView;
+
     /**
      * The municipality associated with the Controller
      */
+
     private Municipality municipality;
 
     /**
@@ -35,6 +39,7 @@ public class ViewController {
      * Municipality
      * @return a string that contains all the general info of the POIs
      */
+
     public String getPOIsInformation(){
         return this.municipality.getPOIsInformations();
     }
@@ -66,6 +71,7 @@ public class ViewController {
      * @param id of the Itinerary
      * @return a string that contains all the specific details of the Itinerary
      */
+
     public String getItineraryDetails(String id) {
         return this.municipality.getItineraryInformation(id);
     }
