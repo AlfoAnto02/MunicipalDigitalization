@@ -4,6 +4,7 @@ import it.cs.unicam.MunicipalDigitalization.util.Coordinates;
 import it.cs.unicam.MunicipalDigitalization.util.ID;
 import it.cs.unicam.MunicipalDigitalization.util.Type;
 
+import java.time.Instant;
 import java.util.Date;
 import java.util.Objects;
 
@@ -12,47 +13,20 @@ import java.util.Objects;
  * It implements the IPOI interface.
  * A POI has an id, name, type, author, creation date, and coordinates.
  */
-public abstract class AbstractPOI extends AbstractMunicipalElement implements IPOI {
+public abstract class AbstractPOI  extends MunicipalElements implements IPOI {
 
     /**
      * The type of the point of interest (POI).
      */
     private Type type;
 
-    public AbstractPOI(ID id, String name, Date creationDate, AuthenticatedUser author, Coordinates coordinates) {
-        super(id, name, creationDate, author, coordinates);
-    }
-
-
-    @Override
-    public Coordinates getCoordinates() {
-        return super.getCoordinates();
-    }
-
-    @Override
-    public void setCoordinates(Coordinates coordinates) {
-        if (super.getCoordinates() == null) {
-            throw new NullPointerException("Coordinates cannot be null");
-        }
-        super.getCoordinates().setX(coordinates.getX());
-        super.getCoordinates().setY(coordinates.getY());
-    }
-
-    @Override
-    public String getId() {
-        return super.getID();
-    }
-
     /**
-     * Setter for the name of the point of interest (POI).
+     * The constructor of the Class
      *
-     * @param name The new name of the point of interest (POI).
+     * @param author the AuthenticatedUser that create the POI
      */
-    public void setName(String name) {
-        if (name == null || name.isEmpty()) {
-            throw new NullPointerException("Name cannot be null");
-        }
-        this.name = name;
+    public AbstractPOI(AuthenticatedUser author) {
+        super(author);
     }
 
     /**
@@ -60,6 +34,7 @@ public abstract class AbstractPOI extends AbstractMunicipalElement implements IP
      *
      * @return The type of the point of interest (POI).
      */
+
     public Type getType() {
         return this.type;
     }
@@ -69,29 +44,12 @@ public abstract class AbstractPOI extends AbstractMunicipalElement implements IP
      *
      * @param type The new type of the point of interest (POI).
      */
+
     public void setType(Type type) {
         if (type == null) {
             throw new NullPointerException("Type cannot be null");
         }
         this.type = type;
-    }
-
-    /**
-     * Getter for the author of the point of interest (POI).
-     *
-     * @return The author of the point of interest (POI).
-     */
-    public AuthenticatedUser getAuthor() {
-        return null;
-    }
-
-    /**
-     * Getter for the creation date of the point of interest (POI).
-     *
-     * @return The creation date of the point of interest (POI).
-     */
-    public Date getCreationDate() {
-        return null;
     }
 
     /**
@@ -106,11 +64,17 @@ public abstract class AbstractPOI extends AbstractMunicipalElement implements IP
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AbstractPOI that = (AbstractPOI) o;
-        return Objects.equals(coordinates, that.coordinates) && Objects.equals(name, that.name) && type == that.type;
+        return Objects.equals(super.getCoordinates(), that.getCoordinates()) &&
+                Objects.equals(super.getName(), that.getName()) && type == that.type;
     }
+
+    /**
+     *
+     * @return the Hashcode of the Object based on the Coordinates, name and type.
+     */
 
     @Override
     public int hashCode() {
-        return Objects.hash(coordinates, name, type);
+        return Objects.hash(super.getCoordinates(), super.getName(), type);
     }
 }
