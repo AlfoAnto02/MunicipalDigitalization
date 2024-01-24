@@ -52,8 +52,7 @@ public class IAuthorizedContributor implements IContributorsView {
         this.itineraryController = new ItineraryController(this, municipality);
     }
 
-    @Override
-    public void createPendingPOI() {
+    public void createPOI() {
         AuthorizedPOI poi = new AuthorizedPOI(this.contributor);
         this.setPOICoordinates(poi);
         this.showListOfTypes();
@@ -105,8 +104,7 @@ public class IAuthorizedContributor implements IContributorsView {
         poiController.setPOIName(getStringInput("Please Insert a Name for your POI"), poi);
     }
 
-    @Override
-    public void createPendingItinerary() {
+    public void createItinerary() {
         AuthorizedItinerary itinerary = new AuthorizedItinerary(this.contributor);
         this.selectPOI(itinerary);
         this.setItineraryName(itinerary);

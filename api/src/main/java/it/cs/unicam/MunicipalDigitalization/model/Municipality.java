@@ -37,6 +37,8 @@ public class Municipality {
      * The name of the municipality.
      */
     private final String name;
+
+
     /**
      * The manager for pending POIs and itineraries.
      */
@@ -128,25 +130,6 @@ public class Municipality {
         return this.listOfPOIs;
     }
 
-
-    /**
-     * This method is used to get the list of pending POIs.
-     *
-     * @return The list of pending POIs.
-     */
-    public List<PendingPOI> getPendingPoiList() {
-        return this.pendingManager.getListOfPendingPOI();
-    }
-
-    /**
-     * This method is used to get the list of pending itineraries.
-     *
-     * @return The list of pending itineraries.
-     */
-    public List<PendingItinerary> getPendingItineraryList() {
-        return this.pendingManager.getListOfPendingItinerary();
-    }
-
     /**
      * This method is used to get the list of itineraries.
      *
@@ -205,12 +188,17 @@ public class Municipality {
         return informations.toString();
     }
 
+    public PendingManager getPendingManager() {
+        return pendingManager;
+    }
+
     /**
      * equals of the class based on the ID of the Municipality and the territory where is situated
      *
      * @param o the object to compare
      * @return true if they are equals.
      */
+
 
     @Override
     public boolean equals(Object o) {

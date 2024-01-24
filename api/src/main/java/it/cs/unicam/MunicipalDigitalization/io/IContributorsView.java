@@ -13,13 +13,13 @@ public interface IContributorsView {
      * This method is used to create a point of interest (POI).
      * The implementation should handle the creation of a new POI.
      */
-    void createPendingPOI();
+    void createPOI();
 
     /**
      * This method is used to create an itinerary.
      * The implementation should handle the creation of a new itinerary.
      */
-    void createPendingItinerary();
+    void createItinerary();
 
     /**
      * This method is used to get the POI controller.

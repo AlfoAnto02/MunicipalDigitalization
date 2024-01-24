@@ -56,7 +56,7 @@ public class IContributor implements IContributorsView {
     }
 
     @Override
-    public void createPendingPOI() {
+    public void createPOI() {
         PendingPOI poi = new PendingPOI(this.contributor);
         this.setPOICoordinates(poi);
         this.showListOfTypes();
@@ -119,7 +119,7 @@ public class IContributor implements IContributorsView {
     }
 
     @Override
-    public void createPendingItinerary() {
+    public void createItinerary() {
         PendingItinerary itinerary = new PendingItinerary(this.contributor);
         this.selectPOI(itinerary);
         this.setItineraryName(itinerary);

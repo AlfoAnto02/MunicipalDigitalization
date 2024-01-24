@@ -30,7 +30,7 @@ public class PendingManager {
      *
      * @param poi The POI to remove.
      */
-    private void removePOI(PendingPOI poi) {
+    public void removePOI(PendingPOI poi) {
         this.listOfPendingPOI.remove(poi);
     }
 
@@ -40,7 +40,7 @@ public class PendingManager {
      *
      * @param itinerary The itinerary to remove.
      */
-    private void removeItinerary(PendingItinerary itinerary) {
+    public void removeItinerary(PendingItinerary itinerary) {
         this.listOfPendingItinerary.remove(itinerary);
     }
 
@@ -49,7 +49,7 @@ public class PendingManager {
      *
      * @param poi The POI to add.
      */
-    protected void addPOI(PendingPOI poi) {
+    public void addPOI(PendingPOI poi) {
         this.listOfPendingPOI.add(poi);
     }
 
@@ -58,7 +58,7 @@ public class PendingManager {
      *
      * @param pendingItinerary The itinerary to add.
      */
-    protected void addPendingItinerary(PendingItinerary pendingItinerary) {
+    public void addPendingItinerary(PendingItinerary pendingItinerary) {
         this.listOfPendingItinerary.add(pendingItinerary);
     }
 
@@ -76,7 +76,7 @@ public class PendingManager {
      *
      * @param listOfPendingPOI The list of pending POIs to be set.
      */
-    private void setListOfPendingPOI(ArrayList<PendingPOI> listOfPendingPOI) {
+    public void setListOfPendingPOI(ArrayList<PendingPOI> listOfPendingPOI) {
         this.listOfPendingPOI = listOfPendingPOI;
     }
 

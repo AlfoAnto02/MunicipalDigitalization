@@ -31,7 +31,7 @@ public class Contributor extends AbstractAuthUser {
      * It delegates the creation to the view.
      */
     private void createPendingPOI() {
-        view.createPendingPOI();
+        view.createPOI();
     }
 
     /**
@@ -39,7 +39,7 @@ public class Contributor extends AbstractAuthUser {
      * It delegates the creation to the view.
      */
     private void createPendingItinerary() {
-        view.createPendingItinerary();
+        view.createItinerary();
     }
 
 }

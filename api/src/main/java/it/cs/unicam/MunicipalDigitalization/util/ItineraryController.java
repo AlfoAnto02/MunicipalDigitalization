@@ -52,7 +52,7 @@ public class ItineraryController {
      * @param itinerary The itinerary to be validated.
      */
     public void validateItinerary(PendingItinerary itinerary) {
-        this.municipality.getPendingItineraryList().remove(itinerary);
+        this.municipality.getPendingManager().removeItinerary(itinerary);
         this.municipality.getItineraryList().add(itinerary);
     }
 
@@ -62,7 +62,7 @@ public class ItineraryController {
      * @param itinerary The itinerary to be invalidated.
      */
     public void invalidateItinerary(PendingItinerary itinerary) {
-        this.municipality.getPendingItineraryList().remove(itinerary);
+        this.municipality.getPendingManager().removeItinerary(itinerary);
     }
 
     /**
@@ -122,7 +122,7 @@ public class ItineraryController {
      * @return A list of pending itineraries.
      */
     public List<PendingItinerary> getPendingItineraryList() {
-        return this.municipality.getPendingItineraryList();
+        return this.municipality.getPendingManager().getListOfPendingItinerary();
     }
 
 

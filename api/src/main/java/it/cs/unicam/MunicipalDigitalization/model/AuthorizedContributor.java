@@ -31,7 +31,7 @@ public class AuthorizedContributor extends AbstractAuthUser {
      * It delegates the creation of POI to the view.
      */
     private void createPOI() {
-        view.createPendingPOI();
+        view.createPOI();
     }
 
     /**
@@ -39,6 +39,6 @@ public class AuthorizedContributor extends AbstractAuthUser {
      * It delegates the creation of itinerary to the view.
      */
     private void createItinerary() {
-        view.createPendingItinerary();
+        view.createItinerary();
     }
 }

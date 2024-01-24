@@ -43,7 +43,7 @@ public class POIController {
      * @param poi The POI to be validated.
      */
     public void validatePOI(PendingPOI poi) {
-        this.municipality.getPendingPoiList().remove(poi);
+        this.municipality.getPendingManager().removePOI(poi);
         this.municipality.getPOIList().add(poi);
     }
 
@@ -53,7 +53,7 @@ public class POIController {
      * @param poi The POI to be invalidated.
      */
     public void invalidatePOI(PendingPOI poi) {
-        this.getPendingPoiList().remove(poi);
+        this.municipality.getPendingManager().removePOI(poi);
     }
 
     /**
@@ -112,7 +112,7 @@ public class POIController {
      * @return A list of pending POIs.
      */
     public List<PendingPOI> getPendingPoiList() {
-        return this.municipality.getPendingPoiList();
+        return this.municipality.getPendingManager().getListOfPendingPOI();
     }
 
 
