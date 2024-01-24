@@ -28,4 +28,9 @@ public abstract class AbstractContent implements IContent {
     public ContentType getType() {
         return this.type;
     }
+
+    @Override
+    public IMunicipalElements getReferredMunicipalElement() {
+        return this.referredMunicipalElement;
+    }
 }

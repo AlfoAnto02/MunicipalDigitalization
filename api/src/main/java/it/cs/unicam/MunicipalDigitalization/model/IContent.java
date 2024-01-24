@@ -15,4 +15,6 @@ public interface IContent {
     void setLink(String link);
 
     void setPhoto(String photo);
+
+    IMunicipalElements getReferredMunicipalElement();
 }

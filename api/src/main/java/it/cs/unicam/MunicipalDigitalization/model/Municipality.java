@@ -48,6 +48,8 @@ public class Municipality {
      */
     private List<User> listOfUsers;
 
+    MunicipalElements municipalElements;
+
     /**
      * Constructor for the Municipality class.
      * It initializes the Municipality with the provided territory.
@@ -131,8 +133,11 @@ public class Municipality {
         this.pendingManager.addPendingContent(pendingContent);
     }
 
+
     public void uploadContent(IContent content) {
-        if (!listOfContents.contains(content)) listOfContents.add(content);
+        if(!content.getReferredMunicipalElement().listOfContents().contains(content)) {
+            content.getReferredMunicipalElement().listOfContents().add(content);
+        }
     }
 
     /**
