@@ -4,7 +4,6 @@ import it.cs.unicam.MunicipalDigitalization.util.Coordinates;
 import it.cs.unicam.MunicipalDigitalization.util.ID;
 import it.cs.unicam.MunicipalDigitalization.util.Type;
 
-import java.time.Instant;
 import java.util.Date;
 import java.util.Objects;
 
@@ -13,71 +12,35 @@ import java.util.Objects;
  * It implements the IPOI interface.
  * A POI has an id, name, type, author, creation date, and coordinates.
  */
-public abstract class AbstractPOI implements IPOI {
-
-    /**
-     * The unique identifier of the point of interest (POI).
-     */
-    private final ID id;
-
-    /**
-     * The author of the point of interest (POI).
-     */
-    private final User author;
-
-    /**
-     * The date when the point of interest (POI) was created.
-     */
-    private final Date creationDate;
-
-    /**
-     * The coordinates of the point of interest (POI).
-     */
-    private Coordinates coordinates;
-
-    /**
-     * The name of the point of interest (POI).
-     */
-    private String name;
+public abstract class AbstractPOI extends AbstractMunicipalElement implements IPOI {
 
     /**
      * The type of the point of interest (POI).
      */
     private Type type;
 
-    /**
-     * Constructor for the AbstractPOI class.
-     *
-     * @param user The author of the point of interest (POI).
-     */
-    public AbstractPOI(User user) {
-        this.author = user;
-        this.id = new ID();
-        this.creationDate = Date.from(Instant.now());
+    public AbstractPOI(ID id, String name, Date creationDate, AuthenticatedUser author, Coordinates coordinates) {
+        super(id, name, creationDate, author, coordinates);
     }
+
 
     @Override
     public Coordinates getCoordinates() {
-        return this.coordinates;
+        return super.getCoordinates();
     }
 
     @Override
     public void setCoordinates(Coordinates coordinates) {
-        if (this.coordinates == null) {
+        if (super.getCoordinates() == null) {
             throw new NullPointerException("Coordinates cannot be null");
         }
-        this.coordinates.setX(coordinates.getX());
-        this.coordinates.setY(coordinates.getY());
+        super.getCoordinates().setX(coordinates.getX());
+        super.getCoordinates().setY(coordinates.getY());
     }
 
     @Override
-    public ID getId() {
-        return this.id;
-    }
-
-    @Override
-    public String getName() {
-        return this.name;
+    public String getId() {
+        return super.getID();
     }
 
     /**
@@ -118,8 +81,8 @@ public abstract class AbstractPOI implements IPOI {
      *
      * @return The author of the point of interest (POI).
      */
-    public User getAuthor() {
-        return this.author;
+    public AuthenticatedUser getAuthor() {
+        return null;
     }
 
     /**
@@ -128,7 +91,7 @@ public abstract class AbstractPOI implements IPOI {
      * @return The creation date of the point of interest (POI).
      */
     public Date getCreationDate() {
-        return this.creationDate;
+        return null;
     }
 
     /**

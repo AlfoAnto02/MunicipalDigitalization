@@ -2,7 +2,6 @@ package it.cs.unicam.MunicipalDigitalization.model;
 
 import it.cs.unicam.MunicipalDigitalization.util.ID;
 
-import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -12,27 +11,7 @@ import java.util.Objects;
  * It implements the IItinerary interface.
  * An itinerary has an id, name, description, author, creation date, the types of the points of interest, and a list of points of interest (POIs).
  */
-public abstract class AbstractItinerary implements IItinerary {
-
-    /**
-     * The unique identifier of the itinerary.
-     */
-    private final ID id;
-
-    /**
-     * The author of the itinerary.
-     */
-    private final User author;
-
-    /**
-     * The date when the itinerary was created.
-     */
-    private final Date creationDate;
-
-    /**
-     * The name of the itinerary.
-     */
-    private String name;
+public abstract class AbstractItinerary extends AbstractMunicipalElement implements IItinerary {
 
     /**
      * A brief description of the itinerary.
@@ -42,22 +21,19 @@ public abstract class AbstractItinerary implements IItinerary {
     /**
      * A list of points of interest (POIs) included in the itinerary.
      */
-    private List<IPOI> listOfPOIs;
+    private final List<IPOI> listOfPOIs;
 
     /**
      * The types of the itinerary.
      */
     private String types;
 
-    /**
-     * Constructor for the AbstractItinerary class.
-     *
-     * @param author The author of the itinerary.
-     */
-    public AbstractItinerary(User author) {
-        this.author = author;
-        this.id = new ID();
-        this.creationDate = Date.from(Instant.now());
+    public AbstractItinerary(ID id, String name, Date creationDate, AuthenticatedUser author, String description, List<IPOI> listOfPOIs, String types) {
+        super(id, name, creationDate, author, null);
+        this.setDescription(description);
+        this.listOfPOIs = listOfPOIs;
+        this.setTypes(types);
+        setCoordinates(null);
     }
 
     /**
@@ -83,13 +59,8 @@ public abstract class AbstractItinerary implements IItinerary {
     }
 
     @Override
-    public ID getId() {
-        return this.id;
-    }
-
-    @Override
-    public String getName() {
-        return this.name;
+    public String getId() {
+        return super.getID();
     }
 
     /**
@@ -126,8 +97,8 @@ public abstract class AbstractItinerary implements IItinerary {
      *
      * @return The author of the itinerary.
      */
-    public User getAuthor() {
-        return this.author;
+    public AuthenticatedUser getAuthor() {
+        return this.getAuthor();
     }
 
     /**

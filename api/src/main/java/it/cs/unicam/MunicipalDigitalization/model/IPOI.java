@@ -1,7 +1,6 @@
 package it.cs.unicam.MunicipalDigitalization.model;
 
 import it.cs.unicam.MunicipalDigitalization.util.Coordinates;
-import it.cs.unicam.MunicipalDigitalization.util.ID;
 import it.cs.unicam.MunicipalDigitalization.util.Type;
 
 /**
@@ -30,7 +29,7 @@ public interface IPOI {
      *
      * @return The id of the POI.
      */
-    ID getId();
+    String getId();
 
     /**
      * This method is used to get the type of the POI.

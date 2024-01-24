@@ -1,7 +1,5 @@
 package it.cs.unicam.MunicipalDigitalization.model;
 
-import it.cs.unicam.MunicipalDigitalization.util.ID;
-
 import java.util.List;
 
 /**
@@ -23,7 +21,7 @@ public interface IItinerary {
      *
      * @return The id of the itinerary.
      */
-    ID getId();
+    String getId();
 
     /**
      * This method is used to get the name of the itinerary.
