@@ -4,8 +4,16 @@ import it.cs.unicam.MunicipalDigitalization.model.*;
 import it.cs.unicam.MunicipalDigitalization.util.*;
 
 import java.util.List;
+import java.util.Scanner;
 
 public class AbstractIContributorsView implements IContributorsView {
+
+    /**
+     *
+     * The scanner to get input from the user.
+     *
+     */
+    protected final Scanner inputScanner;
 
     /**
      * The POI controller of the contributor.
@@ -22,7 +30,20 @@ public class AbstractIContributorsView implements IContributorsView {
      */
     private ContentController contentController;
 
-    private void setPOICoordinates(AuthorizedPOI poi) {
+    /**
+     * The municipality of the contributor.
+     */
+    private final Municipality municipality;
+
+    public AbstractIContributorsView(Municipality municipality) {
+        this.municipality = municipality;
+        this.inputScanner = new Scanner(System.in);
+        this.poiController = new POIController(this, municipality);
+        this.itineraryController = new ItineraryController(this, municipality);
+        this.contentController = new ContentController(this, municipality);
+    }
+
+    public void setPOICoordinates(IPOI poi) {
         double x = getInput("Please Insert the x coordinate");
         double y = getInput("Please Insert the y coordinate");
         poiController.setPOICoordinates(new Coordinates(x, y), poi);
@@ -31,7 +52,7 @@ public class AbstractIContributorsView implements IContributorsView {
     /**
      * This method is used to show a list of types.
      */
-    private void showListOfTypes() {
+    public void showListOfTypes() {
         System.out.println("Select one of the following types");
         System.out.println(Type.getTypes());
     }
@@ -48,7 +69,7 @@ public class AbstractIContributorsView implements IContributorsView {
         }
     }
 
-    private void selectPOI(AuthorizedItinerary itinerary) {
+    public void selectPOI(IItinerary itinerary) {
         this.showListOfPOIs();
         do {
             this.itineraryController.selectPOIToAdd(itinerary, this.itineraryController.getPOIList().get(inputScanner.nextInt()));
@@ -63,11 +84,11 @@ public class AbstractIContributorsView implements IContributorsView {
         return getStringInput("Do you want to continue Adding POIs?  Y/N").equalsIgnoreCase("Y");
     }
 
-    private void setItineraryName(AuthorizedItinerary itinerary) {
+    public void setItineraryName(IItinerary itinerary) {
         this.itineraryController.setItineraryName(itinerary, this.getStringInput("Please Enter a Name for your Itinerary!!! "));
     }
 
-    private void setType(AuthorizedPOI poi) {
+    public void setType(IPOI poi) {
         this.showListOfTypes();
         String typeString = getStringInput("Please Select a Type");
         if (!Type.getTypes().contains(typeString)) {
@@ -77,7 +98,7 @@ public class AbstractIContributorsView implements IContributorsView {
         poiController.setPOIType(typeString, poi);
     }
 
-    private void setPOIName(AuthorizedPOI poi) {
+    public void setPOIName(IPOI poi) {
         poiController.setPOIName(getStringInput("Please Insert a Name for your POI"), poi);
     }
 
@@ -166,13 +187,25 @@ public class AbstractIContributorsView implements IContributorsView {
     }
 
     /**
-     * This method is used to get string input from the user.
+     * This method is used to get input from the user.
      *
      * @param message The message to be displayed to the user.
-     * @return The string input from the user.
+     * @return The input from the user, a double.
+     */
+    private double getInput(String message) {
+        System.out.println(message);
+        return inputScanner.nextDouble();
+    }
+
+    /**
+     * This method is used to get input from the user
+     *
+     * @param message The message to be displayed to the user.
+     * @return the input from the user, a string.
      */
     @Override
     public String getStringInput(String message) {
-        return null;
+        System.out.println(message);
+        return inputScanner.nextLine();
     }
 }

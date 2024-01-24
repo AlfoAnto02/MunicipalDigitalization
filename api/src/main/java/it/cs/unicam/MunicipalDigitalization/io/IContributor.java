@@ -39,20 +39,15 @@ public class IContributor extends AbstractIContributorsView {
     private final Contributor contributor;
 
     /**
-     * The scanner to get input from the user.
-     */
-    private final Scanner inputScanner;
-
-    /**
      * Constructor for the IContributor class.
      *
      * @param municipality The municipality of the contributor.
      * @param contributor  The contributor.
      */
     public IContributor(Municipality municipality, Contributor contributor) {
+        super(municipality);
         this.contributor = contributor;
         this.municipality = municipality;
-        this.inputScanner = new Scanner(System.in);
         this.poiController = new POIController(this, municipality);
         this.itineraryController = new ItineraryController(this, municipality);
         this.contentController = new ContentController(this, municipality);
@@ -70,7 +65,7 @@ public class IContributor extends AbstractIContributorsView {
         this.setPOICoordinates(poi);
         this.showListOfTypes();
         this.setType(poi);
-        this.setPendingPOIName(poi);
+        this.setPOIName(poi);
         this.appendPOI(poi);
         System.out.println("Your Poi has been created !!");
     }
@@ -84,20 +79,11 @@ public class IContributor extends AbstractIContributorsView {
         this.poiController.append(pendingPOI);
     }
 
-
-    /**
-     *
-     * This Method is used to Create a Interface using an interface.
-     * This method will use a few Methods of the Interface For setting every
-     * attribute of the POI
-     */
-
     @Override
     public void createItinerary() {
         PendingItinerary itinerary = new PendingItinerary(this.contributor);
         this.selectPOI(itinerary);
         this.setItineraryName(itinerary);
-        this.setItineraryDescription(itinerary);
         this.appendItinerary(itinerary);
     }
 
@@ -112,6 +98,7 @@ public class IContributor extends AbstractIContributorsView {
 
     @Override
     public void createContent() {
+        //TODO - implement IContributor.createContent
     }
 
     /**
@@ -136,11 +123,5 @@ public class IContributor extends AbstractIContributorsView {
     @Override
     public ContentController getContentController() {
         return this.contentController;
-    }
-
-    @Override
-    public String getStringInput(String message) {
-        System.out.println(message);
-        return inputScanner.nextLine();
     }
 }

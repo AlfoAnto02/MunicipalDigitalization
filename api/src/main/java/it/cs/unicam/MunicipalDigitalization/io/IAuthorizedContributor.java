@@ -1,13 +1,12 @@
 package it.cs.unicam.MunicipalDigitalization.io;
 
-import it.cs.unicam.MunicipalDigitalization.model.*;
-import it.cs.unicam.MunicipalDigitalization.util.Coordinates;
+import it.cs.unicam.MunicipalDigitalization.model.AuthorizedContributor;
+import it.cs.unicam.MunicipalDigitalization.model.AuthorizedItinerary;
+import it.cs.unicam.MunicipalDigitalization.model.AuthorizedPOI;
+import it.cs.unicam.MunicipalDigitalization.model.Municipality;
+import it.cs.unicam.MunicipalDigitalization.util.ContentController;
 import it.cs.unicam.MunicipalDigitalization.util.ItineraryController;
 import it.cs.unicam.MunicipalDigitalization.util.POIController;
-import it.cs.unicam.MunicipalDigitalization.util.Type;
-
-import java.util.List;
-import java.util.Scanner;
 
 /**
  *
@@ -17,30 +16,32 @@ import java.util.Scanner;
  * It also has methods to set POI coordinates, show a list of types, set POI name, set type, show POI list, select POI, confirm itinerary, and set itinerary name.
  *
  */
-public class IAuthorizedContributor implements IContributorsView {
+public class IAuthorizedContributor extends AbstractIContributorsView {
 
-    /**
-     *
-     * The scanner to get input from the user.
-     *
-     */
-
-    protected final Scanner inputScanner;
     /**
      * The POI controller of the authorized contributor.
      *
      */
     private final POIController poiController;
+
     /**
      * The itinerary controller of the authorized contributor.
      *
      */
     private final ItineraryController itineraryController;
+
+    /**
+     * The content controller of the authorized contributor.
+     *
+     */
+    private final ContentController contentController;
+
     /**
      * The municipality of the authorized contributor.
      *
      */
     private final Municipality municipality;
+
     /**
      * The authorized contributor.
      *
@@ -55,20 +56,15 @@ public class IAuthorizedContributor implements IContributorsView {
      * @param contributor The authorized contributor.
      */
     public IAuthorizedContributor(Municipality municipality, AuthorizedContributor contributor) {
+        super(municipality);
         this.contributor = contributor;
         this.municipality = municipality;
-        this.inputScanner = new Scanner(System.in);
         this.poiController = new POIController(this, municipality);
         this.itineraryController = new ItineraryController(this, municipality);
+        this.contentController = new ContentController(this, municipality);
     }
 
-    /**
-     *
-     * This Method is used to Create a POI using an interface.
-     * This method will use a few Methods of the Interface For setting every
-     * attribute of the POI
-     *
-     */
+    @Override
     public void createPOI() {
         AuthorizedPOI poi = new AuthorizedPOI(this.contributor);
         this.setPOICoordinates(poi);
@@ -78,112 +74,16 @@ public class IAuthorizedContributor implements IContributorsView {
         System.out.println("Your Poi has been created !!");
     }
 
-    /**
-     * This method is used to set the coordinates of a POI.
-     *
-     * @param poi The POI whose coordinates are to be set.
-     */
-    private void setPOICoordinates(AuthorizedPOI poi) {
-        double x = getInput("Please Insert the x coordinate");
-        double y = getInput("Please Insert the y coordinate");
-        poiController.setPOICoordinates(new Coordinates(x, y), poi);
-    }
-
-    /**
-     * This method is used to show a list of types.
-     */
-    private void showListOfTypes() {
-        System.out.println("Select one of the following types");
-        System.out.println(Type.getTypes());
-    }
-
-    /**
-     * This method is used to set the type of POI.
-     *
-     * @param poi The POI whose type is to be set.
-     */
-    private void setType(AuthorizedPOI poi) {
-        this.showListOfTypes();
-        String typeString = getStringInput("Please Select a Type");
-        if (!Type.getTypes().contains(typeString)) {
-            typeString = getStringInput("Please Select a Type from the list");
-            showListOfTypes();
-        }
-        poiController.setPOIType(typeString, poi);
-    }
-
-    /**
-     * This method is used to set the name of a POI.
-     *
-     * @param poi The POI whose name is to be set.
-     */
-    private void setPOIName(AuthorizedPOI poi) {
-        poiController.setPOIName(getStringInput("Please Insert a Name for your POI"), poi);
-    }
-
-    /**
-     *
-     * This Method is used to Create a Interface using an interface.
-     * This method will use a few Methods of the Interface For setting every
-     * attribute of the POI
-     *
-     */
-
+    @Override
     public void createItinerary() {
         AuthorizedItinerary itinerary = new AuthorizedItinerary(this.contributor);
         this.selectPOI(itinerary);
         this.setItineraryName(itinerary);
-        this.setItineraryDescription(itinerary);
     }
 
-    /**
-     * This method is used to select a POI for an itinerary.
-     *
-     * @param itinerary The itinerary for which a POI is to be selected.
-     */
-    private void selectPOI(AuthorizedItinerary itinerary) {
-        this.showListOfPOIs();
-        do {
-            this.itineraryController.selectPOIToAdd(itinerary, this.itineraryController.getPOIList().get(inputScanner.nextInt()));
-        } while (itinerary.getListOfPOIs().isEmpty() || !confirmItinerary());
-    }
-
-    /**
-     * This method is used to set the name of a POI.
-     *
-     * @param itinerary The POI whose name is to be set.
-     */
-    private void setItineraryName(AuthorizedItinerary itinerary) {
-        this.itineraryController.setItineraryName(itinerary, this.getStringInput("Please Enter a Name for your Itinerary!!! "));
-    }
-
-    /**
-     * This method is used to set the description of an itinerary.
-     *
-     * @param itinerary The itinerary whose description is to be set.
-     */
-    private void setItineraryDescription(AuthorizedItinerary itinerary) {
-        this.itineraryController.setItineraryDescription(itinerary, this.getStringInput("Please Enter a Description for your Itinerary !!! "));
-    }
-
-    /**
-     * This method is used to show a list of POIs.
-     */
-    private void showListOfPOIs() {
-        List<IPOI> poiList = this.itineraryController.getPOIList();
-        System.out.println("Please, Select the number of which Poi do you wanna add to your itinerary !!! ");
-        for (int i = 0; i < poiList.size(); i++) {
-            System.out.printf("%d %s%n", i, poiList.get(i).getName());
-        }
-    }
-
-    /**
-     * This method is used to confirm an itinerary.
-     *
-     * @return A boolean value indicating whether the itinerary is confirmed.
-     */
-    private boolean confirmItinerary() {
-        return getStringInput("Do you want to continue Adding POIs?  Y/N").equalsIgnoreCase("Y");
+    @Override
+    public void createContent() {
+        //TODO - implement IAuthorizedContributor.createContent
     }
 
     @Override
@@ -196,26 +96,8 @@ public class IAuthorizedContributor implements IContributorsView {
         return this.itineraryController;
     }
 
-    /**
-     * This method is used to get input from the user.
-     *
-     * @param message The message to be displayed to the user.
-     * @return The input from the user, a double.
-     */
-    private double getInput(String message) {
-        System.out.println(message);
-        return inputScanner.nextDouble();
-    }
-
-    /**
-     * This method is used to get input from the user
-     *
-     * @param message The message to be displayed to the user.
-     * @return the input from the user, a string.
-     */
     @Override
-    public String getStringInput(String message) {
-        System.out.println(message);
-        return inputScanner.nextLine();
+    public ContentController getContentController() {
+        return this.contentController;
     }
 }
