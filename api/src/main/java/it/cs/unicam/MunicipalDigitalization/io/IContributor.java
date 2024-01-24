@@ -1,10 +1,7 @@
 package it.cs.unicam.MunicipalDigitalization.io;
 
 import it.cs.unicam.MunicipalDigitalization.model.*;
-import it.cs.unicam.MunicipalDigitalization.util.Coordinates;
-import it.cs.unicam.MunicipalDigitalization.util.ItineraryController;
-import it.cs.unicam.MunicipalDigitalization.util.POIController;
-import it.cs.unicam.MunicipalDigitalization.util.Type;
+import it.cs.unicam.MunicipalDigitalization.util.*;
 
 import java.util.List;
 import java.util.Scanner;
@@ -14,7 +11,7 @@ import java.util.Scanner;
  * It implements the IContributorsView interface.
  * A contributor can create points of interest (POIs) and itineraries.
  */
-public class IContributor implements IContributorsView {
+public class IContributor extends AbstractIContributorsView {
 
     /**
      * The POI controller of the contributor.
@@ -25,6 +22,11 @@ public class IContributor implements IContributorsView {
      * The itinerary controller of the contributor.
      */
     private final ItineraryController itineraryController;
+
+    /**
+     * The content controller of the contributor.
+     */
+    private final ContentController contentController;
 
     /**
      * The municipality of the contributor.
@@ -44,8 +46,8 @@ public class IContributor implements IContributorsView {
     /**
      * Constructor for the IContributor class.
      *
-     * @param municipality    The municipality of the contributor.
-     * @param contributor The contributor.
+     * @param municipality The municipality of the contributor.
+     * @param contributor  The contributor.
      */
     public IContributor(Municipality municipality, Contributor contributor) {
         this.contributor = contributor;
@@ -53,6 +55,7 @@ public class IContributor implements IContributorsView {
         this.inputScanner = new Scanner(System.in);
         this.poiController = new POIController(this, municipality);
         this.itineraryController = new ItineraryController(this, municipality);
+        this.contentController = new ContentController(this, municipality);
     }
 
     /**
@@ -70,49 +73,6 @@ public class IContributor implements IContributorsView {
         this.setPendingPOIName(poi);
         this.appendPOI(poi);
         System.out.println("Your Poi has been created !!");
-    }
-
-    /**
-     * This method is used to set the coordinates of a pending POI.
-     *
-     * @param poi The pending POI whose coordinates are to be set.
-     */
-    private void setPOICoordinates(PendingPOI poi) {
-        double x = getInput("Please Insert the x coordinate");
-        double y = getInput("Please Insert the y coordinate");
-        poiController.setPOICoordinates(new Coordinates(x, y), poi);
-    }
-
-    /**
-     * This method is used to show a list of types.
-     */
-    private void showListOfTypes() {
-        System.out.println("Select one of the following types");
-        System.out.println(Type.getTypes());
-    }
-
-    /**
-     * This method is used to set the type of pending POI.
-     *
-     * @param poi The pending POI whose type is to be set.
-     */
-    private void setType(PendingPOI poi) {
-        showListOfTypes();
-        String typeString = getStringInput("Please Select a Type");
-        if (!Type.getTypes().contains(typeString)) {
-            typeString = getStringInput("Please Select a Type from the list");
-            showListOfTypes();
-        }
-        poiController.setPOIType(typeString, poi);
-    }
-
-    /**
-     * This method is used to set the name of a pending POI.
-     *
-     * @param poi The pending POI whose name is to be set.
-     */
-    private void setPendingPOIName(PendingPOI poi) {
-        poiController.setPOIName(getStringInput("Please Insert a Name for your POI"), poi);
     }
 
     /**
@@ -142,36 +102,6 @@ public class IContributor implements IContributorsView {
     }
 
     /**
-     * This method is used to select a POI for an itinerary.
-     *
-     * @param itinerary The itinerary for which a POI is to be selected.
-     */
-    private void selectPOI(PendingItinerary itinerary) {
-        showListOfPOIs();
-        do {
-            this.itineraryController.selectPOIToAdd(itinerary, this.itineraryController.getPOIList().get(inputScanner.nextInt()));
-        } while (itinerary.getListOfPOIs().isEmpty() || !confirmItinerary());
-    }
-
-    /**
-     * This method is used to set the name of an itinerary.
-     *
-     * @param itinerary The itinerary whose name is to be set.
-     */
-    private void setItineraryName(IItinerary itinerary) {
-        this.itineraryController.setItineraryName(itinerary, this.getStringInput("Please Enter a Name for your Itinerary!!! "));
-    }
-
-    /**
-     * This method is used to set the description of an itinerary.
-     *
-     * @param itinerary The itinerary whose description is to be set.
-     */
-    private void setItineraryDescription(PendingItinerary itinerary) {
-        this.itineraryController.setItineraryDescription(itinerary, this.getStringInput("Please Enter a Description for your Itinerary !!! "));
-    }
-
-    /**
      * This method is used to append an itinerary.
      *
      * @param itinerary The itinerary to be appended.
@@ -180,24 +110,17 @@ public class IContributor implements IContributorsView {
         this.itineraryController.append(itinerary);
     }
 
-    /**
-     * This method is used to show a list of POIs.
-     */
-    private void showListOfPOIs() {
-        List<IPOI> poiList = this.itineraryController.getPOIList();
-        System.out.println("Please, Select the number of which Poi do you wanna add to your itinerary !!! ");
-        for (int i = 0; i < poiList.size(); i++) {
-            System.out.printf("%d %s%n", i, poiList.get(i).getName());
-        }
+    @Override
+    public void createContent() {
     }
 
     /**
-     * This method is used to confirm an itinerary.
+     * This method is used to append a content.
      *
-     * @return A boolean value indicating whether the itinerary is confirmed.
+     * @param pendingContent The content to be appended.
      */
-    private boolean confirmItinerary() {
-        return getStringInput("Do you want to continue Adding POIs?  Y/N").equalsIgnoreCase("Y");
+    public void appendContent(PendingContent pendingContent) {
+        this.contentController.append(pendingContent);
     }
 
     @Override
@@ -210,24 +133,11 @@ public class IContributor implements IContributorsView {
         return this.itineraryController;
     }
 
-    /**
-     * This method is used to get input from the user.
-     *
-     * @param message The message to be displayed to the user.
-     * @return The input from the user, a double
-     */
-    private double getInput(String message) {
-        System.out.println(message);
-        return inputScanner.nextDouble();
+    @Override
+    public ContentController getContentController() {
+        return this.contentController;
     }
 
-
-    /**
-     * This method is used to get input from the user
-     *
-     * @param message The message to be displayed to the user.
-     * @return the input from the user, a string
-     */
     @Override
     public String getStringInput(String message) {
         System.out.println(message);

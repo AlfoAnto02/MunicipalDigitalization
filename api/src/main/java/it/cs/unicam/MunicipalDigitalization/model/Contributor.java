@@ -42,4 +42,10 @@ public class Contributor extends AbstractAuthUser {
         view.createItinerary();
     }
 
+    /**
+     * This method is used to create a pending content.
+     * It delegates the creation to the view.
+     */
+    private void createPendingContent() { view.createContent(); }
+
 }
