@@ -93,7 +93,7 @@ public class Municipality {
      * @param pendingPOI The pending POI to append.
      */
     public void appendPOI(PendingPOI pendingPOI) {
-        this.pendingManager.addPOI(pendingPOI);
+        this.pendingManager.addPendingPOI(pendingPOI);
     }
 
     /**
@@ -159,20 +159,10 @@ public class Municipality {
     }
 
     /**
-     * This method is used to get the list of contents.
-     *
-     * @return The list of contents.
-     */
-    public List<IContent> getContentList() {
-        return this.listOfContents;
-    }
-
-    /**
      * This method is used to get the specific details of a POI present in the Municipality
      *
      * @return a String with the specific Details of the POI
      */
-
     public String getPOIInformation(String id){
        return "ciao";
     }
@@ -226,14 +216,6 @@ public class Municipality {
     public PendingManager getPendingManager() {
         return pendingManager;
     }
-
-    /**
-     * equals of the class based on the ID of the Municipality and the territory where is situated
-     *
-     * @param o the object to compare
-     * @return true if they are equals.
-     */
-
 
     @Override
     public boolean equals(Object o) {

@@ -50,11 +50,20 @@ public class PendingManager {
     }
 
     /**
+     * This method is used to remove a specific content from the list of pending contents.
+     *
+     * @param content The content to remove.
+     */
+    public void removeContent(PendingContent content) {
+        this.listOfPendingContent.remove(content);
+    }
+
+    /**
      * This method is used to add a specific POI to the list of pending POIs.
      *
      * @param poi The POI to add.
      */
-    public void addPOI(PendingPOI poi) {
+    public void addPendingPOI(PendingPOI poi) {
         this.listOfPendingPOI.add(poi);
     }
 
@@ -65,6 +74,15 @@ public class PendingManager {
      */
     public void addPendingItinerary(PendingItinerary pendingItinerary) {
         this.listOfPendingItinerary.add(pendingItinerary);
+    }
+
+    /**
+     * This method is used to add a specific content to the list of pending contents.
+     *
+     * @param pendingContent The content to add.
+     */
+    public void addPendingContent(PendingContent pendingContent) {
+        this.listOfPendingContent.add(pendingContent);
     }
 
     /**
@@ -95,6 +113,15 @@ public class PendingManager {
     }
 
     /**
+     * This method is used to get the list of pending contents.
+     *
+     * @return The list of pending contents.
+     */
+    public List<PendingContent> getListOfPendingContent() {
+        return this.listOfPendingContent;
+    }
+
+    /**
      * This method is used to set the list of pending itineraries.
      *
      * @param listOfPendingItinerary The list of pending itineraries to be set.
@@ -114,7 +141,6 @@ public class PendingManager {
         else throw new IllegalArgumentException("Not present");
     }
 
-
     /**
      * This method is used to get a specific itinerary from the list of pending itineraries.
      *
@@ -125,5 +151,4 @@ public class PendingManager {
         if (this.listOfPendingItinerary.contains(itinerary)) return itinerary;
         else throw new IllegalArgumentException("Not present");
     }
-
 }
