@@ -55,6 +55,12 @@ public class IContributor implements IContributorsView {
         this.itineraryController = new ItineraryController(this, municipality);
     }
 
+    /**
+     *
+     * This Method is used to Create a POI using an interface.
+     * This method will use a few Methods of the Interface For setting every
+     * attribute of the POI
+     */
     @Override
     public void createPOI() {
         PendingPOI poi = new PendingPOI(this.contributor);
@@ -117,6 +123,14 @@ public class IContributor implements IContributorsView {
     public void appendPOI(PendingPOI pendingPOI) {
         this.poiController.append(pendingPOI);
     }
+
+
+    /**
+     *
+     * This Method is used to Create a Interface using an interface.
+     * This method will use a few Methods of the Interface For setting every
+     * attribute of the POI
+     */
 
     @Override
     public void createItinerary() {

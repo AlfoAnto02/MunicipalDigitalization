@@ -10,35 +10,45 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
+ *
  * This class represents an authorized contributor's view.
  * It implements the IContributorsView interface.
  * An authorized contributor can create points of interest (POIs) and itineraries.
  * It also has methods to set POI coordinates, show a list of types, set POI name, set type, show POI list, select POI, confirm itinerary, and set itinerary name.
+ *
  */
 public class IAuthorizedContributor implements IContributorsView {
 
     /**
+     *
      * The scanner to get input from the user.
+     *
      */
+
     protected final Scanner inputScanner;
     /**
      * The POI controller of the authorized contributor.
+     *
      */
     private final POIController poiController;
     /**
      * The itinerary controller of the authorized contributor.
+     *
      */
     private final ItineraryController itineraryController;
     /**
      * The municipality of the authorized contributor.
+     *
      */
     private final Municipality municipality;
     /**
      * The authorized contributor.
+     *
      */
     private final AuthorizedContributor contributor;
 
     /**
+     *
      * Constructor for the IAuthorizedContributor class.
      *
      * @param municipality    The municipality of the authorized contributor.
@@ -52,6 +62,13 @@ public class IAuthorizedContributor implements IContributorsView {
         this.itineraryController = new ItineraryController(this, municipality);
     }
 
+    /**
+     *
+     * This Method is used to Create a POI using an interface.
+     * This method will use a few Methods of the Interface For setting every
+     * attribute of the POI
+     *
+     */
     public void createPOI() {
         AuthorizedPOI poi = new AuthorizedPOI(this.contributor);
         this.setPOICoordinates(poi);
@@ -103,6 +120,14 @@ public class IAuthorizedContributor implements IContributorsView {
     private void setPOIName(AuthorizedPOI poi) {
         poiController.setPOIName(getStringInput("Please Insert a Name for your POI"), poi);
     }
+
+    /**
+     *
+     * This Method is used to Create a Interface using an interface.
+     * This method will use a few Methods of the Interface For setting every
+     * attribute of the POI
+     *
+     */
 
     public void createItinerary() {
         AuthorizedItinerary itinerary = new AuthorizedItinerary(this.contributor);
