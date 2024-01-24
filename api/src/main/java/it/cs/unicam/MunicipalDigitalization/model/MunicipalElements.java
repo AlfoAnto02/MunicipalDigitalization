@@ -5,6 +5,7 @@ import it.cs.unicam.MunicipalDigitalization.util.ID;
 
 import java.time.Instant;
 import java.util.Date;
+import java.util.List;
 
 /**
  * This class represents a Municipal Element. A municipal Element is composed
@@ -12,44 +13,42 @@ import java.util.Date;
  * the coordinates of the Element and the name of the Element.
  *
  */
-
 public abstract class MunicipalElements implements IMunicipalElements {
 
     /**
      * The unique identifier of the MunicipalElement.
      */
-
     private final ID id;
 
     /**
      * The author of the point of the MunicipalElement
      */
-
     private final AuthenticatedUser author;
 
     /**
      * The date when the point MunicipalElement was created
      */
-
     private final Date creationDate;
 
     /**
      * The coordinates of the MunicipalElement
      */
-
     private Coordinates coordinates;
 
     /**
      * The name of the MunicipalElement
      */
-
     private String name;
+
+    /**
+     * The list of contents of the MunicipalElement
+     */
+    private List<IContent> listOfContents;
 
     /**
      * The constructor of the class
      * @param user the Authenticated User that create this Element
      */
-
     public MunicipalElements(AuthenticatedUser user){
         this.author=user;
         this.id = new ID();
@@ -61,7 +60,6 @@ public abstract class MunicipalElements implements IMunicipalElements {
      *
      * @return The coordinates of the MunicipalElement
      */
-
     public Coordinates getCoordinates() {
         return this.coordinates;
     }
@@ -72,7 +70,6 @@ public abstract class MunicipalElements implements IMunicipalElements {
      *
      * @param coordinates The new coordinates of the MunicipalElement
      */
-
     public void setCoordinates(Coordinates coordinates) {
         if (this.coordinates == null) {
             throw new NullPointerException("Coordinates cannot be null");
@@ -86,7 +83,6 @@ public abstract class MunicipalElements implements IMunicipalElements {
      *
      * @return The id of the MunicipalElement
      */
-
     public ID getId() {
         return this.id;
     }
@@ -96,7 +92,6 @@ public abstract class MunicipalElements implements IMunicipalElements {
      *
      * @param name The new name of the MunicipalElement
      */
-
     public void setName(String name) {
         if (name == null || name.isEmpty()) {
             throw new NullPointerException("Name cannot be null");
@@ -109,7 +104,6 @@ public abstract class MunicipalElements implements IMunicipalElements {
      *
      * @return The name of the MunicipalElement
      */
-
     public String getName(){
         return this.name;
     }
@@ -119,7 +113,6 @@ public abstract class MunicipalElements implements IMunicipalElements {
      *
      * @return The author of the MunicipalElement
      */
-
     public AuthenticatedUser getUser(){
         return this.author;
     }
@@ -129,9 +122,12 @@ public abstract class MunicipalElements implements IMunicipalElements {
      *
      * @return The creation date of the MunicipalElement
      */
-
     public Date getCreationDate() {
         return this.creationDate;
     }
 
+    @Override
+    public List<IContent> listOfContents() {
+        return this.listOfContents;
+    }
 }

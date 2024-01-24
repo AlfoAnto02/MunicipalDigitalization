@@ -3,6 +3,7 @@ package it.cs.unicam.MunicipalDigitalization.model;
 import it.cs.unicam.MunicipalDigitalization.util.Coordinates;
 import it.cs.unicam.MunicipalDigitalization.util.ID;
 import java.util.Date;
+import java.util.List;
 
 /**
  * This interface represents the contract of a Municipal Elements.
@@ -17,7 +18,6 @@ public interface IMunicipalElements {
      *
      * @return The creation date of the Municipal Element.
      */
-
     Date getCreationDate();
 
     /**
@@ -25,7 +25,6 @@ public interface IMunicipalElements {
      *
      * @return The author of the Municipal Element.
      */
-
     AuthenticatedUser getUser();
 
     /**
@@ -33,7 +32,6 @@ public interface IMunicipalElements {
      *
      * @return The coordinates of the Municipal Element.
      */
-
     Coordinates getCoordinates();
 
     /**
@@ -42,7 +40,6 @@ public interface IMunicipalElements {
      *
      * @param cc The new coordinates of the Municipal Element.
      */
-
     void setCoordinates(Coordinates cc);
 
     /**
@@ -50,7 +47,6 @@ public interface IMunicipalElements {
      *
      * @return The id of the Municipal Element.
      */
-
     ID getId();
 
     /**
@@ -58,7 +54,6 @@ public interface IMunicipalElements {
      *
      * @return The name of the Municipal Element.
      */
-
     String getName();
 
     /**
@@ -66,6 +61,12 @@ public interface IMunicipalElements {
      *
      * @param name The new name of the Municipal Element.
      */
-
     void setName(String name);
+
+    /**
+     * This method is used to get the list of contents of the Municipal Element.
+     *
+     * @return The list of contents of the Municipal Element.
+     */
+    List <IContent> listOfContents();
 }
