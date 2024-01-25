@@ -1,10 +1,9 @@
 package it.cs.unicam.MunicipalDigitalization.io;
 
 import it.cs.unicam.MunicipalDigitalization.model.*;
-import it.cs.unicam.MunicipalDigitalization.util.*;
-
-import java.util.List;
-import java.util.Scanner;
+import it.cs.unicam.MunicipalDigitalization.util.ContentController;
+import it.cs.unicam.MunicipalDigitalization.util.ItineraryController;
+import it.cs.unicam.MunicipalDigitalization.util.POIController;
 
 /**
  * This class represents a contributor's view.
@@ -92,7 +91,14 @@ public class IContributor extends AbstractIContributorsView {
 
     @Override
     public void createContent() {
-        //TODO - implement IContributor.createContent
+        PendingContent content = new PendingContent(this.contributor, this.selectMunicipalElement(content));
+        this.selectMunicipalElement(content);
+        this.showListOfTypes();
+        this.setType(content);
+        this.setContentDescription(content);
+        this.setContentLink(content);
+        this.setContentPhoto(content);
+        this.appendContent(content);
     }
 
     /**
