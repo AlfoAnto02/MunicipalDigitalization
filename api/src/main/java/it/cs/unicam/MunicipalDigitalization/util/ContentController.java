@@ -8,6 +8,7 @@ import java.util.List;
 /**
  * This class is used to manage the contents of the municipality.
  * It provides methods to upload, append, validate and invalidate contents.
+ * It also provides methods to set the type, description, link, and photo of a content.
  */
 public class ContentController {
 
@@ -43,7 +44,7 @@ public class ContentController {
     }
 
     /**
-     * This method is used to set the POIType description of a content.
+     * This method is used to set the contentType description of a content.
      *
      * @param description The description to set.
      * @param content     The content to set the description to.
@@ -53,7 +54,7 @@ public class ContentController {
     }
 
     /**
-     * This method is used to set the POIType link of a content.
+     This method is used to set the contentType Link of a content.
      *
      * @param link    The link to set.
      * @param content The content to set the link to.
@@ -63,7 +64,7 @@ public class ContentController {
     }
 
     /**
-     * This method is used to set the photo of a content.
+     This method is used to set the contentType Photo of a content.
      *
      * @param photo   The photo to set.
      * @param content The content to set the photo to.
@@ -82,7 +83,7 @@ public class ContentController {
     }
 
     /**
-     * This method is used to append a content to the list of authorized contents.
+     * This method is used to append a content to the list of pending contents.
      *
      * @param content The content to append.
      */
@@ -92,7 +93,7 @@ public class ContentController {
 
     /**
      * This method is used to get the list of Pending contents that are stored
-     * in the Platform.
+     * in the Municipality.
      *
      * @return The list of authorized contents.
      */
