@@ -15,7 +15,6 @@ public interface IPOI extends IMunicipalElements{
      *
      * @return The type of the POI.
      */
-
     Type getType();
 
     /**
@@ -23,7 +22,6 @@ public interface IPOI extends IMunicipalElements{
      *
      * @param t The new type of the POI.
      */
-
     void setType(Type t);
 
 

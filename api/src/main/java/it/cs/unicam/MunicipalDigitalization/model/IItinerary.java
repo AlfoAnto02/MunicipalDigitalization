@@ -9,7 +9,6 @@ import java.util.List;
  * It provides methods to get a list of points of interest (POIs), get the id, name, and description of the itinerary, and to check if a POI is in the itinerary.
  * It also provides methods to set the name, description, and types of the itinerary, and to add a POI to the itinerary.
  */
-
 public interface IItinerary extends IMunicipalElements {
 
     /**
@@ -17,7 +16,6 @@ public interface IItinerary extends IMunicipalElements {
      *
      * @return A list of POIs in the itinerary.
      */
-
     List<IPOI> getListOfPOIs();
 
     /**
@@ -25,7 +23,6 @@ public interface IItinerary extends IMunicipalElements {
      *
      * @return The description of the itinerary.
      */
-
     String getDescription();
 
     /**
@@ -33,7 +30,6 @@ public interface IItinerary extends IMunicipalElements {
      *
      * @param s The new description of the itinerary.
      */
-
     void setDescription(String s);
 
     /**
@@ -42,7 +38,6 @@ public interface IItinerary extends IMunicipalElements {
      * @param poi The POI to check.
      * @return True if the POI is in the itinerary, false otherwise.
      */
-
     boolean check(IPOI poi);
 
     /**
@@ -50,7 +45,6 @@ public interface IItinerary extends IMunicipalElements {
      *
      * @param poi The POI to add.
      */
-
     void addPOI(IPOI poi);
 
     /**
@@ -58,6 +52,5 @@ public interface IItinerary extends IMunicipalElements {
      *
      * @param s The new types of the itinerary.
      */
-
     void setTypes(String s);
 }

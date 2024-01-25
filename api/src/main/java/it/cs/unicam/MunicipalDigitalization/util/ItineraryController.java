@@ -18,6 +18,7 @@ public class ItineraryController {
      * The contributor's view.
      */
     private final IContributorsView contributorView;
+
     /**
      * The municipality.
      */
@@ -45,10 +46,14 @@ public class ItineraryController {
         this.municipality.appendItinerary(itinerary);
     }
 
+    /**
+     * This method is used to upload an itinerary to the Municipality.
+     *
+     * @param itinerary The itinerary to be uploaded.
+     */
     public void upload(IItinerary itinerary) {
         this.municipality.getItineraryList().add(itinerary);
     }
-
 
     /**
      * This method is used to validate an itinerary.
@@ -129,7 +134,6 @@ public class ItineraryController {
         return this.municipality.getPendingManager().getListOfPendingItinerary();
     }
 
-
     /**
      * This method is used to set the description of an itinerary and its type.
      *
@@ -140,5 +144,4 @@ public class ItineraryController {
         itinerary.setDescription(s);
         this.setItineraryType(itinerary);
     }
-
 }

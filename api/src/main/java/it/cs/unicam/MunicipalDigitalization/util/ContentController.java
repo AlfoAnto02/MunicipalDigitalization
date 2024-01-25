@@ -8,6 +8,10 @@ import it.cs.unicam.MunicipalDigitalization.model.PendingContent;
 
 import java.util.List;
 
+/**
+ * This class is used to manage the contents of the municipality.
+ * It provides methods to upload, append, validate and invalidate contents.
+ */
 public class ContentController {
 
     /**

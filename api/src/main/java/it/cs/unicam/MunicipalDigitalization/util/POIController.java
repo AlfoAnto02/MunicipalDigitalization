@@ -36,7 +36,6 @@ public class POIController {
         this.municipality = municipality;
     }
 
-
     /**
      * This method is used to validate a Pending POI.
      *
@@ -66,6 +65,11 @@ public class POIController {
         this.municipality.appendPOI(poi);
     }
 
+    /**
+     * This method is used to upload a POI to the Municipality.
+     *
+     * @param poi The POI to be uploaded.
+     */
     public void upload(IPOI poi) { this.municipality.uploadPOI(poi);}
 
     /**
@@ -106,7 +110,6 @@ public class POIController {
         if (name.isEmpty()) throw new IllegalArgumentException("Illegal Name");
         poi.setName(name);
     }
-
 
     /**
      * This method is used to get a list of pending POIs.

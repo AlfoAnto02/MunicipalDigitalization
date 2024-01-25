@@ -18,6 +18,7 @@ public abstract class AbstractUser implements User {
      * The unique identifier of the user.
      */
     private final ID id;
+
     /**
      * The municipality of the user.
      */
@@ -27,23 +28,18 @@ public abstract class AbstractUser implements User {
      * The view of every User of the Platform
      */
     private ITourist generalView;
+
     /**
      * Constructor for the AbstractUser class.
      *
      * @param municipality The municipality of the user.
      */
-
     public AbstractUser(Municipality municipality) {
         this.municipality = municipality;
         this.id = new ID();
         this.generalView=new ITourist(this.municipality,this);
     }
 
-    /**
-     * Getter for the ID of the User
-     *
-     * @return the ID of the User
-     */
     @Override
     public ID getId() {
         return this.id;
@@ -58,12 +54,6 @@ public abstract class AbstractUser implements User {
         return this.municipality;
     }
 
-    /**
-     * Equals of the class based on the ID and Municipality.
-     *
-     * @param o The object to compare.
-     * @return True if they are the same user.
-     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -89,7 +79,6 @@ public abstract class AbstractUser implements User {
      * This method allows the User to view an Itinerary present in the Municipality.
      * It uses the ITourist General View.
      */
-
     public void viewItinerary(){
         this.generalView.viewItinerary();
     }

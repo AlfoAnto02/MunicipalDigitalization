@@ -9,11 +9,16 @@ import java.util.List;
  */
 public class PendingManager {
 
+    /**
+     * The municipality of the pending manager.
+     */
     private final Municipality municipalityRef;
+
     /**
      * List of pending POIs.
      */
     private ArrayList<PendingPOI> listOfPendingPOI;
+
     /**
      * List of pending itineraries.
      */
@@ -24,6 +29,12 @@ public class PendingManager {
      */
     private ArrayList<PendingContent> listOfPendingContent;
 
+    /**
+     * Constructor for the PendingManager class.
+     * It initializes the PendingManager with the provided municipality.
+     *
+     * @param municipality The municipality of the pending manager.
+     */
     public PendingManager(Municipality municipality) {
         this.listOfPendingPOI = new ArrayList<>();
         this.listOfPendingItinerary = new ArrayList<>();
@@ -38,7 +49,6 @@ public class PendingManager {
     public void removePOI(PendingPOI poi) {
         this.listOfPendingPOI.remove(poi);
     }
-
 
     /**
      * This method is used to remove a specific itinerary from the list of pending itineraries.

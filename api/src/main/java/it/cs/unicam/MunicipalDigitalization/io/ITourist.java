@@ -11,7 +11,6 @@ import java.util.Scanner;
  * Every user can see the Map, the POIs stored in the map, The Itineraries and the Contribution Contests.
  *
  */
-
 public class ITourist {
 
     /**
@@ -62,7 +61,6 @@ public class ITourist {
      * It will show the general Info of the Itineraries that are Stored in the Municipality
      *
      */
-
     public void viewItinerary() {
         this.getItineraries();
         this.viewItinerary();
@@ -86,7 +84,6 @@ public class ITourist {
     /**
      * This method will show the general details of the Itineraries stored in the Municipality
      */
-
     private void getItineraries(){
         System.out.println("This are the Itineraries Present in the Municipality");
         System.out.println(this.viewController.getItinerariesInformation());
@@ -95,7 +92,6 @@ public class ITourist {
     /**
      * This method will show all the specific details of a selected Itinerary using an ID
      */
-
     private void selectItinerary(){
         this.viewController.getItineraryDetails(this.getStringInput("Please Select a POI using an ID"));
     }

@@ -48,12 +48,6 @@ public class ID {
         return id;
     }
 
-    /**
-     * Equals method of the class using only the id parameter
-     *
-     * @param o The object to be compared
-     * @return true if the coordinates are equals, false otherwise
-     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

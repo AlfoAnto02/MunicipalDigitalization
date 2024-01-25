@@ -3,16 +3,39 @@ package it.cs.unicam.MunicipalDigitalization.model;
 import it.cs.unicam.MunicipalDigitalization.util.ContentType;
 import it.cs.unicam.MunicipalDigitalization.util.ID;
 
+/**
+ * This abstract class represents a general content.
+ * It implements the IContent interface.
+ * A content has an id, type, author, and a municipal element referred by the content.
+ */
 public abstract class AbstractContent implements IContent {
 
+    /**
+     * The id of the content.
+     */
     private final ID id;
 
+    /**
+     * The type of the content.
+     */
     private ContentType type;
 
+    /**
+     * The municipal element referred by the content.
+     */
     private final IMunicipalElements referredMunicipalElement;
 
+    /**
+     * The author of the content.
+     */
     private final AuthenticatedUser author;
 
+    /**
+     * Constructor for the AbstractContent class.
+     *
+     * @param author The author of the content.
+     * @param municipalElement The municipal element referred by the content.
+     */
     public AbstractContent(AuthenticatedUser author, IMunicipalElements municipalElement) {
         this.author = author;
         this.referredMunicipalElement = municipalElement;

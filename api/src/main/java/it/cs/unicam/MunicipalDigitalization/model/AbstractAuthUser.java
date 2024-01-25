@@ -16,15 +16,12 @@ public class AbstractAuthUser extends AbstractUser implements AuthenticatedUser 
     /**
      * Password of the User
      */
-
     private String password;
 
     /**
      * Municipality of the User where he will operate
      */
-
     private Municipality municipality;
-
 
     /**
      * The Constructor for a general Authenticated User.
@@ -33,37 +30,21 @@ public class AbstractAuthUser extends AbstractUser implements AuthenticatedUser 
      * @param password password of the User
      * @param municipality Municipality where the User will Operate
      */
-
     public AbstractAuthUser(String name, String password, Municipality municipality) {
         super(municipality);
         this.name=name;
         this.password=password;
     }
 
-
-    /**
-     *
-     * @return The name of the user
-     */
     @Override
     public String getName() {
         return this.name;
     }
 
-    /**
-     *
-     * @return The password of the User
-     */
     @Override
     public String getPassword() {
         return this.password;
     }
-
-    /**
-     * Setter for the password of the user.
-     *
-     * @param password The new name of the user.
-     */
 
     @Override
     public void setPassword(String password) {
@@ -78,8 +59,6 @@ public class AbstractAuthUser extends AbstractUser implements AuthenticatedUser 
      *
      * @param name The new name of the user.
      */
-
-
     public void setName(String name){
         if (name == null || name.isEmpty()) {
             throw new IllegalArgumentException("Name cannot be null or empty");

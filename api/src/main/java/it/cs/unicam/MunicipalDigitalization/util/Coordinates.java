@@ -65,12 +65,6 @@ public class Coordinates {
         this.y = y;
     }
 
-    /**
-     * Equals method of the class using the x and y of a coordinate.
-     *
-     * @param o The object to compare.
-     * @return true if the coordinates are equals, false otherwise
-     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

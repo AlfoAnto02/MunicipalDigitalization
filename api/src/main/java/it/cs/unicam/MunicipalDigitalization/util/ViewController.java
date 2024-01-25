@@ -12,13 +12,11 @@ public class ViewController {
     /**
      * The tourist View
      */
-
     private ITourist touristView;
 
     /**
      * The municipality associated with the Controller
      */
-
     private Municipality municipality;
 
     /**
@@ -28,7 +26,6 @@ public class ViewController {
      * @param touristView  The tourist view.
      * @param municipality The municipality.
      */
-
     public ViewController(ITourist touristView, Municipality municipality){
         this.touristView=touristView;
         this.municipality=municipality;
@@ -39,7 +36,6 @@ public class ViewController {
      * Municipality
      * @return a string that contains all the general info of the POIs
      */
-
     public String getPOIsInformation(){
         return this.municipality.getPOIsInformations();
     }
@@ -50,7 +46,6 @@ public class ViewController {
      * @param id of the POI
      * @return a string that contains all the specific details of the POI
      */
-
     public String getPOIDetails(String id){
         return this.municipality.getPOIInformation(id);
     }
@@ -60,7 +55,6 @@ public class ViewController {
      * Municipality
      * @return a string that contains all the general info of the Itineraries
      */
-
     public String getItinerariesInformation() {
         return this.municipality.getItinerariesInformations();
     }
@@ -71,7 +65,6 @@ public class ViewController {
      * @param id of the Itinerary
      * @return a string that contains all the specific details of the Itinerary
      */
-
     public String getItineraryDetails(String id) {
         return this.municipality.getItineraryInformation(id);
     }

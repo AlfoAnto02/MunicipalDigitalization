@@ -53,12 +53,6 @@ public class IContributor extends AbstractIContributorsView {
         this.contentController = new ContentController(this, municipality);
     }
 
-    /**
-     *
-     * This Method is used to Create a POI using an interface.
-     * This method will use a few Methods of the Interface For setting every
-     * attribute of the POI
-     */
     @Override
     public void createPOI() {
         PendingPOI poi = new PendingPOI(this.contributor);

@@ -38,17 +38,15 @@ public class Municipality {
      */
     private final String name;
 
-
     /**
      * The manager for pending POIs and itineraries.
      */
     private final PendingManager pendingManager;
+
     /**
      * List of users.
      */
     private List<User> listOfUsers;
-
-    MunicipalElements municipalElements;
 
     /**
      * Constructor for the Municipality class.
@@ -133,7 +131,11 @@ public class Municipality {
         this.pendingManager.addPendingContent(pendingContent);
     }
 
-
+    /**
+     * This method is used to upload a content to the municipality.
+     *
+     * @param content The content to upload.
+     */
     public void uploadContent(IContent content) {
         if(!content.getReferredMunicipalElement().listOfContents().contains(content)) {
             content.getReferredMunicipalElement().listOfContents().add(content);
@@ -198,6 +200,7 @@ public class Municipality {
 
         return informations.toString();
     }
+
     /**
      * This method is used to get the information of the Itineraries present in the Municipality
      *
@@ -213,6 +216,10 @@ public class Municipality {
         return informations.toString();
     }
 
+    /**
+     * Getter fot the PendingManager of the Municipality
+     * @return the PendingManager of the Municipality
+     */
     public PendingManager getPendingManager() {
         return pendingManager;
     }

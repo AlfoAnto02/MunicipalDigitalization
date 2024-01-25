@@ -13,8 +13,6 @@ public interface AuthenticatedUser extends User {
      *
      * @return The name of the user.
      */
-
-
     public String getName() ;
 
     /**
@@ -22,7 +20,6 @@ public interface AuthenticatedUser extends User {
      *
      * @return The password of the user.
      */
-
     public String getPassword() ;
 
 
@@ -31,8 +28,6 @@ public interface AuthenticatedUser extends User {
      *
      * @param password The password to be set.
      */
-
-
     public void setPassword(String password) ;
 
 }

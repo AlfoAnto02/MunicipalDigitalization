@@ -10,10 +10,10 @@ import java.util.stream.Stream;
  * It provides methods to select a type based on a string, get a string representation of all types, and check if a string starts with the code of a type.
  */
 public enum Type {
+
     /**
      * Represents a bookshop POI.
      */
-
     BookShop("Bookshop"),
 
     /**

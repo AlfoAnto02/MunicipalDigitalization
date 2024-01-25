@@ -25,7 +25,6 @@ public abstract class AbstractItinerary extends MunicipalElements implements IIt
      * The types of the Itinerary. The types depend on the Types of the POIs
      * that composed the Itinerary
      */
-
     private String types;
 
     /**

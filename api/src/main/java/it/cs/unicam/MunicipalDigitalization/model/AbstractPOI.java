@@ -34,7 +34,6 @@ public abstract class AbstractPOI  extends MunicipalElements implements IPOI {
      *
      * @return The type of the point of interest (POI).
      */
-
     public Type getType() {
         return this.type;
     }
@@ -44,20 +43,12 @@ public abstract class AbstractPOI  extends MunicipalElements implements IPOI {
      *
      * @param type The new type of the point of interest (POI).
      */
-
     public void setType(Type type) {
         if (type == null) {
             throw new NullPointerException("Type cannot be null");
         }
         this.type = type;
     }
-
-    /**
-     * Equals of the class based on the coordinates, name and type of the POI
-     *
-     * @param o The object to compare
-     * @return true if the POIs are equals
-     */
 
     @Override
     public boolean equals(Object o) {
@@ -67,11 +58,6 @@ public abstract class AbstractPOI  extends MunicipalElements implements IPOI {
         return Objects.equals(super.getCoordinates(), that.getCoordinates()) &&
                 Objects.equals(super.getName(), that.getName()) && type == that.type;
     }
-
-    /**
-     *
-     * @return the Hashcode of the Object based on the Coordinates, name and type.
-     */
 
     @Override
     public int hashCode() {
