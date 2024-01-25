@@ -1,7 +1,4 @@
 package it.cs.unicam.MunicipalDigitalization.model;
-
-import it.cs.unicam.MunicipalDigitalization.util.Coordinates;
-import it.cs.unicam.MunicipalDigitalization.util.ID;
 import it.cs.unicam.MunicipalDigitalization.util.Type;
 
 /**

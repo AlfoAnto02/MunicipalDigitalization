@@ -16,6 +16,10 @@ import java.util.List;
 public abstract class MunicipalElements implements IMunicipalElements {
 
     /**
+     * Municipality of the Element
+     */
+    private final Municipality municipality;
+    /**
      * The unique identifier of the MunicipalElement.
      */
     private final ID id;
@@ -49,8 +53,9 @@ public abstract class MunicipalElements implements IMunicipalElements {
      * The constructor of the class
      * @param user the Authenticated User that create this Element
      */
-    public MunicipalElements(AuthenticatedUser user){
+    public MunicipalElements(AuthenticatedUser user, Municipality municipality){
         this.author=user;
+        this.municipality=municipality;
         this.id = new ID();
         this.creationDate = Date.from(Instant.now());
     }
@@ -126,8 +131,23 @@ public abstract class MunicipalElements implements IMunicipalElements {
         return this.creationDate;
     }
 
+    /**
+     * This method is used to get the list of contents of the Municipal Element.
+     *
+     * @return The list of contents of the Municipal Element.
+     */
     @Override
     public List<IContent> listOfContents() {
         return this.listOfContents;
     }
+
+    /**
+     * This method is used to upload an authorized content.
+     * @param content The content to upload.
+     */
+    @Override
+    public void uploadContent(IContent content){
+        this.listOfContents.add(content);
+    }
+
 }
