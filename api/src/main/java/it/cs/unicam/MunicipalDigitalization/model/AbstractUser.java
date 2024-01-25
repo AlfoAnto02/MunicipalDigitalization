@@ -27,7 +27,7 @@ public abstract class AbstractUser implements User {
     /**
      * The view of every User of the Platform
      */
-    private ITourist generalView;
+    private final ITourist generalView;
 
     /**
      * Constructor for the AbstractUser class.

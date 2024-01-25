@@ -13,14 +13,14 @@ public interface AuthenticatedUser extends User {
      *
      * @return The name of the user.
      */
-    public String getName() ;
+    String getName() ;
 
     /**
      * This method is used to get the password of the user.
      *
      * @return The password of the user.
      */
-    public String getPassword() ;
+    String getPassword() ;
 
 
     /**
@@ -28,6 +28,6 @@ public interface AuthenticatedUser extends User {
      *
      * @param password The password to be set.
      */
-    public void setPassword(String password) ;
+    void setPassword(String password) ;
 
 }

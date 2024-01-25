@@ -1,17 +1,11 @@
 package it.cs.unicam.MunicipalDigitalization.model;
-
-import it.cs.unicam.MunicipalDigitalization.util.Coordinates;
-import it.cs.unicam.MunicipalDigitalization.util.ID;
 import it.cs.unicam.MunicipalDigitalization.util.Type;
-
-import java.time.Instant;
-import java.util.Date;
 import java.util.Objects;
 
 /**
  * This abstract class represents a general point of interest (POI).
  * It implements the IPOI interface.
- * A POI has an id, name, type, author, creation date, and coordinates.
+ * A POI has an id, name, type, author, creation date, coordinates and a list of contents.
  */
 public abstract class AbstractPOI  extends MunicipalElements implements IPOI {
 
@@ -25,8 +19,8 @@ public abstract class AbstractPOI  extends MunicipalElements implements IPOI {
      *
      * @param author the AuthenticatedUser that create the POI
      */
-    public AbstractPOI(AuthenticatedUser author) {
-        super(author);
+    public AbstractPOI(AuthenticatedUser author, Municipality municipality) {
+        super(author, municipality);
     }
 
     /**
