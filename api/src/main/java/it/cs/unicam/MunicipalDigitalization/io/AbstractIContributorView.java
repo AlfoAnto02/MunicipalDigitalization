@@ -10,7 +10,7 @@ import java.util.Scanner;
  * It implements the IContributorView interface.
  * A contributor can create points of interest (POIs) and itineraries.
  */
-public class AbstractIContributorView implements IContributorView {
+public abstract class AbstractIContributorView implements IContributorView {
 
     /**
      * The scanner to get input from the user.
@@ -186,7 +186,6 @@ public class AbstractIContributorView implements IContributorView {
         this.setType(poi);
         this.setPOIName(poi);
     }
-
 
     /**
      * This method is used to create an itinerary.

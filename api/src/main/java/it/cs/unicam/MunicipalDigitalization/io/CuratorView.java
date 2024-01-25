@@ -13,11 +13,6 @@ import java.util.List;
  */
 public class CuratorView extends AuthorizedContributorView {
 
-//    /**
-//     * The curator.
-//     */
-//    private Curator curator;
-
     /**
      * Constructor of the class
      *
