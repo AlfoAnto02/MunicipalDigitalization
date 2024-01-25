@@ -1,4 +1,4 @@
-package it.cs.unicam.MunicipalDigitalization.util;
+package it.cs.unicam.MunicipalDigitalization.util.enumerations;
 
 import java.awt.*;
 import java.util.List;

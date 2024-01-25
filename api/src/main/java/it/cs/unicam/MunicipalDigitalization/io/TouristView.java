@@ -1,8 +1,8 @@
 package it.cs.unicam.MunicipalDigitalization.io;
 
 import it.cs.unicam.MunicipalDigitalization.model.Municipality;
-import it.cs.unicam.MunicipalDigitalization.model.IUser;
-import it.cs.unicam.MunicipalDigitalization.util.ViewController;
+import it.cs.unicam.MunicipalDigitalization.model.actors.IUser;
+import it.cs.unicam.MunicipalDigitalization.util.controllers.ViewController;
 
 import java.util.Scanner;
 

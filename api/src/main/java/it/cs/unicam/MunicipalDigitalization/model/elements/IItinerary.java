@@ -1,4 +1,4 @@
-package it.cs.unicam.MunicipalDigitalization.model;
+package it.cs.unicam.MunicipalDigitalization.model.elements;
 
 
 import java.util.List;

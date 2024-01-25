@@ -1,6 +1,7 @@
-package it.cs.unicam.MunicipalDigitalization.model;
+package it.cs.unicam.MunicipalDigitalization.model.actors;
 
 import it.cs.unicam.MunicipalDigitalization.io.TouristView;
+import it.cs.unicam.MunicipalDigitalization.model.Municipality;
 import it.cs.unicam.MunicipalDigitalization.util.ID;
 
 import java.util.Objects;

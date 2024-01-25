@@ -1,7 +1,10 @@
 package it.cs.unicam.MunicipalDigitalization.model;
 
+import it.cs.unicam.MunicipalDigitalization.model.actors.IUser;
+import it.cs.unicam.MunicipalDigitalization.model.elements.*;
 import it.cs.unicam.MunicipalDigitalization.util.Coordinate;
 import it.cs.unicam.MunicipalDigitalization.util.ID;
+import it.cs.unicam.MunicipalDigitalization.util.PendingManager;
 
 import java.util.ArrayList;
 import java.util.List;

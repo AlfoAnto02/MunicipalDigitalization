@@ -1,9 +1,14 @@
 package it.cs.unicam.MunicipalDigitalization.io;
 
 import it.cs.unicam.MunicipalDigitalization.model.*;
-import it.cs.unicam.MunicipalDigitalization.util.ContentController;
-import it.cs.unicam.MunicipalDigitalization.util.ItineraryController;
-import it.cs.unicam.MunicipalDigitalization.util.POIController;
+import it.cs.unicam.MunicipalDigitalization.model.actors.AuthorizedContributor;
+import it.cs.unicam.MunicipalDigitalization.model.elements.AuthorizedContent;
+import it.cs.unicam.MunicipalDigitalization.model.elements.AuthorizedItinerary;
+import it.cs.unicam.MunicipalDigitalization.model.elements.AuthorizedPOI;
+import it.cs.unicam.MunicipalDigitalization.model.elements.IMunicipalElement;
+import it.cs.unicam.MunicipalDigitalization.util.controllers.ContentController;
+import it.cs.unicam.MunicipalDigitalization.util.controllers.ItineraryController;
+import it.cs.unicam.MunicipalDigitalization.util.controllers.POIController;
 
 /**
  * This class represents an authorized contributor's view.

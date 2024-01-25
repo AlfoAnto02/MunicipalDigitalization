@@ -1,9 +1,9 @@
 package it.cs.unicam.MunicipalDigitalization.io;
 
-import it.cs.unicam.MunicipalDigitalization.model.Curator;
-import it.cs.unicam.MunicipalDigitalization.model.PendingContent;
-import it.cs.unicam.MunicipalDigitalization.model.PendingItinerary;
-import it.cs.unicam.MunicipalDigitalization.model.PendingPOI;
+import it.cs.unicam.MunicipalDigitalization.model.actors.Curator;
+import it.cs.unicam.MunicipalDigitalization.model.elements.PendingContent;
+import it.cs.unicam.MunicipalDigitalization.model.elements.PendingItinerary;
+import it.cs.unicam.MunicipalDigitalization.model.elements.PendingPOI;
 
 import java.util.List;
 

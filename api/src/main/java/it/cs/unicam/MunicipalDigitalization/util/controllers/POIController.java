@@ -1,9 +1,11 @@
-package it.cs.unicam.MunicipalDigitalization.util;
+package it.cs.unicam.MunicipalDigitalization.util.controllers;
 
 import it.cs.unicam.MunicipalDigitalization.io.IContributorView;
-import it.cs.unicam.MunicipalDigitalization.model.IPOI;
+import it.cs.unicam.MunicipalDigitalization.model.elements.IPOI;
 import it.cs.unicam.MunicipalDigitalization.model.Municipality;
-import it.cs.unicam.MunicipalDigitalization.model.PendingPOI;
+import it.cs.unicam.MunicipalDigitalization.model.elements.PendingPOI;
+import it.cs.unicam.MunicipalDigitalization.util.Coordinate;
+import it.cs.unicam.MunicipalDigitalization.util.enumerations.POIType;
 
 import java.util.List;
 import java.util.Optional;

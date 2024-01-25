@@ -1,5 +1,7 @@
-package it.cs.unicam.MunicipalDigitalization.model;
+package it.cs.unicam.MunicipalDigitalization.model.actors;
 
+
+import it.cs.unicam.MunicipalDigitalization.model.Municipality;
 
 /**
  * This class Represent an Authenticated IUser.

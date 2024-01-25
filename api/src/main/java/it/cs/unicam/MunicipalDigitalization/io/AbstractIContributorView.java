@@ -1,7 +1,17 @@
 package it.cs.unicam.MunicipalDigitalization.io;
 
 import it.cs.unicam.MunicipalDigitalization.model.*;
+import it.cs.unicam.MunicipalDigitalization.model.actors.IAuthenticatedUser;
+import it.cs.unicam.MunicipalDigitalization.model.elements.IContent;
+import it.cs.unicam.MunicipalDigitalization.model.elements.IItinerary;
+import it.cs.unicam.MunicipalDigitalization.model.elements.IMunicipalElement;
+import it.cs.unicam.MunicipalDigitalization.model.elements.IPOI;
 import it.cs.unicam.MunicipalDigitalization.util.*;
+import it.cs.unicam.MunicipalDigitalization.util.controllers.ContentController;
+import it.cs.unicam.MunicipalDigitalization.util.controllers.ItineraryController;
+import it.cs.unicam.MunicipalDigitalization.util.controllers.POIController;
+import it.cs.unicam.MunicipalDigitalization.util.enumerations.ContentType;
+import it.cs.unicam.MunicipalDigitalization.util.enumerations.POIType;
 
 import java.util.Scanner;
 

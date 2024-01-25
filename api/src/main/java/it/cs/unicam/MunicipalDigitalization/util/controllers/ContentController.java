@@ -1,7 +1,12 @@
-package it.cs.unicam.MunicipalDigitalization.util;
+package it.cs.unicam.MunicipalDigitalization.util.controllers;
 
 import it.cs.unicam.MunicipalDigitalization.io.IContributorView;
 import it.cs.unicam.MunicipalDigitalization.model.*;
+import it.cs.unicam.MunicipalDigitalization.model.elements.AuthorizedContent;
+import it.cs.unicam.MunicipalDigitalization.model.elements.IContent;
+import it.cs.unicam.MunicipalDigitalization.model.elements.IMunicipalElement;
+import it.cs.unicam.MunicipalDigitalization.model.elements.PendingContent;
+import it.cs.unicam.MunicipalDigitalization.util.enumerations.ContentType;
 
 import java.util.List;
 

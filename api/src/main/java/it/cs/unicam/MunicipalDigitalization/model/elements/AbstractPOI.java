@@ -1,6 +1,8 @@
-package it.cs.unicam.MunicipalDigitalization.model;
+package it.cs.unicam.MunicipalDigitalization.model.elements;
 
-import it.cs.unicam.MunicipalDigitalization.util.POIType;
+import it.cs.unicam.MunicipalDigitalization.model.actors.IAuthenticatedUser;
+import it.cs.unicam.MunicipalDigitalization.model.Municipality;
+import it.cs.unicam.MunicipalDigitalization.util.enumerations.POIType;
 
 import java.util.Objects;
 

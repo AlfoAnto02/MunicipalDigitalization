@@ -1,4 +1,4 @@
-package it.cs.unicam.MunicipalDigitalization.model;
+package it.cs.unicam.MunicipalDigitalization.model.actors;
 
 /**
  * This interface represents an Authenticated user in the system.

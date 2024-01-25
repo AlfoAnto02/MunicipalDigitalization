@@ -1,4 +1,4 @@
-package it.cs.unicam.MunicipalDigitalization.util;
+package it.cs.unicam.MunicipalDigitalization.util.controllers;
 
 import it.cs.unicam.MunicipalDigitalization.io.TouristView;
 import it.cs.unicam.MunicipalDigitalization.model.Municipality;

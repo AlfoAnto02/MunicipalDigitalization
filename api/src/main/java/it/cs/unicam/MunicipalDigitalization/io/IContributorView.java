@@ -1,11 +1,11 @@
 package it.cs.unicam.MunicipalDigitalization.io;
 
-import it.cs.unicam.MunicipalDigitalization.model.IContent;
-import it.cs.unicam.MunicipalDigitalization.model.IItinerary;
-import it.cs.unicam.MunicipalDigitalization.model.IPOI;
-import it.cs.unicam.MunicipalDigitalization.util.ContentController;
-import it.cs.unicam.MunicipalDigitalization.util.ItineraryController;
-import it.cs.unicam.MunicipalDigitalization.util.POIController;
+import it.cs.unicam.MunicipalDigitalization.model.elements.IContent;
+import it.cs.unicam.MunicipalDigitalization.model.elements.IItinerary;
+import it.cs.unicam.MunicipalDigitalization.model.elements.IPOI;
+import it.cs.unicam.MunicipalDigitalization.util.controllers.ContentController;
+import it.cs.unicam.MunicipalDigitalization.util.controllers.ItineraryController;
+import it.cs.unicam.MunicipalDigitalization.util.controllers.POIController;
 
 /**
  * This interface represents the view of a contributor.

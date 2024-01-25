@@ -1,4 +1,9 @@
-package it.cs.unicam.MunicipalDigitalization.model;
+package it.cs.unicam.MunicipalDigitalization.util;
+
+import it.cs.unicam.MunicipalDigitalization.model.Municipality;
+import it.cs.unicam.MunicipalDigitalization.model.elements.PendingContent;
+import it.cs.unicam.MunicipalDigitalization.model.elements.PendingItinerary;
+import it.cs.unicam.MunicipalDigitalization.model.elements.PendingPOI;
 
 import java.util.ArrayList;
 import java.util.List;

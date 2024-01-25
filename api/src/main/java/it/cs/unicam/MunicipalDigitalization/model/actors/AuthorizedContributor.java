@@ -1,6 +1,7 @@
-package it.cs.unicam.MunicipalDigitalization.model;
+package it.cs.unicam.MunicipalDigitalization.model.actors;
 
 import it.cs.unicam.MunicipalDigitalization.io.AuthorizedContributorView;
+import it.cs.unicam.MunicipalDigitalization.model.Municipality;
 
 /**
  * This class represents an authorized contributor, which is a type of user.

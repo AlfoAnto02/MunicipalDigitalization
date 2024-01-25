@@ -1,10 +1,10 @@
-package it.cs.unicam.MunicipalDigitalization.util;
+package it.cs.unicam.MunicipalDigitalization.util.controllers;
 
 import it.cs.unicam.MunicipalDigitalization.io.IContributorView;
-import it.cs.unicam.MunicipalDigitalization.model.IItinerary;
-import it.cs.unicam.MunicipalDigitalization.model.IPOI;
+import it.cs.unicam.MunicipalDigitalization.model.elements.IItinerary;
+import it.cs.unicam.MunicipalDigitalization.model.elements.IPOI;
 import it.cs.unicam.MunicipalDigitalization.model.Municipality;
-import it.cs.unicam.MunicipalDigitalization.model.PendingItinerary;
+import it.cs.unicam.MunicipalDigitalization.model.elements.PendingItinerary;
 
 import java.util.List;
 

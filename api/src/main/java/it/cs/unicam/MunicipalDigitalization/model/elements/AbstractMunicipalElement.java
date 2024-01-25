@@ -1,5 +1,7 @@
-package it.cs.unicam.MunicipalDigitalization.model;
+package it.cs.unicam.MunicipalDigitalization.model.elements;
 
+import it.cs.unicam.MunicipalDigitalization.model.actors.IAuthenticatedUser;
+import it.cs.unicam.MunicipalDigitalization.model.Municipality;
 import it.cs.unicam.MunicipalDigitalization.util.Coordinate;
 import it.cs.unicam.MunicipalDigitalization.util.ID;
 

@@ -1,6 +1,7 @@
-package it.cs.unicam.MunicipalDigitalization.model;
+package it.cs.unicam.MunicipalDigitalization.model.actors;
 
 import it.cs.unicam.MunicipalDigitalization.io.CuratorView;
+import it.cs.unicam.MunicipalDigitalization.model.Municipality;
 
 /**
  * This class represents a curator, which is a type of authorized contributor.
