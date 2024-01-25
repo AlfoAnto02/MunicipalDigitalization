@@ -9,13 +9,15 @@ package it.cs.unicam.MunicipalDigitalization.model;
  */
 public class PendingItinerary extends AbstractItinerary {
 
+
     /**
      * Constructor for the PendingItinerary class.
-     * It initializes the PendingItinerary with the provided user.
-     *
-     * @param user The user who created the itinerary.
+     * It initializes the PendingItinerary with the provided user and the Municipality
+     * where the Itinerary should be located
+     * @param user that creates the itinerary
+     * @param municipality where is located
      */
-    public PendingItinerary(Contributor user) {
-        super(user);
+    public PendingItinerary(Contributor user, Municipality municipality) {
+        super(user, municipality);
     }
 }
