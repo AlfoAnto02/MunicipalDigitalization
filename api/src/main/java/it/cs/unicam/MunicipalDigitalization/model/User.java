@@ -27,7 +27,7 @@ public interface User {
     /**
      * This method is used to view the details of a POI present in the Platform.
      */
-    void viewPOI() ;
+    void viewPOI();
 
     /**
      * This method is used to view the details of an Itinerary present in the Platform.

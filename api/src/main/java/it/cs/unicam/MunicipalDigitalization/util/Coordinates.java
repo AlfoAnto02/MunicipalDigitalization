@@ -66,11 +66,11 @@ public class Coordinates {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Coordinates that = (Coordinates) o;
-        return Double.compare(that.x, x) == 0 && Double.compare(that.y, y) == 0;
+    public boolean equals(Object other) {
+        if (this == other) return true;
+        if (other == null || getClass() != other.getClass()) return false;
+        Coordinates coordinates = (Coordinates) other;
+        return Double.compare(coordinates.x, x) == 0 && Double.compare(coordinates.y, y) == 0;
     }
 
     @Override

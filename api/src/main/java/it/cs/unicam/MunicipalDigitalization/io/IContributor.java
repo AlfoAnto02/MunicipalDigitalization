@@ -58,38 +58,21 @@ public class IContributor extends AbstractIContributorsView {
      * It creates a POI, uploads it, and prints a message to the user.
      */
     public void createPOI() {
-        PendingPOI poi = new PendingPOI(this.contributor, this.municipality);
-        super.createPOI(poi);
-        this.appendPOI(poi);
+        PendingPOI pendingPOI = new PendingPOI(this.contributor, this.municipality);
+        super.createPOI(pendingPOI);
+        this.poiController.append(pendingPOI);
         System.out.println("Your Poi has been created !!");
     }
 
     /**
-     * This method is used to append a POI.
-     *
-     * @param pendingPOI The POI to be appended.
-     */
-    public void appendPOI(PendingPOI pendingPOI) {
-        this.poiController.append(pendingPOI);
-    }
-
-   /**
      * This method is used to create an itinerary.
      * It creates an itinerary, uploads it, and prints a message to the user.
      */
     public void createItinerary() {
         PendingItinerary itinerary = new PendingItinerary(this.contributor, this.municipality);
         super.createItinerary(itinerary);
-        this.appendItinerary(itinerary);
-    }
-
-    /**
-     * This method is used to append an itinerary.
-     *
-     * @param itinerary The itinerary to be appended.
-     */
-    private void appendItinerary(PendingItinerary itinerary) {
         this.itineraryController.append(itinerary);
+        System.out.println("Your Itinerary has been created !!");
     }
 
     /**
@@ -98,17 +81,8 @@ public class IContributor extends AbstractIContributorsView {
      */
     public void createContent() {
         IMunicipalElements municipalElements = super.selectMunicipalElement();
-        PendingContent content = new PendingContent(this.contributor, municipalElements);
-        super.createContent(content);
-        this.appendContent(content);
-    }
-
-    /**
-     * This method is used to append a content.
-     *
-     * @param pendingContent The content to be appended.
-     */
-    public void appendContent(PendingContent pendingContent) {
+        PendingContent pendingContent = new PendingContent(this.contributor, municipalElements);
+        super.createContent(pendingContent);
         this.contentController.appendContent(pendingContent);
     }
 

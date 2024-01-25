@@ -1,5 +1,7 @@
 package it.cs.unicam.MunicipalDigitalization.model;
+
 import it.cs.unicam.MunicipalDigitalization.util.Coordinates;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -15,7 +17,7 @@ public abstract class AbstractItinerary extends MunicipalElements implements IIt
     /**
      * List of POIs that composed the Itinerary
      */
-    private List<IPOI> listOfPOIs;
+    private final List<IPOI> pois;
 
     /**
      * The types of the Itinerary. The types depend on the Types of the POIs
@@ -42,7 +44,7 @@ public abstract class AbstractItinerary extends MunicipalElements implements IIt
 
     public AbstractItinerary(AuthenticatedUser author, Municipality municipality) {
         super(author, municipality);
-        this.listOfPOIs=new ArrayList<>();
+        this.pois = new ArrayList<>();
     }
 
     /**
@@ -100,19 +102,19 @@ public abstract class AbstractItinerary extends MunicipalElements implements IIt
      */
 
     @Override
-    public List<IPOI> getListOfPOIs() {
-        return this.listOfPOIs;
+    public List<IPOI> getPOIs() {
+        return this.pois;
     }
 
     /**
-     * Method to check if a POI is in the itinerary.
+     * Method to contains if a POI is in the itinerary.
      *
-     * @param poi The POI to check.
+     * @param poi The POI to contains.
      * @return True if the POI is in the itinerary, false otherwise.
      */
 
-    public boolean check(IPOI poi) {
-        return this.getListOfPOIs().contains(poi);
+    public boolean contains(IPOI poi) {
+        return this.getPOIs().contains(poi);
     }
 
     /**
@@ -122,31 +124,30 @@ public abstract class AbstractItinerary extends MunicipalElements implements IIt
      */
 
     public void addPOI(IPOI poi) {
-        this.listOfPOIs.add(poi);
+        this.pois.add(poi);
     }
 
     /**
      * Equals of the class based on the name and ListOfPOIs of the itinerary
      *
-     * @param o object to compare
+     * @param other object to compare
      * @return true if the itineraries are equals.
      */
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        AbstractItinerary that = (AbstractItinerary) o;
-        return Objects.equals(super.getName(), that.getName()) && Objects.equals(listOfPOIs, that.listOfPOIs);
+    public boolean equals(Object other) {
+        if (this == other) return true;
+        if (other == null || getClass() != other.getClass()) return false;
+        AbstractItinerary abstractItinerary = (AbstractItinerary) other;
+        return Objects.equals(super.getName(), abstractItinerary.getName()) && Objects.equals(pois, abstractItinerary.pois);
     }
 
     /**
-     *
      * @return the Hashcode of the Object based on the Name and on the List of POIs.
      */
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.getName(), listOfPOIs);
+        return Objects.hash(super.getName(), pois);
     }
 }

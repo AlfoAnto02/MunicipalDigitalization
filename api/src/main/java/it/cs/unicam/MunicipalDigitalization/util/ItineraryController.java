@@ -29,7 +29,7 @@ public class ItineraryController {
      * It initializes the ItineraryController with the provided view and municipality.
      *
      * @param contributorView The contributor's view.
-     * @param municipality        The municipality.
+     * @param municipality    The municipality.
      */
     public ItineraryController(IContributorsView contributorView, Municipality municipality) {
         this.contributorView = contributorView;
@@ -91,7 +91,7 @@ public class ItineraryController {
      * @param poi       The POI to be added.
      */
     public void selectPOIToAdd(IItinerary itinerary, IPOI poi) {
-        if (itinerary.check(poi)) itinerary.addPOI(poi);
+        if (itinerary.contains(poi)) itinerary.addPOI(poi);
         else throw new IllegalArgumentException("You already added this POI to your Itinerary !!!");
     }
 
@@ -102,7 +102,7 @@ public class ItineraryController {
      * @return The type of POIs in the itinerary.
      */
     private String getPOIsType(IItinerary itinerary) {
-        return itinerary.getListOfPOIs().toString();
+        return itinerary.getPOIs().toString();
     }
 
     /**
@@ -131,7 +131,7 @@ public class ItineraryController {
      * @return A list of pending itineraries.
      */
     public List<PendingItinerary> getPendingItineraryList() {
-        return this.municipality.getPendingManager().getListOfPendingItinerary();
+        return this.municipality.getPendingManager().getPendingItineraries();
     }
 
     /**

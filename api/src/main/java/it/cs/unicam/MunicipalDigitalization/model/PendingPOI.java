@@ -13,7 +13,8 @@ public class PendingPOI extends AbstractPOI {
      * Constructor for the PendingPOI class.
      * It initializes the PendingPOI with the provided user and the Municipality
      * where the Poi should be located
-     * @param user that creates the POI
+     *
+     * @param user         that creates the POI
      * @param municipality where is located
      */
     public PendingPOI(Contributor user, Municipality municipality) {

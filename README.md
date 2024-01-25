@@ -1,11 +1,13 @@
 # Municipal Digitalization API
 
-This repository contains the API for the Municipal Digitalization project, a university project for the digitalization of a municipal area. The project is developed using Java and Kotlin, and is managed with Gradle.
+This repository contains the API for the Municipal Digitalization project, a university project for the digitalization
+of a municipal area. The project is developed using Java and Kotlin, and is managed with Gradle.
 
 ## Project Structure
 
 - `settings.gradle.kts`: Sets the root project name.
-- `build.gradle.kts`: Contains the project's build configurations, including plugins, repositories, dependencies, and tasks.
+- `build.gradle.kts`: Contains the project's build configurations, including plugins, repositories, dependencies, and
+  tasks.
 - `src`: Contains the source code for the project, organized into `main` and `test` major directories.
 
 ## Dependencies
@@ -24,7 +26,8 @@ The project follows the Unified Process Model
 
 ## Getting Started
 
-To get started with the project, clone the repository and import it into your preferred IDE. Ensure that you have Java 21 installed on your machine.
+To get started with the project, clone the repository and import it into your preferred IDE. Ensure that you have Java
+21 installed on your machine.
 
 ## Contributing
 

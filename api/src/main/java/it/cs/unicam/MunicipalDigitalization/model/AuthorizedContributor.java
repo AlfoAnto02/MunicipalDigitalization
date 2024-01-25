@@ -18,8 +18,8 @@ public class AuthorizedContributor extends AbstractAuthUser {
     /**
      * Constructor for the AuthorizedContributor class.
      *
-     * @param name     The name of the authorized contributor.
-     * @param password The password of the authorized contributor.
+     * @param name         The name of the authorized contributor.
+     * @param password     The password of the authorized contributor.
      * @param municipality The municipality of the authorized contributor.
      */
     public AuthorizedContributor(String name, String password, Municipality municipality) {

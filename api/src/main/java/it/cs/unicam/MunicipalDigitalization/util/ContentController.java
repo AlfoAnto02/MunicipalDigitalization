@@ -29,7 +29,7 @@ public class ContentController {
      */
     public ContentController(IContributorsView contributorView, Municipality municipality) {
         this.contributorView = contributorView;
-        this.municipality=municipality;
+        this.municipality = municipality;
     }
 
     /**
@@ -43,7 +43,7 @@ public class ContentController {
     }
 
     /**
-     * This method is used to set the Type description of a content.
+     * This method is used to set the POIType description of a content.
      *
      * @param description The description to set.
      * @param content     The content to set the description to.
@@ -53,7 +53,7 @@ public class ContentController {
     }
 
     /**
-     * This method is used to set the Type link of a content.
+     * This method is used to set the POIType link of a content.
      *
      * @param link    The link to set.
      * @param content The content to set the link to.
@@ -97,7 +97,7 @@ public class ContentController {
      * @return The list of authorized contents.
      */
     public List<PendingContent> getPendingContents() {
-        return this.municipality.getPendingManager().getListOfPendingContent();
+        return this.municipality.getPendingManager().getPendingContents();
     }
 
     /**

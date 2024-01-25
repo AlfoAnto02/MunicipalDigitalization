@@ -26,33 +26,35 @@ public class ViewController {
      * @param touristView  The tourist view.
      * @param municipality The municipality.
      */
-    public ViewController(ITourist touristView, Municipality municipality){
-        this.touristView=touristView;
-        this.municipality=municipality;
+    public ViewController(ITourist touristView, Municipality municipality) {
+        this.touristView = touristView;
+        this.municipality = municipality;
     }
 
     /**
      * This method returns the general Information of the POIs that are presents in the
      * Municipality
+     *
      * @return a string that contains all the general info of the POIs
      */
-    public String getPOIsInformation(){
+    public String getPOIsInformation() {
         return this.municipality.getPOIsInformations();
     }
 
     /**
      * This method returns all the specific details of a POI selected by using the ID that is
      * stored in the Municipality.
+     *
      * @param id of the POI
-     * @return a string that contains all the specific details of the POI
      */
-    public String getPOIDetails(String id){
-        return this.municipality.getPOIInformation(id);
+    public void getPOIDetails(String id) {
+        this.municipality.getPOIInformation(id);
     }
 
     /**
      * This method returns the general Information of the Itineraries that are presents in the
      * Municipality
+     *
      * @return a string that contains all the general info of the Itineraries
      */
     public String getItinerariesInformation() {
@@ -62,10 +64,10 @@ public class ViewController {
     /**
      * This method returns all the specific details of an Itinerary selected by using the ID that is
      * stored in the Municipality.
+     *
      * @param id of the Itinerary
-     * @return a string that contains all the specific details of the Itinerary
      */
-    public String getItineraryDetails(String id) {
-        return this.municipality.getItineraryInformation(id);
+    public void getItineraryDetails(String id) {
+        this.municipality.getItineraryInformation(id);
     }
 }

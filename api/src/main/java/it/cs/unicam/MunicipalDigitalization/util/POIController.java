@@ -2,8 +2,8 @@ package it.cs.unicam.MunicipalDigitalization.util;
 
 import it.cs.unicam.MunicipalDigitalization.io.IContributorsView;
 import it.cs.unicam.MunicipalDigitalization.model.IPOI;
-import it.cs.unicam.MunicipalDigitalization.model.PendingPOI;
 import it.cs.unicam.MunicipalDigitalization.model.Municipality;
+import it.cs.unicam.MunicipalDigitalization.model.PendingPOI;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,7 +28,7 @@ public class POIController {
      * Constructor for the POIController class.
      * It initializes the POIController with the provided view and municipality.
      *
-     * @param view     The contributor's view.
+     * @param view         The contributor's view.
      * @param municipality The municipality.
      */
     public POIController(IContributorsView view, Municipality municipality) {
@@ -70,7 +70,9 @@ public class POIController {
      *
      * @param poi The POI to be uploaded.
      */
-    public void upload(IPOI poi) { this.municipality.uploadPOI(poi);}
+    public void upload(IPOI poi) {
+        this.municipality.uploadPOI(poi);
+    }
 
     /**
      * This method is used to set the coordinates of a POI.
@@ -91,12 +93,12 @@ public class POIController {
      * @param poi        The POI whose type is to be set.
      */
     public void setPOIType(String typeString, IPOI poi) {
-        Optional<Type> oType = Type.selectType(typeString);
+        Optional<POIType> oType = POIType.selectType(typeString);
         if (oType.isEmpty()) {
-            throw new IllegalArgumentException("Wrong Type");
+            throw new IllegalArgumentException("Wrong POIType");
         } else {
-            Type type = oType.get();
-            poi.setType(type);
+            POIType POIType = oType.get();
+            poi.setType(POIType);
         }
     }
 
@@ -117,7 +119,7 @@ public class POIController {
      * @return A list of pending POIs.
      */
     public List<PendingPOI> getPendingPoiList() {
-        return this.municipality.getPendingManager().getListOfPendingPOI();
+        return this.municipality.getPendingManager().getPendingPOIs();
     }
 
 

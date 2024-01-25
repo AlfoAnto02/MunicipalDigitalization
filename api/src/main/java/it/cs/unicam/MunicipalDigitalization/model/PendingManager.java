@@ -13,21 +13,18 @@ public class PendingManager {
      * The municipality of the pending manager.
      */
     private final Municipality municipalityRef;
-
-    /**
-     * List of pending POIs.
-     */
-    private ArrayList<PendingPOI> listOfPendingPOI;
-
-    /**
-     * List of pending itineraries.
-     */
-    private ArrayList<PendingItinerary> listOfPendingItinerary;
-
     /**
      * List of pending contents.
      */
-    private ArrayList<PendingContent> listOfPendingContent;
+    private final ArrayList<PendingContent> pendingContents;
+    /**
+     * List of pending POIs.
+     */
+    private ArrayList<PendingPOI> pendingPOIs;
+    /**
+     * List of pending itineraries.
+     */
+    private ArrayList<PendingItinerary> pendingItineraries;
 
     /**
      * Constructor for the PendingManager class.
@@ -36,9 +33,9 @@ public class PendingManager {
      * @param municipality The municipality of the pending manager.
      */
     public PendingManager(Municipality municipality) {
-        this.listOfPendingPOI = new ArrayList<>();
-        this.listOfPendingItinerary = new ArrayList<>();
-        this.listOfPendingContent=new ArrayList<>();
+        this.pendingPOIs = new ArrayList<>();
+        this.pendingItineraries = new ArrayList<>();
+        this.pendingContents = new ArrayList<>();
         this.municipalityRef = municipality;
     }
 
@@ -48,7 +45,7 @@ public class PendingManager {
      * @param poi The POI to remove.
      */
     public void removePOI(PendingPOI poi) {
-        this.listOfPendingPOI.remove(poi);
+        this.pendingPOIs.remove(poi);
     }
 
     /**
@@ -57,7 +54,7 @@ public class PendingManager {
      * @param itinerary The itinerary to remove.
      */
     public void removeItinerary(PendingItinerary itinerary) {
-        this.listOfPendingItinerary.remove(itinerary);
+        this.pendingItineraries.remove(itinerary);
     }
 
     /**
@@ -66,7 +63,7 @@ public class PendingManager {
      * @param content The content to remove.
      */
     public void removeContent(PendingContent content) {
-        this.listOfPendingContent.remove(content);
+        this.pendingContents.remove(content);
     }
 
     /**
@@ -75,7 +72,7 @@ public class PendingManager {
      * @param poi The POI to add.
      */
     public void addPendingPOI(PendingPOI poi) {
-        this.listOfPendingPOI.add(poi);
+        this.pendingPOIs.add(poi);
     }
 
     /**
@@ -84,7 +81,7 @@ public class PendingManager {
      * @param pendingItinerary The itinerary to add.
      */
     public void addPendingItinerary(PendingItinerary pendingItinerary) {
-        this.listOfPendingItinerary.add(pendingItinerary);
+        this.pendingItineraries.add(pendingItinerary);
     }
 
     /**
@@ -93,7 +90,7 @@ public class PendingManager {
      * @param pendingContent The content to add.
      */
     public void addPendingContent(PendingContent pendingContent) {
-        this.listOfPendingContent.add(pendingContent);
+        this.pendingContents.add(pendingContent);
     }
 
     /**
@@ -101,17 +98,17 @@ public class PendingManager {
      *
      * @return The list of pending POIs.
      */
-    public ArrayList<PendingPOI> getListOfPendingPOI() {
-        return this.listOfPendingPOI;
+    public ArrayList<PendingPOI> getPendingPOIs() {
+        return this.pendingPOIs;
     }
 
     /**
      * This method is used to set the list of pending POIs.
      *
-     * @param listOfPendingPOI The list of pending POIs to be set.
+     * @param pendingPOIs The list of pending POIs to be set.
      */
-    public void setListOfPendingPOI(ArrayList<PendingPOI> listOfPendingPOI) {
-        this.listOfPendingPOI = listOfPendingPOI;
+    public void setPendingPOIs(ArrayList<PendingPOI> pendingPOIs) {
+        this.pendingPOIs = pendingPOIs;
     }
 
     /**
@@ -119,8 +116,17 @@ public class PendingManager {
      *
      * @return The list of pending itineraries.
      */
-    public List<PendingItinerary> getListOfPendingItinerary() {
-        return this.listOfPendingItinerary;
+    public List<PendingItinerary> getPendingItineraries() {
+        return this.pendingItineraries;
+    }
+
+    /**
+     * This method is used to set the list of pending itineraries.
+     *
+     * @param pendingItineraries The list of pending itineraries to be set.
+     */
+    private void setPendingItineraries(ArrayList<PendingItinerary> pendingItineraries) {
+        this.pendingItineraries = pendingItineraries;
     }
 
     /**
@@ -128,17 +134,8 @@ public class PendingManager {
      *
      * @return The list of pending contents.
      */
-    public List<PendingContent> getListOfPendingContent() {
-        return this.listOfPendingContent;
-    }
-
-    /**
-     * This method is used to set the list of pending itineraries.
-     *
-     * @param listOfPendingItinerary The list of pending itineraries to be set.
-     */
-    private void setListOfPendingItinerary(ArrayList<PendingItinerary> listOfPendingItinerary) {
-        this.listOfPendingItinerary = listOfPendingItinerary;
+    public List<PendingContent> getPendingContents() {
+        return this.pendingContents;
     }
 
     /**
@@ -148,7 +145,7 @@ public class PendingManager {
      * @return The requested POI.
      */
     public PendingPOI getPOI(PendingPOI poi) {
-        if (this.listOfPendingPOI.contains(poi)) return poi;
+        if (this.pendingPOIs.contains(poi)) return poi;
         else throw new IllegalArgumentException("Not present");
     }
 
@@ -159,7 +156,7 @@ public class PendingManager {
      * @return The requested itinerary.
      */
     public PendingItinerary getItinerary(PendingItinerary itinerary) {
-        if (this.listOfPendingItinerary.contains(itinerary)) return itinerary;
+        if (this.pendingItineraries.contains(itinerary)) return itinerary;
         else throw new IllegalArgumentException("Not present");
     }
 }

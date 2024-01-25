@@ -15,15 +15,13 @@ import java.util.Objects;
 public abstract class AbstractUser implements User {
 
     /**
-     * The unique identifier of the user.
-     */
-    private final ID id;
-
-    /**
      * The municipality of the user.
      */
     protected final Municipality municipality;
-
+    /**
+     * The unique identifier of the user.
+     */
+    private final ID id;
     /**
      * The view of every User of the Platform
      */
@@ -37,7 +35,7 @@ public abstract class AbstractUser implements User {
     public AbstractUser(Municipality municipality) {
         this.municipality = municipality;
         this.id = new ID();
-        this.generalView=new ITourist(this.municipality,this);
+        this.generalView = new ITourist(this.municipality, this);
     }
 
     @Override
@@ -79,7 +77,7 @@ public abstract class AbstractUser implements User {
      * This method allows the User to view an Itinerary present in the Municipality.
      * It uses the ITourist General View.
      */
-    public void viewItinerary(){
+    public void viewItinerary() {
         this.generalView.viewItinerary();
     }
 }

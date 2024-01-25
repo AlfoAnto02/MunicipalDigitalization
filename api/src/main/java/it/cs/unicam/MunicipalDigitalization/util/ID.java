@@ -49,11 +49,11 @@ public class ID {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ID id1 = (ID) o;
-        return Objects.equals(id, id1.id);
+    public boolean equals(Object other) {
+        if (this == other) return true;
+        if (other == null || getClass() != other.getClass()) return false;
+        ID id2 = (ID) other;
+        return Objects.equals(id, id2.id);
     }
 
     @Override

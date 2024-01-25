@@ -36,7 +36,7 @@ public abstract class AbstractContent implements IContent {
     private String description;
 
     /**
-     * Link Type to fill
+     * Link POIType to fill
      */
     private String link;
 
@@ -58,7 +58,6 @@ public abstract class AbstractContent implements IContent {
     }
 
     /**
-     *
      * @return the ID of the content
      */
     @Override
@@ -67,8 +66,7 @@ public abstract class AbstractContent implements IContent {
     }
 
     /**
-     *
-     * @return the Type of the Content
+     * @return the POIType of the Content
      */
     @Override
     public ContentType getType() {
@@ -76,7 +74,6 @@ public abstract class AbstractContent implements IContent {
     }
 
     /**
-     *
      * @param type The new type of the content.
      */
     @Override
@@ -86,7 +83,6 @@ public abstract class AbstractContent implements IContent {
     }
 
     /**
-     *
      * @return the referred Municipal Element of this Content
      */
     @Override
@@ -95,7 +91,6 @@ public abstract class AbstractContent implements IContent {
     }
 
     /**
-     *
      * @param description The new description of the content.
      */
     @Override
@@ -104,7 +99,6 @@ public abstract class AbstractContent implements IContent {
     }
 
     /**
-     *
      * @param link The new link of the content.
      */
     @Override
@@ -113,7 +107,6 @@ public abstract class AbstractContent implements IContent {
     }
 
     /**
-     *
      * @param photo The new photo of the content.
      */
     @Override

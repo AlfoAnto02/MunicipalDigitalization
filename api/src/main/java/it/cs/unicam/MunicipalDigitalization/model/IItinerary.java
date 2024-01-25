@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * This interface represents an itinerary.
- * It provides methods to get a list of points of interest (POIs), get the id, name, and description of the itinerary, and to check if a POI is in the itinerary.
+ * It provides methods to get a list of points of interest (POIs), get the id, name, and description of the itinerary, and to contains if a POI is in the itinerary.
  * It also provides methods to set the name, description, and types of the itinerary, and to add a POI to the itinerary.
  */
 public interface IItinerary extends IMunicipalElements {
@@ -15,7 +15,7 @@ public interface IItinerary extends IMunicipalElements {
      *
      * @return A list of POIs in the itinerary.
      */
-    List<IPOI> getListOfPOIs();
+    List<IPOI> getPOIs();
 
     /**
      * This method is used to get the description of the itinerary.
@@ -32,12 +32,12 @@ public interface IItinerary extends IMunicipalElements {
     void setDescription(String s);
 
     /**
-     * This method is used to check if a POI is in the itinerary.
+     * This method is used to contains if a POI is in the itinerary.
      *
-     * @param poi The POI to check.
+     * @param poi The POI to contains.
      * @return True if the POI is in the itinerary, false otherwise.
      */
-    boolean check(IPOI poi);
+    boolean contains(IPOI poi);
 
     /**
      * This method is used to add a POI to the itinerary.

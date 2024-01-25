@@ -7,9 +7,9 @@ import java.util.stream.Stream;
  * This enum represents the types of points of interest (POIs) that can be created.
  * The types include BookShop, TownHall, Church, Cinema, and School.
  * Each type is associated with a code.
- * It provides methods to select a type based on a string, get a string representation of all types, and check if a string starts with the code of a type.
+ * It provides methods to select a type based on a string, get a string representation of all types, and contains if a string starts with the code of a type.
  */
-public enum Type {
+public enum POIType {
 
     /**
      * Represents a bookshop POI.
@@ -42,12 +42,12 @@ public enum Type {
     private final String code;
 
     /**
-     * Constructor for the Type enum.
+     * Constructor for the POIType enum.
      * It initializes the type with the provided code.
      *
      * @param code The code associated with the type.
      */
-    Type(String code) {
+    POIType(String code) {
         this.code = code;
     }
 
@@ -57,8 +57,8 @@ public enum Type {
      * @param line The string to be used to select a type.
      * @return An Optional containing the selected type if it exists, or an empty Optional if it does not.
      */
-    public static Optional<Type> selectType(String line) {
-        return Stream.of(Type.values()).filter(c -> c.isTypeOfLine(line)).findFirst();
+    public static Optional<POIType> selectType(String line) {
+        return Stream.of(POIType.values()).filter(c -> c.isTypeOfLine(line)).findFirst();
     }
 
     /**
@@ -71,7 +71,7 @@ public enum Type {
     }
 
     /**
-     * This method is used to check if a string starts with the code of a type.
+     * This method is used to contains if a string starts with the code of a type.
      *
      * @param line The string to be checked.
      * @return True if the string starts with the code of a type, false otherwise.

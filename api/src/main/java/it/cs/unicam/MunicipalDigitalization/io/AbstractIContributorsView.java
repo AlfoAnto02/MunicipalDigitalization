@@ -3,7 +3,6 @@ package it.cs.unicam.MunicipalDigitalization.io;
 import it.cs.unicam.MunicipalDigitalization.model.*;
 import it.cs.unicam.MunicipalDigitalization.util.*;
 
-import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -59,28 +58,22 @@ public class AbstractIContributorsView implements IContributorsView {
      * @param poi The POI whose coordinates are to be set.
      */
     public void setPOICoordinates(IPOI poi) {
-        double x = getInput("Please Insert the x coordinate");
-        double y = getInput("Please Insert the y coordinate");
-        poiController.setPOICoordinates(new Coordinates(x, y), poi);
+        poiController.setPOICoordinates(new Coordinates(getInput("Please Insert the x coordinate"), getInput("Please Insert the y coordinate")), poi);
     }
 
     /**
      * This method is used to show a list of types.
      */
     public void showListOfPOITypes() {
-        System.out.println("Select one of the following types");
-        System.out.println(Type.getTypes());
+        System.out.println("Select one of the following types\n" + POIType.getTypes());
     }
 
     /**
      * This method is used to show a list of POIs.
      */
     private void showListOfPOIs() {
-        List<IPOI> poiList = this.itineraryController.getPOIList();
         System.out.println("Please, Select the number of which Poi do you wanna add to your itinerary !!! ");
-        for (int i = 0; i < poiList.size(); i++) {
-            System.out.printf("%d %s%n", i, poiList.get(i).getName());
-        }
+        this.itineraryController.getPOIList().forEach(poi -> System.out.println(poi.getName()));
     }
 
     /**
@@ -92,16 +85,7 @@ public class AbstractIContributorsView implements IContributorsView {
         this.showListOfPOIs();
         do {
             this.itineraryController.selectPOIToAdd(itinerary, this.itineraryController.getPOIList().get(inputScanner.nextInt()));
-        } while (itinerary.getListOfPOIs().isEmpty() || !confirmItinerary());
-    }
-
-    /**
-     * This method is used to confirm an itinerary.
-     *
-     * @return True if the itinerary is confirmed, false otherwise.
-     */
-    private boolean confirmItinerary() {
-        return getStringInput("Do you want to continue Adding POIs?  Y/N").equalsIgnoreCase("Y");
+        } while (itinerary.getPOIs().isEmpty() || !getStringInput("Do you want to continue Adding POIs?  Y/N").equalsIgnoreCase("Y"));
     }
 
     /**
@@ -114,15 +98,15 @@ public class AbstractIContributorsView implements IContributorsView {
     }
 
     /**
-     * This method is used to set the type of a POI.
+     * This method is used to set the type of POI.
      *
      * @param poi The POI whose type is to be set.
      */
     public void setType(IPOI poi) {
         this.showListOfPOITypes();
-        String typeString = getStringInput("Please Select a Type");
-        if (!Type.getTypes().contains(typeString)) {
-            typeString = getStringInput("Please Select a Type from the list");
+        String typeString = getStringInput("Please Select a POIType");
+        if (!POIType.getTypes().contains(typeString)) {
+            typeString = getStringInput("Please Select a POIType from the list");
             showListOfPOITypes();
         }
         poiController.setPOIType(typeString, poi);
@@ -147,11 +131,10 @@ public class AbstractIContributorsView implements IContributorsView {
     }
 
     /**
-     * This method is used to get the Content Type List.
+     * This method is used to get the Content POIType List.
      */
     public void getContentTypeList() {
-        System.out.println("Select one of the following types");
-        System.out.println(ContentType.getListOfTypes());
+        System.out.println("Select one of the following types\n" + ContentType.getListOfTypes());
     }
 
     /**
@@ -160,7 +143,7 @@ public class AbstractIContributorsView implements IContributorsView {
      * @param content The content to which the type is to be added.
      */
     public void selectType(IContent content) {
-        this.contentController.selectType(ContentType.valueOf(getStringInput("Please Select a Type")), content);
+        this.contentController.selectType(ContentType.valueOf(getStringInput("Please Select a POIType")), content);
     }
 
     /**
@@ -229,10 +212,10 @@ public class AbstractIContributorsView implements IContributorsView {
         this.getContentTypeList();
         this.selectType(content);
         switch (content.getType()) {
-            case IMAGE -> {
+            case PHOTO -> {
                 System.out.println("Inserisci il link dell'immagine");
                 String link = this.inputScanner.nextLine();
-                content.setLink(link);
+                content.setPhoto(link);
             }
             case LINK -> {
                 System.out.println("Inserisci il link");

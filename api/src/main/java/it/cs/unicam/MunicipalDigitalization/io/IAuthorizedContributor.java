@@ -61,17 +61,8 @@ public class IAuthorizedContributor extends AbstractIContributorsView {
     public void createPOI() {
         AuthorizedPOI poi = new AuthorizedPOI(this.authorizedContributor, authorizedContributor.getMunicipality());
         super.createPOI(poi);
-        this.uploadPOI(poi);
-        System.out.println("Your Poi has been created !!");
-    }
-
-    /**
-     * This method is used to upload a POI.
-     *
-     * @param poi The POI to upload.
-     */
-    private void uploadPOI(AuthorizedPOI poi) {
         this.poiController.upload(poi);
+        System.out.println("Your Poi has been created !!");
     }
 
     /**
@@ -81,16 +72,8 @@ public class IAuthorizedContributor extends AbstractIContributorsView {
     public void createItinerary() {
         AuthorizedItinerary itinerary = new AuthorizedItinerary(this.authorizedContributor, authorizedContributor.getMunicipality());
         super.createItinerary(itinerary);
-        this.uploadItinerary(itinerary);
-    }
-
-    /**
-     * This method is used to upload an itinerary.
-     *
-     * @param itinerary The itinerary to upload.
-     */
-    private void uploadItinerary(AuthorizedItinerary itinerary) {
         this.itineraryController.upload(itinerary);
+        System.out.println("Your Itinerary has been created !!");
     }
 
     /**
@@ -101,16 +84,7 @@ public class IAuthorizedContributor extends AbstractIContributorsView {
         IMunicipalElements municipalElement = super.selectMunicipalElement();
         AuthorizedContent content = new AuthorizedContent(this.authorizedContributor, municipalElement);
         super.createContent(content);
-        this.uploadContent(content, municipalElement);
-    }
-
-    /**
-     * This method is used to upload a content.
-     *
-     * @param content The content to upload.
-     */
-    private void uploadContent(AuthorizedContent content, IMunicipalElements municipalElements) {
-        this.contentController.uploadContent(content, municipalElements);
+        this.contentController.uploadContent(content, municipalElement);
     }
 
     @Override

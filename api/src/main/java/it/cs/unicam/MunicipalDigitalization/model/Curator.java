@@ -17,8 +17,8 @@ public class Curator extends AuthorizedContributor {
     /**
      * Constructor for the Curator class.
      *
-     * @param name     The name of the curator.
-     * @param password The password of the curator.
+     * @param name         The name of the curator.
+     * @param password     The password of the curator.
      * @param municipality The municipality of the curator.
      */
     public Curator(String name, String password, Municipality municipality) {
@@ -42,7 +42,7 @@ public class Curator extends AuthorizedContributor {
     /**
      * This method is used to validate a Content using the associated view.
      */
-    private void validateContent(){
+    private void validateContent() {
         view.startValidateContent();
     }
 }

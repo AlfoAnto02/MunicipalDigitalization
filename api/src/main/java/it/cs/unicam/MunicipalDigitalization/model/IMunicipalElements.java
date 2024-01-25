@@ -2,6 +2,7 @@ package it.cs.unicam.MunicipalDigitalization.model;
 
 import it.cs.unicam.MunicipalDigitalization.util.Coordinates;
 import it.cs.unicam.MunicipalDigitalization.util.ID;
+
 import java.util.Date;
 import java.util.List;
 
@@ -9,7 +10,6 @@ import java.util.List;
  * This interface represents the contract of a Municipal Elements.
  * A class needs to implement this interface to be a Municipal Element such as
  * a POI or an Itinerary.
- *
  */
 public interface IMunicipalElements {
 
@@ -68,10 +68,11 @@ public interface IMunicipalElements {
      *
      * @return The list of contents of the Municipal Element.
      */
-    List <IContent> listOfContents();
+    List<IContent> listOfContents();
 
     /**
      * This method is used to upload an authorized content.
+     *
      * @param content The content to upload.
      */
     void uploadContent(IContent content);

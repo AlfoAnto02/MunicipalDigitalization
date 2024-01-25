@@ -11,7 +11,6 @@ import java.util.List;
  * This class represents a Municipal Element. A municipal Element is composed
  * by an ID, an AutneticatedUser that create the Element, a creation Date of the Element
  * the coordinates of the Element and the name of the Element.
- *
  */
 public abstract class MunicipalElements implements IMunicipalElements {
 
@@ -51,11 +50,12 @@ public abstract class MunicipalElements implements IMunicipalElements {
 
     /**
      * The constructor of the class
+     *
      * @param user the Authenticated User that create this Element
      */
-    public MunicipalElements(AuthenticatedUser user, Municipality municipality){
-        this.author=user;
-        this.municipality=municipality;
+    public MunicipalElements(AuthenticatedUser user, Municipality municipality) {
+        this.author = user;
+        this.municipality = municipality;
         this.id = new ID();
         this.creationDate = Date.from(Instant.now());
     }
@@ -93,6 +93,15 @@ public abstract class MunicipalElements implements IMunicipalElements {
     }
 
     /**
+     * This method is used to get the name of the MunicipalElement
+     *
+     * @return The name of the MunicipalElement
+     */
+    public String getName() {
+        return this.name;
+    }
+
+    /**
      * Setter for the name of the MunicipalElement
      *
      * @param name The new name of the MunicipalElement
@@ -105,20 +114,11 @@ public abstract class MunicipalElements implements IMunicipalElements {
     }
 
     /**
-     * This method is used to get the name of the MunicipalElement
-     *
-     * @return The name of the MunicipalElement
-     */
-    public String getName(){
-        return this.name;
-    }
-
-    /**
      * Getter for the author of the MunicipalElement.
      *
      * @return The author of the MunicipalElement
      */
-    public AuthenticatedUser getUser(){
+    public AuthenticatedUser getUser() {
         return this.author;
     }
 
@@ -143,10 +143,11 @@ public abstract class MunicipalElements implements IMunicipalElements {
 
     /**
      * This method is used to upload an authorized content.
+     *
      * @param content The content to upload.
      */
     @Override
-    public void uploadContent(IContent content){
+    public void uploadContent(IContent content) {
         this.listOfContents.add(content);
     }
 

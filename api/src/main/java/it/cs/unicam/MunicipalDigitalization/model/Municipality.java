@@ -9,7 +9,7 @@ import java.util.Objects;
 
 /**
  * This class represents a municipality for managing points of interest (POIs) and itineraries.
- * It provides methods to check coordinates and names, append and upload POIs and itineraries, and get lists of POIs.
+ * It provides methods to contains coordinates and names, append and upload POIs and itineraries, and get lists of POIs.
  */
 public class Municipality {
 
@@ -64,9 +64,9 @@ public class Municipality {
     }
 
     /**
-     * This method is used to check if the coordinates are valid.
+     * This method is used to contains if the coordinates are valid.
      *
-     * @param coordinates The coordinates to check.
+     * @param coordinates The coordinates to contains.
      * @return True if the coordinates are valid, false otherwise.
      */
     public boolean checkCoordinates(Coordinates coordinates) {
@@ -75,9 +75,9 @@ public class Municipality {
     }
 
     /**
-     * This method is used to check if the name is valid.
+     * This method is used to contains if the name is valid.
      *
-     * @param name The name to check.
+     * @param name The name to contains.
      * @return True if the name is valid, false otherwise.
      */
     private boolean checkName(String name) {
@@ -122,7 +122,7 @@ public class Municipality {
         if (!listOfItineraries.contains(itinerary)) listOfItineraries.add(itinerary);
     }
 
-   /**
+    /**
      * This method is used to append a pending content to the list of contents.
      *
      * @param pendingContent The pending content to append.
@@ -137,7 +137,7 @@ public class Municipality {
      * @param content The content to upload.
      */
     public void uploadContent(IContent content) {
-        if(!content.getReferredMunicipalElement().listOfContents().contains(content)) {
+        if (!content.getReferredMunicipalElement().listOfContents().contains(content)) {
             content.getReferredMunicipalElement().listOfContents().add(content);
         }
     }
@@ -165,8 +165,8 @@ public class Municipality {
      *
      * @return a String with the specific Details of the POI
      */
-    public String getPOIInformation(String id){
-       return "ciao";
+    public String getPOIInformation(String id) {
+        return "ciao";
     }
 
     /**
@@ -174,7 +174,7 @@ public class Municipality {
      *
      * @return a String with the specific Details of the POI.
      */
-    public String getItineraryInformation(String id){
+    public String getItineraryInformation(String id) {
         return "ciao";
     }
 
@@ -183,14 +183,16 @@ public class Municipality {
      *
      * @return a String with the specific Details of the Content.
      */
-    public String getContentInformation(String id){ return "ciao"; }
+    public String getContentInformation(String id) {
+        return "ciao";
+    }
 
     /**
      * This method is used to get the general information of the POIs present in the Municipality
      *
      * @return a String with the Name, Coordinates and ID of every POI.
      */
-    public String getPOIsInformations(){
+    public String getPOIsInformations() {
         StringBuilder informations = new StringBuilder();
         for (IPOI p : this.listOfPOIs) {
             informations.append("Name: ").append(p.getName())
@@ -206,7 +208,7 @@ public class Municipality {
      *
      * @return a String with the Name and ID of every itinerary-
      */
-    public String getItinerariesInformations(){
+    public String getItinerariesInformations() {
         StringBuilder informations = new StringBuilder();
         for (IItinerary i : this.listOfItineraries) {
             informations.append("Name: ").append(i.getName())
@@ -218,6 +220,7 @@ public class Municipality {
 
     /**
      * Getter fot the PendingManager of the Municipality
+     *
      * @return the PendingManager of the Municipality
      */
     public PendingManager getPendingManager() {

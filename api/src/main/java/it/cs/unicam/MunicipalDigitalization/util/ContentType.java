@@ -10,7 +10,7 @@ import java.util.stream.Stream;
  * This enum represents the types of contents that can be created.
  * The types include Description, Link, and Image.
  * Each type is associated with a code.
- * It provides methods to select a type based on a string, get a string representation of all types, and check if a string starts with the code of a type.
+ * It provides methods to select a type based on a string, get a string representation of all types, and contains if a string starts with the code of a type.
  */
 public enum ContentType {
 
@@ -27,7 +27,7 @@ public enum ContentType {
     /**
      * Represents an image content.
      */
-    IMAGE("Image");
+    PHOTO("Photo");
 
     /**
      * The code associated with the type.
@@ -88,7 +88,7 @@ public enum ContentType {
     }
 
     /**
-     * This method is used to check if a string starts with the code of a type.
+     * This method is used to contains if a string starts with the code of a type.
      *
      * @param line The string to be checked.
      * @return True if the string starts with the code of a type, false otherwise.

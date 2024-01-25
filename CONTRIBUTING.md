@@ -1,6 +1,7 @@
 # Contributing to MunicipalDigitalization
 
-Thank you for your interest in contributing to MunicipalDigitalization, a project that aims to improve the digitalization of municipal services and processes. 🙌
+Thank you for your interest in contributing to MunicipalDigitalization, a project that aims to improve the
+digitalization of municipal services and processes. 🙌
 
 ## How to contribute
 
@@ -14,7 +15,8 @@ There are many ways you can contribute to this project, such as:
 
 ## Code of conduct
 
-Please read and follow our code of conduct before you participate in this project. We expect all contributors to respect each other and foster a welcoming and inclusive community. 🤗
+Please read and follow our code of conduct before you participate in this project. We expect all contributors to respect
+each other and foster a welcoming and inclusive community. 🤗
 
 ## Getting started
 
@@ -42,7 +44,8 @@ When creating a pull request, please follow these guidelines:
 
 ## Feedback and support
 
-We appreciate your feedback and support for this project. If you have any questions, suggestions, or issues, please feel free to contact us through:
+We appreciate your feedback and support for this project. If you have any questions, suggestions, or issues, please feel
+free to contact us through:
 
 - GitHub issues: https://github.com/MacMat01/MunicipalDigitalization/issues
 - Email: matteo.machella01@gmail.com

@@ -17,8 +17,8 @@ public class Contributor extends AbstractAuthUser {
     /**
      * Constructor for the Contributor class.
      *
-     * @param name     The name of the contributor.
-     * @param password The password of the contributor.
+     * @param name         The name of the contributor.
+     * @param password     The password of the contributor.
      * @param municipality The municipality of the contributor.
      */
     public Contributor(String name, String password, Municipality municipality) {
@@ -46,6 +46,8 @@ public class Contributor extends AbstractAuthUser {
      * This method is used to create a pending content.
      * It delegates the creation to the view.
      */
-    private void createPendingContent() { view.createContent(); }
+    private void createPendingContent() {
+        view.createContent();
+    }
 
 }
