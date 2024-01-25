@@ -21,17 +21,17 @@ public class AbstractIContributorsView implements IContributorsView {
     /**
      * The POI controller of the contributor.
      */
-    private POIController poiController;
+    private final POIController poiController;
 
     /**
      * The itinerary controller of the contributor.
      */
-    private ItineraryController itineraryController;
+    private final ItineraryController itineraryController;
 
     /**
      * The content controller of the contributor.
      */
-    private ContentController contentController;
+    private final ContentController contentController;
 
     /**
      * The municipality of the contributor.
@@ -43,18 +43,14 @@ public class AbstractIContributorsView implements IContributorsView {
      */
     private final AuthenticatedUser user;
 
-    /**
-     * Constructor for the IContributor class.
-     *
-     * @param municipality The municipality of the contributor.
-     */
-    public AbstractIContributorsView(Municipality municipality, AuthenticatedUser user) {
-        this.municipality = municipality;
+
+    public AbstractIContributorsView(AuthenticatedUser user) {
+        this.municipality = user.getMunicipality();
         this.user = user;
         this.inputScanner = new Scanner(System.in);
         this.poiController = new POIController(this, municipality);
         this.itineraryController = new ItineraryController(this, municipality);
-        this.contentController = new ContentController(this);
+        this.contentController = new ContentController(this, municipality);
     }
 
     /**
@@ -194,6 +190,12 @@ public class AbstractIContributorsView implements IContributorsView {
         this.contentController.setPhoto(ContentType.valueOf(getStringInput("Please insert a Photo for your Content")), content);
     }
 
+    /**
+     * This method is used to create a point of interest (POI).
+     * The implementation should handle the creation of a new POI.
+     *
+     * @param poi The POI to be created.
+     */
     @Override
     public void createPOI(IPOI poi) {
         this.setPOICoordinates(poi);
@@ -203,6 +205,12 @@ public class AbstractIContributorsView implements IContributorsView {
     }
 
 
+    /**
+     * This method is used to create an itinerary.
+     * The implementation should handle the creation of a new itinerary.
+     *
+     * @param itinerary The itinerary to be created.
+     */
     @Override
     public void createItinerary(IItinerary itinerary) {
         this.showListOfPOIs();
@@ -210,6 +218,12 @@ public class AbstractIContributorsView implements IContributorsView {
         this.setItineraryName(itinerary);
     }
 
+    /**
+     * This method is used to create a content.
+     * The implementation should handle the creation of a new content.
+     *
+     * @param content The content to be created.
+     */
     @Override
     public void createContent(IContent content) {
         this.getContentTypeList();

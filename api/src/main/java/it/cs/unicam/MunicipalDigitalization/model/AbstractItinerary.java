@@ -1,18 +1,14 @@
 package it.cs.unicam.MunicipalDigitalization.model;
-
 import it.cs.unicam.MunicipalDigitalization.util.Coordinates;
-import it.cs.unicam.MunicipalDigitalization.util.ID;
-
-import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
 /**
  * This abstract class represents a general itinerary.
  * It implements the IItinerary interface.
- * An itinerary has an id, name, description, author, creation date, the types of the points of interest, and a list of points of interest (POIs).
+ * An itinerary has an id, name, description, author, creation date, the types of the points of interest
+ * the  list of points of interest (POIs) and a list of Contents.
  */
 public abstract class AbstractItinerary extends MunicipalElements implements IItinerary {
 
@@ -44,8 +40,8 @@ public abstract class AbstractItinerary extends MunicipalElements implements IIt
      * @param author of the Itinerary
      */
 
-    public AbstractItinerary(AuthenticatedUser author) {
-        super(author);
+    public AbstractItinerary(AuthenticatedUser author, Municipality municipality) {
+        super(author, municipality);
         this.listOfPOIs=new ArrayList<>();
     }
 
@@ -132,7 +128,7 @@ public abstract class AbstractItinerary extends MunicipalElements implements IIt
     /**
      * Equals of the class based on the name and ListOfPOIs of the itinerary
      *
-     * @param o
+     * @param o object to compare
      * @return true if the itineraries are equals.
      */
 
