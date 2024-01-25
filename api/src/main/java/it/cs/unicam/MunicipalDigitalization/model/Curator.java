@@ -38,4 +38,11 @@ public class Curator extends AuthorizedContributor {
     private void validateItinerary() {
         view.startValidateItinerary();
     }
+
+    /**
+     * This method is used to validate a Content using the associated view.
+     */
+    private void validateContent(){
+        view.startValidateContent();
+    }
 }

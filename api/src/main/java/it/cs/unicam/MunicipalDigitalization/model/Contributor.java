@@ -23,7 +23,7 @@ public class Contributor extends AbstractAuthUser {
      */
     public Contributor(String name, String password, Municipality municipality) {
         super(name, password, municipality);
-        this.view = new IContributor(municipality, this);
+        this.view = new IContributor(this);
     }
 
     /**
