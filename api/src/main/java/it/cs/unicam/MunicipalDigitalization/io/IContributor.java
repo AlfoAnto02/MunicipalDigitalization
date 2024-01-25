@@ -38,18 +38,19 @@ public class IContributor extends AbstractIContributorsView {
     private final Contributor contributor;
 
     /**
-     * Constructor for the IContributor class.
+     * This is the Constructor of che class. It has to initialize all the
+     * Controller of the class.
      *
-     * @param municipality The municipality of the contributor.
-     * @param contributor  The contributor.
+     * @param contributor actor
      */
-    public IContributor(Municipality municipality, Contributor contributor) {
-        super(municipality, contributor);
+
+    public IContributor(Contributor contributor) {
+        super(contributor);
         this.contributor = contributor;
-        this.municipality = municipality;
+        this.municipality = contributor.getMunicipality();
         this.poiController = new POIController(this, municipality);
         this.itineraryController = new ItineraryController(this, municipality);
-        this.contentController = new ContentController(this);
+        this.contentController = new ContentController(this, municipality);
     }
 
     /**
@@ -57,7 +58,7 @@ public class IContributor extends AbstractIContributorsView {
      * It creates a POI, uploads it, and prints a message to the user.
      */
     public void createPOI() {
-        PendingPOI poi = new PendingPOI(this.contributor);
+        PendingPOI poi = new PendingPOI(this.contributor, this.municipality);
         super.createPOI(poi);
         this.appendPOI(poi);
         System.out.println("Your Poi has been created !!");
@@ -77,7 +78,7 @@ public class IContributor extends AbstractIContributorsView {
      * It creates an itinerary, uploads it, and prints a message to the user.
      */
     public void createItinerary() {
-        PendingItinerary itinerary = new PendingItinerary(this.contributor);
+        PendingItinerary itinerary = new PendingItinerary(this.contributor, this.municipality);
         super.createItinerary(itinerary);
         this.appendItinerary(itinerary);
     }
@@ -107,7 +108,9 @@ public class IContributor extends AbstractIContributorsView {
      *
      * @param pendingContent The content to be appended.
      */
-    public void appendContent(PendingContent pendingContent) { this.contentController.append(pendingContent); }
+    public void appendContent(PendingContent pendingContent) {
+        this.contentController.appendContent(pendingContent);
+    }
 
     @Override
     public POIController getPOIController() {

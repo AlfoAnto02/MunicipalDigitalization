@@ -38,19 +38,20 @@ public class IAuthorizedContributor extends AbstractIContributorsView {
      */
     private final AuthorizedContributor authorizedContributor;
 
+
     /**
-     * Constructor for the IAuthorizedContributor class.
+     * This is the Constructor of the Class. It has to initialize all the Controllers
+     * of the class.
      *
-     * @param municipality The municipality of the authorized contributor.
-     * @param authorizedContributor  The authorized contributor.
+     * @param authorizedContributor Actor
      */
-    public IAuthorizedContributor(Municipality municipality, AuthorizedContributor authorizedContributor) {
-        super(municipality, authorizedContributor);
+    public IAuthorizedContributor(AuthorizedContributor authorizedContributor) {
+        super(authorizedContributor);
         this.authorizedContributor = authorizedContributor;
-        this.municipality = municipality;
+        this.municipality = authorizedContributor.getMunicipality();
         this.poiController = new POIController(this, municipality);
         this.itineraryController = new ItineraryController(this, municipality);
-        this.contentController = new ContentController(this);
+        this.contentController = new ContentController(this, municipality);
     }
 
     /**
@@ -58,7 +59,7 @@ public class IAuthorizedContributor extends AbstractIContributorsView {
      * It creates a POI, uploads it, and prints a message to the user.
      */
     public void createPOI() {
-        AuthorizedPOI poi = new AuthorizedPOI(this.authorizedContributor);
+        AuthorizedPOI poi = new AuthorizedPOI(this.authorizedContributor, authorizedContributor.getMunicipality());
         super.createPOI(poi);
         this.uploadPOI(poi);
         System.out.println("Your Poi has been created !!");
@@ -78,7 +79,7 @@ public class IAuthorizedContributor extends AbstractIContributorsView {
      * It creates an itinerary, uploads it, and prints a message to the user.
      */
     public void createItinerary() {
-        AuthorizedItinerary itinerary = new AuthorizedItinerary(this.authorizedContributor);
+        AuthorizedItinerary itinerary = new AuthorizedItinerary(this.authorizedContributor, authorizedContributor.getMunicipality());
         super.createItinerary(itinerary);
         this.uploadItinerary(itinerary);
     }
@@ -109,7 +110,7 @@ public class IAuthorizedContributor extends AbstractIContributorsView {
      * @param content The content to upload.
      */
     private void uploadContent(AuthorizedContent content, IMunicipalElements municipalElements) {
-        this.contentController.upload(content, municipalElements);
+        this.contentController.uploadContent(content, municipalElements);
     }
 
     @Override
