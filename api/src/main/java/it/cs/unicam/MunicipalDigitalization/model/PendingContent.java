@@ -17,16 +17,16 @@ public class PendingContent extends AbstractContent {
 
     @Override
     public void setDescription(String description) {
-
+        //TODO  implement
     }
 
     @Override
     public void setLink(String link) {
-
+        //TODO  implement
     }
 
     @Override
     public void setPhoto(String photo) {
-
+        //TODO  implement
     }
 }
