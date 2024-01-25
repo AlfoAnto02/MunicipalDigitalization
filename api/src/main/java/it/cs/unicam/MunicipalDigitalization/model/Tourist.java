@@ -1,15 +1,15 @@
 package it.cs.unicam.MunicipalDigitalization.model;
 
 /**
- * This class represents a general User of the Platform.
- * Every User of the Platform/Municipality have the possibility to View the POIs
+ * This class represents a general IUser of the Platform.
+ * Every IUser of the Platform/Municipality have the possibility to View the POIs
  * presents in the Platform, the Itineraries and the Map.
- * Every other type of User have to extends this behavior.
+ * Every other type of IUser have to extends this behavior.
  */
-public class Tourist extends AbstractUser {
+public class Tourist extends AbstractIUser {
 
     /**
-     * Constructor for the AbstractUser class.
+     * Constructor for the AbstractIUser class.
      *
      * @param municipality The municipality of the user.
      */

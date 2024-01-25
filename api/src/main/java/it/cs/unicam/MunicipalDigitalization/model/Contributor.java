@@ -1,18 +1,18 @@
 package it.cs.unicam.MunicipalDigitalization.model;
 
-import it.cs.unicam.MunicipalDigitalization.io.IContributor;
+import it.cs.unicam.MunicipalDigitalization.io.ContributorView;
 
 /**
  * This class represents a contributor, which is a type of user.
- * It extends the AbstractUser class.
+ * It extends the AbstractIUser class.
  * A contributor has a view and can create pending points of interest (POIs) and itineraries.
  */
-public class Contributor extends AbstractAuthUser {
+public class Contributor extends AbstractAuthenticatedAuthenticatedUser {
 
     /**
      * The view of the contributor.
      */
-    private final IContributor view;
+    private final ContributorView view;
 
     /**
      * Constructor for the Contributor class.
@@ -23,7 +23,7 @@ public class Contributor extends AbstractAuthUser {
      */
     public Contributor(String name, String password, Municipality municipality) {
         super(name, password, municipality);
-        this.view = new IContributor(this);
+        this.view = new ContributorView(this);
     }
 
     /**

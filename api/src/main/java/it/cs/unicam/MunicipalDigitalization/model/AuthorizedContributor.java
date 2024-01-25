@@ -1,19 +1,19 @@
 package it.cs.unicam.MunicipalDigitalization.model;
 
-import it.cs.unicam.MunicipalDigitalization.io.IAuthorizedContributor;
+import it.cs.unicam.MunicipalDigitalization.io.AuthorizedContributorView;
 
 /**
  * This class represents an authorized contributor, which is a type of user.
- * It extends the AbstractUser class.
+ * It extends the AbstractIUser class.
  * An authorized contributor has a view and can create points of interest (POIs) and itineraries.
  */
-public class AuthorizedContributor extends AbstractAuthUser {
+public class AuthorizedContributor extends AbstractAuthenticatedAuthenticatedUser {
 
     /**
      * The view of the authorized contributor.
-     * This is an instance of IAuthorizedContributor interface which provides the methods for creating POIs and itineraries.
+     * This is an instance of AuthorizedContributorView interface which provides the methods for creating POIs and itineraries.
      */
-    private IAuthorizedContributor view;
+    private AuthorizedContributorView view;
 
     /**
      * Constructor for the AuthorizedContributor class.

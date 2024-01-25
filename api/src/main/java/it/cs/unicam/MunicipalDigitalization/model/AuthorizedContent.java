@@ -15,7 +15,7 @@ public class AuthorizedContent extends AbstractContent {
      * @param author           of the Content
      * @param municipalElement referred by the Content
      */
-    public AuthorizedContent(AuthenticatedUser author, IMunicipalElements municipalElement) {
+    public AuthorizedContent(IAuthenticatedUser author, IMunicipalElement municipalElement) {
         super(author, municipalElement);
     }
 }

@@ -1,6 +1,6 @@
 package it.cs.unicam.MunicipalDigitalization.util;
 
-import it.cs.unicam.MunicipalDigitalization.io.ITourist;
+import it.cs.unicam.MunicipalDigitalization.io.TouristView;
 import it.cs.unicam.MunicipalDigitalization.model.Municipality;
 
 /**
@@ -12,7 +12,7 @@ public class ViewController {
     /**
      * The tourist View
      */
-    private final ITourist touristView;
+    private final TouristView touristView;
 
     /**
      * The municipality associated with the Controller
@@ -26,7 +26,7 @@ public class ViewController {
      * @param touristView  The tourist view.
      * @param municipality The municipality.
      */
-    public ViewController(ITourist touristView, Municipality municipality) {
+    public ViewController(TouristView touristView, Municipality municipality) {
         this.touristView = touristView;
         this.municipality = municipality;
     }

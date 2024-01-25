@@ -1,6 +1,6 @@
 package it.cs.unicam.MunicipalDigitalization.model;
 
-import it.cs.unicam.MunicipalDigitalization.util.Coordinates;
+import it.cs.unicam.MunicipalDigitalization.util.Coordinate;
 import it.cs.unicam.MunicipalDigitalization.util.ID;
 
 import java.util.Date;
@@ -11,7 +11,7 @@ import java.util.List;
  * A class needs to implement this interface to be a Municipal Element such as
  * a POI or an Itinerary.
  */
-public interface IMunicipalElements {
+public interface IMunicipalElement {
 
     /**
      * Getter for the creation date of the Municipal Element.
@@ -25,14 +25,14 @@ public interface IMunicipalElements {
      *
      * @return The author of the Municipal Element.
      */
-    AuthenticatedUser getUser();
+    IAuthenticatedUser getUser();
 
     /**
      * This method is used to get the coordinates of the Municipal Element.
      *
      * @return The coordinates of the Municipal Element.
      */
-    Coordinates getCoordinates();
+    Coordinate getCoordinates();
 
     /**
      * This method is used to set the coordinates of the Municipal Element.
@@ -40,7 +40,7 @@ public interface IMunicipalElements {
      *
      * @param cc The new coordinates of the Municipal Element.
      */
-    void setCoordinates(Coordinates cc);
+    void setCoordinates(Coordinate cc);
 
     /**
      * This method is used to get the id of the Municipal Element.

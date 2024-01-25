@@ -14,7 +14,7 @@ public class PendingContent extends AbstractContent {
      * @param author           The authorized contributor who creates the content.
      * @param municipalElement The municipal element to which the content refers.
      */
-    public PendingContent(Contributor author, IMunicipalElements municipalElement) {
+    public PendingContent(Contributor author, IMunicipalElement municipalElement) {
         super(author, municipalElement);
     }
 }

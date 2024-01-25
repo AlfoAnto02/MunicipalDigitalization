@@ -1,6 +1,6 @@
 package it.cs.unicam.MunicipalDigitalization.model;
 
-import it.cs.unicam.MunicipalDigitalization.io.ICurator;
+import it.cs.unicam.MunicipalDigitalization.io.CuratorView;
 
 /**
  * This class represents a curator, which is a type of authorized contributor.
@@ -12,7 +12,7 @@ public class Curator extends AuthorizedContributor {
     /**
      * The view of the curator.
      */
-    private ICurator view;
+    private CuratorView view;
 
     /**
      * Constructor for the Curator class.

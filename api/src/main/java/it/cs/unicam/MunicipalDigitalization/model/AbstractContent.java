@@ -18,12 +18,12 @@ public abstract class AbstractContent implements IContent {
     /**
      * The municipal element referred by the content.
      */
-    private final IMunicipalElements referredMunicipalElement;
+    private final IMunicipalElement referredMunicipalElement;
 
     /**
      * The author of the content.
      */
-    private final AuthenticatedUser author;
+    private final IAuthenticatedUser author;
 
     /**
      * The type of the content.
@@ -51,7 +51,7 @@ public abstract class AbstractContent implements IContent {
      * @param author           The author of the content.
      * @param municipalElement The municipal element referred by the content.
      */
-    public AbstractContent(AuthenticatedUser author, IMunicipalElements municipalElement) {
+    public AbstractContent(IAuthenticatedUser author, IMunicipalElement municipalElement) {
         this.author = author;
         this.referredMunicipalElement = municipalElement;
         this.id = new ID();
@@ -86,7 +86,7 @@ public abstract class AbstractContent implements IContent {
      * @return the referred Municipal Element of this Content
      */
     @Override
-    public IMunicipalElements getReferredMunicipalElement() {
+    public IMunicipalElement getReferredMunicipalElement() {
         return this.referredMunicipalElement;
     }
 

@@ -1,6 +1,6 @@
 package it.cs.unicam.MunicipalDigitalization.util;
 
-import it.cs.unicam.MunicipalDigitalization.io.IContributorsView;
+import it.cs.unicam.MunicipalDigitalization.io.IContributorView;
 import it.cs.unicam.MunicipalDigitalization.model.*;
 
 import java.util.List;
@@ -14,7 +14,7 @@ public class ContentController {
     /**
      * The view for contributors.
      */
-    private final IContributorsView contributorView;
+    private final IContributorView contributorView;
 
 
     /**
@@ -27,7 +27,7 @@ public class ContentController {
      *
      * @param contributorView The view for contributors.
      */
-    public ContentController(IContributorsView contributorView, Municipality municipality) {
+    public ContentController(IContributorView contributorView, Municipality municipality) {
         this.contributorView = contributorView;
         this.municipality = municipality;
     }
@@ -77,7 +77,7 @@ public class ContentController {
      *
      * @param content The content to upload.
      */
-    public void uploadContent(AuthorizedContent content, IMunicipalElements municipalElement) {
+    public void uploadContent(AuthorizedContent content, IMunicipalElement municipalElement) {
         municipalElement.uploadContent(content);
     }
 

@@ -7,10 +7,10 @@ import it.cs.unicam.MunicipalDigitalization.util.POIController;
 
 /**
  * This class represents a contributor's view.
- * It implements the IContributorsView interface.
+ * It implements the IContributorView interface.
  * A contributor can create points of interest (POIs) and itineraries.
  */
-public class IContributor extends AbstractIContributorsView {
+public class ContributorView extends AbstractIContributorView {
 
     /**
      * The POI controller of the contributor.
@@ -44,7 +44,7 @@ public class IContributor extends AbstractIContributorsView {
      * @param contributor actor
      */
 
-    public IContributor(Contributor contributor) {
+    public ContributorView(Contributor contributor) {
         super(contributor);
         this.contributor = contributor;
         this.municipality = contributor.getMunicipality();
@@ -80,7 +80,7 @@ public class IContributor extends AbstractIContributorsView {
      * It creates a content, uploads it, and prints a message to the user.
      */
     public void createContent() {
-        IMunicipalElements municipalElements = super.selectMunicipalElement();
+        IMunicipalElement municipalElements = super.selectMunicipalElement();
         PendingContent pendingContent = new PendingContent(this.contributor, municipalElements);
         super.createContent(pendingContent);
         this.contentController.appendContent(pendingContent);

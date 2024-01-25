@@ -4,11 +4,11 @@ import it.cs.unicam.MunicipalDigitalization.util.ID;
 
 /**
  * This interface represents a user in the system.
- * It provides methods to get the id and the municipality associated with the User.
+ * It provides methods to get the id and the municipality associated with the IUser.
  * It also has the responsibility to permit the View of a POI or an Itinerary present
  * in the Municipality.
  */
-public interface User {
+public interface IUser {
 
     /**
      * This method is used to get the id of the user.

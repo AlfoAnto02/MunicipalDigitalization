@@ -2,34 +2,34 @@ package it.cs.unicam.MunicipalDigitalization.model;
 
 
 /**
- * This class Represent an Authenticated User.
- * Differently from a User, the Authenticated User has a name and a Password.
+ * This class Represent an Authenticated IUser.
+ * Differently from a IUser, the Authenticated IUser has a name and a Password.
  */
-public abstract class AbstractAuthUser extends AbstractUser implements AuthenticatedUser {
+public abstract class AbstractAuthenticatedAuthenticatedUser extends AbstractIUser implements IAuthenticatedUser {
 
     /**
-     * Name of the User
+     * Name of the IUser
      */
     private String name;
 
     /**
-     * Password of the User
+     * Password of the IUser
      */
     private String password;
 
     /**
-     * Municipality of the User where he will operate
+     * Municipality of the IUser where he will operate
      */
     private Municipality municipality;
 
     /**
-     * The Constructor for a general Authenticated User.
+     * The Constructor for a general Authenticated IUser.
      *
-     * @param name         name of the User
-     * @param password     password of the User
-     * @param municipality Municipality where the User will Operate
+     * @param name         name of the IUser
+     * @param password     password of the IUser
+     * @param municipality Municipality where the IUser will Operate
      */
-    public AbstractAuthUser(String name, String password, Municipality municipality) {
+    public AbstractAuthenticatedAuthenticatedUser(String name, String password, Municipality municipality) {
         super(municipality);
         this.name = name;
         this.password = password;

@@ -11,7 +11,7 @@ import it.cs.unicam.MunicipalDigitalization.util.POIController;
  * This interface represents the view of a contributor.
  * It provides methods to create points of interest (POIs) and itineraries, and to get the POI and itinerary controllers.
  */
-public interface IContributorsView {
+public interface IContributorView {
 
     /**
      * This method is used to create a point of interest (POI).

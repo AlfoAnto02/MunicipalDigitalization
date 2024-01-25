@@ -7,10 +7,10 @@ import java.util.Scanner;
 
 /**
  * This class represents a contributor's view.
- * It implements the IContributorsView interface.
+ * It implements the IContributorView interface.
  * A contributor can create points of interest (POIs) and itineraries.
  */
-public class AbstractIContributorsView implements IContributorsView {
+public class AbstractIContributorView implements IContributorView {
 
     /**
      * The scanner to get input from the user.
@@ -38,12 +38,12 @@ public class AbstractIContributorsView implements IContributorsView {
     private final Municipality municipality;
 
     /**
-     * The Authenticated User.
+     * The Authenticated IUser.
      */
-    private final AuthenticatedUser user;
+    private final IAuthenticatedUser user;
 
 
-    public AbstractIContributorsView(AuthenticatedUser user) {
+    public AbstractIContributorView(IAuthenticatedUser user) {
         this.municipality = user.getMunicipality();
         this.user = user;
         this.inputScanner = new Scanner(System.in);
@@ -53,12 +53,12 @@ public class AbstractIContributorsView implements IContributorsView {
     }
 
     /**
-     * This method is used to set the POI Coordinates.
+     * This method is used to set the POI Coordinate.
      *
      * @param poi The POI whose coordinates are to be set.
      */
     public void setPOICoordinates(IPOI poi) {
-        poiController.setPOICoordinates(new Coordinates(getInput("Please Insert the x coordinate"), getInput("Please Insert the y coordinate")), poi);
+        poiController.setPOICoordinates(new Coordinate(getInput("Please Insert the x coordinate"), getInput("Please Insert the y coordinate")), poi);
     }
 
     /**
@@ -126,7 +126,7 @@ public class AbstractIContributorsView implements IContributorsView {
      *
      * @return the user
      */
-    private AuthenticatedUser getUser() {
+    private IAuthenticatedUser getUser() {
         return this.user;
     }
 
@@ -237,7 +237,7 @@ public class AbstractIContributorsView implements IContributorsView {
      *
      * @return The municipal element selected.
      */
-    public IMunicipalElements selectMunicipalElement() {
+    public IMunicipalElement selectMunicipalElement() {
         System.out.println("Scegli un elemento a cui associare il contenuto");
         System.out.println(municipality.getItineraryList());
         System.out.println(municipality.getPOIList());

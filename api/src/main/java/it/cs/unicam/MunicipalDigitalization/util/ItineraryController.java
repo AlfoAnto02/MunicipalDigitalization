@@ -1,6 +1,6 @@
 package it.cs.unicam.MunicipalDigitalization.util;
 
-import it.cs.unicam.MunicipalDigitalization.io.IContributorsView;
+import it.cs.unicam.MunicipalDigitalization.io.IContributorView;
 import it.cs.unicam.MunicipalDigitalization.model.IItinerary;
 import it.cs.unicam.MunicipalDigitalization.model.IPOI;
 import it.cs.unicam.MunicipalDigitalization.model.Municipality;
@@ -17,7 +17,7 @@ public class ItineraryController {
     /**
      * The contributor's view.
      */
-    private final IContributorsView contributorView;
+    private final IContributorView contributorView;
 
     /**
      * The municipality.
@@ -31,7 +31,7 @@ public class ItineraryController {
      * @param contributorView The contributor's view.
      * @param municipality    The municipality.
      */
-    public ItineraryController(IContributorsView contributorView, Municipality municipality) {
+    public ItineraryController(IContributorView contributorView, Municipality municipality) {
         this.contributorView = contributorView;
         this.municipality = municipality;
     }

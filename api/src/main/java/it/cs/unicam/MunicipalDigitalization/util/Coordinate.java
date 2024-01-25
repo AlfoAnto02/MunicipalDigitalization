@@ -6,7 +6,7 @@ import java.util.Objects;
  * This class represents a set of coordinates.
  * A coordinate has an x and y value.
  */
-public class Coordinates {
+public class Coordinate {
 
     /**
      * The x value of the coordinate.
@@ -19,12 +19,12 @@ public class Coordinates {
     private double y;
 
     /**
-     * Constructor for the Coordinates class.
+     * Constructor for the Coordinate class.
      *
      * @param x The x value of the coordinate.
      * @param y The y value of the coordinate.
      */
-    public Coordinates(double x, double y) {
+    public Coordinate(double x, double y) {
         this.x = x;
         this.y = y;
     }
@@ -69,8 +69,8 @@ public class Coordinates {
     public boolean equals(Object other) {
         if (this == other) return true;
         if (other == null || getClass() != other.getClass()) return false;
-        Coordinates coordinates = (Coordinates) other;
-        return Double.compare(coordinates.x, x) == 0 && Double.compare(coordinates.y, y) == 0;
+        Coordinate coordinate = (Coordinate) other;
+        return Double.compare(coordinate.x, x) == 0 && Double.compare(coordinate.y, y) == 0;
     }
 
     @Override

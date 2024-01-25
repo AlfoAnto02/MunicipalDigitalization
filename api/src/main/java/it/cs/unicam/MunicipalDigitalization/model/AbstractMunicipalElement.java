@@ -1,6 +1,6 @@
 package it.cs.unicam.MunicipalDigitalization.model;
 
-import it.cs.unicam.MunicipalDigitalization.util.Coordinates;
+import it.cs.unicam.MunicipalDigitalization.util.Coordinate;
 import it.cs.unicam.MunicipalDigitalization.util.ID;
 
 import java.time.Instant;
@@ -10,9 +10,9 @@ import java.util.List;
 /**
  * This class represents a Municipal Element. A municipal Element is composed
  * by an ID, an AutneticatedUser that create the Element, a creation Date of the Element
- * the coordinates of the Element and the name of the Element.
+ * the coordinate of the Element and the name of the Element.
  */
-public abstract class MunicipalElements implements IMunicipalElements {
+public abstract class AbstractMunicipalElement implements IMunicipalElement {
 
     /**
      * Municipality of the Element
@@ -26,7 +26,7 @@ public abstract class MunicipalElements implements IMunicipalElements {
     /**
      * The author of the point of the MunicipalElement
      */
-    private final AuthenticatedUser author;
+    private final IAuthenticatedUser author;
 
     /**
      * The date when the point MunicipalElement was created
@@ -34,9 +34,9 @@ public abstract class MunicipalElements implements IMunicipalElements {
     private final Date creationDate;
 
     /**
-     * The coordinates of the MunicipalElement
+     * The coordinate of the MunicipalElement
      */
-    private Coordinates coordinates;
+    private Coordinate coordinate;
 
     /**
      * The name of the MunicipalElement
@@ -51,9 +51,9 @@ public abstract class MunicipalElements implements IMunicipalElements {
     /**
      * The constructor of the class
      *
-     * @param user the Authenticated User that create this Element
+     * @param user the Authenticated IUser that create this Element
      */
-    public MunicipalElements(AuthenticatedUser user, Municipality municipality) {
+    public AbstractMunicipalElement(IAuthenticatedUser user, Municipality municipality) {
         this.author = user;
         this.municipality = municipality;
         this.id = new ID();
@@ -61,26 +61,26 @@ public abstract class MunicipalElements implements IMunicipalElements {
     }
 
     /**
-     * This method is used to get the coordinates of the MunicipalElement
+     * This method is used to get the coordinate of the MunicipalElement
      *
-     * @return The coordinates of the MunicipalElement
+     * @return The coordinate of the MunicipalElement
      */
-    public Coordinates getCoordinates() {
-        return this.coordinates;
+    public Coordinate getCoordinates() {
+        return this.coordinate;
     }
 
     /**
-     * This method is used to set the coordinates of the MunicipalElement
-     * The implementation should handle the setting of the coordinates.
+     * This method is used to set the coordinate of the MunicipalElement
+     * The implementation should handle the setting of the coordinate.
      *
-     * @param coordinates The new coordinates of the MunicipalElement
+     * @param coordinate The new coordinate of the MunicipalElement
      */
-    public void setCoordinates(Coordinates coordinates) {
-        if (this.coordinates == null) {
-            throw new NullPointerException("Coordinates cannot be null");
+    public void setCoordinates(Coordinate coordinate) {
+        if (this.coordinate == null) {
+            throw new NullPointerException("Coordinate cannot be null");
         }
-        this.coordinates.setX(coordinates.getX());
-        this.coordinates.setY(coordinates.getY());
+        this.coordinate.setX(coordinate.getX());
+        this.coordinate.setY(coordinate.getY());
     }
 
     /**
@@ -118,7 +118,7 @@ public abstract class MunicipalElements implements IMunicipalElements {
      *
      * @return The author of the MunicipalElement
      */
-    public AuthenticatedUser getUser() {
+    public IAuthenticatedUser getUser() {
         return this.author;
     }
 

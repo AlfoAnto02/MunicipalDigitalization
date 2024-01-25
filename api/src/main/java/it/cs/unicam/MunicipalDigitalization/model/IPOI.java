@@ -4,9 +4,9 @@ import it.cs.unicam.MunicipalDigitalization.util.POIType;
 
 /**
  * This interface represents a point of interest (POI).
- * It provides methods to get and set the coordinates, id, name, and type of the POI.
+ * It provides methods to get and set the type of the POI.
  */
-public interface IPOI extends IMunicipalElements {
+public interface IPOI extends IMunicipalElement {
 
     /**
      * This method is used to get the type of the POI.

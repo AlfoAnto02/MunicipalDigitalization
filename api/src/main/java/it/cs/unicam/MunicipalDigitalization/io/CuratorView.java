@@ -11,7 +11,7 @@ import java.util.List;
  * This class represents a curator's view and extends the authorized contributor's view.
  * A curator can validate or invalidate points of interest (POIs), an itinerary or a content.
  */
-public class ICurator extends IAuthorizedContributor {
+public class CuratorView extends AuthorizedContributorView {
 
 //    /**
 //     * The curator.
@@ -23,7 +23,7 @@ public class ICurator extends IAuthorizedContributor {
      *
      * @param curator actor
      */
-    public ICurator(Curator curator) {
+    public CuratorView(Curator curator) {
         super(curator);
     }
 

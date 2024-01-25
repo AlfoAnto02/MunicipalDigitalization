@@ -1,16 +1,16 @@
 package it.cs.unicam.MunicipalDigitalization.io;
 
 import it.cs.unicam.MunicipalDigitalization.model.Municipality;
-import it.cs.unicam.MunicipalDigitalization.model.User;
+import it.cs.unicam.MunicipalDigitalization.model.IUser;
 import it.cs.unicam.MunicipalDigitalization.util.ViewController;
 
 import java.util.Scanner;
 
 /**
- * This class represents the view of Every User that can interact with the Map and the Platform
+ * This class represents the view of Every IUser that can interact with the Map and the Platform
  * Every user can see the Map, the POIs stored in the map, The Itineraries and the Contribution Contests.
  */
-public class ITourist {
+public class TouristView {
 
     /**
      * The view Controller of the class
@@ -20,7 +20,7 @@ public class ITourist {
     /**
      * The user that will use this view
      */
-    private final User tourist;
+    private final IUser tourist;
 
     /**
      * The municipality of the Controller. Each Municipality has a different View.
@@ -33,12 +33,12 @@ public class ITourist {
     private final Scanner inputScanner;
 
     /**
-     * Constructor for the ITourist Class
+     * Constructor for the TouristView Class
      *
      * @param municipality municipality of the View
-     * @param tourist      User that will use this view
+     * @param tourist      IUser that will use this view
      */
-    public ITourist(Municipality municipality, User tourist) {
+    public TouristView(Municipality municipality, IUser tourist) {
         this.municipality = municipality;
         this.tourist = tourist;
         this.viewController = new ViewController(this, this.municipality);

@@ -1,6 +1,6 @@
 package it.cs.unicam.MunicipalDigitalization.util;
 
-import it.cs.unicam.MunicipalDigitalization.io.IContributorsView;
+import it.cs.unicam.MunicipalDigitalization.io.IContributorView;
 import it.cs.unicam.MunicipalDigitalization.model.IPOI;
 import it.cs.unicam.MunicipalDigitalization.model.Municipality;
 import it.cs.unicam.MunicipalDigitalization.model.PendingPOI;
@@ -17,7 +17,7 @@ public class POIController {
     /**
      * The contributor's view.
      */
-    private final IContributorsView contributorView;
+    private final IContributorView contributorView;
 
     /**
      * The municipality associated with the Controller.
@@ -31,7 +31,7 @@ public class POIController {
      * @param view         The contributor's view.
      * @param municipality The municipality.
      */
-    public POIController(IContributorsView view, Municipality municipality) {
+    public POIController(IContributorView view, Municipality municipality) {
         this.contributorView = view;
         this.municipality = municipality;
     }
@@ -75,15 +75,15 @@ public class POIController {
     }
 
     /**
-     * This method is used to set the coordinates of a POI.
+     * This method is used to set the coordinate of a POI.
      *
-     * @param coordinates The coordinates to be set.
-     * @param poi         The POI whose coordinates are to be set.
+     * @param coordinate The coordinate to be set.
+     * @param poi         The POI whose coordinate are to be set.
      */
-    public void setPOICoordinates(Coordinates coordinates, IPOI poi) {
-        if (municipality.checkCoordinates(coordinates)) {
-            poi.setCoordinates(coordinates);
-        } else throw new IllegalArgumentException("Coordinates error");
+    public void setPOICoordinates(Coordinate coordinate, IPOI poi) {
+        if (municipality.checkCoordinates(coordinate)) {
+            poi.setCoordinates(coordinate);
+        } else throw new IllegalArgumentException("Coordinate error");
     }
 
     /**

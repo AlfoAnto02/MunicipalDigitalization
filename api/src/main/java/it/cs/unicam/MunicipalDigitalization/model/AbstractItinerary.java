@@ -1,6 +1,6 @@
 package it.cs.unicam.MunicipalDigitalization.model;
 
-import it.cs.unicam.MunicipalDigitalization.util.Coordinates;
+import it.cs.unicam.MunicipalDigitalization.util.Coordinate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,7 @@ import java.util.Objects;
  * An itinerary has an id, name, description, author, creation date, the types of the points of interest
  * the  list of points of interest (POIs) and a list of Contents.
  */
-public abstract class AbstractItinerary extends MunicipalElements implements IItinerary {
+public abstract class AbstractItinerary extends AbstractMunicipalElement implements IItinerary {
 
     /**
      * List of POIs that composed the Itinerary
@@ -31,10 +31,10 @@ public abstract class AbstractItinerary extends MunicipalElements implements IIt
     private String description;
 
     /**
-     * The coordinates where the Itinerary is situated.
+     * The coordinate where the Itinerary is situated.
      */
 
-    private Coordinates coordinates;
+    private Coordinate coordinate;
 
     /**
      * The constructor of the class
@@ -42,7 +42,7 @@ public abstract class AbstractItinerary extends MunicipalElements implements IIt
      * @param author of the Itinerary
      */
 
-    public AbstractItinerary(AuthenticatedUser author, Municipality municipality) {
+    public AbstractItinerary(IAuthenticatedUser author, Municipality municipality) {
         super(author, municipality);
         this.pois = new ArrayList<>();
     }

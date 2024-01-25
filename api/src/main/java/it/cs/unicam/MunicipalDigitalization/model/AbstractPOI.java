@@ -9,7 +9,7 @@ import java.util.Objects;
  * It implements the IPOI interface.
  * A POI has an id, name, POIType, author, creation date, coordinates and a list of contents.
  */
-public abstract class AbstractPOI extends MunicipalElements implements IPOI {
+public abstract class AbstractPOI extends AbstractMunicipalElement implements IPOI {
 
     /**
      * The POIType of the point of interest (POI).
@@ -19,9 +19,9 @@ public abstract class AbstractPOI extends MunicipalElements implements IPOI {
     /**
      * The constructor of the Class
      *
-     * @param author the AuthenticatedUser that create the POI
+     * @param author the IAuthenticatedUser that create the POI
      */
-    public AbstractPOI(AuthenticatedUser author, Municipality municipality) {
+    public AbstractPOI(IAuthenticatedUser author, Municipality municipality) {
         super(author, municipality);
     }
 

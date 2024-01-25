@@ -56,5 +56,5 @@ public interface IContent {
      *
      * @return The Referred Municipal Element of the content.
      */
-    IMunicipalElements getReferredMunicipalElement();
+    IMunicipalElement getReferredMunicipalElement();
 }

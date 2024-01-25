@@ -7,11 +7,11 @@ import it.cs.unicam.MunicipalDigitalization.util.POIController;
 
 /**
  * This class represents an authorized contributor's view.
- * It implements the IContributorsView interface.
+ * It implements the IContributorView interface.
  * An authorized contributor can create points of interest (POIs) and itineraries.
  * It also has methods to set POI coordinates, show a list of types, set POI name, set type, show POI list, select POI, confirm itinerary, and set itinerary name.
  */
-public class IAuthorizedContributor extends AbstractIContributorsView {
+public class AuthorizedContributorView extends AbstractIContributorView {
 
     /**
      * The POI controller of the authorized contributor.
@@ -45,7 +45,7 @@ public class IAuthorizedContributor extends AbstractIContributorsView {
      *
      * @param authorizedContributor Actor
      */
-    public IAuthorizedContributor(AuthorizedContributor authorizedContributor) {
+    public AuthorizedContributorView(AuthorizedContributor authorizedContributor) {
         super(authorizedContributor);
         this.authorizedContributor = authorizedContributor;
         this.municipality = authorizedContributor.getMunicipality();
@@ -81,7 +81,7 @@ public class IAuthorizedContributor extends AbstractIContributorsView {
      * It creates content, uploads it, and prints a message to the user.
      */
     public void createContent() {
-        IMunicipalElements municipalElement = super.selectMunicipalElement();
+        IMunicipalElement municipalElement = super.selectMunicipalElement();
         AuthorizedContent content = new AuthorizedContent(this.authorizedContributor, municipalElement);
         super.createContent(content);
         this.contentController.uploadContent(content, municipalElement);

@@ -1,6 +1,6 @@
 package it.cs.unicam.MunicipalDigitalization.model;
 
-import it.cs.unicam.MunicipalDigitalization.util.Coordinates;
+import it.cs.unicam.MunicipalDigitalization.util.Coordinate;
 import it.cs.unicam.MunicipalDigitalization.util.ID;
 
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ public class Municipality {
     /**
      * The territory of the municipality.
      */
-    private final Coordinates territory;
+    private final Coordinate territory;
 
     /**
      * List of POIs.
@@ -46,7 +46,7 @@ public class Municipality {
     /**
      * List of users.
      */
-    private List<User> listOfUsers;
+    private List<IUser> listOfIUsers;
 
     /**
      * Constructor for the Municipality class.
@@ -54,7 +54,7 @@ public class Municipality {
      *
      * @param territory The territory of the municipality.
      */
-    public Municipality(Coordinates territory, String name) {
+    public Municipality(Coordinate territory, String name) {
         this.name = name;
         this.listOfPOIs = new ArrayList<>();
         this.listOfItineraries = new ArrayList<>();
@@ -64,12 +64,12 @@ public class Municipality {
     }
 
     /**
-     * This method is used to contains if the coordinates are valid.
+     * This method is used to contains if the coordinate are valid.
      *
-     * @param coordinates The coordinates to contains.
-     * @return True if the coordinates are valid, false otherwise.
+     * @param coordinate The coordinate to contains.
+     * @return True if the coordinate are valid, false otherwise.
      */
-    public boolean checkCoordinates(Coordinates coordinates) {
+    public boolean checkCoordinates(Coordinate coordinate) {
         // TODO - implement Municipality.checkCoordinates
         throw new UnsupportedOperationException();
     }
@@ -190,7 +190,7 @@ public class Municipality {
     /**
      * This method is used to get the general information of the POIs present in the Municipality
      *
-     * @return a String with the Name, Coordinates and ID of every POI.
+     * @return a String with the Name, Coordinate and ID of every POI.
      */
     public String getPOIsInformations() {
         StringBuilder informations = new StringBuilder();
