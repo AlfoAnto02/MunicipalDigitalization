@@ -30,10 +30,19 @@ public abstract class AbstractContent implements IContent {
      */
     private ContentType type;
 
+    /**
+     * Description type to fill
+     */
     private String description;
 
+    /**
+     * Link Type to fill
+     */
     private String link;
 
+    /**
+     * Photo type to fill
+     */
     private String photo;
 
     /**
@@ -48,37 +57,65 @@ public abstract class AbstractContent implements IContent {
         this.id = new ID();
     }
 
+    /**
+     *
+     * @return the ID of the content
+     */
     @Override
     public String getID() {
         return this.id.toString();
     }
 
+    /**
+     *
+     * @return the Type of the Content
+     */
     @Override
     public ContentType getType() {
         return this.type;
     }
 
+    /**
+     *
+     * @param type The new type of the content.
+     */
     @Override
     public void setType(ContentType type) {
         if (type == null) throw new IllegalArgumentException("Content type is null");
         this.type = type;
     }
 
+    /**
+     *
+     * @return the referred Municipal Element of this Content
+     */
     @Override
     public IMunicipalElements getReferredMunicipalElement() {
         return this.referredMunicipalElement;
     }
 
+    /**
+     *
+     * @param description The new description of the content.
+     */
     @Override
     public void setDescription(String description) {
         this.description = description;
     }
 
+    /**
+     *
+     * @param link The new link of the content.
+     */
     @Override
     public void setLink(String link) {
         this.link = link;
     }
 
+    /**
+     *
+     * @param photo The new photo of the content.
+     */
     @Override
     public void setPhoto(String photo) {
         this.photo = photo;

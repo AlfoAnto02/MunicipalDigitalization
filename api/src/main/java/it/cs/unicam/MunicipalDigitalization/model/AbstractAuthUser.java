@@ -1,6 +1,5 @@
 package it.cs.unicam.MunicipalDigitalization.model;
 
-import it.cs.unicam.MunicipalDigitalization.util.ID;
 
 /**
  * This class Represent an Authenticated User.
