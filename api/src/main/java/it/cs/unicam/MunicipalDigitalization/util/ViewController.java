@@ -12,12 +12,12 @@ public class ViewController {
     /**
      * The tourist View
      */
-    private ITourist touristView;
+    private final ITourist touristView;
 
     /**
      * The municipality associated with the Controller
      */
-    private Municipality municipality;
+    private final Municipality municipality;
 
     /**
      * Constructor for the ViewController class.
