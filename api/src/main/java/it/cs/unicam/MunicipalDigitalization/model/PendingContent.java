@@ -16,11 +16,6 @@ public class PendingContent extends AbstractContent {
     }
 
     @Override
-    public void setType(ContentType type) {
-
-    }
-
-    @Override
     public void setDescription(String description) {
 
     }
