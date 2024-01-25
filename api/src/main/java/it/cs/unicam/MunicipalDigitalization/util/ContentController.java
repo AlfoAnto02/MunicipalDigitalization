@@ -16,27 +16,34 @@ public class ContentController {
      */
     private final IContributorsView contributorView;
 
+
+    /**
+     * The municipality.
+     */
+    private final Municipality municipality;
+
     /**
      * Constructor for the ContentController class.
      *
      * @param contributorView The view for contributors.
      */
-    public ContentController(IContributorsView contributorView) {
+    public ContentController(IContributorsView contributorView, Municipality municipality) {
         this.contributorView = contributorView;
+        this.municipality=municipality;
     }
 
     /**
-     * This method is used to set the name of a content.
+     * This method is used to set the type of content.
      *
      * @param type    The type to set.
-     * @param content The content to set the name to.
+     * @param content The content to set the type to.
      */
     public void selectType(ContentType type, IContent content) {
         content.setType(type);
     }
 
     /**
-     * This method is used to set the description of a content.
+     * This method is used to set the Type description of a content.
      *
      * @param description The description to set.
      * @param content     The content to set the description to.
@@ -46,7 +53,7 @@ public class ContentController {
     }
 
     /**
-     * This method is used to set the link of a content.
+     * This method is used to set the Type link of a content.
      *
      * @param link    The link to set.
      * @param content The content to set the link to.
@@ -70,8 +77,7 @@ public class ContentController {
      *
      * @param content The content to upload.
      */
-    public void upload(AuthorizedContent content, IMunicipalElements municipalElement) {
-
+    public void uploadContent(AuthorizedContent content, IMunicipalElements municipalElement) {
         municipalElement.uploadContent(content);
     }
 
@@ -80,17 +86,18 @@ public class ContentController {
      *
      * @param content The content to append.
      */
-    public void append(PendingContent content, IMunicipalElements municipalElement) {
-        municipalElement.appendContent(content);
+    public void appendContent(PendingContent content) {
+        this.municipality.appendContent(content);
     }
 
     /**
-     * This method is used to get the list of authorized contents.
+     * This method is used to get the list of Pending contents that are stored
+     * in the Platform.
      *
      * @return The list of authorized contents.
      */
-    public List<PendingContent> getPendingContents(IMunicipalElements municipalElement) {
-        return municipalElement.getPendingManager().getListOfPendingContent();
+    public List<PendingContent> getPendingContents() {
+        return this.municipality.getPendingManager().getListOfPendingContent();
     }
 
     /**
@@ -98,9 +105,9 @@ public class ContentController {
      *
      * @param content The content to validate.
      */
-    private void validateContent(IContent content, IMunicipalElements municipalElement) {
-        municipalElement.getPendingManager().removeContent(content);
-        municipalElement.uploadContent(content);
+    public void validateContent(PendingContent content) {
+        this.municipality.getPendingManager().removeContent(content);
+        this.municipality.uploadContent(content);
     }
 
     /**
@@ -108,7 +115,7 @@ public class ContentController {
      *
      * @param content The content to invalidate.
      */
-    private void invalidateContent(PendingContent content, IMunicipalElements municipalElement) {
-        municipalElement.getPendingManager().removeContent(content);
+    public void invalidateContent(PendingContent content) {
+        this.municipality.getPendingManager().removeContent(content);
     }
 }

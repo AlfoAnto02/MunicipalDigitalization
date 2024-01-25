@@ -10,10 +10,12 @@ public class AuthorizedPOI extends AbstractPOI {
 
     /**
      * Constructor for the AuthorizedPOI class.
-     *
-     * @param user The authorized contributor who creates the point of interest (POI).
+     * It initializes the AuthorizedPOI with the provided user and the Municipality
+     * where the POI should be located
+     * @param user that creates the itinerary
+     * @param municipality where is located
      */
-    public <T extends AuthorizedContributor> AuthorizedPOI(T user) {
-        super(user);
+    public <T extends AuthorizedContributor> AuthorizedPOI(T user, Municipality municipality) {
+        super(user, municipality);
     }
 }

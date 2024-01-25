@@ -10,10 +10,12 @@ public class AuthorizedItinerary extends AbstractItinerary {
 
     /**
      * Constructor for the AuthorizedItinerary class.
-     *
-     * @param user The authorized contributor who creates the itinerary.
+     * It initializes the AuthorizedItinerary with the provided user and the Municipality
+     * where the Itinerary should be located
+     * @param user that creates the itinerary
+     * @param municipality where is located
      */
-    public <T extends AuthorizedContributor> AuthorizedItinerary(T user) {
-        super(user);
+    public <T extends AuthorizedContributor> AuthorizedItinerary(T user, Municipality municipality) {
+        super(user, municipality);
     }
 }
