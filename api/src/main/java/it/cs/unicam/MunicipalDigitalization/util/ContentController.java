@@ -28,7 +28,7 @@ public class ContentController {
      * Constructor for the ContentController class.
      *
      * @param contributorView The view for contributors.
-     * @param municipality The municipality.
+     * @param municipality    The municipality.
      */
     public ContentController(IContributorsView contributorView, Municipality municipality) {
         this.contributorView = contributorView;
@@ -38,7 +38,7 @@ public class ContentController {
     /**
      * This method is used to set the name of a content.
      *
-     * @param type The type to set.
+     * @param type    The type to set.
      * @param content The content to set the name to.
      */
     private void selectType(ContentType type, IContent content) {
@@ -49,7 +49,7 @@ public class ContentController {
      * This method is used to set the description of a content.
      *
      * @param description The description to set.
-     * @param content The content to set the description to.
+     * @param content     The content to set the description to.
      */
     private void setDescription(ContentType description, IContent content) {
         content.setDescription(String.valueOf(description));
@@ -58,7 +58,7 @@ public class ContentController {
     /**
      * This method is used to set the link of a content.
      *
-     * @param link The link to set.
+     * @param link    The link to set.
      * @param content The content to set the link to.
      */
     private void setLink(ContentType link, IContent content) {
@@ -68,7 +68,7 @@ public class ContentController {
     /**
      * This method is used to set the photo of a content.
      *
-     * @param photo The photo to set.
+     * @param photo   The photo to set.
      * @param content The content to set the photo to.
      */
     private void setPhoto(ContentType photo, IContent content) {

@@ -103,7 +103,7 @@ public enum ContentType {
      * @param data The data to load.
      */
     public void loadData(Object data) {
-        switch(this){
+        switch (this) {
             case DESCRIPTION:
                 loadDescription(data);
                 break;
@@ -168,9 +168,9 @@ public enum ContentType {
      *
      * @return The content of the content.
      */
-    public Object returnContentType(){
+    public Object returnContentType() {
         if (!this.description.isEmpty()) return this.getDescription();
-        else if(!this.link.isEmpty()) return this.getLink();
+        else if (!this.link.isEmpty()) return this.getLink();
         return this.getImage();
     }
 
