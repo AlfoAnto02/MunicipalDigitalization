@@ -38,6 +38,7 @@ public class PendingManager {
     public PendingManager(Municipality municipality) {
         this.listOfPendingPOI = new ArrayList<>();
         this.listOfPendingItinerary = new ArrayList<>();
+        this.listOfPendingContent=new ArrayList<>();
         this.municipalityRef = municipality;
     }
 
