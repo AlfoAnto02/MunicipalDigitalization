@@ -46,5 +46,7 @@ public class AuthorizedContributor extends AbstractAuthUser {
      * This method is used to create a content.
      * It delegates the creation of content to the view.
      */
-    private void createContent() { view.createContent(); }
+    private void createContent() {
+        view.createContent();
+    }
 }

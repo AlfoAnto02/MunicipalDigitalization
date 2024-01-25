@@ -1,8 +1,10 @@
 package it.cs.unicam.MunicipalDigitalization.model;
 
 /**
- * This abstract class represents a general content.
- * It implements the IContent interface.
+ * This class represent an AuthorizedContent.
+ * An authorized content is a content that can be uploaded immediately on the Municipal
+ * Element without being validated by a curator
+ * It implements extends the AbstractContent class.
  * A content has an id, type, author, and a municipal element referred by the content.
  */
 public class AuthorizedContent extends AbstractContent {
