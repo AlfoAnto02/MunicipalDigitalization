@@ -5,7 +5,7 @@ import java.util.Random;
 
 /**
  * This class represents an ID object.
- * The ID is a randomly generated string of 6 characters.
+ * The ID is a randomly generated string of 16 characters.
  */
 public class ID {
 

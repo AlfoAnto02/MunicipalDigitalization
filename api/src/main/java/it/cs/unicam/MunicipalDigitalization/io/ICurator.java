@@ -1,15 +1,12 @@
 package it.cs.unicam.MunicipalDigitalization.io;
 
-import it.cs.unicam.MunicipalDigitalization.model.Curator;
-import it.cs.unicam.MunicipalDigitalization.model.PendingItinerary;
-import it.cs.unicam.MunicipalDigitalization.model.PendingPOI;
-import it.cs.unicam.MunicipalDigitalization.model.Municipality;
+import it.cs.unicam.MunicipalDigitalization.model.*;
 
 import java.util.List;
 
 /**
  * This class represents a curator's view and extends the authorized contributor's view.
- * A curator can validate or invalidate points of interest (POIs) and itineraries.
+ * A curator can validate or invalidate points of interest (POIs), an itinerary or a content.
  */
 public class ICurator extends IAuthorizedContributor {
 
@@ -19,13 +16,14 @@ public class ICurator extends IAuthorizedContributor {
     private Curator curator;
 
     /**
-     * Constructor for the ICurator class.
+     * Constructor of the class
      *
-     * @param municipality The municipality of the curator.
-     * @param curator  The curator.
+     * @param curator actor
      */
-    public ICurator(Municipality municipality, Curator curator) {
-        super(municipality, curator);
+
+
+    public ICurator(Curator curator) {
+        super(curator);
     }
 
     /**
@@ -42,7 +40,7 @@ public class ICurator extends IAuthorizedContributor {
     }
 
     /**
-     * This method is used to show a list of pending POIs.
+     * This method is used to show the list of pending POIs.
      *
      * @return The list of pending POIs.
      */
@@ -93,7 +91,7 @@ public class ICurator extends IAuthorizedContributor {
     }
 
     /**
-     * This method is used to show a list of pending itineraries.
+     * This method is used to show the list of pending itineraries.
      *
      * @return The list of pending itineraries.
      */
@@ -128,6 +126,57 @@ public class ICurator extends IAuthorizedContributor {
      */
     private void invalidateItinerary(PendingItinerary pendingItinerary) {
         this.getItineraryController().invalidateItinerary(pendingItinerary);
+    }
+
+    /**
+     * This method is used to start the process of validating a Content.
+     * It prompts the Curator to select a Content and decide to validate or not
+     */
+    public void startValidateContent() {
+        List<PendingContent> list = showPendingContent();
+        PendingContent selectedContent = list.get(inputScanner.nextInt());
+        showPendingContentInfo(selectedContent);
+        String answer = getStringInput("Do you want to validate this Content?? Y/N");
+        if (answer.equalsIgnoreCase("Y")) validateContent(selectedContent);
+        else invalidateContent(selectedContent);
+    }
+
+    /**
+     * This method is used to invalidate a content.
+     *
+     * @param selectedContent to invalidate
+     */
+    private void invalidateContent(PendingContent selectedContent) {
+        this.getContentController().invalidateContent(selectedContent);
+    }
+
+    /**
+     * This method is used to validate a content and upload it to the platform
+     *
+     * @param selectedContent to validate
+     */
+    private void validateContent(PendingContent selectedContent) {
+        this.getContentController().validateContent(selectedContent);
+    }
+
+    /**
+     * This method is used to show the specific info of a content
+     *
+     * @param selectedContent to show info
+     */
+    private void showPendingContentInfo(PendingContent selectedContent) {
+        System.out.println(selectedContent.toString());
+    }
+
+    /**
+     * This method is used to show all the pending contents
+     *
+     * @return the List of Pending Contents
+     */
+    private List<PendingContent> showPendingContent() {
+        List<PendingContent> list = this.getContentController().getPendingContents();
+        printList(list);
+        return list;
     }
 
     /**
