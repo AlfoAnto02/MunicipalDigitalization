@@ -48,8 +48,9 @@ public class AbstractIContributorsView implements IContributorsView {
      *
      * @param municipality The municipality of the contributor.
      */
-    public AbstractIContributorsView(Municipality municipality) {
+    public AbstractIContributorsView(Municipality municipality, AuthenticatedUser user) {
         this.municipality = municipality;
+        this.user = user;
         this.inputScanner = new Scanner(System.in);
         this.poiController = new POIController(this, municipality);
         this.itineraryController = new ItineraryController(this, municipality);
