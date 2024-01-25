@@ -69,4 +69,24 @@ public interface IMunicipalElements {
      * @return The list of contents of the Municipal Element.
      */
     List <IContent> listOfContents();
+
+    /**
+     * This method is used to get the list of comments of the Municipal Element.
+     *
+     * @return The list of comments of the Municipal Element.
+     */
+    PendingManager getPendingManager();
+
+    /**
+     * This method is used to upload an authorized content.
+     * @param content The content to upload.
+     */
+    void uploadContent(AuthorizedContent content);
+
+    /**
+     * This method is used to append a content to the list of pending contents.
+     *
+     * @param content The content to append.
+     */
+    void appendContent(PendingContent content);
 }

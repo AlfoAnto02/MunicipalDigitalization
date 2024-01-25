@@ -39,6 +39,11 @@ public class AbstractIContributorsView implements IContributorsView {
     private final Municipality municipality;
 
     /**
+     * The Authenticated User.
+     */
+    private final AuthenticatedUser user;
+
+    /**
      * Constructor for the IContributor class.
      *
      * @param municipality The municipality of the contributor.
@@ -48,11 +53,12 @@ public class AbstractIContributorsView implements IContributorsView {
         this.inputScanner = new Scanner(System.in);
         this.poiController = new POIController(this, municipality);
         this.itineraryController = new ItineraryController(this, municipality);
-        this.contentController = new ContentController(this, municipality);
+        this.contentController = new ContentController(this);
     }
 
     /**
      * This method is used to set the POI Coordinates.
+     *
      * @param poi The POI whose coordinates are to be set.
      */
     public void setPOICoordinates(IPOI poi) {
@@ -64,14 +70,9 @@ public class AbstractIContributorsView implements IContributorsView {
     /**
      * This method is used to show a list of types.
      */
-    public void showListOfTypes() {
+    public void showListOfPOITypes() {
         System.out.println("Select one of the following types");
         System.out.println(Type.getTypes());
-    }
-
-    private String showPOIList() {
-        //TODO: implement this method
-        return null;
     }
 
     /**
@@ -95,10 +96,6 @@ public class AbstractIContributorsView implements IContributorsView {
         do {
             this.itineraryController.selectPOIToAdd(itinerary, this.itineraryController.getPOIList().get(inputScanner.nextInt()));
         } while (itinerary.getListOfPOIs().isEmpty() || !confirmItinerary());
-    }
-
-    private void selectPoisAction() {
-        //TODO: implement this method
     }
 
     /**
@@ -125,11 +122,11 @@ public class AbstractIContributorsView implements IContributorsView {
      * @param poi The POI whose type is to be set.
      */
     public void setType(IPOI poi) {
-        this.showListOfTypes();
+        this.showListOfPOITypes();
         String typeString = getStringInput("Please Select a Type");
         if (!Type.getTypes().contains(typeString)) {
             typeString = getStringInput("Please Select a Type from the list");
-            showListOfTypes();
+            showListOfPOITypes();
         }
         poiController.setPOIType(typeString, poi);
     }
@@ -143,59 +140,139 @@ public class AbstractIContributorsView implements IContributorsView {
         poiController.setPOIName(getStringInput("Please Insert a Name for your POI"), poi);
     }
 
-    private Contributor getUser() {
-        //TODO: implement this method
-        return null;
+    /**
+     * this method returns the user
+     *
+     * @return the user
+     */
+    private AuthenticatedUser getUser() {
+        return this.user;
     }
 
-    private void getContentTypeList() {
-        //TODO: implement this method
+    /**
+     * This method is used to get the Content Type List.
+     */
+    public void getContentTypeList() {
+        System.out.println("Select one of the following types");
+        System.out.println(ContentType.getListOfTypes());
     }
 
-    private void selectType(IContent content) {
-        //TODO: implement this method
+    /**
+     * This method is used to select a type.
+     *
+     * @param content The content to which the type is to be added.
+     */
+    public void selectType(IContent content) {
+        this.contentController.selectType(ContentType.valueOf(getStringInput("Please Select a Type")), content);
     }
 
-    private void setDescription(IContent content) {
-        //TODO: implement this method
+    /**
+     * This method is used to set the description of a content.
+     *
+     * @param content The content whose description is to be set.
+     */
+    public void setDescription(IContent content) {
+        this.contentController.setDescription(ContentType.valueOf(getStringInput("Please insert a Description for your Content")), content);
     }
 
-    private void setLink(IContent content) {
-        //TODO: implement this method
+    /**
+     * This method is used to set the link of a content.
+     *
+     * @param content The content whose link is to be set.
+     */
+    public void setLink(IContent content) {
+        this.contentController.setLink(ContentType.valueOf(getStringInput("Please insert a Link for your Content")), content);
     }
 
-    private void setPhoto(IContent content) {
-        //TODO: implement this method
+    /**
+     * This method is used to set the photo of a content.
+     *
+     * @param content The content whose photo is to be set.
+     */
+    public void setPhoto(IContent content) {
+        this.contentController.setPhoto(ContentType.valueOf(getStringInput("Please insert a Photo for your Content")), content);
     }
 
     @Override
-    public void createPOI() {
-        //TODO: implement this method
+    public void createPOI(IPOI poi) {
+        this.setPOICoordinates(poi);
+        this.showListOfPOITypes();
+        this.setType(poi);
+        this.setPOIName(poi);
+    }
+
+
+    @Override
+    public void createItinerary(IItinerary itinerary) {
+        this.showListOfPOIs();
+        this.selectPOI(itinerary);
+        this.setItineraryName(itinerary);
     }
 
     @Override
-    public void createItinerary() {
-        //TODO: implement this method
+    public void createContent(IContent content) {
+        this.getContentTypeList();
+        this.selectType(content);
+        switch (content.getType()) {
+            case IMAGE -> {
+                System.out.println("Inserisci il link dell'immagine");
+                String link = this.inputScanner.nextLine();
+                content.setLink(link);
+            }
+            case LINK -> {
+                System.out.println("Inserisci il link");
+                String link = this.inputScanner.nextLine();
+                content.setLink(link);
+            }
+            case DESCRIPTION -> {
+                System.out.println("Inserisci la descrizione");
+                String description = this.inputScanner.nextLine();
+                content.setDescription(description);
+            }
+            default -> throw new IllegalArgumentException("Tipo non valido");
+        }
     }
 
-    @Override
-    public void createContent() {
-        //TODO: implement this method
+    /**
+     * This method is used to select a municipal element.
+     * if the element is not found, an exception is thrown.
+     *
+     * @return The municipal element selected.
+     */
+    public IMunicipalElements selectMunicipalElement() {
+        System.out.println("Scegli un elemento a cui associare il contenuto");
+        System.out.println(municipality.getItineraryList());
+        System.out.println(municipality.getPOIList());
+        System.out.println("Inserisci il nome dell'elemento");
+        String name = this.inputScanner.nextLine();
+        for (IItinerary itinerary : municipality.getItineraryList()) {
+            if (itinerary.getName().equals(name)) {
+                return itinerary;
+            }
+        }
+
+        for (IPOI poi : municipality.getPOIList()) {
+            if (poi.getName().equals(name)) {
+                return poi;
+            }
+        }
+
+        throw new IllegalArgumentException("Elemento non trovato");
     }
 
     @Override
     public POIController getPOIController() {
-        return null;
+        return this.poiController;
     }
 
     @Override
     public ItineraryController getItineraryController() {
-        return null;
+        return this.itineraryController;
     }
 
     @Override
     public ContentController getContentController() {
-        return null;
+        return this.contentController;
     }
 
     /**
@@ -215,6 +292,7 @@ public class AbstractIContributorsView implements IContributorsView {
      * @param message The message to be displayed to the user.
      * @return The string input from the user.
      */
+    @Override
     public String getStringInput(String message) {
         System.out.println(message);
         return inputScanner.nextLine();

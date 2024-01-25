@@ -1,5 +1,8 @@
 package it.cs.unicam.MunicipalDigitalization.io;
 
+import it.cs.unicam.MunicipalDigitalization.model.IContent;
+import it.cs.unicam.MunicipalDigitalization.model.IItinerary;
+import it.cs.unicam.MunicipalDigitalization.model.IPOI;
 import it.cs.unicam.MunicipalDigitalization.util.ContentController;
 import it.cs.unicam.MunicipalDigitalization.util.ItineraryController;
 import it.cs.unicam.MunicipalDigitalization.util.POIController;
@@ -13,20 +16,26 @@ public interface IContributorsView {
     /**
      * This method is used to create a point of interest (POI).
      * The implementation should handle the creation of a new POI.
+     *
+     * @param poi The POI to be created.
      */
-    void createPOI();
+    void createPOI(IPOI poi);
 
     /**
      * This method is used to create an itinerary.
      * The implementation should handle the creation of a new itinerary.
+     *
+     * @param itinerary The itinerary to be created.
      */
-    void createItinerary();
+    void createItinerary(IItinerary itinerary);
 
     /**
      * This method is used to create a content.
      * The implementation should handle the creation of a new content.
+     *
+     * @param content The content to be created.
      */
-    void createContent();
+    void createContent(IContent content);
 
     /**
      * This method is used to get the POI controller.

@@ -1,9 +1,6 @@
 package it.cs.unicam.MunicipalDigitalization.io;
 
-import it.cs.unicam.MunicipalDigitalization.model.AuthorizedContributor;
-import it.cs.unicam.MunicipalDigitalization.model.AuthorizedItinerary;
-import it.cs.unicam.MunicipalDigitalization.model.AuthorizedPOI;
-import it.cs.unicam.MunicipalDigitalization.model.Municipality;
+import it.cs.unicam.MunicipalDigitalization.model.*;
 import it.cs.unicam.MunicipalDigitalization.util.ContentController;
 import it.cs.unicam.MunicipalDigitalization.util.ItineraryController;
 import it.cs.unicam.MunicipalDigitalization.util.POIController;
@@ -39,43 +36,80 @@ public class IAuthorizedContributor extends AbstractIContributorsView {
     /**
      * The authorized contributor.
      */
-    private final AuthorizedContributor contributor;
+    private final AuthorizedContributor authorizedContributor;
 
     /**
      * Constructor for the IAuthorizedContributor class.
      *
      * @param municipality The municipality of the authorized contributor.
-     * @param contributor  The authorized contributor.
+     * @param authorizedContributor  The authorized contributor.
      */
-    public IAuthorizedContributor(Municipality municipality, AuthorizedContributor contributor) {
-        super(municipality);
-        this.contributor = contributor;
+    public IAuthorizedContributor(Municipality municipality, AuthorizedContributor authorizedContributor) {
+        super(municipality, authorizedContributor);
+        this.authorizedContributor = authorizedContributor;
         this.municipality = municipality;
         this.poiController = new POIController(this, municipality);
         this.itineraryController = new ItineraryController(this, municipality);
-        this.contentController = new ContentController(this, municipality);
+        this.contentController = new ContentController(this);
     }
 
-    @Override
+    /**
+     * This method is used to create a POI.
+     * It creates a POI, uploads it, and prints a message to the user.
+     */
     public void createPOI() {
-        AuthorizedPOI poi = new AuthorizedPOI(this.contributor);
-        this.setPOICoordinates(poi);
-        this.showListOfTypes();
-        this.setType(poi);
-        this.setPOIName(poi);
+        AuthorizedPOI poi = new AuthorizedPOI(this.authorizedContributor);
+        super.createPOI(poi);
+        this.uploadPOI(poi);
         System.out.println("Your Poi has been created !!");
     }
 
-    @Override
-    public void createItinerary() {
-        AuthorizedItinerary itinerary = new AuthorizedItinerary(this.contributor);
-        this.selectPOI(itinerary);
-        this.setItineraryName(itinerary);
+    /**
+     * This method is used to upload a POI.
+     *
+     * @param poi The POI to upload.
+     */
+    private void uploadPOI(AuthorizedPOI poi) {
+        this.poiController.upload(poi);
     }
 
-    @Override
+    /**
+     * This method is used to create an itinerary.
+     * It creates an itinerary, uploads it, and prints a message to the user.
+     */
+    public void createItinerary() {
+        AuthorizedItinerary itinerary = new AuthorizedItinerary(this.authorizedContributor);
+        super.createItinerary(itinerary);
+        this.uploadItinerary(itinerary);
+    }
+
+    /**
+     * This method is used to upload an itinerary.
+     *
+     * @param itinerary The itinerary to upload.
+     */
+    private void uploadItinerary(AuthorizedItinerary itinerary) {
+        this.itineraryController.upload(itinerary);
+    }
+
+    /**
+     * This method is used to create content.
+     * It creates content, uploads it, and prints a message to the user.
+     */
     public void createContent() {
-        //TODO - implement IAuthorizedContributor.createContent
+        IMunicipalElements municipalElement = super.selectMunicipalElement();
+        AuthorizedContent content = new AuthorizedContent(this.authorizedContributor, municipalElement);
+        super.createContent(content);
+        this.uploadContent(content, municipalElement);
+    }
+
+    /**
+     * This method is used to upload a content.
+     *
+     * @param content The content to upload.
+     */
+    private void uploadContent(AuthorizedContent content, IMunicipalElements municipalElements) {
+        this.contentController.upload(content, municipalElements);
     }
 
     @Override

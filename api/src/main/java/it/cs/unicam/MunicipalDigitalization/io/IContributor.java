@@ -44,21 +44,21 @@ public class IContributor extends AbstractIContributorsView {
      * @param contributor  The contributor.
      */
     public IContributor(Municipality municipality, Contributor contributor) {
-        super(municipality);
+        super(municipality, contributor);
         this.contributor = contributor;
         this.municipality = municipality;
         this.poiController = new POIController(this, municipality);
         this.itineraryController = new ItineraryController(this, municipality);
-        this.contentController = new ContentController(this, municipality);
+        this.contentController = new ContentController(this);
     }
 
-    @Override
+    /**
+     * This method is used to create a point of interest (POI).
+     * It creates a POI, uploads it, and prints a message to the user.
+     */
     public void createPOI() {
         PendingPOI poi = new PendingPOI(this.contributor);
-        this.setPOICoordinates(poi);
-        this.showListOfTypes();
-        this.setType(poi);
-        this.setPOIName(poi);
+        super.createPOI(poi);
         this.appendPOI(poi);
         System.out.println("Your Poi has been created !!");
     }
@@ -72,11 +72,13 @@ public class IContributor extends AbstractIContributorsView {
         this.poiController.append(pendingPOI);
     }
 
-    @Override
+   /**
+     * This method is used to create an itinerary.
+     * It creates an itinerary, uploads it, and prints a message to the user.
+     */
     public void createItinerary() {
         PendingItinerary itinerary = new PendingItinerary(this.contributor);
-        this.selectPOI(itinerary);
-        this.setItineraryName(itinerary);
+        super.createItinerary(itinerary);
         this.appendItinerary(itinerary);
     }
 
@@ -89,15 +91,14 @@ public class IContributor extends AbstractIContributorsView {
         this.itineraryController.append(itinerary);
     }
 
-    @Override
+    /**
+     * This method is used to create a content.
+     * It creates a content, uploads it, and prints a message to the user.
+     */
     public void createContent() {
-        PendingContent content = new PendingContent(this.contributor, this.selectMunicipalElement(content));
-        this.selectMunicipalElement(content);
-        this.showListOfTypes();
-        this.setType(content);
-        this.setContentDescription(content);
-        this.setContentLink(content);
-        this.setContentPhoto(content);
+        IMunicipalElements municipalElements = super.selectMunicipalElement();
+        PendingContent content = new PendingContent(this.contributor, municipalElements);
+        super.createContent(content);
         this.appendContent(content);
     }
 
@@ -106,9 +107,7 @@ public class IContributor extends AbstractIContributorsView {
      *
      * @param pendingContent The content to be appended.
      */
-    public void appendContent(PendingContent pendingContent) {
-        this.contentController.append(pendingContent);
-    }
+    public void appendContent(PendingContent pendingContent) { this.contentController.append(pendingContent); }
 
     @Override
     public POIController getPOIController() {

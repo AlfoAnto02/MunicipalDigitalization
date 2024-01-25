@@ -85,7 +85,7 @@ public class POIController {
     }
 
     /**
-     * This method is used to set the type of a POI.
+     * This method is used to set the type of POI.
      *
      * @param typeString The type to be set.
      * @param poi        The POI whose type is to be set.
