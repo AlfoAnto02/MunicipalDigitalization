@@ -20,6 +20,12 @@ public abstract class AbstractContent implements IContent {
     }
 
     @Override
+    public void setType(ContentType type) {
+        if(type==null) throw new IllegalArgumentException("Content type is null");
+        this.type=type;
+    }
+
+    @Override
     public String getID() {
         return this.id.toString();
     }

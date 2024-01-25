@@ -8,10 +8,6 @@ public class AuthorizedContent extends AbstractContent {
         super(author, municipalElement);
     }
 
-    @Override
-    public void setType(ContentType type) {
-
-    }
 
     @Override
     public void setDescription(String description) {
