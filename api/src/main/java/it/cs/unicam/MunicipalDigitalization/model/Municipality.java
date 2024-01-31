@@ -168,7 +168,7 @@ public class Municipality {
      *
      * @return a String with the specific Details of the POI
      */
-    public String getPOIInformation(String id) {
+    public String getPOIFullInfo(String id) {
         return "ciao";
     }
 
@@ -177,7 +177,7 @@ public class Municipality {
      *
      * @return a String with the specific Details of the POI.
      */
-    public String getItineraryInformation(String id) {
+    public String getItineraryFullInfo(String id) {
         return "ciao";
     }
 
@@ -195,7 +195,7 @@ public class Municipality {
      *
      * @return a String with the Name, Coordinate and ID of every POI.
      */
-    public String getPOIsInformations() {
+    public String getPOIGeneralInfo() {
         StringBuilder informations = new StringBuilder();
         for (IPOI p : this.listOfPOIs) {
             informations.append("Name: ").append(p.getName())
@@ -211,7 +211,7 @@ public class Municipality {
      *
      * @return a String with the Name and ID of every itinerary-
      */
-    public String getItinerariesInformations() {
+    public String getItinerariesGeneralInfo() {
         StringBuilder informations = new StringBuilder();
         for (IItinerary i : this.listOfItineraries) {
             informations.append("Name: ").append(i.getName())

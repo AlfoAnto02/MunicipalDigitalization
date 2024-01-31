@@ -37,8 +37,8 @@ public class ViewController {
      *
      * @return a string that contains all the general info of the POIs
      */
-    public String getPOIsInformation() {
-        return this.municipality.getPOIsInformations();
+    public String getPOIGeneralInfo() {
+        return this.municipality.getPOIGeneralInfo();
     }
 
     /**
@@ -47,8 +47,8 @@ public class ViewController {
      *
      * @param id of the POI
      */
-    public void getPOIDetails(String id) {
-        this.municipality.getPOIInformation(id);
+    public void getPOIFullInfo(String id) {
+        this.municipality.getPOIFullInfo(id);
     }
 
     /**
@@ -57,8 +57,8 @@ public class ViewController {
      *
      * @return a string that contains all the general info of the Itineraries
      */
-    public String getItinerariesInformation() {
-        return this.municipality.getItinerariesInformations();
+    public String getItinerariesGeneralInfo() {
+        return this.municipality.getItinerariesGeneralInfo();
     }
 
     /**
@@ -67,7 +67,7 @@ public class ViewController {
      *
      * @param id of the Itinerary
      */
-    public void getItineraryDetails(String id) {
-        this.municipality.getItineraryInformation(id);
+    public void getItineraryFullInfo(String id) {
+        this.municipality.getItineraryFullInfo(id);
     }
 }

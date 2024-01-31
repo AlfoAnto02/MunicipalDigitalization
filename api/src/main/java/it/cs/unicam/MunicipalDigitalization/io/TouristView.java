@@ -51,8 +51,8 @@ public class TouristView {
      */
     public void viewPOI() {
         System.out.println("This are the POIs Present in the Municipality");
-        System.out.println(this.viewController.getPOIsInformation());
-        this.viewController.getPOIDetails(this.getStringInput("Please Select a POI using an ID"));
+        System.out.println(this.viewController.getPOIGeneralInfo());
+        this.viewController.getPOIFullInfo(this.getStringInput("Please Select a POI using an ID"));
     }
 
     /**
@@ -61,8 +61,8 @@ public class TouristView {
      */
     public void viewItinerary() {
         System.out.println("This are the Itineraries Present in the Municipality");
-        System.out.println(this.viewController.getItinerariesInformation());
-        this.viewController.getItineraryDetails(this.getStringInput("Please Select a POI using an ID"));
+        System.out.println(this.viewController.getItinerariesGeneralInfo());
+        this.viewController.getItineraryFullInfo(this.getStringInput("Please Select a POI using an ID"));
     }
 
     /**
