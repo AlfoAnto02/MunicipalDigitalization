@@ -16,6 +16,7 @@ import it.cs.unicam.MunicipalDigitalization.util.controllers.POIController;
  * An authorized contributor can create points of interest (POIs) and itineraries.
  * It also has methods to set POI coordinates, show a list of types, set POI name, set type, show POI list, select POI, confirm itinerary, and set itinerary name.
  */
+
 public class AuthorizedContributorView extends AbstractIContributorView {
 
     /**
