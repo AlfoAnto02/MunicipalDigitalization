@@ -78,5 +78,7 @@ public interface IMunicipalElement {
      */
     void uploadContent(IContent content);
 
+    String getContent(String id);
+    
     String getContentFullInfo(String id);
 }
