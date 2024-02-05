@@ -18,4 +18,13 @@ public class Tourist extends AbstractIUser {
     public Tourist(Municipality municipality) {
         super(municipality);
     }
+
+    /**
+     * This method is used to change the municipality of the Tourist.
+     *
+     * @param municipality The new municipality of the Tourist.
+     */
+    public void changeMunicipality(Municipality municipality) {
+        super.municipality = municipality;
+    }
 }
