@@ -80,6 +80,10 @@ public class ViewController {
     public String getContents(String id) {
         return this.municipalElement.getContent(id);
     }
+    
+    public void getContentFullInfo(String id) {
+        this.municipalElement.getContentFullInfo(id);
+    }
 
     public void getMunicipalities() {
         //TODO Implement this method
