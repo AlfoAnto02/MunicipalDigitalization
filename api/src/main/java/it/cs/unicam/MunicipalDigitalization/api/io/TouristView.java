@@ -2,6 +2,7 @@ package it.cs.unicam.MunicipalDigitalization.api.io;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
 import it.cs.unicam.MunicipalDigitalization.api.model.actors.IUser;
+import it.cs.unicam.MunicipalDigitalization.api.model.elements.IMunicipalElement;
 import it.cs.unicam.MunicipalDigitalization.api.util.controllers.ViewController;
 
 import java.util.Scanner;
@@ -32,6 +33,8 @@ public class TouristView {
      */
     private final Scanner inputScanner;
 
+    private final MapController mapController;
+
     /**
      * Constructor for the TouristView Class
      *
@@ -51,7 +54,7 @@ public class TouristView {
      */
     public void viewPOI() {
         System.out.println("This are the POIs Present in the Municipality");
-        System.out.println(this.viewController.getPOIGeneralInfo());
+        System.out.println(this.viewController.getPOIs());
         this.viewController.getPOIFullInfo(this.getStringInput("Please Select a POI using an ID"));
     }
 
@@ -61,7 +64,7 @@ public class TouristView {
      */
     public void viewItinerary() {
         System.out.println("This are the Itineraries Present in the Municipality");
-        System.out.println(this.viewController.getItinerariesGeneralInfo());
+        System.out.println(this.viewController.getItineraries());
         this.viewController.getItineraryFullInfo(this.getStringInput("Please Select a POI using an ID"));
     }
 
@@ -74,5 +77,20 @@ public class TouristView {
     private String getStringInput(String message) {
         System.out.println(message);
         return inputScanner.nextLine();
+    }
+
+    public void viewContents(String id) {
+        System.out.println("This are the Contents Present in the Municipal Elements of the Municipality");
+        System.out.println(this.viewController.getContents(id));
+        this.viewController.getContentFullInfo(this.getStringInput("Please Select a Content using an ID"));
+    }
+
+    public void viewMunicipalities() {
+        System.out.println("This are the Municipalities Present in the Platform");
+        System.out.println(this.mapController.getMunicipalities());
+    }
+
+    public void viewMap() {
+        this.mapController.showMap();
     }
 }

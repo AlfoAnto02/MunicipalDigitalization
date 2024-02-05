@@ -2,6 +2,10 @@ package it.cs.unicam.MunicipalDigitalization.api.util.controllers;
 
 import it.cs.unicam.MunicipalDigitalization.api.io.TouristView;
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
+import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractMunicipalElement;
+import it.cs.unicam.MunicipalDigitalization.api.model.elements.IItinerary;
+import it.cs.unicam.MunicipalDigitalization.api.model.elements.IMunicipalElement;
+import it.cs.unicam.MunicipalDigitalization.api.model.elements.IPOI;
 
 /**
  * This class represents the view Controller of the Municipality. It contains the method for get the Information about
@@ -18,6 +22,8 @@ public class ViewController {
      * The municipality associated with the Controller
      */
     private final Municipality municipality;
+    
+    private AbstractMunicipalElement municipalElement;
 
     /**
      * Constructor for the ViewController class.
@@ -37,8 +43,8 @@ public class ViewController {
      *
      * @return a string that contains all the general info of the POIs
      */
-    public String getPOIGeneralInfo() {
-        return this.municipality.getPOIGeneralInfo();
+    public String getPOIs() {
+        return this.municipality.getPOIs();
     }
 
     /**
@@ -57,8 +63,8 @@ public class ViewController {
      *
      * @return a string that contains all the general info of the Itineraries
      */
-    public String getItinerariesGeneralInfo() {
-        return this.municipality.getItinerariesGeneralInfo();
+    public String getItineraries() {
+        return this.municipality.getItineraries();
     }
 
     /**
@@ -69,5 +75,14 @@ public class ViewController {
      */
     public void getItineraryFullInfo(String id) {
         this.municipality.getItineraryFullInfo(id);
+    }
+    
+    public String getContents(String id) {
+        return this.municipalElement.getContent(id);
+    }
+
+    public void getMunicipalities() {
+        //TODO Implement this method
+        throw new UnsupportedOperationException("Not yet implemented");
     }
 }

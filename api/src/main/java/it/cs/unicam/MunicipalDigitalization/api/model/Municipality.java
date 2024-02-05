@@ -195,15 +195,13 @@ public class Municipality {
      *
      * @return a String with the Name, Coordinate and ID of every POI.
      */
-    public String getPOIGeneralInfo() {
-        StringBuilder informations = new StringBuilder();
+    public String getPOIs() {
+        StringBuilder element = new StringBuilder();
         for (IPOI p : this.listOfPOIs) {
-            informations.append("Name: ").append(p.getName())
-                    .append("\nID: ").append(p.getId())
-                    .append("\n\n");
+            element.append("Name: ").append(p.getName()).append("\nID: ").append(p.getId()).append("\n\n");
         }
 
-        return informations.toString();
+        return element.toString();
     }
 
     /**
@@ -211,14 +209,12 @@ public class Municipality {
      *
      * @return a String with the Name and ID of every itinerary-
      */
-    public String getItinerariesGeneralInfo() {
-        StringBuilder informations = new StringBuilder();
+    public String getItineraries() {
+        StringBuilder element = new StringBuilder();
         for (IItinerary i : this.listOfItineraries) {
-            informations.append("Name: ").append(i.getName())
-                    .append("\nID: ").append(i.getId())
-                    .append("\n\n");
+            element.append("Name: ").append(i.getName()).append("\nID: ").append(i.getId()).append("\n\n");
         }
-        return informations.toString();
+        return element.toString();
     }
 
     /**
