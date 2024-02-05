@@ -169,7 +169,8 @@ public class Municipality {
      * @return a String with the specific Details of the POI
      */
     public String getPOIFullInfo(String id) {
-        return "ciao";
+        // TODO - implement Municipality.getPOIFullInfo
+        throw new UnsupportedOperationException();
     }
 
     /**
@@ -178,7 +179,8 @@ public class Municipality {
      * @return a String with the specific Details of the POI.
      */
     public String getItineraryFullInfo(String id) {
-        return "ciao";
+        // TODO - implement Municipality.getItineraryFullInfo
+        throw new UnsupportedOperationException();
     }
 
     /**
@@ -187,7 +189,8 @@ public class Municipality {
      * @return a String with the specific Details of the Content.
      */
     public String getContentInformation(String id) {
-        return "ciao";
+        // TODO - implement Municipality.getContentInformation
+        throw new UnsupportedOperationException();
     }
 
     /**

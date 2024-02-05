@@ -2,7 +2,7 @@ package it.cs.unicam.MunicipalDigitalization.api.io;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
 import it.cs.unicam.MunicipalDigitalization.api.model.actors.IUser;
-import it.cs.unicam.MunicipalDigitalization.api.model.elements.IMunicipalElement;
+import it.cs.unicam.MunicipalDigitalization.api.util.controllers.MapController;
 import it.cs.unicam.MunicipalDigitalization.api.util.controllers.ViewController;
 
 import java.util.Scanner;
@@ -46,6 +46,7 @@ public class TouristView {
         this.tourist = tourist;
         this.viewController = new ViewController(this, this.municipality);
         this.inputScanner = new Scanner(System.in);
+        this.mapController = new MapController(this, this.municipality);
     }
 
     /**
@@ -90,7 +91,8 @@ public class TouristView {
         System.out.println(this.mapController.getMunicipalities());
     }
 
-    public void viewMap() {
-        this.mapController.showMap();
+    public void viewMap(String id) {
+        // TODO - implement TouristView.viewMap
+        throw new UnsupportedOperationException();
     }
 }
