@@ -1,4 +1,4 @@
-package it.cs.unicam.MunicipalDigitalization.api.util.enumerations;
+package it.cs.unicam.MunicipalDigitalization.api.util;
 
 import java.util.Optional;
 import java.util.stream.Stream;

@@ -1,11 +1,11 @@
 package it.cs.unicam.MunicipalDigitalization.api.util.controllers;
 
 import it.cs.unicam.MunicipalDigitalization.api.io.IContributorView;
-import it.cs.unicam.MunicipalDigitalization.api.model.elements.IPOI;
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
+import it.cs.unicam.MunicipalDigitalization.api.model.elements.IPOI;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.PendingPOI;
 import it.cs.unicam.MunicipalDigitalization.api.util.Coordinate;
-import it.cs.unicam.MunicipalDigitalization.api.util.enumerations.POIType;
+import it.cs.unicam.MunicipalDigitalization.api.util.POIType;
 
 import java.util.List;
 import java.util.Optional;
@@ -80,7 +80,7 @@ public class POIController {
      * This method is used to set the coordinate of a POI.
      *
      * @param coordinate The coordinate to be set.
-     * @param poi         The POI whose coordinate are to be set.
+     * @param poi        The POI whose coordinate are to be set.
      */
     public void setPOICoordinates(Coordinate coordinate, IPOI poi) {
         if (municipality.checkCoordinates(coordinate)) {

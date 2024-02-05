@@ -1,7 +1,7 @@
 package it.cs.unicam.MunicipalDigitalization.api.model.elements;
 
-import it.cs.unicam.MunicipalDigitalization.api.model.actors.AuthorizedContributor;
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
+import it.cs.unicam.MunicipalDigitalization.api.model.actors.AuthorizedContributor;
 
 /**
  * This class represents an authorized point of interest (POI), which is a type of POI.

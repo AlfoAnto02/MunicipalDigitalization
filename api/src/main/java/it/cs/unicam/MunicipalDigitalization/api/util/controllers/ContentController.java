@@ -1,12 +1,12 @@
 package it.cs.unicam.MunicipalDigitalization.api.util.controllers;
 
 import it.cs.unicam.MunicipalDigitalization.api.io.IContributorView;
-import it.cs.unicam.MunicipalDigitalization.api.model.*;
+import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AuthorizedContent;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.IContent;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.IMunicipalElement;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.PendingContent;
-import it.cs.unicam.MunicipalDigitalization.api.util.enumerations.ContentType;
+import it.cs.unicam.MunicipalDigitalization.api.util.ContentType;
 
 import java.util.List;
 
@@ -59,7 +59,7 @@ public class ContentController {
     }
 
     /**
-     This method is used to set the contentType Link of a content.
+     * This method is used to set the contentType Link of a content.
      *
      * @param link    The link to set.
      * @param content The content to set the link to.
@@ -69,7 +69,7 @@ public class ContentController {
     }
 
     /**
-     This method is used to set the contentType Photo of a content.
+     * This method is used to set the contentType Photo of a content.
      *
      * @param photo   The photo to set.
      * @param content The content to set the photo to.

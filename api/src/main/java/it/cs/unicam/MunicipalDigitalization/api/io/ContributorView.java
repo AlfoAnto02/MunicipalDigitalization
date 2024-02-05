@@ -1,6 +1,6 @@
 package it.cs.unicam.MunicipalDigitalization.api.io;
 
-import it.cs.unicam.MunicipalDigitalization.api.model.*;
+import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
 import it.cs.unicam.MunicipalDigitalization.api.model.actors.Contributor;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.IMunicipalElement;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.PendingContent;

@@ -1,7 +1,7 @@
 package it.cs.unicam.MunicipalDigitalization.api.model.elements;
 
-import it.cs.unicam.MunicipalDigitalization.api.model.actors.IAuthenticatedUser;
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
+import it.cs.unicam.MunicipalDigitalization.api.model.actors.IAuthenticatedUser;
 import it.cs.unicam.MunicipalDigitalization.api.util.Coordinate;
 
 import java.util.ArrayList;

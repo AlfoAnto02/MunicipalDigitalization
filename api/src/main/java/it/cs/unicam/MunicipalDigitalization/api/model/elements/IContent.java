@@ -1,6 +1,6 @@
 package it.cs.unicam.MunicipalDigitalization.api.model.elements;
 
-import it.cs.unicam.MunicipalDigitalization.api.util.enumerations.ContentType;
+import it.cs.unicam.MunicipalDigitalization.api.util.ContentType;
 
 /**
  * This abstract class represents a general content.

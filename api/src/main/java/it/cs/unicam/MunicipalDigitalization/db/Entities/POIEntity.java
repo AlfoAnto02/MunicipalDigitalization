@@ -32,7 +32,7 @@ public class POIEntity {
     /**
      * Author of the POI
      */
-    @ManyToOne(optional = false,fetch = FetchType.EAGER)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "author")
     private UserEntity author;
 
@@ -49,7 +49,6 @@ public class POIEntity {
      */
     @Column(nullable = false)
     private Number longitude;
-
 
 
 }

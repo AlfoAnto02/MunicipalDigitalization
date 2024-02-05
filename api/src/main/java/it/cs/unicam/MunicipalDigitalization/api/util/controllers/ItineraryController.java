@@ -1,9 +1,9 @@
 package it.cs.unicam.MunicipalDigitalization.api.util.controllers;
 
 import it.cs.unicam.MunicipalDigitalization.api.io.IContributorView;
+import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.IItinerary;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.IPOI;
-import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.PendingItinerary;
 
 import java.util.List;

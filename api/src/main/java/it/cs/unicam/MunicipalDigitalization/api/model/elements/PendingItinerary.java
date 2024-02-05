@@ -1,7 +1,7 @@
 package it.cs.unicam.MunicipalDigitalization.api.model.elements;
 
-import it.cs.unicam.MunicipalDigitalization.api.model.actors.Contributor;
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
+import it.cs.unicam.MunicipalDigitalization.api.model.actors.Contributor;
 
 /**
  * This class represents a pending itinerary.
