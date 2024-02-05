@@ -155,7 +155,7 @@ public abstract class AbstractMunicipalElement implements IMunicipalElement {
     public String getContent(String id) {
         return this.listOfContents.stream().filter(content -> content.getID().equals(id)).findFirst().get().getContent();
     }
-    
+
     public String getContentFullInfo(String id) {
         return "ciao";
     }

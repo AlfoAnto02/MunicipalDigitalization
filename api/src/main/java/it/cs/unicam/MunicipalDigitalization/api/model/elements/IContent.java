@@ -57,6 +57,6 @@ public interface IContent {
      * @return The Referred Municipal Element of the content.
      */
     IMunicipalElement getReferredMunicipalElement();
-    
-    String  getContent();
+
+    String getContent();
 }

@@ -114,8 +114,8 @@ public abstract class AbstractContent implements IContent {
     public void setPhoto(String photo) {
         this.photo = photo;
     }
-    
+
     public String getContent() {
-       return "Content: " + this.description + " " + this.getType();
+        return "Content: " + this.description + " " + this.getType();
     }
 }

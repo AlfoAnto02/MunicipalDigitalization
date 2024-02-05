@@ -9,7 +9,7 @@ import java.util.Map;
 public class OSMSystem {
 
     private MunicipalRepository municipalRepository;
-    
+
     private MapController mapController;
 
     public OSMSystem(MunicipalRepository municipalRepository) {
