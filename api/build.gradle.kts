@@ -27,7 +27,7 @@ dependencies {
     runtimeOnly("com.mysql:mysql-connector-j")
     annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-
+    implementation("org.xerial:sqlite-jdbc:3.41.2.2")
 }
 
 java {
