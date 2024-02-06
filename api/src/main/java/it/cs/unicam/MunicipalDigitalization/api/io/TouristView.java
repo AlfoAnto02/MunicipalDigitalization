@@ -35,6 +35,9 @@ public class TouristView {
      */
     private final Scanner inputScanner;
 
+    /**
+     * The map Controller of the class
+     */
     private final MapController mapController;
 
     /**
@@ -82,17 +85,26 @@ public class TouristView {
         return inputScanner.nextLine();
     }
 
+    /**
+     * This method is used to view the Contents present in the Municipality
+     */
     public void viewContents(String id) {
         System.out.println("This are the Contents Present in the Municipal Elements of the Municipality");
         System.out.println(this.viewController.getContents(id));
         this.viewController.getContentFullInfo(this.getStringInput("Please Select a Content using an ID"));
     }
 
+    /**
+     * This method is used to view the Municipalities present in the Platform
+     */
     public void viewMunicipalities() {
         System.out.println("This are the Municipalities Present in the Platform");
         System.out.println(this.mapController.getMunicipalities());
     }
 
+    /**
+     * This method is used to view the map of the Municipality
+     */
     public void viewMap(String id) {
         // TODO - implement TouristView.viewMap
         throw new UnsupportedOperationException();

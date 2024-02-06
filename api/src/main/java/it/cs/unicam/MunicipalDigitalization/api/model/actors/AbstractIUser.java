@@ -18,11 +18,13 @@ public abstract class AbstractIUser implements IUser {
     /**
      * The municipality of the user.
      */
-    protected final Municipality municipality;
+    protected Municipality municipality;
+
     /**
      * The unique identifier of the user.
      */
     private final ID id;
+
     /**
      * The view of every IUser of the Platform
      */
@@ -81,4 +83,16 @@ public abstract class AbstractIUser implements IUser {
     public void viewItinerary() {
         this.generalView.viewItinerary();
     }
+
+    /**
+     * This method allows the IUser to view the contents present in the Municipality Elements.
+     * It uses the TouristView General View.
+     */
+    public void viewContents(String id) { this.generalView.viewContents(id); }
+
+    /**
+     * This method allows the IUser to view the map of the Municipality.
+     * It uses the TouristView General View.
+     */
+    public void getMap(String id) { this.generalView.viewMap(id); }
 }

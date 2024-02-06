@@ -35,5 +35,13 @@ public interface IUser {
      */
     void viewItinerary();
 
+    /**
+     * This method is used to view the content of the Municipal Elements.
+     */
+    void viewContents(String id);
 
+    /**
+     * This method is used to get the map of the Municipality.
+     */
+    void getMap(String id);
 }
