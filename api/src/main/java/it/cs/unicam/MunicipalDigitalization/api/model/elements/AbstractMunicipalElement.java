@@ -12,43 +12,35 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * This class represents a Municipal Element. A municipal Element is composed
- * by an ID, an AutheticatedUser that create the Element, a creation Date of the Element
+ * This abstract class represents a Municipal Element. A municipal Element is composed
+ * by an ID, an AuthenticatedUser that create the Element, a creation Date of the Element
  * the coordinate of the Element and the name of the Element.
  */
 public abstract class AbstractMunicipalElement implements IMunicipalElement {
     /**
      * The unique identifier of the MunicipalElement.
-     * -- GETTER --
      */
     @Getter
     private final ID id;
+
     /**
      * Municipality of the Element
      */
     private final Municipality municipality;
-
-    /**
-     * The status of the Element, if it is Pending or Published.
-     * -- GETTER --
-     *  return the Status of the Element.
-     */
-    @Getter
-    private ElementStatus elementStatus;
-
     /**
      * The author of the point of the MunicipalElement
      */
     private final IAuthenticatedUser author;
-
     /**
      * The date when the point MunicipalElement was created
-     * -- GETTER --
-     *  Getter for the creation date of the MunicipalElement
      */
     @Getter
     private final Date creationDate;
-
+    /**
+     * The status of the Element, if it is Pending or Published.
+     */
+    @Getter
+    private ElementStatus elementStatus;
     /**
      * The coordinate of the MunicipalElement
      */
@@ -56,8 +48,6 @@ public abstract class AbstractMunicipalElement implements IMunicipalElement {
 
     /**
      * The name of the MunicipalElement
-     * -- GETTER --
-     *  This method is used to get the name of the MunicipalElement
      */
     @Getter
     private String name;
@@ -68,9 +58,10 @@ public abstract class AbstractMunicipalElement implements IMunicipalElement {
     private List<IContent> listOfContents;
 
     /**
-     * The constructor of the class
+     * Constructor for the AbstractMunicipalElement class.
      *
-     * @param user the Authenticated IUser that create this Element
+     * @param user         the Authenticated IUser that create this Element
+     * @param municipality the Municipality where this Element is located
      */
     public AbstractMunicipalElement(IAuthenticatedUser user, Municipality municipality) {
         this.author = user;
@@ -80,7 +71,7 @@ public abstract class AbstractMunicipalElement implements IMunicipalElement {
     }
 
     /**
-     * This method is used to get the coordinate of the MunicipalElement
+     * Getter for the coordinates of the MunicipalElement.
      *
      * @return The coordinate of the MunicipalElement
      */
@@ -89,10 +80,10 @@ public abstract class AbstractMunicipalElement implements IMunicipalElement {
     }
 
     /**
-     * This method is used to set the coordinate of the MunicipalElement
-     * The implementation should handle the setting of the coordinate.
+     * Setter for the coordinates of the MunicipalElement.
      *
      * @param coordinate The new coordinate of the MunicipalElement
+     * @throws NullPointerException if the provided coordinate is null
      */
     public void setCoordinates(Coordinate coordinate) {
         if (this.coordinate == null) {
@@ -103,19 +94,21 @@ public abstract class AbstractMunicipalElement implements IMunicipalElement {
     }
 
     /**
-     * set the status of the Element
+     * Setter for the status of the MunicipalElement.
      *
-     * @param elementStatus status to set
+     * @param elementStatus The new status of the MunicipalElement
+     * @throws IllegalArgumentException if the provided status is null
      */
     public void setElementStatus(ElementStatus elementStatus) {
-        if(elementStatus ==null) throw new IllegalArgumentException("Element status invalid");
+        if (elementStatus == null) throw new IllegalArgumentException("Element status invalid");
         this.elementStatus = elementStatus;
     }
 
     /**
-     * Setter for the name of the MunicipalElement
+     * Setter for the name of the MunicipalElement.
      *
      * @param name The new name of the MunicipalElement
+     * @throws NullPointerException if the provided name is null or empty
      */
     public void setName(String name) {
         if (name == null || name.isEmpty()) {
@@ -133,30 +126,33 @@ public abstract class AbstractMunicipalElement implements IMunicipalElement {
         return this.author;
     }
 
-    /**
-     * This method is used to get the list of contents of the Municipal Element.
-     *
-     * @return The list of contents of the Municipal Element.
-     */
     @Override
     public List<IContent> listOfContents() {
         return this.listOfContents;
     }
 
-    /**
-     * This method is used to upload an authorized content.
-     *
-     * @param content The content to upload.
-     */
     @Override
     public void uploadContent(IContent content) {
         this.listOfContents.add(content);
     }
 
+    /**
+     * Method to get a specific content from the MunicipalElement by its ID.
+     *
+     * @param id The ID of the content to retrieve.
+     * @return The content as a string.
+     */
     public String getContent(String id) {
         return this.listOfContents.stream().filter(content -> content.getID().equals(id)).findFirst().get().getContent();
     }
 
+    /**
+     * Method to get full information about a specific content from the MunicipalElement by its ID.
+     *
+     * @param id The ID of the content to retrieve.
+     */
     public void getContentFullInfo(String id) {
+        // TODO - implement AbstractMunicipalElement.getContentFullInfo
+        throw new UnsupportedOperationException();
     }
 }

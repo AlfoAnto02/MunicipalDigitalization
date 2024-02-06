@@ -73,18 +73,18 @@ public interface IMunicipalElement {
     List<IContent> listOfContents();
 
     /**
-     * This method is used to set the status of the Element, Pending or Published.
-     *
-     * @param status status of the Element
-     */
-    void setElementStatus(ElementStatus status);
-
-    /**
      * This method is used to get the status of the Element
      *
      * @return the status of the Element
      */
     ElementStatus getElementStatus();
+
+    /**
+     * This method is used to set the status of the Element, Pending or Published.
+     *
+     * @param status status of the Element
+     */
+    void setElementStatus(ElementStatus status);
 
     /**
      * This method is used to upload an authorized content.
