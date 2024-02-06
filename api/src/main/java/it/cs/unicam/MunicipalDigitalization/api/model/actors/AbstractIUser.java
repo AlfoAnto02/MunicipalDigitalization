@@ -3,6 +3,7 @@ package it.cs.unicam.MunicipalDigitalization.api.model.actors;
 import it.cs.unicam.MunicipalDigitalization.api.io.TouristView;
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
 import it.cs.unicam.MunicipalDigitalization.api.util.ID;
+import lombok.Getter;
 
 import java.util.Objects;
 
@@ -17,7 +18,10 @@ public abstract class AbstractIUser implements IUser {
 
     /**
      * The municipality of the user.
+     * -- GETTER --
+     *  Getter for the municipality of the user.
      */
+    @Getter
     protected Municipality municipality;
 
     /**
@@ -44,15 +48,6 @@ public abstract class AbstractIUser implements IUser {
     @Override
     public ID getId() {
         return this.id;
-    }
-
-    /**
-     * Getter for the municipality of the user.
-     *
-     * @return The municipality of the user.
-     */
-    public Municipality getMunicipality() {
-        return this.municipality;
     }
 
     @Override

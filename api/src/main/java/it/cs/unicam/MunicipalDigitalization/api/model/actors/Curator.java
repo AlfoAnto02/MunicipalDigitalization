@@ -3,6 +3,7 @@ package it.cs.unicam.MunicipalDigitalization.api.model.actors;
 import it.cs.unicam.MunicipalDigitalization.api.io.CuratorView;
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
 import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;
+import lombok.Getter;
 
 /**
  * This class represents a curator, which is a type of authorized contributor.
@@ -18,7 +19,9 @@ public class Curator extends AuthorizedContributor {
 
     /**
      * Role of the Actor -> Curator
+     * -- GETTER --
      */
+    @Getter
     private final UserRole role = UserRole.CURATOR;
 
     /**
@@ -53,11 +56,4 @@ public class Curator extends AuthorizedContributor {
         view.startValidateContent();
     }
 
-    /**
-     *
-     * @return role of the user
-     */
-    public UserRole getRole() {
-        return role;
-    }
 }

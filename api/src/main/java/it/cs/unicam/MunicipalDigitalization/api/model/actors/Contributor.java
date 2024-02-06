@@ -3,6 +3,7 @@ package it.cs.unicam.MunicipalDigitalization.api.model.actors;
 import it.cs.unicam.MunicipalDigitalization.api.io.ContributorView;
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
 import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;
+import lombok.Getter;
 
 /**
  * This class represents a contributor, which is a type of user.
@@ -18,7 +19,9 @@ public class Contributor extends AbstractAuthenticatedUser {
 
     /**
      * Role of the user -> Contributor
+     * -- GETTER --
      */
+    @Getter
     private final UserRole userRole = UserRole.CONTRIBUTOR;
 
     /**
@@ -57,11 +60,4 @@ public class Contributor extends AbstractAuthenticatedUser {
         view.createContent();
     }
 
-    /**
-     *
-     * @return the role of the Actor
-     */
-    public UserRole getUserRole() {
-        return userRole;
-    }
 }

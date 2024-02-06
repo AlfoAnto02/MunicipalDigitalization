@@ -5,6 +5,7 @@ import it.cs.unicam.MunicipalDigitalization.api.model.elements.*;
 import it.cs.unicam.MunicipalDigitalization.api.util.Coordinate;
 import it.cs.unicam.MunicipalDigitalization.api.util.ID;
 import it.cs.unicam.MunicipalDigitalization.api.util.PendingManager;
+import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +44,10 @@ public class Municipality {
 
     /**
      * The manager for pending POIs and itineraries.
+     * -- GETTER --
+     *  Getter fot the PendingManager of the Municipality
      */
+    @Getter
     private final PendingManager pendingManager;
 
     /**
@@ -218,15 +222,6 @@ public class Municipality {
             element.append("Name: ").append(i.getName()).append("\nID: ").append(i.getId()).append("\n\n");
         }
         return element.toString();
-    }
-
-    /**
-     * Getter fot the PendingManager of the Municipality
-     *
-     * @return the PendingManager of the Municipality
-     */
-    public PendingManager getPendingManager() {
-        return pendingManager;
     }
 
     @Override

@@ -5,6 +5,7 @@ import it.cs.unicam.MunicipalDigitalization.api.model.actors.IAuthenticatedUser;
 import it.cs.unicam.MunicipalDigitalization.api.util.Coordinate;
 import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 import it.cs.unicam.MunicipalDigitalization.api.util.ID;
+import lombok.Getter;
 
 import java.time.Instant;
 import java.util.Date;
@@ -12,13 +13,15 @@ import java.util.List;
 
 /**
  * This class represents a Municipal Element. A municipal Element is composed
- * by an ID, an AutneticatedUser that create the Element, a creation Date of the Element
+ * by an ID, an AutheticatedUser that create the Element, a creation Date of the Element
  * the coordinate of the Element and the name of the Element.
  */
 public abstract class AbstractMunicipalElement implements IMunicipalElement {
     /**
      * The unique identifier of the MunicipalElement.
+     * -- GETTER --
      */
+    @Getter
     private final ID id;
     /**
      * Municipality of the Element
@@ -27,7 +30,10 @@ public abstract class AbstractMunicipalElement implements IMunicipalElement {
 
     /**
      * The status of the Element, if it is Pending or Published.
+     * -- GETTER --
+     *  return the Status of the Element.
      */
+    @Getter
     private ElementStatus elementStatus;
 
     /**
@@ -37,7 +43,10 @@ public abstract class AbstractMunicipalElement implements IMunicipalElement {
 
     /**
      * The date when the point MunicipalElement was created
+     * -- GETTER --
+     *  Getter for the creation date of the MunicipalElement
      */
+    @Getter
     private final Date creationDate;
 
     /**
@@ -47,7 +56,10 @@ public abstract class AbstractMunicipalElement implements IMunicipalElement {
 
     /**
      * The name of the MunicipalElement
+     * -- GETTER --
+     *  This method is used to get the name of the MunicipalElement
      */
+    @Getter
     private String name;
 
     /**
@@ -91,15 +103,6 @@ public abstract class AbstractMunicipalElement implements IMunicipalElement {
     }
 
     /**
-     * return the Status of the Element.
-     *
-     * @return status of the Element
-     */
-    public ElementStatus getElementStatus() {
-        return elementStatus;
-    }
-
-    /**
      * set the status of the Element
      *
      * @param elementStatus status to set
@@ -107,24 +110,6 @@ public abstract class AbstractMunicipalElement implements IMunicipalElement {
     public void setElementStatus(ElementStatus elementStatus) {
         if(elementStatus ==null) throw new IllegalArgumentException("Element status invalid");
         this.elementStatus = elementStatus;
-    }
-
-    /**
-     * This method is used to get the id of the MunicipalElement
-     *
-     * @return The id of the MunicipalElement
-     */
-    public ID getId() {
-        return this.id;
-    }
-
-    /**
-     * This method is used to get the name of the MunicipalElement
-     *
-     * @return The name of the MunicipalElement
-     */
-    public String getName() {
-        return this.name;
     }
 
     /**
@@ -146,15 +131,6 @@ public abstract class AbstractMunicipalElement implements IMunicipalElement {
      */
     public IAuthenticatedUser getUser() {
         return this.author;
-    }
-
-    /**
-     * Getter for the creation date of the MunicipalElement
-     *
-     * @return The creation date of the MunicipalElement
-     */
-    public Date getCreationDate() {
-        return this.creationDate;
     }
 
     /**

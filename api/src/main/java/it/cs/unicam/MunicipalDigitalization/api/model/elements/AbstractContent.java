@@ -4,6 +4,7 @@ import it.cs.unicam.MunicipalDigitalization.api.model.actors.IAuthenticatedUser;
 import it.cs.unicam.MunicipalDigitalization.api.util.ContentType;
 import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 import it.cs.unicam.MunicipalDigitalization.api.util.ID;
+import lombok.Getter;
 
 /**
  * This abstract class represents a general content.
@@ -19,7 +20,9 @@ public abstract class AbstractContent implements IContent {
 
     /**
      * The status of the Element, if it is Pending or Published.
+     * -- GETTER --
      */
+    @Getter
     private ElementStatus elementStatus;
 
     /**
@@ -119,15 +122,6 @@ public abstract class AbstractContent implements IContent {
     @Override
     public void setPhoto(String photo) {
         this.photo = photo;
-    }
-
-    /**
-     * return the Status of the Element.
-     *
-     * @return status of the Element
-     */
-    public ElementStatus getElementStatus() {
-        return elementStatus;
     }
 
     /**
