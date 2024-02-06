@@ -1,5 +1,6 @@
 package it.cs.unicam.MunicipalDigitalization.api.model.elements;
 
+import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 import it.cs.unicam.MunicipalDigitalization.api.util.POIType;
 
 /**

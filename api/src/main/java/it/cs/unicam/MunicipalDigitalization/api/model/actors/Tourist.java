@@ -1,6 +1,7 @@
 package it.cs.unicam.MunicipalDigitalization.api.model.actors;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
+import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;
 
 /**
  * This class represents a general IUser of the Platform.
@@ -11,11 +12,25 @@ import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
 public class Tourist extends AbstractIUser {
 
     /**
+     * Role of the actor -> Tourist
+     */
+    private final UserRole role = UserRole.TOURIST;
+
+
+    /**
      * Constructor for the AbstractIUser class.
      *
      * @param municipality The municipality of the user.
      */
     public Tourist(Municipality municipality) {
         super(municipality);
+    }
+
+    /**
+     *
+     * @return the role of the Actor.
+     */
+    public UserRole getRole() {
+        return role;
     }
 }

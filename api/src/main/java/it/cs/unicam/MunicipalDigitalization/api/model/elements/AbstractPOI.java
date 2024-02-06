@@ -43,7 +43,7 @@ public abstract class AbstractPOI extends AbstractMunicipalElement implements IP
      */
     public void setType(POIType POIType) {
         if (POIType == null) {
-            throw new NullPointerException("POIType cannot be null");
+             throw new NullPointerException("POIType cannot be null");
         }
         this.POIType = POIType;
     }

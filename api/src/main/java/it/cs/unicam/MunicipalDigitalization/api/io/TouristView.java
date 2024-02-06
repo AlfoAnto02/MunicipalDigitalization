@@ -1,7 +1,9 @@
 package it.cs.unicam.MunicipalDigitalization.api.io;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
+import it.cs.unicam.MunicipalDigitalization.api.model.OSMSystem;
 import it.cs.unicam.MunicipalDigitalization.api.model.actors.IUser;
+import it.cs.unicam.MunicipalDigitalization.api.util.MunicipalRepository;
 import it.cs.unicam.MunicipalDigitalization.api.util.controllers.MapController;
 import it.cs.unicam.MunicipalDigitalization.api.util.controllers.ViewController;
 
@@ -46,7 +48,7 @@ public class TouristView {
         this.tourist = tourist;
         this.viewController = new ViewController(this, this.municipality);
         this.inputScanner = new Scanner(System.in);
-        this.mapController = new MapController(this, this.municipality);
+        this.mapController = new MapController(this, new OSMSystem(new MunicipalRepository()));
     }
 
     /**

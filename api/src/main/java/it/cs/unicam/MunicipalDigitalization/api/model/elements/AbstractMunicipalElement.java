@@ -3,6 +3,7 @@ package it.cs.unicam.MunicipalDigitalization.api.model.elements;
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
 import it.cs.unicam.MunicipalDigitalization.api.model.actors.IAuthenticatedUser;
 import it.cs.unicam.MunicipalDigitalization.api.util.Coordinate;
+import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 import it.cs.unicam.MunicipalDigitalization.api.util.ID;
 
 import java.time.Instant;
@@ -23,6 +24,11 @@ public abstract class AbstractMunicipalElement implements IMunicipalElement {
      * Municipality of the Element
      */
     private final Municipality municipality;
+
+    /**
+     * The status of the Element, if it is Pending or Published.
+     */
+    private ElementStatus elementStatus;
 
     /**
      * The author of the point of the MunicipalElement
@@ -82,6 +88,25 @@ public abstract class AbstractMunicipalElement implements IMunicipalElement {
         }
         this.coordinate.setX(coordinate.getX());
         this.coordinate.setY(coordinate.getY());
+    }
+
+    /**
+     * return the Status of the Element.
+     *
+     * @return status of the Element
+     */
+    public ElementStatus getElementStatus() {
+        return elementStatus;
+    }
+
+    /**
+     * set the status of the Element
+     *
+     * @param elementStatus status to set
+     */
+    public void setElementStatus(ElementStatus elementStatus) {
+        if(elementStatus ==null) throw new IllegalArgumentException("Element status invalid");
+        this.elementStatus = elementStatus;
     }
 
     /**
@@ -156,7 +181,6 @@ public abstract class AbstractMunicipalElement implements IMunicipalElement {
         return this.listOfContents.stream().filter(content -> content.getID().equals(id)).findFirst().get().getContent();
     }
 
-    public String getContentFullInfo(String id) {
-        return "ciao";
+    public void getContentFullInfo(String id) {
     }
 }

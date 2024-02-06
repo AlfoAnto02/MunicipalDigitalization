@@ -2,6 +2,7 @@ package it.cs.unicam.MunicipalDigitalization.api.model.elements;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.actors.IAuthenticatedUser;
 import it.cs.unicam.MunicipalDigitalization.api.util.Coordinate;
+import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 import it.cs.unicam.MunicipalDigitalization.api.util.ID;
 
 import java.util.Date;
@@ -72,13 +73,38 @@ public interface IMunicipalElement {
     List<IContent> listOfContents();
 
     /**
+     * This method is used to set the status of the Element, Pending or Published.
+     *
+     * @param status status of the Element
+     */
+    void setElementStatus(ElementStatus status);
+
+    /**
+     * This method is used to get the status of the Element
+     *
+     * @return the status of the Element
+     */
+    ElementStatus getElementStatus();
+
+    /**
      * This method is used to upload an authorized content.
      *
      * @param content The content to upload.
      */
     void uploadContent(IContent content);
 
+    /**
+     * get the content of the Municipal element using its id.
+     *
+     * @param id of the content
+     * @return the content with this id
+     */
     String getContent(String id);
 
-    String getContentFullInfo(String id);
+    /**
+     * Get the content full info of the municipal element using its id.
+     *
+     * @param id of the content
+     */
+    void getContentFullInfo(String id);
 }

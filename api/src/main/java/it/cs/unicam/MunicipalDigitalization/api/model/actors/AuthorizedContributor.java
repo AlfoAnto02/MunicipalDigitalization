@@ -2,6 +2,7 @@ package it.cs.unicam.MunicipalDigitalization.api.model.actors;
 
 import it.cs.unicam.MunicipalDigitalization.api.io.AuthorizedContributorView;
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
+import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;
 
 /**
  * This class represents an authorized contributor, which is a type of user.
@@ -15,6 +16,11 @@ public class AuthorizedContributor extends AbstractAuthenticatedUser {
      * This is an instance of AuthorizedContributorView interface which provides the methods for creating POIs and itineraries.
      */
     private AuthorizedContributorView view;
+
+    /**
+     * Role of the actor -> Authorized_Contributor
+     */
+    private final UserRole userRole = UserRole.AUTHORIZED_CONTRIBUTOR;
 
     /**
      * Constructor for the AuthorizedContributor class.
@@ -49,5 +55,13 @@ public class AuthorizedContributor extends AbstractAuthenticatedUser {
      */
     private void createContent() {
         view.createContent();
+    }
+
+    /**
+     *
+     * @return role of the actor
+     */
+    public UserRole getUserRole() {
+        return userRole;
     }
 }

@@ -24,10 +24,10 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-web")
     compileOnly("org.projectlombok:lombok")
-    runtimeOnly("com.mysql:mysql-connector-j")
     annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    implementation("org.xerial:sqlite-jdbc:3.41.2.2")
+    implementation("org.xerial:sqlite-jdbc:3.25.2")
+    implementation("org.hibernate.orm:hibernate-community-dialects:6.3.2.Final")
 }
 
 java {

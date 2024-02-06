@@ -1,6 +1,7 @@
 package it.cs.unicam.MunicipalDigitalization.api.model.elements;
 
 import it.cs.unicam.MunicipalDigitalization.api.util.ContentType;
+import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 
 /**
  * This abstract class represents a general content.
@@ -57,6 +58,20 @@ public interface IContent {
      * @return The Referred Municipal Element of the content.
      */
     IMunicipalElement getReferredMunicipalElement();
+
+    /**
+     * This method is used to set the status of the Element, Pending or Published.
+     *
+     * @param status status of the Element
+     */
+    void setElementStatus(ElementStatus status);
+
+    /**
+     * This method is used to get the status of the Element
+     *
+     * @return the status of the Element
+     */
+    ElementStatus getElementStatus();
 
     String getContent();
 }

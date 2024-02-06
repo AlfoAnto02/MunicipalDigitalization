@@ -2,6 +2,7 @@ package it.cs.unicam.MunicipalDigitalization.api.model.elements;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.actors.IAuthenticatedUser;
 import it.cs.unicam.MunicipalDigitalization.api.util.ContentType;
+import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 import it.cs.unicam.MunicipalDigitalization.api.util.ID;
 
 /**
@@ -15,6 +16,11 @@ public abstract class AbstractContent implements IContent {
      * The id of the content.
      */
     private final ID id;
+
+    /**
+     * The status of the Element, if it is Pending or Published.
+     */
+    private ElementStatus elementStatus;
 
     /**
      * The municipal element referred by the content.
@@ -113,6 +119,25 @@ public abstract class AbstractContent implements IContent {
     @Override
     public void setPhoto(String photo) {
         this.photo = photo;
+    }
+
+    /**
+     * return the Status of the Element.
+     *
+     * @return status of the Element
+     */
+    public ElementStatus getElementStatus() {
+        return elementStatus;
+    }
+
+    /**
+     * set the status of the Element
+     *
+     * @param elementStatus status to set
+     */
+    public void setElementStatus(ElementStatus elementStatus) {
+        if(elementStatus ==null) throw new IllegalArgumentException("Element status invalid");
+        this.elementStatus = elementStatus;
     }
 
     public String getContent() {
