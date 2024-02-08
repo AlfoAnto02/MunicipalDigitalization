@@ -42,6 +42,11 @@ public abstract class AbstractContent implements IContent {
     @OneToOne
     private AbstractPOI referredPOI;
 
+    /**
+     * The name of the content.
+     */
+    @Column(name = "Name", nullable = false)
+    private String name;
 
     /**
      * The municipal element referred by the content.
