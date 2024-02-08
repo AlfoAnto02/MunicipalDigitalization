@@ -2,6 +2,7 @@ package it.cs.unicam.MunicipalDigitalization.api.model.elements;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
 import it.cs.unicam.MunicipalDigitalization.api.model.actors.Contributor;
+import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 
 /**
  * This class represents a pending itinerary.
@@ -18,10 +19,9 @@ public class PendingItinerary extends AbstractItinerary {
      * It initializes the PendingItinerary with the provided user and the Municipality
      * where the Itinerary should be located
      *
-     * @param user         that creates the itinerary
-     * @param municipality where is located
      */
-    public PendingItinerary(Contributor user, Municipality municipality) {
-        super(user, municipality);
+    public PendingItinerary() {
+        super();
+        this.setElementStatus(ElementStatus.PENDING);
     }
 }

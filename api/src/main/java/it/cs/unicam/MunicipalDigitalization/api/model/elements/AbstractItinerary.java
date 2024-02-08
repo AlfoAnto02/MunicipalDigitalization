@@ -1,8 +1,13 @@
 package it.cs.unicam.MunicipalDigitalization.api.model.elements;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
+import it.cs.unicam.MunicipalDigitalization.api.model.actors.AbstractAuthenticatedUser;
+import it.cs.unicam.MunicipalDigitalization.api.model.actors.AbstractIUser;
 import it.cs.unicam.MunicipalDigitalization.api.model.actors.IAuthenticatedUser;
 import it.cs.unicam.MunicipalDigitalization.api.util.Coordinate;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,49 +19,65 @@ import java.util.Objects;
  * An itinerary has an id, name, description, author, creation date, the types of the points of interest
  * the  list of points of interest (POIs) and a list of Contents.
  */
+@Entity
+@Getter
+@Setter
+@Table(
+        name = "Itineraries",
+        uniqueConstraints = {
+                @UniqueConstraint(
+                        name = "Identification",
+                        columnNames = "id"
+                )
+        }
+)
 public abstract class AbstractItinerary extends AbstractMunicipalElement implements IItinerary {
 
     /**
      * List of POIs that composed the Itinerary
      */
-    private final List<IPOI> pois;
+    @OneToMany(mappedBy = "id")
+    private final List<AbstractPOI> pois;
 
     /**
      * The types of the Itinerary. The types depend on the Types of the POIs
      * that composed the Itinerary
+     * -- GETTER --
+     *  Getter for the types of the itinerary.
+     *
+
      */
+    @Getter
+    @Column(name = "Type",nullable = false)
     private String types;
 
     /**
      * A general Description of the Itinerary
      */
+    @Column(name = "Description",nullable = false)
     private String description;
 
     /**
      * The coordinate where the Itinerary is situated.
      */
 
+    @Transient
     private Coordinate coordinate;
+
+    /**
+     * The author of the point of the MunicipalElement
+     */
+    @ManyToOne
+    @JoinColumn(name = "Author",nullable = false)
+    private AbstractAuthenticatedUser author;
 
     /**
      * The constructor of the class
      *
-     * @param author of the Itinerary
      */
-
-    public AbstractItinerary(IAuthenticatedUser author, Municipality municipality) {
-        super(author, municipality);
+    public AbstractItinerary() {
+        super();
         this.pois = new ArrayList<>();
-    }
-
-    /**
-     * Getter for the types of the itinerary.
-     *
-     * @return The types of the itinerary.
-     */
-
-    public String getTypes() {
-        return this.types;
     }
 
     /**
@@ -98,13 +119,22 @@ public abstract class AbstractItinerary extends AbstractMunicipalElement impleme
     }
 
     /**
+     * Getter for the author of the Itinerary.
+     *
+     * @return The author of the Itinerary
+     */
+    public AbstractAuthenticatedUser getUser() {
+        return this.author;
+    }
+
+    /**
      * get the List of the POIs that composes the itinerary
      *
      * @return a list of POIs
      */
 
     @Override
-    public List<IPOI> getPOIs() {
+    public List<AbstractPOI> getPOIs() {
         return this.pois;
     }
 
@@ -125,7 +155,7 @@ public abstract class AbstractItinerary extends AbstractMunicipalElement impleme
      * @param poi The POI to add.
      */
 
-    public void addPOI(IPOI poi) {
+    public void addPOI(AbstractPOI poi) {
         this.pois.add(poi);
     }
 

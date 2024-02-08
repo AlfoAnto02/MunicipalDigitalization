@@ -17,12 +17,6 @@ public class Curator extends AuthorizedContributor {
      */
     private CuratorView view;
 
-    /**
-     * Role of the Actor -> Curator
-     * -- GETTER --
-     */
-    @Getter
-    private final UserRole role = UserRole.CURATOR;
 
     /**
      * Constructor for the Curator class.

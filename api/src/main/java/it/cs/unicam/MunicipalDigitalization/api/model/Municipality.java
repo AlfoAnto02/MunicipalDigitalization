@@ -1,10 +1,10 @@
 package it.cs.unicam.MunicipalDigitalization.api.model;
 
-import it.cs.unicam.MunicipalDigitalization.api.model.actors.IUser;
+import it.cs.unicam.MunicipalDigitalization.api.model.actors.AbstractAuthenticatedUser;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.*;
 import it.cs.unicam.MunicipalDigitalization.api.util.Coordinate;
-import it.cs.unicam.MunicipalDigitalization.api.util.ID;
 import it.cs.unicam.MunicipalDigitalization.api.util.PendingManager;
+import jakarta.persistence.*;
 import lombok.Getter;
 
 import java.util.ArrayList;
@@ -15,43 +15,62 @@ import java.util.List;
  * It contains information about the municipality and methods to manage its points of interest,
  * itineraries, and contents.
  */
+@Entity
+@Table(
+        name = "municipality",
+        uniqueConstraints = {
+                @UniqueConstraint(
+                        name = "Idintification",
+                        columnNames = "id"
+                )
+        }
+)
 public class Municipality {
 
     /**
      * The unique ID of the municipality.
      */
-    private final ID id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false)
+    private Long id;
 
     /**
      * The geographical coordinates of the municipality.
      */
-    private final Coordinate territory;
+    @Transient
+    private Coordinate territory;
 
     /**
      * The list of points of interest in the municipality.
      */
-    private final List<IPOI> listOfPOIs;
+    @OneToMany(mappedBy = "municipality", cascade = CascadeType.ALL)
+    private final List<AbstractPOI> listOfPOIs;
 
     /**
      * The list of itineraries in the municipality.
      */
-    private final List<IItinerary> listOfItineraries;
+    @OneToMany(mappedBy = "municipality", cascade = CascadeType.ALL)
+    private final List<AbstractItinerary> listOfItineraries;
 
     /**
      * The name of the municipality.
      */
-    private final String name;
+    @Column(nullable = false)
+    private String name;
 
     /**
      * The manager for pending operations in the municipality.
      */
     @Getter
+    @Transient
     private final PendingManager pendingManager;
 
     /**
      * The list of users in the municipality.
      */
-    private List<IUser> listOfIUsers;
+    @OneToMany(mappedBy = "municipality", cascade = CascadeType.ALL)
+    private List<AbstractAuthenticatedUser> listOfIUsers;
 
     /**
      * Constructor for the Municipality class.
@@ -64,7 +83,12 @@ public class Municipality {
         this.listOfPOIs = new ArrayList<>();
         this.listOfItineraries = new ArrayList<>();
         this.territory = territory;
-        this.id = new ID();
+        this.pendingManager = new PendingManager(this);
+    }
+
+    public Municipality() {
+        this.listOfPOIs = new ArrayList<>();
+        this.listOfItineraries = new ArrayList<>();
         this.pendingManager = new PendingManager(this);
     }
 
@@ -104,7 +128,7 @@ public class Municipality {
      *
      * @param poi The point of interest to upload.
      */
-    public void uploadPOI(IPOI poi) {
+    public void uploadPOI(AbstractPOI poi) {
         if (!this.listOfPOIs.contains(poi)) this.listOfPOIs.add(poi);
     }
 
@@ -122,7 +146,7 @@ public class Municipality {
      *
      * @param itinerary The itinerary to upload.
      */
-    public void uploadItinerary(IItinerary itinerary) {
+    public void uploadItinerary(AbstractItinerary itinerary) {
         if (!listOfItineraries.contains(itinerary)) listOfItineraries.add(itinerary);
     }
 
@@ -140,9 +164,11 @@ public class Municipality {
      *
      * @param content The content to upload.
      */
-    public void uploadContent(IContent content) {
-        if (!content.getReferredMunicipalElement().listOfContents().contains(content)) {
-            content.getReferredMunicipalElement().listOfContents().add(content);
+    public void uploadContent(AbstractContent content) {
+        if(content.getReferredPOI()!=null && !content.getReferredPOI().getListOfContents().contains(content)){
+            content.getReferredPOI().getListOfContents().add(content);
+        } else if(content.getReferredItinerary()!=null && !content.getReferredItinerary().getListOfContents().contains(content)){
+            content.getReferredItinerary().getListOfContents().add(content);
         }
     }
 
@@ -151,7 +177,7 @@ public class Municipality {
      *
      * @return The list of points of interest in the municipality.
      */
-    public List<IPOI> getPOIList() {
+    public List<AbstractPOI> getPOIList() {
         return this.listOfPOIs;
     }
 
@@ -160,7 +186,7 @@ public class Municipality {
      *
      * @return The list of itineraries in the municipality.
      */
-    public List<IItinerary> getItineraryList() {
+    public List<AbstractItinerary> getItineraryList() {
         return this.listOfItineraries;
     }
 

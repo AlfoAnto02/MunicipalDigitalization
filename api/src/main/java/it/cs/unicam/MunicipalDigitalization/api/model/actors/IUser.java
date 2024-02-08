@@ -16,7 +16,7 @@ public interface IUser {
      *
      * @return The id of the user.
      */
-    ID getId();
+    Long getId();
 
     /**
      * This method is used to get the municipality associated with the user.
@@ -43,5 +43,6 @@ public interface IUser {
     /**
      * This method is used to get the map of the Municipality.
      */
-    void getMap(String id);
+   // void getMap(String id);
+
 }

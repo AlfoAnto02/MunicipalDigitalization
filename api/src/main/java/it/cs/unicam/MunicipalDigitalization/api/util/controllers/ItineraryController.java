@@ -2,9 +2,7 @@ package it.cs.unicam.MunicipalDigitalization.api.util.controllers;
 
 import it.cs.unicam.MunicipalDigitalization.api.io.IContributorView;
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
-import it.cs.unicam.MunicipalDigitalization.api.model.elements.IItinerary;
-import it.cs.unicam.MunicipalDigitalization.api.model.elements.IPOI;
-import it.cs.unicam.MunicipalDigitalization.api.model.elements.PendingItinerary;
+import it.cs.unicam.MunicipalDigitalization.api.model.elements.*;
 
 import java.util.List;
 
@@ -52,7 +50,7 @@ public class ItineraryController {
      * @param itinerary The itinerary to be uploaded.
      */
     public void upload(IItinerary itinerary) {
-        this.municipality.getItineraryList().add(itinerary);
+        this.municipality.getItineraryList().add((AbstractItinerary) itinerary);
     }
 
     /**
@@ -79,7 +77,7 @@ public class ItineraryController {
      *
      * @return A list of POIs.
      */
-    public List<IPOI> getPOIList() {
+    public List<AbstractPOI> getPOIList() {
         return this.municipality.getPOIList();
     }
 
@@ -91,7 +89,7 @@ public class ItineraryController {
      * @param poi       The POI to be added.
      */
     public void selectPOIToAdd(IItinerary itinerary, IPOI poi) {
-        if (itinerary.contains(poi)) itinerary.addPOI(poi);
+        if (itinerary.contains(poi)) itinerary.addPOI((AbstractPOI) poi);
         else throw new IllegalArgumentException("You already added this POI to your Itinerary !!!");
     }
 

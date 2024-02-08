@@ -2,9 +2,15 @@ package it.cs.unicam.MunicipalDigitalization.api.model.actors;
 
 import it.cs.unicam.MunicipalDigitalization.api.io.TouristView;
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
-import it.cs.unicam.MunicipalDigitalization.api.util.ID;
+import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractItinerary;
+import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractMunicipalElement;
+import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractPOI;
+import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;
+import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -14,25 +20,40 @@ import java.util.Objects;
  * It also provides the ViewPOI and viewItinerary method used to
  * see the specific details of a POI or Itinerary.
  */
+@MappedSuperclass
+@Getter
+@Setter
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class AbstractIUser implements IUser {
+
+    /**
+     * The unique identifier of the user.
+     */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     /**
      * The municipality of the user.
      * -- GETTER --
      *  Getter for the municipality of the user.
      */
-    @Getter
+    @ManyToOne
+    @JoinColumn(name = "municipality")
     protected Municipality municipality;
-
-    /**
-     * The unique identifier of the user.
-     */
-    private final ID id;
 
     /**
      * The view of every IUser of the Platform
      */
+    @Transient
     private final TouristView generalView;
+
+    /**
+     * Role of the Actor
+     * -- GETTER --
+     */
+    @Column(name = "Role")
+    private UserRole role;
 
     /**
      * Constructor for the AbstractIUser class.
@@ -41,12 +62,15 @@ public abstract class AbstractIUser implements IUser {
      */
     public AbstractIUser(Municipality municipality) {
         this.municipality = municipality;
-        this.id = new ID();
+        this.generalView = new TouristView(this.municipality, this);
+    }
+
+    public AbstractIUser() {
         this.generalView = new TouristView(this.municipality, this);
     }
 
     @Override
-    public ID getId() {
+    public Long getId() {
         return this.id;
     }
 
@@ -89,5 +113,6 @@ public abstract class AbstractIUser implements IUser {
      * This method allows the IUser to view the map of the Municipality.
      * It uses the TouristView General View.
      */
-    public void getMap(String id) { this.generalView.viewMap(id); }
+    //public void getMap(String id) { this.generalView.viewMap(id); }
+
 }

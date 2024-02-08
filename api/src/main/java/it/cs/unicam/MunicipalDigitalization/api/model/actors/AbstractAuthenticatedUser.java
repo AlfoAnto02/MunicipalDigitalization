@@ -2,27 +2,55 @@ package it.cs.unicam.MunicipalDigitalization.api.model.actors;
 
 
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
+import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractItinerary;
+import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractPOI;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.List;
 
 /**
  * This class Represent an Authenticated IUser.
  * Differently from a IUser, the Authenticated IUser has a name and a Password.
  */
+@Entity
+@Getter
+@Setter
+@Table(
+        name = "User",
+        uniqueConstraints = {
+                @UniqueConstraint(
+                        name = "Identification",
+                        columnNames = "id"
+                )
+        }
+)
 public abstract class AbstractAuthenticatedUser extends AbstractIUser implements IAuthenticatedUser {
 
     /**
      * Name of the IUser
      */
+    @Column(name = "Name")
     private String name;
 
     /**
      * Password of the IUser
      */
+    @Column(name = "Password", length = 16)
     private String password;
 
     /**
-     * Municipality of the IUser where he will operate
+     * This is the list of Abstract POIs that the author created
      */
-    private Municipality municipality;
+    @OneToMany(mappedBy = "author")
+    private List<AbstractPOI> authoredPOIs;
+
+    /**
+     * This is the List of Abstract Itineraries that the author created
+     */
+    @OneToMany(mappedBy = "author")
+    private List<AbstractItinerary> authoredItineraries;
 
     /**
      * The Constructor for a general Authenticated IUser.
@@ -35,6 +63,10 @@ public abstract class AbstractAuthenticatedUser extends AbstractIUser implements
         super(municipality);
         this.name = name;
         this.password = password;
+    }
+
+    public AbstractAuthenticatedUser() {
+
     }
 
     @Override

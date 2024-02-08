@@ -1,8 +1,12 @@
 package it.cs.unicam.MunicipalDigitalization.api.model.elements;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
+import it.cs.unicam.MunicipalDigitalization.api.model.actors.AbstractAuthenticatedUser;
 import it.cs.unicam.MunicipalDigitalization.api.model.actors.IAuthenticatedUser;
 import it.cs.unicam.MunicipalDigitalization.api.util.POIType;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Objects;
 
@@ -11,20 +15,39 @@ import java.util.Objects;
  * It implements the IPOI interface.
  * A POI has an id, name, POIType, author, creation date, coordinates and a list of contents.
  */
+@Entity
+@Getter
+@Setter
+@Table(
+        name = "Pois",
+        uniqueConstraints = {
+                @UniqueConstraint(
+                        name = "Identification",
+                        columnNames = "id"
+                )
+        }
+)
 public abstract class AbstractPOI extends AbstractMunicipalElement implements IPOI {
 
     /**
      * The POIType of the point of interest (POI).
      */
+    @Column(name = "Type")
     private POIType POIType;
+
+    /**
+     * The author of the point of the MunicipalElement
+     */
+    @ManyToOne
+    @JoinColumn(name = "Author",nullable = false)
+    private AbstractAuthenticatedUser author;
 
     /**
      * The constructor of the Class
      *
-     * @param author the IAuthenticatedUser that create the POI
      */
-    public AbstractPOI(IAuthenticatedUser author, Municipality municipality) {
-        super(author, municipality);
+    public AbstractPOI() {
+        super();
     }
 
     /**
@@ -46,6 +69,15 @@ public abstract class AbstractPOI extends AbstractMunicipalElement implements IP
              throw new NullPointerException("POIType cannot be null");
         }
         this.POIType = POIType;
+    }
+
+    /**
+     * Getter for the author of the POI.
+     *
+     * @return The author of the POI
+     */
+    public AbstractAuthenticatedUser getUser() {
+        return this.author;
     }
 
     @Override

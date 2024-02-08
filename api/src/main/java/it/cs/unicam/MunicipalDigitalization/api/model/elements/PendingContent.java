@@ -1,6 +1,7 @@
 package it.cs.unicam.MunicipalDigitalization.api.model.elements;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.actors.Contributor;
+import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 
 /**
  * This class represents a pending content of a Municipal Element.
@@ -13,10 +14,9 @@ public class PendingContent extends AbstractContent {
     /**
      * Constructor for the PendingContent class.
      *
-     * @param author           The authorized contributor who creates the content.
-     * @param municipalElement The municipal element to which the content refers.
      */
-    public PendingContent(Contributor author, IMunicipalElement municipalElement) {
-        super(author, municipalElement);
+    public PendingContent() {
+        super();
+        this.setElementStatus(ElementStatus.PENDING);
     }
 }

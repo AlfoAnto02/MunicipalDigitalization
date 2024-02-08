@@ -63,7 +63,7 @@ public class ContributorView extends AbstractIContributorView {
      * It creates a POI, uploads it, and prints a message to the user.
      */
     public void createPOI() {
-        PendingPOI pendingPOI = new PendingPOI(this.contributor, this.municipality);
+        PendingPOI pendingPOI = new PendingPOI();
         super.createPOI(pendingPOI);
         this.poiController.append(pendingPOI);
         System.out.println("Your Poi has been created !!");
@@ -74,7 +74,7 @@ public class ContributorView extends AbstractIContributorView {
      * It creates an itinerary, uploads it, and prints a message to the user.
      */
     public void createItinerary() {
-        PendingItinerary itinerary = new PendingItinerary(this.contributor, this.municipality);
+        PendingItinerary itinerary = new PendingItinerary();
         super.createItinerary(itinerary);
         this.itineraryController.append(itinerary);
         System.out.println("Your Itinerary has been created !!");
@@ -86,7 +86,7 @@ public class ContributorView extends AbstractIContributorView {
      */
     public void createContent() {
         IMunicipalElement municipalElements = super.selectMunicipalElement();
-        PendingContent pendingContent = new PendingContent(this.contributor, municipalElements);
+        PendingContent pendingContent = new PendingContent();
         super.createContent(pendingContent);
         this.contentController.appendContent(pendingContent);
     }

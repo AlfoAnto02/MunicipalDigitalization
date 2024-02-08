@@ -1,42 +1,72 @@
 package it.cs.unicam.MunicipalDigitalization.api.model.elements;
 
+import it.cs.unicam.MunicipalDigitalization.api.model.actors.AbstractAuthenticatedUser;
+import it.cs.unicam.MunicipalDigitalization.api.model.actors.AbstractIUser;
 import it.cs.unicam.MunicipalDigitalization.api.model.actors.IAuthenticatedUser;
 import it.cs.unicam.MunicipalDigitalization.api.util.ContentType;
 import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 import it.cs.unicam.MunicipalDigitalization.api.util.ID;
+import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 
 /**
  * This abstract class represents a general content.
  * It implements the IContent interface.
  * A content has an id, type, author, and a municipal element referred by the content.
  */
+@Entity
+@Getter
+@Setter
+@Table(
+        name = "Contents",
+        uniqueConstraints = {
+                @UniqueConstraint(
+                        name = "Identification",
+                        columnNames = "id"
+                )
+        }
+)
 public abstract class AbstractContent implements IContent {
 
     /**
      * The id of the content.
      */
-    private final ID id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     
     /**
      * The municipal element referred by the content.
      */
-    private final IMunicipalElement referredMunicipalElement;
+    @OneToOne
+    private AbstractPOI referredPOI;
+
+
+    /**
+     * The municipal element referred by the content.
+     */
+    @OneToOne
+    private AbstractItinerary referredItinerary;
     
     /**
      * The author of the content.
      */
-    private final IAuthenticatedUser author;
+    @OneToOne
+    private AbstractAuthenticatedUser author;
     
     /**
      * The status of the Element, if it is Pending or Published.
      */
     @Getter
+    @Column(name = "Status",nullable = false)
     private ElementStatus elementStatus;
     
     /**
      * The type of the content.
      */
+    @Enumerated(EnumType.STRING)
+    @Column(name = "Content Type", nullable = false)
     private ContentType type;
 
     /**
@@ -54,17 +84,10 @@ public abstract class AbstractContent implements IContent {
      */
     private String photo;
 
-    /**
-     * Constructor for the AbstractContent class.
-     *
-     * @param author           The author of the content.
-     * @param municipalElement The municipal element referred by the content.
-     */
-    public AbstractContent(IAuthenticatedUser author, IMunicipalElement municipalElement) {
-        this.author = author;
-        this.referredMunicipalElement = municipalElement;
-        this.id = new ID();
+    public AbstractContent() {
+
     }
+
 
     @Override
     public String getID() {
@@ -80,11 +103,6 @@ public abstract class AbstractContent implements IContent {
     public void setType(ContentType type) {
         if (type == null) throw new IllegalArgumentException("Content type is null");
         this.type = type;
-    }
-
-    @Override
-    public IMunicipalElement getReferredMunicipalElement() {
-        return this.referredMunicipalElement;
     }
 
     @Override

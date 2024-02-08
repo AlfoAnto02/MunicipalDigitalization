@@ -1,13 +1,19 @@
 package it.cs.unicam.MunicipalDigitalization.api.model.elements;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
+import it.cs.unicam.MunicipalDigitalization.api.model.actors.AbstractAuthenticatedUser;
+import it.cs.unicam.MunicipalDigitalization.api.model.actors.AbstractIUser;
 import it.cs.unicam.MunicipalDigitalization.api.model.actors.IAuthenticatedUser;
 import it.cs.unicam.MunicipalDigitalization.api.util.Coordinate;
 import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 import it.cs.unicam.MunicipalDigitalization.api.util.ID;
+import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -16,58 +22,63 @@ import java.util.List;
  * by an ID, an AuthenticatedUser that create the Element, a creation Date of the Element
  * the coordinate of the Element and the name of the Element.
  */
+@MappedSuperclass
+@Getter
+@Setter
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class AbstractMunicipalElement implements IMunicipalElement {
     /**
      * The unique identifier of the MunicipalElement.
      */
     @Getter
-    private final ID id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     /**
      * Municipality of the Element
      */
-    private final Municipality municipality;
-    /**
-     * The author of the point of the MunicipalElement
-     */
-    private final IAuthenticatedUser author;
+    @ManyToOne
+    @JoinColumn(name = "municipality",nullable = false)
+    private Municipality municipality;
     /**
      * The date when the point MunicipalElement was created
      */
     @Getter
-    private final Date creationDate;
+    @Column(name = "Creation Date")
+    @CreatedDate
+    private LocalDateTime creationDate;
     /**
      * The status of the Element, if it is Pending or Published.
      */
     @Getter
+    @Column(name = "Status")
     private ElementStatus elementStatus;
     /**
      * The coordinate of the MunicipalElement
      */
+    @Transient
     private Coordinate coordinate;
 
     /**
      * The name of the MunicipalElement
      */
     @Getter
+    @Column(name = "Name", nullable = false)
     private String name;
 
     /**
      * The list of contents of the MunicipalElement
      */
-    private List<IContent> listOfContents;
+    @OneToMany
+    private List<AbstractContent> listOfContents;
 
     /**
      * Constructor for the AbstractMunicipalElement class.
      *
-     * @param user         the Authenticated IUser that create this Element
-     * @param municipality the Municipality where this Element is located
      */
-    public AbstractMunicipalElement(IAuthenticatedUser user, Municipality municipality) {
-        this.author = user;
-        this.municipality = municipality;
-        this.id = new ID();
-        this.creationDate = Date.from(Instant.now());
+    public AbstractMunicipalElement() {
+
     }
 
     /**
@@ -117,22 +128,13 @@ public abstract class AbstractMunicipalElement implements IMunicipalElement {
         this.name = name;
     }
 
-    /**
-     * Getter for the author of the MunicipalElement.
-     *
-     * @return The author of the MunicipalElement
-     */
-    public IAuthenticatedUser getUser() {
-        return this.author;
-    }
-
     @Override
-    public List<IContent> listOfContents() {
+    public List<AbstractContent> listOfContents() {
         return this.listOfContents;
     }
 
     @Override
-    public void uploadContent(IContent content) {
+    public void uploadContent(AbstractContent content) {
         this.listOfContents.add(content);
     }
 

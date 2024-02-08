@@ -65,7 +65,7 @@ public class AuthorizedContributorView extends AbstractIContributorView {
      * It creates a POI, uploads it, and prints a message to the user.
      */
     public void createPOI() {
-        AuthorizedPOI poi = new AuthorizedPOI(this.authorizedContributor, authorizedContributor.getMunicipality());
+        AuthorizedPOI poi = new AuthorizedPOI();
         super.createPOI(poi);
         this.poiController.upload(poi);
         System.out.println("Your Poi has been created !!");
@@ -76,7 +76,7 @@ public class AuthorizedContributorView extends AbstractIContributorView {
      * It creates an itinerary, uploads it, and prints a message to the user.
      */
     public void createItinerary() {
-        AuthorizedItinerary itinerary = new AuthorizedItinerary(this.authorizedContributor, authorizedContributor.getMunicipality());
+        AuthorizedItinerary itinerary = new AuthorizedItinerary();
         super.createItinerary(itinerary);
         this.itineraryController.upload(itinerary);
         System.out.println("Your Itinerary has been created !!");
@@ -88,7 +88,7 @@ public class AuthorizedContributorView extends AbstractIContributorView {
      */
     public void createContent() {
         IMunicipalElement municipalElement = super.selectMunicipalElement();
-        AuthorizedContent content = new AuthorizedContent(this.authorizedContributor, municipalElement);
+        AuthorizedContent content = new AuthorizedContent();
         super.createContent(content);
         this.contentController.uploadContent(content, municipalElement);
     }

@@ -2,6 +2,7 @@ package it.cs.unicam.MunicipalDigitalization.api.util.controllers;
 
 import it.cs.unicam.MunicipalDigitalization.api.io.IContributorView;
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
+import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractPOI;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.IPOI;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.PendingPOI;
 import it.cs.unicam.MunicipalDigitalization.api.util.Coordinate;
@@ -72,7 +73,7 @@ public class POIController {
      *
      * @param poi The POI to be uploaded.
      */
-    public void upload(IPOI poi) {
+    public void upload(AbstractPOI poi) {
         this.municipality.uploadPOI(poi);
     }
 

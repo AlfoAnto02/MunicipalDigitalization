@@ -3,6 +3,7 @@ package it.cs.unicam.MunicipalDigitalization.api.model.actors;
 import it.cs.unicam.MunicipalDigitalization.api.io.ContributorView;
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
 import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;
+import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
 
 /**
@@ -16,13 +17,6 @@ public class Contributor extends AbstractAuthenticatedUser {
      * The view of the contributor.
      */
     private final ContributorView view;
-
-    /**
-     * Role of the user -> Contributor
-     * -- GETTER --
-     */
-    @Getter
-    private final UserRole userRole = UserRole.CONTRIBUTOR;
 
     /**
      * Constructor for the Contributor class.

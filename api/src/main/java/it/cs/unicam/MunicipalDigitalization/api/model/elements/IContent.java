@@ -56,7 +56,14 @@ public interface IContent {
      *
      * @return The Referred Municipal Element of the content.
      */
-    IMunicipalElement getReferredMunicipalElement();
+    AbstractPOI getReferredPOI();
+
+    /**
+     * Getter for the Referred POI of the content.
+     *
+     * @return The Referred Itinerary of the content.
+     */
+    AbstractItinerary getReferredItinerary();
 
     /**
      * This method is used to get the status of the Element

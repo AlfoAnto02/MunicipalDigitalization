@@ -2,6 +2,7 @@ package it.cs.unicam.MunicipalDigitalization.api.model.elements;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
 import it.cs.unicam.MunicipalDigitalization.api.model.actors.AuthorizedContributor;
+import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 
 /**
  * This class represents an authorized itinerary, which is a type of itinerary.
@@ -16,10 +17,9 @@ public class AuthorizedItinerary extends AbstractItinerary {
      * It initializes the AuthorizedItinerary with the provided user and the Municipality
      * where the Itinerary should be located
      *
-     * @param user         that creates the itinerary
-     * @param municipality where is located
      */
-    public <T extends AuthorizedContributor> AuthorizedItinerary(T user, Municipality municipality) {
-        super(user, municipality);
+    public AuthorizedItinerary() {
+        super();
+        this.setElementStatus(ElementStatus.PUBLISHED);
     }
 }

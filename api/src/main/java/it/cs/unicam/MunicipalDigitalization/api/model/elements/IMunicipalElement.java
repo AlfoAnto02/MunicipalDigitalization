@@ -5,6 +5,7 @@ import it.cs.unicam.MunicipalDigitalization.api.util.Coordinate;
 import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 import it.cs.unicam.MunicipalDigitalization.api.util.ID;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -20,7 +21,7 @@ public interface IMunicipalElement {
      *
      * @return The creation date of the Municipal Element.
      */
-    Date getCreationDate();
+    LocalDateTime getCreationDate();
 
     /**
      * Getter for the author of the Municipal Element.
@@ -49,7 +50,7 @@ public interface IMunicipalElement {
      *
      * @return The id of the Municipal Element.
      */
-    ID getId();
+    Long getId();
 
     /**
      * This method is used to get the name of the Municipal Element.
@@ -70,7 +71,7 @@ public interface IMunicipalElement {
      *
      * @return The list of contents of the Municipal Element.
      */
-    List<IContent> listOfContents();
+    List<AbstractContent> listOfContents();
 
     /**
      * This method is used to get the status of the Element
@@ -91,7 +92,7 @@ public interface IMunicipalElement {
      *
      * @param content The content to upload.
      */
-    void uploadContent(IContent content);
+    void uploadContent(AbstractContent content);
 
     /**
      * get the content of the Municipal element using its id.

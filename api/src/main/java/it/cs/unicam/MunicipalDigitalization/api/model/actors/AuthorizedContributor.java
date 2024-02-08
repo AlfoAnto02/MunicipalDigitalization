@@ -19,13 +19,6 @@ public class AuthorizedContributor extends AbstractAuthenticatedUser {
     private AuthorizedContributorView view;
 
     /**
-     * Role of the actor -> Authorized_Contributor
-     * -- GETTER --
-     */
-    @Getter
-    private final UserRole userRole = UserRole.AUTHORIZED_CONTRIBUTOR;
-
-    /**
      * Constructor for the AuthorizedContributor class.
      *
      * @param name         The name of the authorized contributor.

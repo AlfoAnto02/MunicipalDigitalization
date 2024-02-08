@@ -1,6 +1,7 @@
 package it.cs.unicam.MunicipalDigitalization.api.model.elements;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.actors.IAuthenticatedUser;
+import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 
 /**
  * This class represent an AuthorizedContent.
@@ -14,10 +15,9 @@ public class AuthorizedContent extends AbstractContent {
     /**
      * The constructor of the class
      *
-     * @param author           of the Content
-     * @param municipalElement referred by the Content
      */
-    public AuthorizedContent(IAuthenticatedUser author, IMunicipalElement municipalElement) {
-        super(author, municipalElement);
+    public AuthorizedContent() {
+        super();
+        this.setElementStatus(ElementStatus.PUBLISHED);
     }
 }

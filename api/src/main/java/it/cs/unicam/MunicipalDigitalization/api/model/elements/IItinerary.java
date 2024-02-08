@@ -15,7 +15,7 @@ public interface IItinerary extends IMunicipalElement {
      *
      * @return A list of POIs in the itinerary.
      */
-    List<IPOI> getPOIs();
+    List<AbstractPOI> getPOIs();
 
     /**
      * This method is used to get the description of the itinerary.
@@ -44,7 +44,7 @@ public interface IItinerary extends IMunicipalElement {
      *
      * @param poi The POI to add.
      */
-    void addPOI(IPOI poi);
+    void addPOI(AbstractPOI poi);
 
     /**
      * This method is used to set the types of the itinerary.

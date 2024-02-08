@@ -1,7 +1,5 @@
 package it.cs.unicam.MunicipalDigitalization.api.model.elements;
-
-import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
-import it.cs.unicam.MunicipalDigitalization.api.model.actors.Contributor;
+import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 
 /**
  * This class represents a pending point of interest (POI).
@@ -17,11 +15,10 @@ public class PendingPOI extends AbstractPOI {
      * It initializes the PendingPOI with the provided user and the Municipality
      * where the Poi should be located
      *
-     * @param user         that creates the POI
-     * @param municipality where is located
      */
-    public PendingPOI(Contributor user, Municipality municipality) {
-        super(user, municipality);
+    public PendingPOI() {
+        super();
+        this.setElementStatus(ElementStatus.PENDING);
     }
 
 }
