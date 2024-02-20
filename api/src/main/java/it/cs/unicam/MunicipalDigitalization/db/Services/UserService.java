@@ -43,6 +43,10 @@ public class UserService {
         userRepository.saveAll(users);
     }
 
+    public AbstractAuthenticatedUser getUserByName(String name){
+        return userRepository.findByName(name);
+    }
+
 
 
 }

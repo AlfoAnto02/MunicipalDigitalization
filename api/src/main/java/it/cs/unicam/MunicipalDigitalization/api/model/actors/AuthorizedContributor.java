@@ -3,6 +3,8 @@ package it.cs.unicam.MunicipalDigitalization.api.model.actors;
 import it.cs.unicam.MunicipalDigitalization.api.io.AuthorizedContributorView;
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
 import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Transient;
 import lombok.Getter;
 
 /**
@@ -10,12 +12,14 @@ import lombok.Getter;
  * It extends the AbstractIUser class.
  * An authorized contributor has a view and can create points of interest (POIs) and itineraries.
  */
+@Entity
 public class AuthorizedContributor extends AbstractAuthenticatedUser {
 
     /**
      * The view of the authorized contributor.
      * This is an instance of AuthorizedContributorView interface which provides the methods for creating POIs and itineraries.
      */
+    @Transient
     private AuthorizedContributorView view;
 
     /**
@@ -27,6 +31,10 @@ public class AuthorizedContributor extends AbstractAuthenticatedUser {
      */
     public AuthorizedContributor(String name, String password, Municipality municipality) {
         super(name, password, municipality);
+    }
+
+    public AuthorizedContributor() {
+
     }
 
     /**

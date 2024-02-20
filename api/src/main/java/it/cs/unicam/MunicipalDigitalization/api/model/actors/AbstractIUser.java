@@ -23,7 +23,6 @@ import java.util.Objects;
 @MappedSuperclass
 @Getter
 @Setter
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class AbstractIUser implements IUser {
 
     /**
@@ -39,7 +38,7 @@ public abstract class AbstractIUser implements IUser {
      *  Getter for the municipality of the user.
      */
     @ManyToOne
-    @JoinColumn(name = "municipality")
+    @JoinColumn(name = "municipality", nullable = false)
     protected Municipality municipality;
 
     /**
@@ -52,7 +51,7 @@ public abstract class AbstractIUser implements IUser {
      * Role of the Actor
      * -- GETTER --
      */
-    @Column(name = "Role")
+    @Column(name = "Role", nullable = false)
     private UserRole role;
 
     /**

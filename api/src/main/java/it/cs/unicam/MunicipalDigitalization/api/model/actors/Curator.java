@@ -3,6 +3,8 @@ package it.cs.unicam.MunicipalDigitalization.api.model.actors;
 import it.cs.unicam.MunicipalDigitalization.api.io.CuratorView;
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
 import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Transient;
 import lombok.Getter;
 
 /**
@@ -10,11 +12,13 @@ import lombok.Getter;
  * It extends the AuthorizedContributor class.
  * A curator has a view and can validate points of interest (POIs).
  */
+@Entity
 public class Curator extends AuthorizedContributor {
 
     /**
      * The view of the curator.
      */
+    @Transient
     private CuratorView view;
 
 
@@ -27,6 +31,10 @@ public class Curator extends AuthorizedContributor {
      */
     public Curator(String name, String password, Municipality municipality) {
         super(name, password, municipality);
+    }
+
+    public Curator() {
+
     }
 
     /**

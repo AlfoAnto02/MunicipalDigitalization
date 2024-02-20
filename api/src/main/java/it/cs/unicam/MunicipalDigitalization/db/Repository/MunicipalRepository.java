@@ -15,7 +15,7 @@ public interface MunicipalRepository extends JpaRepository<Municipality,Long> {
     /**
      * This is a Method to find a Municipality by an ID
      *
-     * @param id must not be {@literal null}.
+     * @param id of the Municipality
      * @return the Municipality if exists
      */
     @Query("SELECT m FROM Municipality m WHERE m.id=?1")
@@ -29,4 +29,9 @@ public interface MunicipalRepository extends JpaRepository<Municipality,Long> {
      */
     @Query("SELECT m FROM Municipality m WHERE m.name=?1")
     @NonNull Optional<Municipality> findByName(@NonNull String name);
+
+    /**
+     * This is a Method to remove all the Municipalities
+     */
+    void removeAllByName(@NonNull String name);
 }

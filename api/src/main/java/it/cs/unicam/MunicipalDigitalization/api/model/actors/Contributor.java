@@ -3,7 +3,9 @@ package it.cs.unicam.MunicipalDigitalization.api.model.actors;
 import it.cs.unicam.MunicipalDigitalization.api.io.ContributorView;
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
 import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;
+import jakarta.persistence.Entity;
 import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.Transient;
 import lombok.Getter;
 
 /**
@@ -11,12 +13,10 @@ import lombok.Getter;
  * It extends the AbstractIUser class.
  * A contributor has a view and can create pending points of interest (POIs) and itineraries.
  */
+@Entity
 public class Contributor extends AbstractAuthenticatedUser {
-
-    /**
-     * The view of the contributor.
-     */
-    private final ContributorView view;
+    @Transient
+    private ContributorView view;
 
     /**
      * Constructor for the Contributor class.
@@ -25,9 +25,13 @@ public class Contributor extends AbstractAuthenticatedUser {
      * @param password     The password of the contributor.
      * @param municipality The municipality of the contributor.
      */
+
     public Contributor(String name, String password, Municipality municipality) {
         super(name, password, municipality);
-        this.view = new ContributorView(this);
+    }
+
+    public Contributor() {
+
     }
 
     /**

@@ -43,4 +43,13 @@ public interface UserRepository extends JpaRepository<AbstractAuthenticatedUser,
     @Query("SELECT u FROM AbstractAuthenticatedUser u WHERE u.role=?1")
     List<AbstractAuthenticatedUser> findAllByRole(UserRole role);
 
+    /**
+     * Method used to find a user by its name.
+     *
+     * @param name must not be {@literal null}.
+     * @return the user if exists
+     */
+    @Query("SELECT u FROM AbstractAuthenticatedUser u WHERE u.name = ?1")
+    AbstractAuthenticatedUser findByName(String name);
+
 }

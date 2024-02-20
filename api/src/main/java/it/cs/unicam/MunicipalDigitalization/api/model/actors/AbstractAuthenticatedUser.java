@@ -4,10 +4,12 @@ package it.cs.unicam.MunicipalDigitalization.api.model.actors;
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractItinerary;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractPOI;
+import it.cs.unicam.MunicipalDigitalization.api.model.elements.AuthorizedPOI;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,6 +19,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Table(
         name = "User",
         uniqueConstraints = {
@@ -66,7 +69,7 @@ public abstract class AbstractAuthenticatedUser extends AbstractIUser implements
     }
 
     public AbstractAuthenticatedUser() {
-
+        this.authoredPOIs = new ArrayList<>();
     }
 
     @Override
@@ -97,5 +100,9 @@ public abstract class AbstractAuthenticatedUser extends AbstractIUser implements
             throw new IllegalArgumentException("Password cannot be null or empty");
         }
         this.password = password;
+    }
+
+    public void addPOI(AuthorizedPOI poi) {
+        this.authoredPOIs.add(poi);
     }
 }

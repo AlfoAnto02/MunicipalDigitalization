@@ -46,7 +46,7 @@ public abstract class AbstractMunicipalElement implements IMunicipalElement {
      * The status of the Element, if it is Pending or Published.
      */
     @Getter
-    @Column(name = "Status")
+    @Column(name = "Status", nullable = false)
     private ElementStatus elementStatus;
     /**
      * The coordinate of the MunicipalElement

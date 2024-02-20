@@ -33,7 +33,7 @@ public abstract class AbstractPOI extends AbstractMunicipalElement implements IP
     /**
      * The POIType of the point of interest (POI).
      */
-    @Column(name = "Type")
+    @Column(name = "Type", nullable = false)
     private POIType POIType;
 
     /**

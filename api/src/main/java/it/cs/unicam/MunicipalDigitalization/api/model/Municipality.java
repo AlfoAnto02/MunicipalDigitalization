@@ -6,6 +6,7 @@ import it.cs.unicam.MunicipalDigitalization.api.util.Coordinate;
 import it.cs.unicam.MunicipalDigitalization.api.util.PendingManager;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +17,8 @@ import java.util.List;
  * itineraries, and contents.
  */
 @Entity
+@Getter
+@Setter
 @Table(
         name = "municipality",
         uniqueConstraints = {
@@ -39,7 +42,7 @@ public class Municipality {
      * The geographical coordinates of the municipality.
      */
     @Transient
-    private Coordinate territory;
+    private List<Coordinate> territory;
 
     /**
      * The list of points of interest in the municipality.
@@ -78,7 +81,8 @@ public class Municipality {
      * @param territory The geographical coordinates of the municipality.
      * @param name      The name of the municipality.
      */
-    public Municipality(Coordinate territory, String name) {
+    public Municipality(List<Coordinate> territory, String name) {
+        if(territory.size()<3) throw new IllegalArgumentException("The territory must have at least 3 coordinates");
         this.name = name;
         this.listOfPOIs = new ArrayList<>();
         this.listOfItineraries = new ArrayList<>();
