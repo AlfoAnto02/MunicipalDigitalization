@@ -1,8 +1,8 @@
 package it.cs.unicam.MunicipalDigitalization.api.model.elements;
-
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
 import it.cs.unicam.MunicipalDigitalization.api.model.actors.AbstractAuthenticatedUser;
-import it.cs.unicam.MunicipalDigitalization.api.model.actors.IAuthenticatedUser;
+import it.cs.unicam.MunicipalDigitalization.api.util.Coordinate;
+import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 import it.cs.unicam.MunicipalDigitalization.api.util.POIType;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -18,6 +18,7 @@ import java.util.Objects;
 @Entity
 @Getter
 @Setter
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Table(
         name = "Pois",
         uniqueConstraints = {
@@ -48,6 +49,23 @@ public abstract class AbstractPOI extends AbstractMunicipalElement implements IP
      */
     public AbstractPOI() {
         super();
+    }
+
+    /**
+     * The constructor of the Class used by the Builder
+     *
+     * @param municipality The municipality of the POI
+     * @param elementStatus The status of the POI
+     * @param coordinate The coordinate of the POI
+     * @param name The name of the POI
+     * @param POIType The type of the POI
+     * @param author The author of the POI
+     */
+    public AbstractPOI(Municipality municipality, ElementStatus elementStatus, Coordinate coordinate,
+                       String name, POIType POIType, AbstractAuthenticatedUser author) {
+        super(municipality, elementStatus, coordinate, name);
+        this.POIType = POIType;
+        this.author = author;
     }
 
     /**

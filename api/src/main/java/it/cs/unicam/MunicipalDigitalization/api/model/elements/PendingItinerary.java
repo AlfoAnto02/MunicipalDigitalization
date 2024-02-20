@@ -1,8 +1,12 @@
 package it.cs.unicam.MunicipalDigitalization.api.model.elements;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
+import it.cs.unicam.MunicipalDigitalization.api.model.actors.AbstractAuthenticatedUser;
 import it.cs.unicam.MunicipalDigitalization.api.model.actors.Contributor;
+import it.cs.unicam.MunicipalDigitalization.api.util.Coordinate;
 import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
+
+import java.util.List;
 
 /**
  * This class represents a pending itinerary.
@@ -16,12 +20,26 @@ public class PendingItinerary extends AbstractItinerary {
 
     /**
      * Constructor for the PendingItinerary class.
-     * It initializes the PendingItinerary with the provided user and the Municipality
-     * where the Itinerary should be located
-     *
      */
     public PendingItinerary() {
         super();
-        this.setElementStatus(ElementStatus.PENDING);
+    }
+
+/**
+     * Constructor for the PendingItinerary class used by the Builder
+     *
+     * @param municipality the municipality where the itinerary should be located
+     * @param elementStatus the status of the itinerary
+     * @param coordinate the coordinate of the itinerary
+     * @param name the name of the itinerary
+     * @param pois the list of points of interest (POIs) that compose the itinerary
+     * @param types the types of the itinerary
+     * @param description the description of the itinerary
+     * @param author the author of the itinerary
+     */
+    public PendingItinerary(Municipality municipality, ElementStatus elementStatus,
+                            Coordinate coordinate, String name, List<AbstractPOI> pois, String types,
+                            String description, AbstractAuthenticatedUser author) {
+        super(municipality, elementStatus, coordinate, name, pois, types, description, author);
     }
 }

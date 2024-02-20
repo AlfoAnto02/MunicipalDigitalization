@@ -1,10 +1,8 @@
 package it.cs.unicam.MunicipalDigitalization.api.model.elements;
-
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
 import it.cs.unicam.MunicipalDigitalization.api.model.actors.AbstractAuthenticatedUser;
-import it.cs.unicam.MunicipalDigitalization.api.model.actors.AbstractIUser;
-import it.cs.unicam.MunicipalDigitalization.api.model.actors.IAuthenticatedUser;
 import it.cs.unicam.MunicipalDigitalization.api.util.Coordinate;
+import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,6 +20,7 @@ import java.util.Objects;
 @Entity
 @Getter
 @Setter
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Table(
         name = "Itineraries",
         uniqueConstraints = {
@@ -45,7 +44,6 @@ public abstract class AbstractItinerary extends AbstractMunicipalElement impleme
      * -- GETTER --
      *  Getter for the types of the itinerary.
      *
-
      */
     @Getter
     @Column(name = "Type",nullable = false)
@@ -56,13 +54,6 @@ public abstract class AbstractItinerary extends AbstractMunicipalElement impleme
      */
     @Column(name = "Description",nullable = false)
     private String description;
-
-    /**
-     * The coordinate where the Itinerary is situated.
-     */
-
-    @Transient
-    private Coordinate coordinate;
 
     /**
      * The author of the point of the MunicipalElement
@@ -78,6 +69,28 @@ public abstract class AbstractItinerary extends AbstractMunicipalElement impleme
     public AbstractItinerary() {
         super();
         this.pois = new ArrayList<>();
+    }
+
+    /**
+     * The constructor of the class used by the Builder
+     *
+     * @param municipality The municipality of the Itinerary
+     * @param elementStatus The status of the Itinerary
+     * @param coordinate The coordinate of the Itinerary
+     * @param name The name of the Itinerary
+     * @param pois The list of POIs that composed the Itinerary
+     * @param types The types of the Itinerary
+     * @param description The description of the Itinerary
+     * @param author The author of the Itinerary
+     */
+    public AbstractItinerary(Municipality municipality, ElementStatus elementStatus, Coordinate coordinate,
+                             String name, List<AbstractPOI> pois, String types, String description,
+                              AbstractAuthenticatedUser author) {
+        super(municipality, elementStatus, coordinate, name);
+        this.pois = pois;
+        this.types = types;
+        this.description = description;
+        this.author = author;
     }
 
     /**

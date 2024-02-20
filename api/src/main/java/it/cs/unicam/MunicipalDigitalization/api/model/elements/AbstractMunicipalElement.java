@@ -1,20 +1,15 @@
 package it.cs.unicam.MunicipalDigitalization.api.model.elements;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
-import it.cs.unicam.MunicipalDigitalization.api.model.actors.AbstractAuthenticatedUser;
-import it.cs.unicam.MunicipalDigitalization.api.model.actors.AbstractIUser;
-import it.cs.unicam.MunicipalDigitalization.api.model.actors.IAuthenticatedUser;
 import it.cs.unicam.MunicipalDigitalization.api.util.Coordinate;
 import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
-import it.cs.unicam.MunicipalDigitalization.api.util.ID;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 
-import java.time.Instant;
 import java.time.LocalDateTime;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,7 +20,6 @@ import java.util.List;
 @MappedSuperclass
 @Getter
 @Setter
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class AbstractMunicipalElement implements IMunicipalElement {
     /**
      * The unique identifier of the MunicipalElement.
@@ -78,7 +72,25 @@ public abstract class AbstractMunicipalElement implements IMunicipalElement {
      *
      */
     public AbstractMunicipalElement() {
+        this.listOfContents= new ArrayList<>();
+        this.creationDate=LocalDateTime.now();
+    }
 
+    /**
+     * Constructor for the AbstractMunicipalElement class that will be used from the Builder
+     *
+     * @param municipality The municipality of the MunicipalElement
+     * @param elementStatus The status of the MunicipalElement
+     * @param coordinate The coordinate of the MunicipalElement
+     * @param name The name of the MunicipalElement
+     */
+    public AbstractMunicipalElement(Municipality municipality, ElementStatus elementStatus, Coordinate coordinate, String name) {
+        this.municipality = municipality;
+        this.elementStatus = elementStatus;
+        this.coordinate = coordinate;
+        this.name = name;
+        this.listOfContents= new ArrayList<>();
+        this.creationDate=LocalDateTime.now();
     }
 
     /**
@@ -156,5 +168,9 @@ public abstract class AbstractMunicipalElement implements IMunicipalElement {
     public void getContentFullInfo(String id) {
         // TODO - implement AbstractMunicipalElement.getContentFullInfo
         throw new UnsupportedOperationException();
+    }
+
+    public void setStatus(ElementStatus status) {
+        this.elementStatus=status;
     }
 }

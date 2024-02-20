@@ -1,7 +1,10 @@
 package it.cs.unicam.MunicipalDigitalization.api.model.elements;
 
+import it.cs.unicam.MunicipalDigitalization.api.model.actors.AbstractAuthenticatedUser;
 import it.cs.unicam.MunicipalDigitalization.api.model.actors.IAuthenticatedUser;
+import it.cs.unicam.MunicipalDigitalization.api.util.ContentType;
 import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
+import jakarta.persistence.Entity;
 
 /**
  * This class represent an AuthorizedContent.
@@ -10,6 +13,7 @@ import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
  * It implements extends the AbstractContent class.
  * A content has an id, type, author, and a municipal element referred by the content.
  */
+@Entity
 public class AuthorizedContent extends AbstractContent {
 
     /**
@@ -18,6 +22,15 @@ public class AuthorizedContent extends AbstractContent {
      */
     public AuthorizedContent() {
         super();
-        this.setElementStatus(ElementStatus.PUBLISHED);
+    }
+
+    public AuthorizedContent(AbstractPOI referredPOI, String name, AbstractAuthenticatedUser author,
+                             ElementStatus elementStatus, ContentType type, String description, String link, String photo) {
+        super(referredPOI, name, author, elementStatus, type, description, link, photo);
+    }
+
+    public AuthorizedContent(String name, AbstractItinerary referredItinerary, AbstractAuthenticatedUser author,
+                             ElementStatus elementStatus, ContentType type, String description, String link, String photo) {
+        super(name, referredItinerary, author, elementStatus, type, description, link, photo);
     }
 }
