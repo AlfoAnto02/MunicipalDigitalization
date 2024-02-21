@@ -5,6 +5,7 @@ import it.cs.unicam.MunicipalDigitalization.api.model.actors.AbstractAuthenticat
 import it.cs.unicam.MunicipalDigitalization.api.model.actors.Contributor;
 import it.cs.unicam.MunicipalDigitalization.api.util.Coordinate;
 import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
+import jakarta.persistence.Entity;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ import java.util.List;
  * It provides methods to get a list of points of interest (POIs), get the id, name, and description of the itinerary, and to contains if a POI is in the itinerary.
  * It also provides methods to set the name, description, and types of the itinerary, and to add a POI to the itinerary.
  */
+@Entity
 public class PendingItinerary extends AbstractItinerary {
 
 

@@ -6,6 +6,8 @@ import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractPOI;
 import it.cs.unicam.MunicipalDigitalization.api.util.Coordinate;
 import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 
+import java.util.List;
+
 /**
  * This interface represents the Builder of an Itinerary.
  * It is used to create an Itinerary step by step.
@@ -17,7 +19,7 @@ public interface ItineraryBuilder {
      *
      * @param poi The POI to add to the Itinerary.
      */
-    void addPOI(AbstractPOI poi);
+    void addPOIs(List<AbstractPOI> poi);
 
     /**
      * this method is used to set the name of the Itinerary.

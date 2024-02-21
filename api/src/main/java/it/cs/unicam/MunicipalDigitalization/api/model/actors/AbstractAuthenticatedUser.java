@@ -70,6 +70,7 @@ public abstract class AbstractAuthenticatedUser extends AbstractIUser implements
 
     public AbstractAuthenticatedUser() {
         this.authoredPOIs = new ArrayList<>();
+        this.authoredItineraries = new ArrayList<>();
     }
 
     @Override
@@ -102,7 +103,11 @@ public abstract class AbstractAuthenticatedUser extends AbstractIUser implements
         this.password = password;
     }
 
-    public void addPOI(AuthorizedPOI poi) {
+    public void addPOI(AbstractPOI poi) {
         this.authoredPOIs.add(poi);
+    }
+
+    public void addItinerary(AbstractItinerary itinerary) {
+        this.authoredItineraries.add(itinerary);
     }
 }

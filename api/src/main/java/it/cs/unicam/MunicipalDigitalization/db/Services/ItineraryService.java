@@ -15,8 +15,24 @@ import java.util.Optional;
 @Service
 public class ItineraryService {
 
+    private final ItineraryRepository itineraryRepository;
+
+    private final MunicipalService municipalityService;
+
+    private final UserService userService;
+
     @Autowired
-    private ItineraryRepository itineraryRepository;
+    public ItineraryService(ItineraryRepository itineraryRepository, MunicipalService municipalityService, UserService userService) {
+        this.itineraryRepository = itineraryRepository;
+        this.municipalityService = municipalityService;
+        this.userService = userService;
+    }
+
+    public void saveItinerary(AbstractItinerary itinerary){
+        itineraryRepository.save(itinerary);
+        municipalityService.addItinerary(itinerary.getMunicipality().getId(), itinerary);
+        userService.addItinerary(itinerary.getAuthor().getId(), itinerary);
+    }
 
     public @NonNull Optional<AbstractItinerary> getItineraryById(Long id) {
         return itineraryRepository.findById(id);
@@ -40,10 +56,6 @@ public class ItineraryService {
 
     public List<AbstractItinerary> getItinerariesByMunicipality(Municipality municipalityId){
         return itineraryRepository.findAllByMunicipality(municipalityId);
-    }
-
-    public void saveItinerary(AbstractItinerary itinerary){
-        itineraryRepository.save(itinerary);
     }
 
     public void deleteItinerary(AbstractItinerary itinerary){

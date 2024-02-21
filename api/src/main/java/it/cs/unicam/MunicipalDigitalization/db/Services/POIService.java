@@ -15,9 +15,39 @@ import java.util.Optional;
 
 @Service
 public class POIService {
+    private final POIRepository poiRepository;
 
+    private final MunicipalService municipalityService;
+
+    private final UserService userService;
     @Autowired
-    private POIRepository poiRepository;
+    public POIService(POIRepository poiRepository, MunicipalService municipalityService, UserService userService) {
+        this.poiRepository = poiRepository;
+        this.municipalityService = municipalityService;
+        this.userService = userService;
+    }
+
+    public void savePOI(AbstractPOI poi){
+        poiRepository.save(poi);
+        municipalityService.addPOI(poi.getMunicipality().getId(), poi);
+        userService.addPOI(poi.getAuthor().getId(), poi);
+    }
+
+    public void deletePOI(AbstractPOI poi){
+        poiRepository.delete(poi);
+    }
+
+    public void deletePOIById(Long id){
+        poiRepository.deleteById(id);
+    }
+
+    public void saveAllPOIs(List<AbstractPOI> pois){
+        poiRepository.saveAll(pois);
+    }
+
+    public void deleteAllPOIs(List<AbstractPOI> pois){
+        poiRepository.deleteAll(pois);
+    }
 
     public @NonNull Optional<AbstractPOI> getPOIByID(Long id){
         return poiRepository.findById(id);
@@ -47,25 +77,8 @@ public class POIService {
         return poiRepository.findAllByType(type);
     }
 
-    public void savePOI(AbstractPOI poi){
-        poiRepository.save(poi);
+
+    public List<AbstractPOI> getPOIsByIds(List<Long> pois) {
+        return poiRepository.findAllById(pois);
     }
-
-    public void deletePOI(AbstractPOI poi){
-        poiRepository.delete(poi);
-    }
-
-    public void deletePOIById(Long id){
-        poiRepository.deleteById(id);
-    }
-
-    public void saveAllPOIs(List<AbstractPOI> pois){
-        poiRepository.saveAll(pois);
-    }
-
-    public void deleteAllPOIs(List<AbstractPOI> pois){
-        poiRepository.deleteAll(pois);
-    }
-
-
 }

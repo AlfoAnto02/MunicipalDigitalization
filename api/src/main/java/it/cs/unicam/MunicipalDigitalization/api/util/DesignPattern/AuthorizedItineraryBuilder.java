@@ -24,21 +24,15 @@ public class AuthorizedItineraryBuilder implements ItineraryBuilder{
     private ElementStatus status;
 
     @Override
-    public void addPOI(AbstractPOI poi) {
-        if(poiList.contains(poi)){
-            throw new IllegalArgumentException("The POI is already in the list");
-        }
-        if(poi == null){
-            throw new IllegalArgumentException("The POI is null");
-        }
-        this.poiList.add(poi);
+    public void addPOIs(List<AbstractPOI>  poi) {
+        this.poiList = poi;
     }
 
     @Override
     public void setItineraryName(String name) {
         if(name.length() > 40) throw new IllegalArgumentException("The name must not be longer than 40 characters");
         if(name.length()< 10) throw new IllegalArgumentException("The name must not be shorter than 10 characters");
-        if(!containsSpecialCharacters(name)) throw new IllegalArgumentException("The name must not contain special characters");
+        if(containsSpecialCharacters(name)) throw new IllegalArgumentException("The name must not contain special characters");
         if(!name.isBlank()) this.name = name;
         else throw new IllegalArgumentException("The name must not be null or blank");
     }
@@ -83,9 +77,9 @@ public class AuthorizedItineraryBuilder implements ItineraryBuilder{
 
     @Override
     public void setItineraryCoordinates(Coordinate coordinate) {
-        if(coordinate == null || !this.municipality.checkCoordinates(coordinate) ){
+        /* if(coordinate == null || !this.municipality.checkCoordinates(coordinate) ){
             throw new IllegalArgumentException("The coordinates are null or not in the municipality");
-        }
+        }*/
         this.coordinate = coordinate;
     }
 

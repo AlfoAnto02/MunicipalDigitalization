@@ -5,6 +5,7 @@ import it.cs.unicam.MunicipalDigitalization.api.model.actors.AbstractAuthenticat
 import it.cs.unicam.MunicipalDigitalization.api.model.actors.AuthorizedContributor;
 import it.cs.unicam.MunicipalDigitalization.api.util.Coordinate;
 import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
+import jakarta.persistence.Entity;
 
 import java.util.List;
 
@@ -14,6 +15,7 @@ import java.util.List;
  * An authorized itinerary has a list of points of interest (POIs), id, name, and description.
  * It also has a method to contains if a given POI is part of the itinerary.
  */
+@Entity
 public class AuthorizedItinerary extends AbstractItinerary {
 
     /**

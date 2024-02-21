@@ -2,7 +2,6 @@ package it.cs.unicam.MunicipalDigitalization;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
 import it.cs.unicam.MunicipalDigitalization.api.util.Coordinate;
-import it.cs.unicam.MunicipalDigitalization.db.Repository.MunicipalRepository;
 import it.cs.unicam.MunicipalDigitalization.db.Services.MunicipalService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

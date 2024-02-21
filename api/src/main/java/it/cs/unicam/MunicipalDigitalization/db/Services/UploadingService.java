@@ -58,10 +58,12 @@ public class UploadingService {
         municipalService.getMunicipalByID(poidto.municipality()).ifPresent(poiBuilder::setPOIMunicipality);
     }
     private void buildItinerary(ItineraryBuilder itineraryBuilder, ItineraryDTO itineraryDTO) {
+        itineraryBuilder.setItineraryName(itineraryDTO.name());
         itineraryBuilder.setItineraryAuthor(userService.getUserById(itineraryDTO.author()));
         itineraryBuilder.setItineraryDescription(itineraryDTO.description());
         municipalService.getMunicipalByID(itineraryDTO.municipality()).ifPresent(itineraryBuilder::setItineraryMunicipality);
         itineraryBuilder.setItineraryCoordinates(itineraryDTO.coordinate());
+        itineraryBuilder.addPOIs(poiService.getPOIsByIds(itineraryDTO.pois()));
         itineraryBuilder.setItineraryType();
         itineraryBuilder.setItineraryStatus();
     }

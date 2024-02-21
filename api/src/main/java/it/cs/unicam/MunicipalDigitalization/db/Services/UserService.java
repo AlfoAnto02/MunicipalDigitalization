@@ -2,6 +2,8 @@ package it.cs.unicam.MunicipalDigitalization.db.Services;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
 import it.cs.unicam.MunicipalDigitalization.api.model.actors.AbstractAuthenticatedUser;
+import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractItinerary;
+import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractPOI;
 import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;
 import it.cs.unicam.MunicipalDigitalization.db.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +14,25 @@ import java.util.List;
 @Service
 public class UserService {
 
-    @Autowired
-    private UserRepository userRepository;
 
+    private final UserRepository userRepository;
+
+    @Autowired
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    public void addPOI(Long userID, AbstractPOI poi){
+        AbstractAuthenticatedUser user = userRepository.getReferenceById(userID);
+        user.addPOI(poi);
+        userRepository.save(user);
+    }
+
+    public void addItinerary(Long userID, AbstractItinerary itinerary){
+        AbstractAuthenticatedUser user = userRepository.getReferenceById(userID);
+        user.addItinerary(itinerary);
+        userRepository.save(user);
+    }
     public AbstractAuthenticatedUser getUserById(Long id){
         return userRepository.getReferenceById(id);
     }

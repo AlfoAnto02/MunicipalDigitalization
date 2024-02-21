@@ -2,12 +2,12 @@ package it.cs.unicam.MunicipalDigitalization;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
 import it.cs.unicam.MunicipalDigitalization.api.model.actors.AuthorizedContributor;
-import it.cs.unicam.MunicipalDigitalization.api.model.elements.AuthorizedPOI;
 import it.cs.unicam.MunicipalDigitalization.api.util.Coordinate;
-import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 import it.cs.unicam.MunicipalDigitalization.api.util.POIType;
 import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;
+import it.cs.unicam.MunicipalDigitalization.api.util.controllers.dto.ItineraryDTO;
 import it.cs.unicam.MunicipalDigitalization.api.util.controllers.dto.POIDTO;
+import it.cs.unicam.MunicipalDigitalization.db.Repository.ItineraryRepository;
 import it.cs.unicam.MunicipalDigitalization.db.Repository.MunicipalRepository;
 import it.cs.unicam.MunicipalDigitalization.db.Repository.POIRepository;
 import it.cs.unicam.MunicipalDigitalization.db.Repository.UserRepository;
@@ -18,19 +18,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.util.ArrayList;
+import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 @Transactional
-public class POIRepoTest {
+public class ItineraryRepoTest {
 
     @Autowired
     private MunicipalRepository municipalService;
 
     @Autowired
-    private POIRepository poiService;
+    private ItineraryRepository itineraryService;
+
+    @Autowired
+    private POIService poiService;
 
     @Autowired
     private UserRepository userService;
@@ -38,9 +42,8 @@ public class POIRepoTest {
     @Autowired
     private UploadingService uploadingService;
 
-
     @Test
-    public void createAuthorizedPOI(){
+    public void createAuthorizedItinerary(){
         //Create a Municipality
         Municipality municipality = new Municipality();
         municipality.setName("Municipality");
@@ -55,28 +58,20 @@ public class POIRepoTest {
         System.out.println(user.getId());
         System.out.println(municipality.getId());
 
-        //Create a POI
-        POIDTO poiDTO = new POIDTO("Monteleone", POIType.Cinema, user.getId(), municipality.getId(), new Coordinate(1,1));
-        uploadingService.uploadPOI(poiDTO);
+        //Create a POIs
+        POIDTO poi1 = new POIDTO("Monteleone", POIType.Cinema, user.getId(), municipality.getId(), new Coordinate(1,1));
+        POIDTO poi2 = new POIDTO("Ginevra", POIType.Cinema, user.getId(), municipality.getId(), new Coordinate(2,2));
+        uploadingService.uploadPOI(poi1);
+        uploadingService.uploadPOI(poi2);
 
-        //Check if the POI present
-        assertTrue(poiService.findByName("Monteleone").isPresent());
+        //Create an Itinerary
+        ItineraryDTO itineraryDTO = new ItineraryDTO("Super itinerario", "Cinema", "Questo è un fantastico itinerario",
+                user.getId(), municipality.getId(), new Coordinate(1,1), new ArrayList<>
+                (List.of(poiService.getPOIbyName("Monteleone").get().getId(), poiService.getPOIbyName("Ginevra").get().getId())));
+        uploadingService.uploadItinerary(itineraryDTO);
 
-        //Check if the POI is Authorized
-        assertEquals(poiService.findByName("Monteleone").get().getElementStatus(), ElementStatus.PUBLISHED);
-
-        //Check if the POI is in the Municipality
-        assertEquals(municipalService.getReferenceById(municipality.getId()).getListOfPOIs().size(), 1);
-
-        //Check if the POI is in the User
-        assertEquals(userService.getReferenceById(user.getId()).getAuthoredPOIs().size(), 1);
-
-        //Check if the POI is Correct
-
-        assertEquals(poiService.findByName("Monteleone").get().getName(), "Monteleone");
-        assertEquals(poiService.findByName("Monteleone").get().getPOIType(), POIType.Cinema);
-        assertEquals(poiService.findByName("Monteleone").get().getAuthor(), user);
-        assertEquals(poiService.findByName("Monteleone").get().getMunicipality(), municipality);
+        assertEquals(itineraryService.findByName("Super itinerario").get().getName(), "Super itinerario");
 
     }
+
 }
