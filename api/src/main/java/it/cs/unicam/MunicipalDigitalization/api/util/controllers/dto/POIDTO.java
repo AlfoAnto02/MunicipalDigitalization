@@ -11,7 +11,8 @@ public record POIDTO (
         POIType poiType,
         Long author,
         Long municipality,
-        Coordinate coordinate
+        Coordinate coordinate,
+        ElementStatus status
 
         )
 {}

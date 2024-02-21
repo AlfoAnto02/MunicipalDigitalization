@@ -1,13 +1,14 @@
 package it.cs.unicam.MunicipalDigitalization.db.Services;
 
-import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
 import it.cs.unicam.MunicipalDigitalization.api.model.actors.AbstractAuthenticatedUser;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractContent;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractMunicipalElement;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractPOI;
 import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 import it.cs.unicam.MunicipalDigitalization.api.util.POIType;
+import it.cs.unicam.MunicipalDigitalization.api.util.controllers.dto.POIDTO;
 import it.cs.unicam.MunicipalDigitalization.db.Repository.POIRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,9 +35,21 @@ public class POIService {
      * @param poi the POI to save
      */
     public void savePOI(AbstractPOI poi){
+        System.out.println(poi.getCoordinate().toString());
         poiRepository.save(poi);
-        municipalityService.addPOI(poi.getMunicipality().getId(), poi);
-        userService.addPOI(poi.getAuthor().getId(), poi);
+
+        //Get the municipality id and the author Id
+        Long municipalityId = poi.getMunicipality().getId();
+        Long authorId = poi.getAuthor().getId();
+
+        //Check if the POI is already associated with the municipality
+        if(poi.getMunicipality().getPOIList().stream().anyMatch(p -> p.getId().equals(poi.getId()))){
+            municipalityService.addPOI(poi.getMunicipality().getId(), poi);
+        }
+        //Check if the POI is already associated with the user
+        if(poi.getAuthor().getAuthoredPOIs().stream().anyMatch(p -> p.getId().equals(poi.getId()))){
+            userService.addPOI(poi.getAuthor().getId(), poi);
+        }
     }
 
     /**
@@ -50,7 +63,6 @@ public class POIService {
         poi.addContent(content);
         poiRepository.save(poi);
     }
-
     public AbstractMunicipalElement getPOIByID(Long id){
         return poiRepository.getReferenceById(id);
     }
@@ -67,8 +79,8 @@ public class POIService {
         return poiRepository.findAllByAuthor(user);
     }
 
-    public List<AbstractPOI> getPOIsByMunicipality(Municipality municipality){
-        return poiRepository.findAllByMunicipality(municipality);
+    public List<AbstractPOI> getPOIsByMunicipality(Long municipality){
+        return poiRepository.findAllByMunicipalityId(municipality);
     }
 
     public Optional<AbstractPOI> getPOIbyName(String name){
@@ -82,5 +94,9 @@ public class POIService {
 
     public List<AbstractPOI> getPOIsByIds(List<Long> pois) {
         return poiRepository.findAllById(pois);
+    }
+
+    public List<AbstractPOI> getAllPOIs() {
+        return poiRepository.findAll();
     }
 }

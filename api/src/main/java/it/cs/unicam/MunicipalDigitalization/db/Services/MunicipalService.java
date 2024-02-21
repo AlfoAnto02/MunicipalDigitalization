@@ -1,6 +1,7 @@
 package it.cs.unicam.MunicipalDigitalization.db.Services;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
+import it.cs.unicam.MunicipalDigitalization.api.model.actors.AuthorizedContributor;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractItinerary;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractPOI;
 import it.cs.unicam.MunicipalDigitalization.db.Repository.MunicipalRepository;
@@ -79,4 +80,9 @@ public class MunicipalService {
     }
 
 
+    public void saveUser(AuthorizedContributor contributor, Long id) {
+        Municipality municipality = municipalRepository.getReferenceById(id);
+        municipality.addUser(contributor);
+        municipalRepository.save(municipality);
+    }
 }

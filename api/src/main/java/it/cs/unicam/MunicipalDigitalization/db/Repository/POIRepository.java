@@ -45,11 +45,11 @@ public interface POIRepository extends JpaRepository<AbstractPOI, Long> {
 
     /**
      * This Method is used to find the List of POIs of a Municipality
-     * @param municipality of the POIs
+     * @param id of the Municipality
      * @return a List of POIs
      */
-    @Query("SELECT p FROM AbstractPOI p WHERE p.municipality=?1")
-    List<AbstractPOI> findAllByMunicipality(Municipality municipality);
+    @Query("SELECT p FROM AbstractPOI p WHERE p.municipality.id=?1")
+    List<AbstractPOI> findAllByMunicipalityId(Long id);
 
     /**
      * This Method is used to find a POI by its name
