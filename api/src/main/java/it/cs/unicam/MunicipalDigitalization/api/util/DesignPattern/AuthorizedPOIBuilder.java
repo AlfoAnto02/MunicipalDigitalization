@@ -27,9 +27,6 @@ public class AuthorizedPOIBuilder implements POIBuilder {
 
     private ElementStatus status;
 
-
-
-
     @Override
     public void setPOIAuthor(AbstractAuthenticatedUser author) {
         if(author.getRole() == UserRole.AUTHORIZED_CONTRIBUTOR || author.getRole() == UserRole.CURATOR) {

@@ -1,4 +1,5 @@
 package it.cs.unicam.MunicipalDigitalization.api.model.elements;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
 import it.cs.unicam.MunicipalDigitalization.api.model.actors.AbstractAuthenticatedUser;
 import it.cs.unicam.MunicipalDigitalization.api.util.Coordinate;
@@ -41,6 +42,7 @@ public abstract class AbstractPOI extends AbstractMunicipalElement implements IP
      */
     @ManyToOne
     @JoinColumn(name = "Author",nullable = false)
+    @JsonManagedReference
     private AbstractAuthenticatedUser author;
 
     /**
