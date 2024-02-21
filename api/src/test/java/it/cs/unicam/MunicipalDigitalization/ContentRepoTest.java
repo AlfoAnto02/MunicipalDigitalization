@@ -1,15 +1,18 @@
 package it.cs.unicam.MunicipalDigitalization;
 
+
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
 import it.cs.unicam.MunicipalDigitalization.api.model.actors.AuthorizedContributor;
+import it.cs.unicam.MunicipalDigitalization.api.util.ContentType;
 import it.cs.unicam.MunicipalDigitalization.api.util.Coordinate;
-import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 import it.cs.unicam.MunicipalDigitalization.api.util.POIType;
 import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;
+import it.cs.unicam.MunicipalDigitalization.api.util.controllers.dto.ContentDTO;
 import it.cs.unicam.MunicipalDigitalization.api.util.controllers.dto.POIDTO;
 import it.cs.unicam.MunicipalDigitalization.db.Repository.MunicipalRepository;
-import it.cs.unicam.MunicipalDigitalization.db.Repository.POIRepository;
 import it.cs.unicam.MunicipalDigitalization.db.Repository.UserRepository;
+import it.cs.unicam.MunicipalDigitalization.db.Services.ContentService;
+import it.cs.unicam.MunicipalDigitalization.db.Services.POIService;
 import it.cs.unicam.MunicipalDigitalization.db.Services.UploadingService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,18 +20,15 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 
 @SpringBootTest
 @Transactional
-public class POIRepoTest {
-
+public class ContentRepoTest {
     @Autowired
     private MunicipalRepository municipalService;
 
     @Autowired
-    private POIRepository poiService;
+    private POIService poiService;
 
     @Autowired
     private UserRepository userService;
@@ -36,9 +36,11 @@ public class POIRepoTest {
     @Autowired
     private UploadingService uploadingService;
 
+    @Autowired
+    private ContentService contentService;
 
     @Test
-    public void createAuthorizedPOI(){
+    public void createAuthorizedContent(){
         //Create a Municipality
         Municipality municipality = new Municipality();
         municipality.setName("Municipality");
@@ -57,24 +59,23 @@ public class POIRepoTest {
         POIDTO poiDTO = new POIDTO("Monteleone", POIType.Cinema, user.getId(), municipality.getId(), new Coordinate(1,1));
         uploadingService.uploadPOI(poiDTO);
 
-        //Check if the POI present
-        assertTrue(poiService.findByName("Monteleone").isPresent());
+        //Create a Content
+        ContentDTO contentDTO = new ContentDTO("Barcellona", 1L, null, user.getId(),
+                ContentType.PHOTO, null, null, "barcellonaspettacolo.png");
 
-        //Check if the POI is Authorized
-        assertEquals(poiService.findByName("Monteleone").get().getElementStatus(), ElementStatus.PUBLISHED);
+        //Upload the Content
+        uploadingService.uploadContent(contentDTO);
 
-        //Check if the POI is in the Municipality
-        assertEquals(municipalService.getReferenceById(municipality.getId()).getListOfPOIs().size(), 1);
+        //Check if the Content has been uploaded
+        assertEquals(1, contentService.getAllContents().size());
 
-        //Check if the POI is in the User
-        assertEquals(userService.getReferenceById(user.getId()).getAuthoredPOIs().size(), 1);
+        //Check if the Content has been uploaded in the right POI
+        assertEquals(1, poiService.getPOIByID(1L).getListOfContents().size());
 
-        //Check if the POI is Correct
+        //Check if the content in the POI is the same of the Content in the DB
+        assertEquals(contentService.getContentById(1L), poiService.getPOIByID(1L).getListOfContents().getFirst());
 
-        assertEquals(poiService.findByName("Monteleone").get().getName(), "Monteleone");
-        assertEquals(poiService.findByName("Monteleone").get().getPOIType(), POIType.Cinema);
-        assertEquals(poiService.findByName("Monteleone").get().getAuthor(), user);
-        assertEquals(poiService.findByName("Monteleone").get().getMunicipality(), municipality);
 
     }
+
 }

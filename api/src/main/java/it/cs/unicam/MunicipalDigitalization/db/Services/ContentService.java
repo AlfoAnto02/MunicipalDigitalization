@@ -3,37 +3,43 @@ package it.cs.unicam.MunicipalDigitalization.db.Services;
 import it.cs.unicam.MunicipalDigitalization.api.model.actors.AbstractAuthenticatedUser;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractContent;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractItinerary;
-import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractPOI;
-import it.cs.unicam.MunicipalDigitalization.api.util.ContentType;
 import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 import it.cs.unicam.MunicipalDigitalization.db.Repository.ContentRepository;
-import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ContentService {
 
+
+    private final ContentRepository contentRepository;
+    private final POIService poiService;
+    private final ItineraryService itineraryService;
+
     @Autowired
-    private ContentRepository contentRepository;
-
-    public @NonNull Optional<AbstractContent> getContentById(Long id) {
-        return contentRepository.findById(id);
+    public ContentService(ContentRepository contentRepository, POIService poiService, ItineraryService itineraryService) {
+        this.contentRepository = contentRepository;
+        this.poiService = poiService;
+        this.itineraryService = itineraryService;
     }
 
-    public AbstractContent getContentByName(String name) {
-        return contentRepository.findByName(name);
+    /**
+     * Save a content in the database and add it to the POI or Itinerary it refers to
+     *
+     * @param content the content to save
+     */
+    public void saveContent(AbstractContent content) {
+        contentRepository.save(content);
+        if (content.getReferredPOI() != null) {
+            poiService.addContent(content.getReferredPOI().getId(), content);
+        }
+        else itineraryService.addContent(content.getReferredItinerary().getId(), content);
     }
 
-    public List<AbstractContent> getContentByType(ContentType type) {
-        return contentRepository.findAllByType(type);
-    }
-
-    public List<AbstractContent> getContentByReferredPOI(AbstractPOI id) {
-        return contentRepository.findAllByReferredPOI(id);
+    public AbstractContent getContentById(Long id) {
+        return contentRepository.getReferenceById(id);
     }
 
     public List<AbstractContent> getContentByReferredItinerary(AbstractItinerary id) {
@@ -48,29 +54,22 @@ public class ContentService {
         return contentRepository.findAllByElementStatus(ElementStatus.PENDING);
     }
 
-    public List<AbstractContent> getAuthorizedPOIs() {
+    public List<AbstractContent> getAuthorizedContents() {
         return contentRepository.findAllByElementStatus(ElementStatus.PUBLISHED);
     }
 
-    public AbstractContent saveContent(AbstractContent content) {
-        return contentRepository.save(content);
+    public List<AbstractContent> getAllContents() {
+        return contentRepository.findAll();
     }
 
     public void deleteContent(Long id) {
         contentRepository.deleteById(id);
     }
 
-    public void deleteContent(AbstractContent content) {
-        contentRepository.delete(content);
-    }
-
     public void deleteAllContent() {
         contentRepository.deleteAll();
     }
 
-    public boolean existsContentById(Long id) {
-        return contentRepository.existsById(id);
-    }
 
 
 }

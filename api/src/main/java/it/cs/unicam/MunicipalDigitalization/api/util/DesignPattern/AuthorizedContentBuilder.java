@@ -99,8 +99,8 @@ public class AuthorizedContentBuilder implements ContentBuilder{
      * @return an Authorized content;
      */
     public AuthorizedContent build(){
-        if(this.author == null || this.name == null || this.type == null || this.photo == null || this.link == null ||
-                this.description == null || this.contentStatus == null) throw new IllegalArgumentException("All fields must be set");
+        if(this.author == null || this.name == null || this.type == null || (this.photo == null && this.link == null &&
+                this.description == null) || this.contentStatus == null) throw new IllegalArgumentException("All fields must be set");
         else if (this.referredPOI == null && this.referredItinerary == null) throw new IllegalArgumentException("Referred element must be set");
         else if (this.referredPOI != null && this.referredItinerary != null) throw new IllegalArgumentException("Referred element must be unique");
         else if (this.referredPOI != null && this.referredItinerary==null) return new AuthorizedContent(this.referredPOI, this.name,

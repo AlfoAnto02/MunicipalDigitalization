@@ -173,4 +173,13 @@ public abstract class AbstractMunicipalElement implements IMunicipalElement {
     public void setStatus(ElementStatus status) {
         this.elementStatus=status;
     }
+
+    /**
+     * This method is used to add a content to the list of contents of the MunicipalElement
+     *
+     * @param content The content to add
+     */
+    public void addContent(AbstractContent content) {
+        this.listOfContents.add(content);
+    }
 }

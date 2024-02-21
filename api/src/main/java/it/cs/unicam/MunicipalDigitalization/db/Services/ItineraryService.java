@@ -2,15 +2,15 @@ package it.cs.unicam.MunicipalDigitalization.db.Services;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
 import it.cs.unicam.MunicipalDigitalization.api.model.actors.AbstractAuthenticatedUser;
+import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractContent;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractItinerary;
+import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractMunicipalElement;
 import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 import it.cs.unicam.MunicipalDigitalization.db.Repository.ItineraryRepository;
-import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ItineraryService {
@@ -28,18 +28,32 @@ public class ItineraryService {
         this.userService = userService;
     }
 
+    /**
+     * Save an itinerary in the database and add it to the municipality and the user
+     *
+     * @param itinerary the itinerary to save
+     */
+
     public void saveItinerary(AbstractItinerary itinerary){
         itineraryRepository.save(itinerary);
         municipalityService.addItinerary(itinerary.getMunicipality().getId(), itinerary);
         userService.addItinerary(itinerary.getAuthor().getId(), itinerary);
     }
 
-    public @NonNull Optional<AbstractItinerary> getItineraryById(Long id) {
-        return itineraryRepository.findById(id);
+    /**
+     * Add a content to an itinerary
+     *
+     * @param id the id of the itinerary
+     * @param content the content to add
+     */
+    public void addContent(Long id, AbstractContent content) {
+        AbstractItinerary itinerary = itineraryRepository.getReferenceById(id);
+        itinerary.addContent(content);
+        saveItinerary(itinerary);
     }
 
-    public Optional<AbstractItinerary> getItineraryByName(String name) {
-        return itineraryRepository.findByName(name);
+    public AbstractMunicipalElement getItineraryById(Long id) {
+        return itineraryRepository.getReferenceById(id);
     }
 
     public List<AbstractItinerary> getPendingItineraries() {
@@ -58,20 +72,8 @@ public class ItineraryService {
         return itineraryRepository.findAllByMunicipality(municipalityId);
     }
 
-    public void deleteItinerary(AbstractItinerary itinerary){
-        itineraryRepository.delete(itinerary);
-    }
-
     public void deleteItineraryById(Long id){
         itineraryRepository.deleteById(id);
-    }
-
-    public void saveAllItineraries(List<AbstractItinerary> itineraries){
-        itineraryRepository.saveAll(itineraries);
-    }
-
-    public void deleteAllItineraries(List<AbstractItinerary> itineraries){
-        itineraryRepository.deleteAll(itineraries);
     }
 
     public void deleteAllItineraries(){
@@ -81,6 +83,5 @@ public class ItineraryService {
     public Iterable<AbstractItinerary> getAllItineraries(){
         return itineraryRepository.findAll();
     }
-
 
 }

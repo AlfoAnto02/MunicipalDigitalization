@@ -9,7 +9,6 @@ import it.cs.unicam.MunicipalDigitalization.api.util.controllers.dto.ItineraryDT
 import it.cs.unicam.MunicipalDigitalization.api.util.controllers.dto.POIDTO;
 import it.cs.unicam.MunicipalDigitalization.db.Repository.ItineraryRepository;
 import it.cs.unicam.MunicipalDigitalization.db.Repository.MunicipalRepository;
-import it.cs.unicam.MunicipalDigitalization.db.Repository.POIRepository;
 import it.cs.unicam.MunicipalDigitalization.db.Repository.UserRepository;
 import it.cs.unicam.MunicipalDigitalization.db.Services.POIService;
 import it.cs.unicam.MunicipalDigitalization.db.Services.UploadingService;

@@ -5,8 +5,8 @@ import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 
 public record ContentDTO (
         String name,
-        String referredPOI,
-        String referredItinerary,
+        Long referredPOI,
+        Long referredItinerary,
         Long author,
         ContentType type,
         String description,

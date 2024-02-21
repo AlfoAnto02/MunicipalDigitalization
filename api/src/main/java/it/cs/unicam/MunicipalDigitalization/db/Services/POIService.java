@@ -2,11 +2,12 @@ package it.cs.unicam.MunicipalDigitalization.db.Services;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
 import it.cs.unicam.MunicipalDigitalization.api.model.actors.AbstractAuthenticatedUser;
+import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractContent;
+import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractMunicipalElement;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractPOI;
 import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 import it.cs.unicam.MunicipalDigitalization.api.util.POIType;
 import it.cs.unicam.MunicipalDigitalization.db.Repository.POIRepository;
-import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,30 +28,31 @@ public class POIService {
         this.userService = userService;
     }
 
+    /**
+     * Save a POI in the database and update the references in the municipality and user
+     *
+     * @param poi the POI to save
+     */
     public void savePOI(AbstractPOI poi){
         poiRepository.save(poi);
         municipalityService.addPOI(poi.getMunicipality().getId(), poi);
         userService.addPOI(poi.getAuthor().getId(), poi);
     }
 
-    public void deletePOI(AbstractPOI poi){
-        poiRepository.delete(poi);
+    /**
+     * Add a content to a POI
+     *
+     * @param id ID of the POI
+     * @param content the content to add
+     */
+    public void addContent(Long id, AbstractContent content){
+        AbstractPOI poi = poiRepository.getReferenceById(id);
+        poi.addContent(content);
+        poiRepository.save(poi);
     }
 
-    public void deletePOIById(Long id){
-        poiRepository.deleteById(id);
-    }
-
-    public void saveAllPOIs(List<AbstractPOI> pois){
-        poiRepository.saveAll(pois);
-    }
-
-    public void deleteAllPOIs(List<AbstractPOI> pois){
-        poiRepository.deleteAll(pois);
-    }
-
-    public @NonNull Optional<AbstractPOI> getPOIByID(Long id){
-        return poiRepository.findById(id);
+    public AbstractMunicipalElement getPOIByID(Long id){
+        return poiRepository.getReferenceById(id);
     }
 
     public List<AbstractPOI> getPendingPOIs(){

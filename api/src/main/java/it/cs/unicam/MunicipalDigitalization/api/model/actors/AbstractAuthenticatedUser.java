@@ -2,6 +2,7 @@ package it.cs.unicam.MunicipalDigitalization.api.model.actors;
 
 
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
+import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractContent;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractItinerary;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractPOI;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AuthorizedPOI;
@@ -56,6 +57,12 @@ public abstract class AbstractAuthenticatedUser extends AbstractIUser implements
     private List<AbstractItinerary> authoredItineraries;
 
     /**
+     * This is the List of Abstract Contents that the author created
+     */
+    @OneToMany(mappedBy = "author")
+    private List<AbstractContent> authoredContents;
+
+    /**
      * The Constructor for a general Authenticated IUser.
      *
      * @param name         name of the IUser
@@ -71,6 +78,7 @@ public abstract class AbstractAuthenticatedUser extends AbstractIUser implements
     public AbstractAuthenticatedUser() {
         this.authoredPOIs = new ArrayList<>();
         this.authoredItineraries = new ArrayList<>();
+        this.authoredContents = new ArrayList<>();
     }
 
     @Override

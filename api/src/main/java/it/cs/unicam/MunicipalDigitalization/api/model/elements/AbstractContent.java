@@ -40,7 +40,8 @@ public abstract class AbstractContent implements IContent {
     /**
      * The municipal element referred by the content.
      */
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "ReferredPOI",nullable = true)
     private AbstractPOI referredPOI;
 
     /**
@@ -52,13 +53,15 @@ public abstract class AbstractContent implements IContent {
     /**
      * The municipal element referred by the content.
      */
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "ReferredItinerary",nullable = true)
     private AbstractItinerary referredItinerary;
     
     /**
      * The author of the content.
      */
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "Author",nullable = false)
     private AbstractAuthenticatedUser author;
     
     /**

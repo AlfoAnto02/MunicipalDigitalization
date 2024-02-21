@@ -22,11 +22,24 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
+    /**
+     * Add a POI to the user's list of authored POIs
+     *
+     * @param userID ID of the user
+     * @param poi POI to be added
+     */
     public void addPOI(Long userID, AbstractPOI poi){
         AbstractAuthenticatedUser user = userRepository.getReferenceById(userID);
         user.addPOI(poi);
         userRepository.save(user);
     }
+
+    /**
+     * Add an itinerary to the user's list of authored itineraries
+     *
+     * @param userID ID of the user
+     * @param itinerary Itinerary to be added
+     */
 
     public void addItinerary(Long userID, AbstractItinerary itinerary){
         AbstractAuthenticatedUser user = userRepository.getReferenceById(userID);

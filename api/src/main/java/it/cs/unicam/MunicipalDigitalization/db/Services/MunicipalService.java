@@ -21,24 +21,36 @@ public class MunicipalService {
         this.municipalRepository = municipalRepository;
     }
 
-    public @NonNull Optional<Municipality> getMunicipalByID(Long id){
-        return municipalRepository.findById(id);
-    }
-
-    public Optional<Municipality> getMunicipalByName(String name){
-        return municipalRepository.findByName(name);
-    }
-
+    /**
+     * Add a POI to a municipality
+     *
+     * @param municipalID ID of the municipality
+     * @param poi POI to add
+     */
     public void addPOI(Long municipalID, AbstractPOI poi){
         Municipality municipality = municipalRepository.getReferenceById(municipalID);
         municipality.uploadPOI(poi);
         municipalRepository.save(municipality);
     }
 
+    /**
+     * Add an itinerary to a municipality
+     *
+     * @param municipalID ID of the municipality
+     * @param itinerary Itinerary to add
+     */
     public void addItinerary(Long municipalID, AbstractItinerary itinerary){
         Municipality municipality = municipalRepository.getReferenceById(municipalID);
         municipality.uploadItinerary(itinerary);
         municipalRepository.save(municipality);
+    }
+
+    public @NonNull Optional<Municipality> getMunicipalByID(Long id){
+        return municipalRepository.findById(id);
+    }
+
+    public Optional<Municipality> getMunicipalByName(String name){
+        return municipalRepository.findByName(name);
     }
 
     public void saveMunicipal(Municipality municipality){
@@ -57,9 +69,6 @@ public class MunicipalService {
         municipalRepository.saveAll(municipalities);
     }
 
-    public void deleteAllMunicipals(Iterable<Municipality> municipalities){
-        municipalRepository.deleteAll(municipalities);
-    }
 
     public void deleteAllMunicipals(){
         municipalRepository.deleteAll();
