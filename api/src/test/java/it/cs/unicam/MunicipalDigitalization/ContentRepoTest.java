@@ -3,17 +3,15 @@ package it.cs.unicam.MunicipalDigitalization;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
 import it.cs.unicam.MunicipalDigitalization.api.model.actors.AuthorizedContributor;
-import it.cs.unicam.MunicipalDigitalization.api.util.ContentType;
-import it.cs.unicam.MunicipalDigitalization.api.util.Coordinate;
-import it.cs.unicam.MunicipalDigitalization.api.util.POIType;
-import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;
-import it.cs.unicam.MunicipalDigitalization.api.util.controllers.dto.ContentDTO;
-import it.cs.unicam.MunicipalDigitalization.api.util.controllers.dto.POIDTO;
+import it.cs.unicam.MunicipalDigitalization.api.util.*;
+import it.cs.unicam.MunicipalDigitalization.db.Services.POIUploadingService;
+import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.ContentDTO;
+import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.POIDTO;
 import it.cs.unicam.MunicipalDigitalization.db.Repository.MunicipalRepository;
 import it.cs.unicam.MunicipalDigitalization.db.Repository.UserRepository;
 import it.cs.unicam.MunicipalDigitalization.db.Services.ContentService;
 import it.cs.unicam.MunicipalDigitalization.db.Services.POIService;
-import it.cs.unicam.MunicipalDigitalization.db.Services.UploadingService;
+import it.cs.unicam.MunicipalDigitalization.db.Services.ContentUploadingService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -34,10 +32,12 @@ public class ContentRepoTest {
     private UserRepository userService;
 
     @Autowired
-    private UploadingService uploadingService;
+    private ContentUploadingService uploadingService;
 
     @Autowired
     private ContentService contentService;
+    @Autowired
+    private POIUploadingService poiUploadingService;
 
     @Test
     public void createAuthorizedContent(){
@@ -48,7 +48,6 @@ public class ContentRepoTest {
 
         //Create a Contributor
         AuthorizedContributor user = new AuthorizedContributor();
-        user.setRole(UserRole.AUTHORIZED_CONTRIBUTOR);
         user.setMunicipality(municipality);
         userService.save(user);
 
@@ -56,8 +55,8 @@ public class ContentRepoTest {
         System.out.println(municipality.getId());
 
         //Create a POI
-        POIDTO poiDTO = new POIDTO("Monteleone", POIType.Cinema, user.getId(), municipality.getId(), new Coordinate(1,1));
-        uploadingService.uploadPOI(poiDTO);
+        POIDTO poiDTO = new POIDTO("Monteleone", POIType.Cinema, user.getId(), municipality.getId(), new Coordinate(1,1), ElementStatus.PUBLISHED);
+        poiUploadingService.uploadPOI(poiDTO);
 
         //Create a Content
         ContentDTO contentDTO = new ContentDTO("Barcellona", 1L, null, user.getId(),
