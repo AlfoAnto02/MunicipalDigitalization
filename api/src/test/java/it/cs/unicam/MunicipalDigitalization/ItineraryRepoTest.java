@@ -5,15 +5,14 @@ import it.cs.unicam.MunicipalDigitalization.api.model.actors.AuthorizedContribut
 import it.cs.unicam.MunicipalDigitalization.api.util.Coordinate;
 import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 import it.cs.unicam.MunicipalDigitalization.api.util.POIType;
-import it.cs.unicam.MunicipalDigitalization.db.Services.ItineraryUploadingService;
-import it.cs.unicam.MunicipalDigitalization.db.Services.POIUploadingService;
+import it.cs.unicam.MunicipalDigitalization.db.Services.uploadingServices.ItineraryUploadingService;
+import it.cs.unicam.MunicipalDigitalization.db.Services.uploadingServices.POIUploadingService;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.ItineraryDTO;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.POIDTO;
 import it.cs.unicam.MunicipalDigitalization.db.Repository.ItineraryRepository;
 import it.cs.unicam.MunicipalDigitalization.db.Repository.MunicipalRepository;
 import it.cs.unicam.MunicipalDigitalization.db.Repository.UserRepository;
 import it.cs.unicam.MunicipalDigitalization.db.Services.POIService;
-import it.cs.unicam.MunicipalDigitalization.db.Services.ContentUploadingService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

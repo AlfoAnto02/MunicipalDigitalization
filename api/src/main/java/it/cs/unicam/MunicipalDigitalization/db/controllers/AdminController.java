@@ -3,6 +3,7 @@ package it.cs.unicam.MunicipalDigitalization.db.controllers;
 import it.cs.unicam.MunicipalDigitalization.api.model.actors.PlatformGestor;
 import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.Requests.MunicipalityRequest;
+import it.cs.unicam.MunicipalDigitalization.db.controllers.Requests.RoleRequest;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.MunicipalityDTO;
 import it.cs.unicam.MunicipalDigitalization.db.Services.AdminServices;
 import it.cs.unicam.MunicipalDigitalization.db.Services.MunicipalService;
@@ -18,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class MunicipalController {
+public class AdminController {
     private final AdminServices adminServices;
 
     private final UserService userService;
@@ -28,8 +29,8 @@ public class MunicipalController {
     private final MunicipalityDTOMapper municipalityDTOMapper;
 
     @Autowired
-    public MunicipalController(AdminServices adminServices, UserService userService, MunicipalService municipalService,
-                               MunicipalityDTOMapper municipalityDTOMapper) {
+    public AdminController(AdminServices adminServices, UserService userService, MunicipalService municipalService,
+                           MunicipalityDTOMapper municipalityDTOMapper) {
         this.adminServices = adminServices;
         this.userService = userService;
         this.municipalService = municipalService;
@@ -51,7 +52,7 @@ public class MunicipalController {
      * @return a response entity with the status of the operation
      */
 
-    @RequestMapping(value = "/adming/add/municipality", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/add/municipality", method = RequestMethod.POST)
     public ResponseEntity<Object> addMunicipality(@RequestBody MunicipalityRequest municipalityRequest){
         Long adminID = municipalityRequest.getAdminID();
         MunicipalityDTO municipalityDTO = municipalityRequest.getMunicipalityDTO();
@@ -70,6 +71,12 @@ public class MunicipalController {
                 .stream()
                 .map(municipalityDTOMapper),
                 HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/admin/give/role", method = RequestMethod.POST)
+    public ResponseEntity<Object> giveRole(@RequestBody RoleRequest roleRequest){
+        adminServices.addRole(roleRequest.getAdminID(), roleRequest.getUserID(), roleRequest.getRole());
+        return new ResponseEntity<>("Role given", HttpStatus.OK);
     }
 
 

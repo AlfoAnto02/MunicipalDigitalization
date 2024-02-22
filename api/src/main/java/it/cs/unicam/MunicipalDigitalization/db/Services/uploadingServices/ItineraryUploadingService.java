@@ -1,8 +1,11 @@
-package it.cs.unicam.MunicipalDigitalization.db.Services;
+package it.cs.unicam.MunicipalDigitalization.db.Services.uploadingServices;
 
 import it.cs.unicam.MunicipalDigitalization.api.util.DesignPattern.Builder.ItineraryBuilder;
 import it.cs.unicam.MunicipalDigitalization.api.util.DesignPattern.FactoryMethod.ItineraryBuilderFactory;
 import it.cs.unicam.MunicipalDigitalization.db.Services.Mediators.ItineraryMediator;
+import it.cs.unicam.MunicipalDigitalization.db.Services.MunicipalService;
+import it.cs.unicam.MunicipalDigitalization.db.Services.POIService;
+import it.cs.unicam.MunicipalDigitalization.db.Services.UserService;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.ItineraryDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,7 +52,7 @@ public class ItineraryUploadingService {
         itineraryBuilder.setItineraryName(itineraryDTO.name());
         itineraryBuilder.setItineraryAuthor(userService.getUserById(itineraryDTO.author()));
         itineraryBuilder.setItineraryDescription(itineraryDTO.description());
-        municipalService.getMunicipalByID(itineraryDTO.municipality()).ifPresent(itineraryBuilder::setItineraryMunicipality);
+        municipalService.findMunicipalByID(itineraryDTO.municipality()).ifPresent(itineraryBuilder::setItineraryMunicipality);
         itineraryBuilder.setItineraryCoordinates(itineraryDTO.coordinate());
         itineraryBuilder.addPOIs(poiService.getPOIsByIds(itineraryDTO.pois()));
         itineraryBuilder.setItineraryType();
