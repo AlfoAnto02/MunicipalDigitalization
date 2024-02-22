@@ -2,8 +2,8 @@ package it.cs.unicam.MunicipalDigitalization.db.Services;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
 import it.cs.unicam.MunicipalDigitalization.api.model.actors.AbstractAuthenticatedUser;
-import it.cs.unicam.MunicipalDigitalization.api.util.DesignPattern.GiveRoleCommand;
-import it.cs.unicam.MunicipalDigitalization.api.util.DesignPattern.RemoveRoleCommand;
+import it.cs.unicam.MunicipalDigitalization.api.util.DesignPattern.Command.GiveRoleCommand;
+import it.cs.unicam.MunicipalDigitalization.api.util.DesignPattern.Command.RemoveRoleCommand;
 import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.MunicipalityDTO;
 import org.springframework.beans.factory.annotation.Autowired;

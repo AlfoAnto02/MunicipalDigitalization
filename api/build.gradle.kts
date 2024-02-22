@@ -28,6 +28,7 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     implementation("org.xerial:sqlite-jdbc:3.25.2")
     implementation("org.hibernate.orm:hibernate-community-dialects:6.3.2.Final")
+    implementation("org.modelmapper:modelmapper:2.4.4")
 }
 
 java {
