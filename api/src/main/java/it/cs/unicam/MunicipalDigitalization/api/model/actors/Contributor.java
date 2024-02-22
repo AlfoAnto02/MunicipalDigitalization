@@ -1,12 +1,9 @@
 package it.cs.unicam.MunicipalDigitalization.api.model.actors;
 
-import it.cs.unicam.MunicipalDigitalization.api.io.ContributorView;
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
 import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;
 import jakarta.persistence.Entity;
-import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.Transient;
-import lombok.Getter;
 
 /**
  * This class represents a contributor, which is a type of user.
@@ -15,8 +12,6 @@ import lombok.Getter;
  */
 @Entity
 public class Contributor extends AbstractAuthenticatedUser {
-    @Transient
-    private ContributorView view;
 
     /**
      * Constructor for the Contributor class.
@@ -28,34 +23,11 @@ public class Contributor extends AbstractAuthenticatedUser {
 
     public Contributor(String name, String password, Municipality municipality) {
         super(name, password, municipality);
+        super.addRole(UserRole.CONTRIBUTOR);
     }
 
     public Contributor() {
-
-    }
-
-    /**
-     * This method is used to create a pending point of interest (POI).
-     * It delegates the creation to the view.
-     */
-    private void createPendingPOI() {
-        view.createPOI();
-    }
-
-    /**
-     * This method is used to create a pending itinerary.
-     * It delegates the creation to the view.
-     */
-    private void createPendingItinerary() {
-        view.createItinerary();
-    }
-
-    /**
-     * This method is used to create a pending content.
-     * It delegates the creation to the view.
-     */
-    private void createPendingContent() {
-        view.createContent();
+        super.addRole(UserRole.CONTRIBUTOR);
     }
 
 }

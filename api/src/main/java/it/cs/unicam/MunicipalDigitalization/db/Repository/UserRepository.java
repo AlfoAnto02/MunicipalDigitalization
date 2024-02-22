@@ -40,7 +40,7 @@ public interface UserRepository extends JpaRepository<AbstractAuthenticatedUser,
      * @param role Role of the User
      * @return a List of Users
      */
-    @Query("SELECT u FROM AbstractAuthenticatedUser u WHERE u.role=?1")
+    @Query("SELECT u FROM AbstractAuthenticatedUser u WHERE :role MEMBER OF u.role")
     List<AbstractAuthenticatedUser> findAllByRole(UserRole role);
 
     /**

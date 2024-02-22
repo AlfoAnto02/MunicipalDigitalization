@@ -1,11 +1,13 @@
 package it.cs.unicam.MunicipalDigitalization.api.model.actors;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractContent;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractItinerary;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractPOI;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AuthorizedPOI;
+import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -48,18 +50,21 @@ public abstract class AbstractAuthenticatedUser extends AbstractIUser implements
      * This is the list of Abstract POIs that the author created
      */
     @OneToMany(mappedBy = "author")
+    @JsonBackReference
     private List<AbstractPOI> authoredPOIs;
 
     /**
      * This is the List of Abstract Itineraries that the author created
      */
     @OneToMany(mappedBy = "author")
+    @JsonBackReference
     private List<AbstractItinerary> authoredItineraries;
 
     /**
      * This is the List of Abstract Contents that the author created
      */
     @OneToMany(mappedBy = "author")
+    @JsonBackReference
     private List<AbstractContent> authoredContents;
 
     /**
@@ -73,9 +78,26 @@ public abstract class AbstractAuthenticatedUser extends AbstractIUser implements
         super(municipality);
         this.name = name;
         this.password = password;
+        this.authoredPOIs = new ArrayList<>();
+        this.authoredItineraries = new ArrayList<>();
+        this.authoredContents = new ArrayList<>();
+    }
+    public AbstractAuthenticatedUser() {
+        this.authoredPOIs = new ArrayList<>();
+        this.authoredItineraries = new ArrayList<>();
+        this.authoredContents = new ArrayList<>();
     }
 
-    public AbstractAuthenticatedUser() {
+    /**
+     * The Constructor for a general Authenticated IUser that does not have a Municipality.
+     * It is used By the PlatformGestor because it does not have a Municipality.
+     *
+     * @param name     name of the IUser
+     * @param password password of the IUser
+     */
+    public AbstractAuthenticatedUser(String name, String password) {
+        this.name = name;
+        this.password = password;
         this.authoredPOIs = new ArrayList<>();
         this.authoredItineraries = new ArrayList<>();
         this.authoredContents = new ArrayList<>();
