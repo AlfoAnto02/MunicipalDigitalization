@@ -1,12 +1,13 @@
-package it.cs.unicam.MunicipalDigitalization.api.util.controllers.dto;
+package it.cs.unicam.MunicipalDigitalization.db.controllers.dto;
 
 import it.cs.unicam.MunicipalDigitalization.api.util.Coordinate;
 
 import java.util.List;
 
 public record MunicipalityDTO(
-        List<Coordinate> territory,
-        String name
+        String name,
+        List<Coordinate> territory
+
 )
 {
 }

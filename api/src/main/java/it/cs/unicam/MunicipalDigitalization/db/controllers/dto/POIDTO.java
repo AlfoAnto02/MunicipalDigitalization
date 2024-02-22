@@ -1,4 +1,4 @@
-package it.cs.unicam.MunicipalDigitalization.api.util.controllers.dto;
+package it.cs.unicam.MunicipalDigitalization.db.controllers.dto;
 
 import it.cs.unicam.MunicipalDigitalization.api.util.Coordinate;
 import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;

@@ -8,6 +8,9 @@ import it.cs.unicam.MunicipalDigitalization.db.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * This class is a mediator for the itinerary service, the municipality service and the user service.
+ */
 @Component
 public class ItineraryMediator {
     private final ItineraryService itineraryService;
@@ -30,11 +33,11 @@ public class ItineraryMediator {
         Long municipalityId = itinerary.getMunicipality().getId();
         Long authorId = itinerary.getAuthor().getId();
 
-        if(itinerary.getMunicipality().getPOIList().stream().anyMatch(p -> p.getId().equals(itinerary.getId()))){
+        if(!itinerary.getMunicipality().getPOIList().stream().anyMatch(p -> p.getId().equals(itinerary.getId()))){
             municipalityService.addItinerary(itinerary.getMunicipality().getId(), itinerary);
         }
 
-        if(itinerary.getAuthor().getAuthoredPOIs().stream().anyMatch(p -> p.getId().equals(itinerary.getId()))){
+        if(!itinerary.getAuthor().getAuthoredPOIs().stream().anyMatch(p -> p.getId().equals(itinerary.getId()))){
             userService.addItinerary(itinerary.getAuthor().getId(), itinerary);
         }
     }

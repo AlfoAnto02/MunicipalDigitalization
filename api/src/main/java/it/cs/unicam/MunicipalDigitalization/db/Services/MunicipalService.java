@@ -1,14 +1,17 @@
 package it.cs.unicam.MunicipalDigitalization.db.Services;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
+import it.cs.unicam.MunicipalDigitalization.api.model.actors.AbstractAuthenticatedUser;
 import it.cs.unicam.MunicipalDigitalization.api.model.actors.AuthorizedContributor;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractItinerary;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractPOI;
+import it.cs.unicam.MunicipalDigitalization.api.util.MatchingAlgorithms;
 import it.cs.unicam.MunicipalDigitalization.db.Repository.MunicipalRepository;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -20,6 +23,11 @@ public class MunicipalService {
     @Autowired
     public MunicipalService(MunicipalRepository municipalRepository) {
         this.municipalRepository = municipalRepository;
+    }
+
+    public void saveMunicipal(Municipality municipality){
+        if (!MatchingAlgorithms.isMunicipalSimilarToMunicipalityList(municipality,municipalRepository.findAll())) municipalRepository.save(municipality);
+        else throw new IllegalArgumentException("Municipality already exists");
     }
 
     /**
@@ -46,43 +54,30 @@ public class MunicipalService {
         municipalRepository.save(municipality);
     }
 
-    public @NonNull Optional<Municipality> getMunicipalByID(Long id){
-        return municipalRepository.findById(id);
+
+    public Municipality getMunicipalByID(Long id){
+        return municipalRepository.getReferenceById(id);
     }
 
     public Optional<Municipality> getMunicipalByName(String name){
         return municipalRepository.findByName(name);
     }
 
-    public void saveMunicipal(Municipality municipality){
-        municipalRepository.save(municipality);
-    }
-
-    public void deleteMunicipal(Municipality municipality){
-        municipalRepository.delete(municipality);
-    }
-
     public void deleteMunicipalById(Long id){
         municipalRepository.deleteById(id);
     }
 
-    public void saveAllMunicipals(Iterable<Municipality> municipalities){
-        municipalRepository.saveAll(municipalities);
-    }
-
-
-    public void deleteAllMunicipals(){
-        municipalRepository.deleteAll();
-    }
-
-    public Iterable<Municipality> getAllMunicipals(){
+    public List<Municipality> getAllMunicipals(){
         return municipalRepository.findAll();
     }
 
-
-    public void saveUser(AuthorizedContributor contributor, Long id) {
+    public void addUser(Long id, AbstractAuthenticatedUser user) {
         Municipality municipality = municipalRepository.getReferenceById(id);
-        municipality.addUser(contributor);
+        municipality.addUser(user);
         municipalRepository.save(municipality);
+    }
+
+    public Optional<Municipality> findMunicipalByID(Long municipality) {
+        return municipalRepository.findById(municipality);
     }
 }

@@ -1,7 +1,7 @@
 package it.cs.unicam.MunicipalDigitalization.db.mappers;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractPOI;
-import it.cs.unicam.MunicipalDigitalization.api.util.controllers.dto.POIDTO;
+import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.POIDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.function.Function;

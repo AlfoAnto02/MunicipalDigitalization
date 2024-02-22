@@ -5,6 +5,7 @@ import lombok.NonNull;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -34,4 +35,12 @@ public interface MunicipalRepository extends JpaRepository<Municipality,Long> {
      * This is a Method to remove all the Municipalities
      */
     void removeAllByName(@NonNull String name);
+
+    /**
+     * This is a Method to find all the Municipalities
+     *
+     * @return a List of Municipalities
+     */
+    @Query("SELECT m FROM Municipality m")
+    List<Municipality> findAll();
 }

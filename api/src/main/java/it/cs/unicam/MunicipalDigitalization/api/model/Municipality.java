@@ -1,6 +1,7 @@
 package it.cs.unicam.MunicipalDigitalization.api.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import it.cs.unicam.MunicipalDigitalization.api.model.actors.AbstractAuthenticatedUser;
 import it.cs.unicam.MunicipalDigitalization.api.model.actors.AuthorizedContributor;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.*;
@@ -41,9 +42,17 @@ public class Municipality {
     private Long id;
 
     /**
+     * The name of the municipality.
+     */
+    @Column(nullable = false)
+    private String name;
+
+    /**
      * The geographical coordinates of the municipality.
      */
-    @Transient
+    @ElementCollection
+    @CollectionTable(name = "territory", joinColumns = @JoinColumn(name = "municipality_id"))
+    @Column(name = "coordinate")
     private List<Coordinate> territory;
 
     /**
@@ -61,16 +70,11 @@ public class Municipality {
     private  List<AbstractItinerary> listOfItineraries;
 
     /**
-     * The name of the municipality.
-     */
-    @Column(nullable = false)
-    private String name;
-
-    /**
      * The manager for pending operations in the municipality.
      */
     @Getter
     @Transient
+    @JsonIgnore
     private final PendingManager pendingManager;
 
     /**
@@ -259,7 +263,7 @@ public class Municipality {
         return element.toString();
     }
 
-    public void addUser(AuthorizedContributor contributor) {
+    public void addUser(AbstractAuthenticatedUser contributor) {
         this.listOfIUsers.add(contributor);
     }
 }
