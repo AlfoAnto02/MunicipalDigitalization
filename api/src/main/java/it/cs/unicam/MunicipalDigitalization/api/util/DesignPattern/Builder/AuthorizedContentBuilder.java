@@ -1,10 +1,11 @@
-package it.cs.unicam.MunicipalDigitalization.api.util.DesignPattern;
+package it.cs.unicam.MunicipalDigitalization.api.util.DesignPattern.Builder;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.actors.AbstractAuthenticatedUser;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.*;
 import it.cs.unicam.MunicipalDigitalization.api.util.ContentType;
 import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;
+import org.springframework.stereotype.Component;
 
 import static it.cs.unicam.MunicipalDigitalization.api.util.MatchingAlgorithms.containsSpecialCharacters;
 import static it.cs.unicam.MunicipalDigitalization.api.util.MatchingAlgorithms.isLink;
@@ -12,6 +13,7 @@ import static it.cs.unicam.MunicipalDigitalization.api.util.MatchingAlgorithms.i
 /**
  * This class represents a builder for authorized content
  */
+@Component
 public class AuthorizedContentBuilder implements ContentBuilder{
     private AbstractAuthenticatedUser author;
     private String name;
@@ -26,7 +28,7 @@ public class AuthorizedContentBuilder implements ContentBuilder{
     @Override
     public void setContentAuthor(AbstractAuthenticatedUser author) {
         if(author == null) throw new IllegalArgumentException("Author cannot be null");
-        if(author.getRole() == UserRole.AUTHORIZED_CONTRIBUTOR || author.getRole() == UserRole.CURATOR) this.author = author;
+        if(author.getRole().contains(UserRole.AUTHORIZED_CONTRIBUTOR)|| author.getRole().contains(UserRole.CURATOR)) this.author = author;
         else throw new IllegalArgumentException("Author must be a contributor");
     }
 

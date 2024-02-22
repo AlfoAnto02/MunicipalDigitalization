@@ -1,4 +1,4 @@
-package it.cs.unicam.MunicipalDigitalization.api.util.DesignPattern;
+package it.cs.unicam.MunicipalDigitalization.api.util.DesignPattern.Builder;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.actors.AbstractAuthenticatedUser;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractItinerary;
@@ -8,6 +8,7 @@ import it.cs.unicam.MunicipalDigitalization.api.model.elements.PendingContent;
 import it.cs.unicam.MunicipalDigitalization.api.util.ContentType;
 import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;
+import org.springframework.stereotype.Component;
 
 import static it.cs.unicam.MunicipalDigitalization.api.util.MatchingAlgorithms.containsSpecialCharacters;
 import static it.cs.unicam.MunicipalDigitalization.api.util.MatchingAlgorithms.isLink;
@@ -15,6 +16,7 @@ import static it.cs.unicam.MunicipalDigitalization.api.util.MatchingAlgorithms.i
 /**
  * This class represents a builder for a pending content
  */
+@Component
 public class PendingContentBuilder implements ContentBuilder{
 
     private AbstractAuthenticatedUser author;
@@ -30,7 +32,7 @@ public class PendingContentBuilder implements ContentBuilder{
     @Override
     public void setContentAuthor(AbstractAuthenticatedUser author) {
         if(author == null) throw new IllegalArgumentException("Author cannot be null");
-        if(author.getRole() == UserRole.CONTRIBUTOR) this.author = author;
+        if(author.getRole().contains(UserRole.CONTRIBUTOR)) this.author = author;
         else throw new IllegalArgumentException("Author must be a contributor");
     }
 
