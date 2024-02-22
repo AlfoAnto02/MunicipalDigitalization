@@ -11,7 +11,7 @@ import static it.cs.unicam.MunicipalDigitalization.api.util.MatchingAlgorithms.c
 import static it.cs.unicam.MunicipalDigitalization.api.util.MatchingAlgorithms.isLink;
 
 /**
- * This class represents a builder for authorized content
+ * This class represents a builder for an authorized content
  */
 @Component
 public class AuthorizedContentBuilder implements ContentBuilder{
@@ -24,6 +24,7 @@ public class AuthorizedContentBuilder implements ContentBuilder{
     private AbstractPOI referredPOI;
     private AbstractItinerary referredItinerary;
     private ElementStatus contentStatus;
+
 
     @Override
     public void setContentAuthor(AbstractAuthenticatedUser author) {
@@ -85,6 +86,9 @@ public class AuthorizedContentBuilder implements ContentBuilder{
         this.contentStatus = ElementStatus.PUBLISHED;
     }
 
+    /**
+     * This method resets the builder fields
+     */
     public void reset(){
         this.author = null;
         this.name = null;

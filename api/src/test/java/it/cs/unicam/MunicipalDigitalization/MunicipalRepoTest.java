@@ -15,6 +15,9 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * This class tests the Municipality repository.
+ */
 @SpringBootTest
 @Transactional
 public class MunicipalRepoTest {
@@ -43,6 +46,9 @@ public class MunicipalRepoTest {
         municipalRepository.deleteMunicipalById(municipality.getId());
     }
 
+    /**
+     * Test the add of a Municipality in the Municipality repository.
+     */
     @Test
     public void testAddMunicipal(){
 
@@ -53,6 +59,9 @@ public class MunicipalRepoTest {
         System.out.println(municipalRepository.getMunicipalByName("Municipal").get().getName());
     }
 
+    /**
+     * Test the remove of a municipality in the Municipality repository.
+     */
     @Test
     public void testRemoveMunicipal(){
 
@@ -63,6 +72,9 @@ public class MunicipalRepoTest {
         assertTrue(municipalRepository.getMunicipalByName("Municipal").isEmpty());
     }
 
+    /**
+     * Test the update of a Municipality in the Municipality repository.
+     */
     @Test
     public void testUpdateMunicipal(){
 

@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * This class represents the Rest Controller for the admin operations
+ */
 @RestController
 public class AdminController {
     private final AdminServices adminServices;
@@ -37,6 +40,9 @@ public class AdminController {
         this.municipalityDTOMapper = municipalityDTOMapper;
     }
 
+    /**
+     * Initializes the platform gestor if it is not present in the database.
+     */
     @PostConstruct
     public void init() {
         if (userService.getUsersByRole(UserRole.PLATFORM_GESTOR).isEmpty()){
@@ -73,6 +79,12 @@ public class AdminController {
                 HttpStatus.OK);
     }
 
+    /**
+     * Gives a role to a user
+     *
+     * @param roleRequest the request containing the admin id, the user id and the role to give
+     * @return a response entity with the status of the operation
+     */
     @RequestMapping(value = "/admin/give/role", method = RequestMethod.POST)
     public ResponseEntity<Object> giveRole(@RequestBody RoleRequest roleRequest){
         adminServices.addRole(roleRequest.getAdminID(), roleRequest.getUserID(), roleRequest.getRole());

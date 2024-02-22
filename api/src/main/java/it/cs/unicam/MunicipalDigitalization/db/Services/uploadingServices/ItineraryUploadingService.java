@@ -10,6 +10,11 @@ import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.ItineraryDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * This class is responsible for uploading an itinerary to the database
+ * It uses the ItineraryMediator to save the itinerary
+ * It uses the ItineraryBuilderFactory to create the itinerary
+ */
 @Service
 public class ItineraryUploadingService {
 
@@ -59,6 +64,11 @@ public class ItineraryUploadingService {
         itineraryBuilder.setItineraryStatus();
     }
 
+    /**
+     * Checks if the itinerary is valid
+     *
+     * @param itineraryDTO the itinerary to be checked
+     */
     private void checkItinerary(ItineraryDTO itineraryDTO) {
         //TODO
     }

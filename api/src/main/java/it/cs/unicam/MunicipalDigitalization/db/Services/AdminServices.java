@@ -9,6 +9,10 @@ import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.MunicipalityDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * Service class for admin operations.
+ * It contains methods to remove and add roles to users and to create municipalities.
+ */
 @Service
 public class AdminServices {
     private final UserService userService;

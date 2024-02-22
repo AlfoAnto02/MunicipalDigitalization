@@ -24,6 +24,11 @@ public class ContentMediator {
         this.itineraryService = itineraryService;
     }
 
+    /**
+     * This method saves the content in the database and adds it to the POI or the itinerary.
+     *
+     * @param content the content to save
+     */
     public void saveContent(AbstractContent content) {
         contentService.saveContent(content);
         if (content.getReferredPOI() != null) {

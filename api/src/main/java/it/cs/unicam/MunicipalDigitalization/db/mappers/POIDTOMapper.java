@@ -6,6 +6,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.function.Function;
 
+/**
+ * This class is used to map a POI object to a POIDTO object.
+ * It implements the Function interface.
+ */
 @Service
 public class POIDTOMapper implements Function<AbstractPOI, POIDTO> {
     @Override

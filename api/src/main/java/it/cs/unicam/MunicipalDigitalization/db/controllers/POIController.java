@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * This class represents the controller for points of interest (POIs).
+ * This class is a RestController that handles the requests related to the POI entity.
  */
 
 @RestController

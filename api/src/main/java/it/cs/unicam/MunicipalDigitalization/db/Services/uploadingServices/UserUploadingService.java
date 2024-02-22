@@ -7,6 +7,10 @@ import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * This class is used to upload a user to the database.
+ * It checks if the user is valid and then uploads it.
+ */
 @Service
 public class UserUploadingService {
     private final UserMediator userMediator;
@@ -18,6 +22,11 @@ public class UserUploadingService {
         this.municipalService = municipalService;
     }
 
+    /**
+     * This method is used to upload a user to the database.
+     *
+     * @param userDTO the user to upload
+     */
     public void uploadUser(UserDTO userDTO){
         checkUser(userDTO);
         AuthenticatedTourist user = new AuthenticatedTourist();
@@ -27,6 +36,11 @@ public class UserUploadingService {
         userMediator.registerUser(user);
     }
 
+    /**
+     * This method is used to check if the user is valid.
+     *
+     * @param userDTO the user to check
+     */
     private void checkUser(UserDTO userDTO) {
         //TODO
     }

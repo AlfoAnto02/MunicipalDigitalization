@@ -22,15 +22,29 @@ public class AuthorizedContent extends AbstractContent {
      */
     public AuthorizedContent() {
         super();
+        this.setElementStatus(ElementStatus.PUBLISHED);
     }
 
+    /**
+     * The constructor of the class for a referredPOI Content
+     *
+     * @param referredPOI referredPOI
+     * @param name name of the content
+     * @param author author of the content
+     * @param type type of the content
+     * @param description description of the content
+     * @param link link of the content
+     * @param photo photo of the content
+     */
     public AuthorizedContent(AbstractPOI referredPOI, String name, AbstractAuthenticatedUser author,
-                             ElementStatus elementStatus, ContentType type, String description, String link, String photo) {
-        super(referredPOI, name, author, elementStatus, type, description, link, photo);
+                              ContentType type, String description, String link, String photo) {
+        super(referredPOI, name, author, type, description, link, photo);
+        this.setElementStatus(ElementStatus.PUBLISHED);
     }
 
     public AuthorizedContent(String name, AbstractItinerary referredItinerary, AbstractAuthenticatedUser author,
-                             ElementStatus elementStatus, ContentType type, String description, String link, String photo) {
-        super(name, referredItinerary, author, elementStatus, type, description, link, photo);
+                             ContentType type, String description, String link, String photo) {
+        super(name, referredItinerary, author, type, description, link, photo);
+        this.setElementStatus(ElementStatus.PUBLISHED);
     }
 }

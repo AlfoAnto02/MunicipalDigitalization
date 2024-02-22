@@ -18,7 +18,9 @@ import org.springframework.transaction.annotation.Transactional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-
+/**
+ * This class tests the POIRepository
+ */
 @SpringBootTest
 @Transactional
 public class POIRepoTest {
@@ -36,6 +38,9 @@ public class POIRepoTest {
     private POIUploadingService uploadingService;
 
 
+    /**
+     * This method tests the creation of a POI
+     */
     @Test
     public void createAuthorizedPOI(){
         //Create a Municipality

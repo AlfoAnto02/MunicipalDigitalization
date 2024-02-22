@@ -23,6 +23,9 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * This class is used to test the ItineraryRepository.
+ */
 @SpringBootTest
 @Transactional
 public class ItineraryRepoTest {
@@ -44,6 +47,9 @@ public class ItineraryRepoTest {
     @Autowired
     private POIUploadingService poiUploadingService;
 
+    /**
+     * This method is used to test the creation of an authorized itinerary.
+     */
     @Test
     public void createAuthorizedItinerary(){
         //Create a Municipality

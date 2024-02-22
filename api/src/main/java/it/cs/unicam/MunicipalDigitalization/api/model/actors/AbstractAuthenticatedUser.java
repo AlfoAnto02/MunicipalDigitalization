@@ -103,6 +103,34 @@ public abstract class AbstractAuthenticatedUser extends AbstractIUser implements
         this.authoredContents = new ArrayList<>();
     }
 
+    /**
+     * This method is used to add a POI to the list of authored POIs
+     *
+     * @param poi the POI to add
+     */
+    public void addPOI(AbstractPOI poi) {
+        this.authoredPOIs.add(poi);
+    }
+
+    /**
+     * This method is used to add an Itinerary to the list of authored Itineraries
+     *
+     * @param itinerary itinerary to add
+     */
+
+    public void addItinerary(AbstractItinerary itinerary) {
+        this.authoredItineraries.add(itinerary);
+    }
+
+    /**
+     * This method is used to add a Content to the list of authored Contents
+     *
+     * @param content content to add
+     */
+    public void addContent(AbstractContent content) {
+        this.authoredContents.add(content);
+    }
+
     @Override
     public String getName() {
         return this.name;
@@ -133,11 +161,4 @@ public abstract class AbstractAuthenticatedUser extends AbstractIUser implements
         this.password = password;
     }
 
-    public void addPOI(AbstractPOI poi) {
-        this.authoredPOIs.add(poi);
-    }
-
-    public void addItinerary(AbstractItinerary itinerary) {
-        this.authoredItineraries.add(itinerary);
-    }
 }

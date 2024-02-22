@@ -6,6 +6,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.function.Function;
 
+/**
+ * This class is used to map a Municipality object to a MunicipalityDTO object.
+ * It implements the Function interface.
+ */
 @Service
 public class MunicipalityDTOMapper implements Function<Municipality, MunicipalityDTO> {
 

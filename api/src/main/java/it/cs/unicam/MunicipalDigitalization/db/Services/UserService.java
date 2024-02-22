@@ -11,6 +11,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Service class for the User entity
+ * It provides methods for adding POIs and Itineraries to the user's list of authored elements
+ */
 @Service
 public class UserService {
 

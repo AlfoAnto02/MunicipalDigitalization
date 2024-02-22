@@ -14,6 +14,9 @@ import java.util.List;
 
 import static it.cs.unicam.MunicipalDigitalization.api.util.MatchingAlgorithms.containsSpecialCharacters;
 
+/**
+ * This class represents the building of an AuthorizedItinerary
+ */
 @Component
 public class AuthorizedItineraryBuilder implements ItineraryBuilder{
     private List<AbstractPOI> poiList;

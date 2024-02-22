@@ -107,19 +107,17 @@ public abstract class AbstractContent implements IContent {
      * @param referredPOI the municipal element referred by the content.
      * @param name the name of the content.
      * @param author the author of the content.
-     * @param elementStatus the status of the Element, if it is Pending or Published.
      * @param type the type of the content.
      * @param description the description of the content.
      * @param link the link of the content.
      * @param photo the photo of the content.
      */
     public AbstractContent(AbstractPOI referredPOI, String name,
-                           AbstractAuthenticatedUser author, ElementStatus elementStatus, ContentType type,
+                           AbstractAuthenticatedUser author, ContentType type,
                            String description, String link, String photo) {
         this.referredPOI = referredPOI;
         this.name = name;
         this.author = author;
-        this.elementStatus = elementStatus;
         this.type = type;
         this.description = description;
         this.link = link;
@@ -133,7 +131,6 @@ public abstract class AbstractContent implements IContent {
      * @param referredItinerary the municipal element referred by the content.
      * @param name the name of the content.
      * @param author the author of the content.
-     * @param elementStatus the status of the Element, if it is Pending or Published.
      * @param type the type of the content.
      * @param description the description of the content.
      * @param link the link of the content.
@@ -141,11 +138,10 @@ public abstract class AbstractContent implements IContent {
      */
 
     public AbstractContent(String name, AbstractItinerary referredItinerary, AbstractAuthenticatedUser author,
-                           ElementStatus elementStatus, ContentType type, String description, String link, String photo) {
+                            ContentType type, String description, String link, String photo) {
         this.name = name;
         this.referredItinerary = referredItinerary;
         this.author = author;
-        this.elementStatus = elementStatus;
         this.type = type;
         this.description = description;
         this.link = link;

@@ -26,6 +26,11 @@ public class ItineraryMediator {
         this.userService = userService;
     }
 
+    /**
+     * This method saves an itinerary and adds it to the municipality and the author.
+     *
+     * @param itinerary the itinerary to save
+     */
     public void saveItinerary(AbstractItinerary itinerary){
         this.itineraryService.saveItinerary(itinerary);
 

@@ -11,6 +11,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * This class is a service for the ContentRepository. It provides methods to save and retrieve contents from the database.
+ */
 @Service
 public class ContentService {
 
@@ -31,6 +34,8 @@ public class ContentService {
         if (!MatchingAlgorithms.isContentSimilarToContentList(content,contentRepository.findAll())) contentRepository.save(content);
         else throw new IllegalArgumentException("Content already exists");
     }
+
+
 
     public AbstractContent getContentById(Long id) {
         return contentRepository.getReferenceById(id);

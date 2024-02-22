@@ -9,6 +9,9 @@ import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.POIDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * Service class for uploading POIs to the database
+ */
 @Service
 public class POIUploadingService {
     private final MunicipalService municipalService;
@@ -38,6 +41,12 @@ public class POIUploadingService {
         poiMediator.savePOI(builder.build());
     }
 
+    /**
+     * Builds a POI from a DTO using the right builder
+     *
+     * @param poiBuilder the builder to be used
+     * @param poidto the DTO to be used
+     */
     private void buildPOI(POIBuilder poiBuilder, POIDTO poidto){
         poiBuilder.setPOIAuthor(userService.getUserById(poidto.author()));
         poiBuilder.setPOICoordinates(poidto.coordinate());
@@ -47,6 +56,11 @@ public class POIUploadingService {
         municipalService.findMunicipalByID(poidto.municipality()).ifPresent(poiBuilder::setPOIMunicipality);
     }
 
+    /**
+     * Checks if the POI is valid
+     *
+     * @param poiDTO the POI to be checked
+     */
     private void checkPOI(POIDTO poiDTO) {
         //TODO
     }

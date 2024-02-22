@@ -14,6 +14,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Service for the POI entity
+ * it contains the logic to save, update and delete a POI
+ * it also contains the logic to add a content to a POI
+ */
 @Service
 public class POIService {
     private final POIRepository poiRepository;

@@ -14,6 +14,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Service class for the Municipality entity
+ * It provides methods to interact with the database
+ */
 @Service
 public class MunicipalService {
 
@@ -25,6 +29,11 @@ public class MunicipalService {
         this.municipalRepository = municipalRepository;
     }
 
+    /**
+     * Save a municipality to the database if it does not already exist
+     *
+     * @param municipality Municipality to save
+     */
     public void saveMunicipal(Municipality municipality){
         if (!MatchingAlgorithms.isMunicipalSimilarToMunicipalityList(municipality,municipalRepository.findAll())) municipalRepository.save(municipality);
         else throw new IllegalArgumentException("Municipality already exists");
@@ -39,6 +48,18 @@ public class MunicipalService {
     public void addPOI(Long municipalID, AbstractPOI poi){
         Municipality municipality = municipalRepository.getReferenceById(municipalID);
         municipality.uploadPOI(poi);
+        municipalRepository.save(municipality);
+    }
+
+    /**
+     * Add a user to a municipality
+     *
+     * @param id ID of the municipality
+     * @param user User to add
+     */
+    public void addUser(Long id, AbstractAuthenticatedUser user) {
+        Municipality municipality = municipalRepository.getReferenceById(id);
+        municipality.addUser(user);
         municipalRepository.save(municipality);
     }
 
@@ -69,12 +90,6 @@ public class MunicipalService {
 
     public List<Municipality> getAllMunicipals(){
         return municipalRepository.findAll();
-    }
-
-    public void addUser(Long id, AbstractAuthenticatedUser user) {
-        Municipality municipality = municipalRepository.getReferenceById(id);
-        municipality.addUser(user);
-        municipalRepository.save(municipality);
     }
 
     public Optional<Municipality> findMunicipalByID(Long municipality) {

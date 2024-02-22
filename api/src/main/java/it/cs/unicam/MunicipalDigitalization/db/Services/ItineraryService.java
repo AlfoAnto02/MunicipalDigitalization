@@ -13,6 +13,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * This class is a service for the itinerary entity.
+ * It provides methods to save an itinerary, add a content to an itinerary and get an itinerary by id.
+ */
 @Service
 public class ItineraryService {
 
@@ -46,6 +50,12 @@ public class ItineraryService {
         saveItinerary(itinerary);
     }
 
+    /**
+     * Get an itinerary by id
+     *
+     * @param id the id of the itinerary
+     * @return the itinerary
+     */
     public AbstractMunicipalElement getItineraryById(Long id) {
         return itineraryRepository.getReferenceById(id);
     }

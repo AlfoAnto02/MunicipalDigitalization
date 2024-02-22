@@ -14,6 +14,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * This class tests the UserRepo class.
+ */
 @SpringBootTest
 @Transactional
 public class UserRepoTest {
@@ -26,6 +29,9 @@ public class UserRepoTest {
 
     private Municipality muni;
 
+    /**
+     * This method tests the addUser method of the UserRepo class.
+     */
     @Test
     public void testAddUser(){
         //Create a new AuthorizedContributor
@@ -41,6 +47,9 @@ public class UserRepoTest {
         assertEquals("Alfredo", userService.getUserById(user.getId()).getName());
     }
 
+    /**
+     * This method tests the removeUser method of the UserRepo class.
+     */
     @Test
     public void testRemoveUser(){
         //Create a new AuthorizedContributor

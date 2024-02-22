@@ -23,6 +23,11 @@ public class POIMediator {
         this.userService = userService;
     }
 
+    /**
+     * This method saves a POI and associates it with the municipality and the author.
+     *
+     * @param poi The POI to save.
+     */
     public void savePOI(AbstractPOI poi) {
         poiService.savePOI(poi);
 

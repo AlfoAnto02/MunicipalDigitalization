@@ -13,6 +13,10 @@ import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.ContentDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * This class is responsible for uploading content to the system.
+ * It uses the ContentBuilderFactory to create the correct builder for the user that is uploading the content.
+ */
 @Service
 public class ContentUploadingService {
     private final UserService userService;
@@ -32,6 +36,11 @@ public class ContentUploadingService {
         this.contentBuilderFactory = contentBuilderFactory;
     }
 
+    /**
+     * Uploads a content to the system
+     *
+     * @param contentDTO the content to be uploaded
+     */
     public void uploadContent(ContentDTO contentDTO) {
         checkContent(contentDTO);
         ContentBuilder builder = contentBuilderFactory.createBuilderForUser(userService.getUserById(contentDTO.author()));
@@ -40,7 +49,7 @@ public class ContentUploadingService {
     }
 
     /**
-     * Builds a content
+     * Builds a content using the correct builder
      *
      * @param contentBuilder the builder to be used
      * @param contentDTO the content to be built
@@ -59,6 +68,11 @@ public class ContentUploadingService {
         contentBuilder.setContentStatus();
     }
 
+    /**
+     * Checks if the content is valid
+     *
+     * @param contentDTO the content to be checked
+     */
     private void checkContent(ContentDTO contentDTO) {
         //TODO
     }
