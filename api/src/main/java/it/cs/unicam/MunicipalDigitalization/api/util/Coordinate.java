@@ -1,11 +1,14 @@
 package it.cs.unicam.MunicipalDigitalization.api.util;
 
+import jakarta.persistence.Embeddable;
+
 import java.util.Objects;
 
 /**
  * This class represents a set of coordinates.
  * A coordinate has an x and y value.
  */
+@Embeddable
 public class Coordinate {
 
     /**
@@ -27,6 +30,10 @@ public class Coordinate {
     public Coordinate(double x, double y) {
         this.x = x;
         this.y = y;
+    }
+
+    public Coordinate() {
+
     }
 
     /**
@@ -76,5 +83,13 @@ public class Coordinate {
     @Override
     public int hashCode() {
         return Objects.hash(x, y);
+    }
+
+    @Override
+    public String toString() {
+        return "Coordinate{" +
+                "x=" + x +
+                ", y=" + y +
+                '}';
     }
 }

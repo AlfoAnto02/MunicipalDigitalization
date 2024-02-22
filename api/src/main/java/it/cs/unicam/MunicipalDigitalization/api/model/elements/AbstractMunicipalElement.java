@@ -1,5 +1,6 @@
 package it.cs.unicam.MunicipalDigitalization.api.model.elements;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
 import it.cs.unicam.MunicipalDigitalization.api.util.Coordinate;
 import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
@@ -34,6 +35,7 @@ public abstract class AbstractMunicipalElement implements IMunicipalElement {
      */
     @ManyToOne
     @JoinColumn(name = "municipality",nullable = false)
+    @JsonManagedReference
     private Municipality municipality;
     /**
      * The date when the point MunicipalElement was created
@@ -51,7 +53,8 @@ public abstract class AbstractMunicipalElement implements IMunicipalElement {
     /**
      * The coordinate of the MunicipalElement
      */
-    @Transient
+
+    @Embedded
     private Coordinate coordinate;
 
     /**

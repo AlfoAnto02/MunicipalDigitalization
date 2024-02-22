@@ -1,6 +1,9 @@
 package it.cs.unicam.MunicipalDigitalization.api.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import it.cs.unicam.MunicipalDigitalization.api.model.actors.AbstractAuthenticatedUser;
+import it.cs.unicam.MunicipalDigitalization.api.model.actors.AuthorizedContributor;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.*;
 import it.cs.unicam.MunicipalDigitalization.api.util.Coordinate;
 import it.cs.unicam.MunicipalDigitalization.api.util.PendingManager;
@@ -39,40 +42,46 @@ public class Municipality {
     private Long id;
 
     /**
-     * The geographical coordinates of the municipality.
-     */
-    @Transient
-    private List<Coordinate> territory;
-
-    /**
-     * The list of points of interest in the municipality.
-     */
-    @OneToMany(mappedBy = "municipality", cascade = CascadeType.ALL)
-    private final List<AbstractPOI> listOfPOIs;
-
-    /**
-     * The list of itineraries in the municipality.
-     */
-    @OneToMany(mappedBy = "municipality", cascade = CascadeType.ALL)
-    private final List<AbstractItinerary> listOfItineraries;
-
-    /**
      * The name of the municipality.
      */
     @Column(nullable = false)
     private String name;
 
     /**
+     * The geographical coordinates of the municipality.
+     */
+    @ElementCollection
+    @CollectionTable(name = "territory", joinColumns = @JoinColumn(name = "municipality_id"))
+    @Column(name = "coordinate")
+    private List<Coordinate> territory;
+
+    /**
+     * The list of points of interest in the municipality.
+     */
+    @OneToMany(mappedBy = "municipality", cascade = CascadeType.ALL)
+    @JsonBackReference
+    private  List<AbstractPOI> listOfPOIs;
+
+    /**
+     * The list of itineraries in the municipality.
+     */
+    @OneToMany(mappedBy = "municipality", cascade = CascadeType.ALL)
+    @JsonBackReference
+    private  List<AbstractItinerary> listOfItineraries;
+
+    /**
      * The manager for pending operations in the municipality.
      */
     @Getter
     @Transient
+    @JsonIgnore
     private final PendingManager pendingManager;
 
     /**
      * The list of users in the municipality.
      */
     @OneToMany(mappedBy = "municipality", cascade = CascadeType.ALL)
+    @JsonBackReference
     private List<AbstractAuthenticatedUser> listOfIUsers;
 
     /**
@@ -252,5 +261,9 @@ public class Municipality {
             element.append("Name: ").append(i.getName()).append("\nID: ").append(i.getId()).append("\n\n");
         }
         return element.toString();
+    }
+
+    public void addUser(AbstractAuthenticatedUser contributor) {
+        this.listOfIUsers.add(contributor);
     }
 }

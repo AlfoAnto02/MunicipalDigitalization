@@ -46,32 +46,34 @@ public class UserService {
         user.addItinerary(itinerary);
         userRepository.save(user);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public void saveUser(AbstractAuthenticatedUser user){
+        userRepository.save(user);
+    }
     public AbstractAuthenticatedUser getUserById(Long id){
         return userRepository.getReferenceById(id);
-    }
-
-    public List<AbstractAuthenticatedUser> getUsersByMunicipality(Municipality municipality){
-        return userRepository.findAllByMunicipality(municipality);
     }
 
     public List<AbstractAuthenticatedUser> getUsersByRole(UserRole role){
         return userRepository.findAllByRole(role);
     }
 
-    public void saveUser(AbstractAuthenticatedUser user){
-        userRepository.save(user);
-    }
-
-    public void deleteUser(AbstractAuthenticatedUser user){
-        userRepository.delete(user);
-    }
-
     public void deleteUserById(Long id){
         userRepository.deleteById(id);
-    }
-
-    public void saveAllUsers(List<AbstractAuthenticatedUser> users){
-        userRepository.saveAll(users);
     }
 
     public AbstractAuthenticatedUser getUserByName(String name){
@@ -79,5 +81,7 @@ public class UserService {
     }
 
 
-
+    public List<AbstractAuthenticatedUser> getAllUsers() {
+        return userRepository.findAll();
+    }
 }

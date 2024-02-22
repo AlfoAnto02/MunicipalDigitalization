@@ -1,4 +1,4 @@
-package it.cs.unicam.MunicipalDigitalization.api.util.controllers.dto;
+package it.cs.unicam.MunicipalDigitalization.db.controllers.dto;
 
 import it.cs.unicam.MunicipalDigitalization.api.util.Coordinate;
 import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
@@ -11,7 +11,8 @@ public record POIDTO (
         POIType poiType,
         Long author,
         Long municipality,
-        Coordinate coordinate
+        Coordinate coordinate,
+        ElementStatus status
 
         )
 {}

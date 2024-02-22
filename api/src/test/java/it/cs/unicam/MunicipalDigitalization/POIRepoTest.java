@@ -5,12 +5,11 @@ import it.cs.unicam.MunicipalDigitalization.api.model.actors.AuthorizedContribut
 import it.cs.unicam.MunicipalDigitalization.api.util.Coordinate;
 import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 import it.cs.unicam.MunicipalDigitalization.api.util.POIType;
-import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;
-import it.cs.unicam.MunicipalDigitalization.api.util.controllers.dto.POIDTO;
+import it.cs.unicam.MunicipalDigitalization.db.Services.uploadingServices.POIUploadingService;
+import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.POIDTO;
 import it.cs.unicam.MunicipalDigitalization.db.Repository.MunicipalRepository;
 import it.cs.unicam.MunicipalDigitalization.db.Repository.POIRepository;
 import it.cs.unicam.MunicipalDigitalization.db.Repository.UserRepository;
-import it.cs.unicam.MunicipalDigitalization.db.Services.UploadingService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -34,7 +33,7 @@ public class POIRepoTest {
     private UserRepository userService;
 
     @Autowired
-    private UploadingService uploadingService;
+    private POIUploadingService uploadingService;
 
 
     @Test
@@ -46,7 +45,6 @@ public class POIRepoTest {
 
         //Create a Contributor
         AuthorizedContributor user = new AuthorizedContributor();
-        user.setRole(UserRole.AUTHORIZED_CONTRIBUTOR);
         user.setMunicipality(municipality);
         userService.save(user);
 
@@ -54,7 +52,7 @@ public class POIRepoTest {
         System.out.println(municipality.getId());
 
         //Create a POI
-        POIDTO poiDTO = new POIDTO("Monteleone", POIType.Cinema, user.getId(), municipality.getId(), new Coordinate(1,1));
+        POIDTO poiDTO = new POIDTO("Monteleone", POIType.Cinema, user.getId(), municipality.getId(), new Coordinate(1,1), ElementStatus.PUBLISHED);
         uploadingService.uploadPOI(poiDTO);
 
         //Check if the POI present

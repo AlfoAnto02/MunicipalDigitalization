@@ -1,7 +1,8 @@
-package it.cs.unicam.MunicipalDigitalization.api.util.DesignPattern;
+package it.cs.unicam.MunicipalDigitalization.api.util.DesignPattern.Builder;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
 import it.cs.unicam.MunicipalDigitalization.api.model.actors.AbstractAuthenticatedUser;
+import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractItinerary;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractPOI;
 import it.cs.unicam.MunicipalDigitalization.api.util.Coordinate;
 import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
@@ -70,5 +71,10 @@ public interface ItineraryBuilder {
      * This method is used to build the Itinerary.
      */
     void reset();
+
+    /**
+     * This method is used to build the Itinerary.
+     */
+    AbstractItinerary build();
 
 }

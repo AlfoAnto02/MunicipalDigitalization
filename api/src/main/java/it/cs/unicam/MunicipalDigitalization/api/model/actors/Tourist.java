@@ -1,6 +1,7 @@
 package it.cs.unicam.MunicipalDigitalization.api.model.actors;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
+import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;
 import jakarta.persistence.Entity;
 
 /**
@@ -19,9 +20,10 @@ public class Tourist extends AbstractIUser {
      */
     public Tourist(Municipality municipality) {
         super(municipality);
+        super.addRole(UserRole.TOURIST);
     }
 
     public Tourist() {
-
+        super.addRole(UserRole.TOURIST);
     }
 }

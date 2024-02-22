@@ -1,5 +1,8 @@
 package it.cs.unicam.MunicipalDigitalization.api.util;
 
+import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
+import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractContent;
+import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractItinerary;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractPOI;
 
 import java.util.ArrayList;
@@ -44,5 +47,74 @@ public class MatchingAlgorithms {
     public static boolean isLink(String str){
         String urlPattern = "^(http(s)?://)?([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,}(/[a-zA-Z0-9-_.~%]+)*(/\\?[a-zA-Z0-9-_.~&=]+)?$";
         return Pattern.matches(urlPattern, str);
+    }
+
+    /**
+     * This method checks if a POI is similar to a POI present in a list of POIs
+     *
+     * @param poi POI to check if it is similar to a POI in the list
+     * @param poiList list of POIs
+     * @return true if the POI is similar to a POI in the list, false otherwise
+     */
+
+    public static boolean isPOISimilarToPoiList(AbstractPOI poi, List<AbstractPOI> poiList) {
+        for (AbstractPOI p : poiList) {
+            if(poi.getName().equalsIgnoreCase(p.getName()) && poi.getType().equals(p.getType())&&
+            poi.getMunicipality().equals(p.getMunicipality()) && poi.getCoordinate().equals(p.getCoordinate()) && !p.equals(poi))
+                return true;
+        }
+        return false;
+    }
+
+    /**
+     * This method checks if an itinerary is similar to an itinerary present in a list of itineraries
+     *
+     * @param itinerary itinerary to check if it is similar to an itinerary in the list
+     * @param itineraryList list of itineraries
+     * @return true if the itinerary is similar to an itinerary in the list, false otherwise
+     */
+
+    public static boolean isItinerarySimilarToItineraryList(AbstractItinerary itinerary, List<AbstractItinerary> itineraryList) {
+        for (AbstractItinerary i : itineraryList) {
+            if(itinerary.getName().equalsIgnoreCase(i.getName()) && itinerary.getMunicipality().equals(i.getMunicipality()) &&
+            itinerary.getCoordinate().equals(i.getCoordinate()) && itinerary.getPOIs().equals(i.getPOIs()) && !i.equals(itinerary))
+                return true;
+        }
+        return false;
+    }
+
+    /**
+     * This method checks if a content is similar to a content present in a list of contents
+     *
+     * @param content content to check if it is similar to a content in the list
+     * @param contentList list of contents
+     * @return true if the content is similar to a content in the list, false otherwise
+     */
+    public static boolean isContentSimilarToContentList(AbstractContent content, List<AbstractContent> contentList) {
+        for (AbstractContent c : contentList) {
+            if(content.getType().equals(c.getType()) &&
+                    (content.getPhoto().equals(c.getPhoto()) && content.getLink().equals(c.getLink()) &&
+                            content.getDescription().equals(c.getDescription())) &&
+                    (content.getReferredItinerary().getId().equals(c.getReferredItinerary().getId()) &&
+                                    content.getReferredPOI().getId().equals(c.getReferredPOI().getId())) &&
+            !c.equals(content)) return true;
+        }
+        return false;
+    }
+
+    /**
+     * This method checks if a municipality is similar to a municipality present in a list of municipalities
+     *
+     * @param municipality municipality to check if it is similar to a municipality in the list
+     * @param municipalityList list of municipalities
+     * @return true if the municipality is similar to a municipality in the list, false otherwise
+     */
+    public static boolean isMunicipalSimilarToMunicipalityList(Municipality municipality, List<Municipality> municipalityList) {
+        for (Municipality m : municipalityList) {
+            if(municipality.getName().equalsIgnoreCase(m.getName()) && municipality.getTerritory().equals(m.getTerritory())&&
+            !m.equals(municipality))
+                return true;
+        }
+        return false;
     }
 }

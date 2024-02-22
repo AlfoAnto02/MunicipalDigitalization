@@ -1,4 +1,4 @@
-package it.cs.unicam.MunicipalDigitalization.api.util.DesignPattern;
+package it.cs.unicam.MunicipalDigitalization.api.util.DesignPattern.Command;
 
 /**
  * This is the Interface of the Command.

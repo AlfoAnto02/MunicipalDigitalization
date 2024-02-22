@@ -1,19 +1,21 @@
-package it.cs.unicam.MunicipalDigitalization.api.util.DesignPattern;
+package it.cs.unicam.MunicipalDigitalization.api.util.DesignPattern.Builder;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
 import it.cs.unicam.MunicipalDigitalization.api.model.actors.AbstractAuthenticatedUser;
-import it.cs.unicam.MunicipalDigitalization.api.model.elements.PendingPOI;
+import it.cs.unicam.MunicipalDigitalization.api.model.elements.AuthorizedPOI;
 import it.cs.unicam.MunicipalDigitalization.api.util.Coordinate;
 import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 import it.cs.unicam.MunicipalDigitalization.api.util.POIType;
 import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;
+import org.springframework.stereotype.Component;
 
 import static it.cs.unicam.MunicipalDigitalization.api.util.MatchingAlgorithms.containsSpecialCharacters;
 
 /**
- * This class represents the building of a Pending POI Object.
+ * This class represents the building of an AuthorizedPOI
  */
-public class PendingPOIBuilder implements POIBuilder{
+@Component
+public class AuthorizedPOIBuilder implements POIBuilder {
 
     private AbstractAuthenticatedUser author;
 
@@ -27,12 +29,9 @@ public class PendingPOIBuilder implements POIBuilder{
 
     private ElementStatus status;
 
-
-
-
     @Override
     public void setPOIAuthor(AbstractAuthenticatedUser author) {
-        if(author.getRole() == UserRole.CONTRIBUTOR) {
+        if(author.getRole().contains(UserRole.AUTHORIZED_CONTRIBUTOR) || author.getRole().contains(UserRole.CURATOR)) {
             this.author = author;
         }
         else throw new IllegalArgumentException("The author must be a Contributor");
@@ -61,14 +60,14 @@ public class PendingPOIBuilder implements POIBuilder{
 
     @Override
     public void setPOIMunicipality(Municipality municipality) {
-        //if(municipality != null && municipality.checkCoordinates(this.coordinates))  this.municipality = municipality;
-        //else throw new IllegalArgumentException("The municipality must not be null and the coordinates must be inside the municipality");
-        this.municipality = municipality;
+       // if(municipality != null && municipality.checkCoordinates(this.coordinates))  this.municipality = municipality;
+       // else throw new IllegalArgumentException("The municipality must not be null and the coordinates must be inside the municipality");
+         this.municipality = municipality;
     }
 
     @Override
     public void setPOIStatus() {
-        this.status = ElementStatus.PENDING;
+        this.status = ElementStatus.PUBLISHED;
     }
 
     @Override
@@ -82,11 +81,12 @@ public class PendingPOIBuilder implements POIBuilder{
     }
 
     /**
-     * This method is used to build the Pending POI.
+     * This method is used to build the Authorized POI
      *
      * @return The Pending POI.
      */
-    public PendingPOI build(){
-        return new PendingPOI(this.municipality, this.status, this.coordinates, this.name, this.type, this.author);
+    public AuthorizedPOI build(){
+        return new AuthorizedPOI(this.municipality, this.status, this.coordinates, this.name, this.type, this.author);
     }
+
 }

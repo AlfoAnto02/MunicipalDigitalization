@@ -1,15 +1,12 @@
 package it.cs.unicam.MunicipalDigitalization.api.model.actors;
 
-import it.cs.unicam.MunicipalDigitalization.api.io.TouristView;
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
-import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractItinerary;
-import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractMunicipalElement;
-import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractPOI;
 import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -38,21 +35,15 @@ public abstract class AbstractIUser implements IUser {
      *  Getter for the municipality of the user.
      */
     @ManyToOne
-    @JoinColumn(name = "municipality", nullable = false)
+    @JoinColumn(name = "municipality", nullable = true)
     protected Municipality municipality;
-
-    /**
-     * The view of every IUser of the Platform
-     */
-    @Transient
-    private final TouristView generalView;
 
     /**
      * Role of the Actor
      * -- GETTER --
      */
-    @Column(name = "Role", nullable = false)
-    private UserRole role;
+    @ElementCollection(targetClass = UserRole.class)
+    private List<UserRole> role;
 
     /**
      * Constructor for the AbstractIUser class.
@@ -61,11 +52,32 @@ public abstract class AbstractIUser implements IUser {
      */
     public AbstractIUser(Municipality municipality) {
         this.municipality = municipality;
-        this.generalView = new TouristView(this.municipality, this);
+        this.role = new ArrayList<>();
     }
 
     public AbstractIUser() {
-        this.generalView = new TouristView(this.municipality, this);
+        this.role = new ArrayList<>();
+    }
+
+    /**
+     * Method to remove a role from the user.
+     *
+     * @param role The role to remove.
+     */
+    public void removeRole(UserRole role) {
+        if(this.role.contains(role))  this.role.remove(role);
+        else throw new IllegalArgumentException("The user doesn't have the role to remove.");
+    }
+
+    /**
+     * Method to add a role to the user.
+     *
+     * @param role The role to add.
+     */
+
+    public void addRole(UserRole role) {
+        if(!this.role.contains(role))  this.role.add(role);
+        else throw new IllegalArgumentException("The user already has the role.");
     }
 
     @Override
@@ -85,33 +97,4 @@ public abstract class AbstractIUser implements IUser {
     public int hashCode() {
         return Objects.hash(id, municipality);
     }
-
-    /**
-     * This method allows the IUser to view a POI present in the Municipality.
-     * It uses the TouristView General View.
-     */
-    public void viewPOI() {
-        this.generalView.viewPOI();
-    }
-
-    /**
-     * This method allows the IUser to view an Itinerary present in the Municipality.
-     * It uses the TouristView General View.
-     */
-    public void viewItinerary() {
-        this.generalView.viewItinerary();
-    }
-
-    /**
-     * This method allows the IUser to view the contents present in the Municipality Elements.
-     * It uses the TouristView General View.
-     */
-    public void viewContents(String id) { this.generalView.viewContents(id); }
-
-    /**
-     * This method allows the IUser to view the map of the Municipality.
-     * It uses the TouristView General View.
-     */
-    //public void getMap(String id) { this.generalView.viewMap(id); }
-
 }

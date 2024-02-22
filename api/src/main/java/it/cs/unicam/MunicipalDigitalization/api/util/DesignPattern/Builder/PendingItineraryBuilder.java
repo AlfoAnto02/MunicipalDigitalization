@@ -1,4 +1,4 @@
-package it.cs.unicam.MunicipalDigitalization.api.util.DesignPattern;
+package it.cs.unicam.MunicipalDigitalization.api.util.DesignPattern.Builder;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
 import it.cs.unicam.MunicipalDigitalization.api.model.actors.AbstractAuthenticatedUser;
@@ -8,6 +8,7 @@ import it.cs.unicam.MunicipalDigitalization.api.util.Coordinate;
 import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 import it.cs.unicam.MunicipalDigitalization.api.util.MatchingAlgorithms;
 import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -17,6 +18,7 @@ import static it.cs.unicam.MunicipalDigitalization.api.util.MatchingAlgorithms.c
  * This class represents the Builder of a Pending Itinerary.
  * It is used to create a Pending Itinerary step by step.
  */
+@Component
 public class PendingItineraryBuilder implements ItineraryBuilder{
     private List<AbstractPOI> poiList;
     private String name;
@@ -57,7 +59,7 @@ public class PendingItineraryBuilder implements ItineraryBuilder{
 
     @Override
     public void setItineraryAuthor(AbstractAuthenticatedUser author) {
-        if(author.getRole() == UserRole.CONTRIBUTOR) this.author = author;
+        if(author.getRole().contains(UserRole.CONTRIBUTOR)) this.author = author;
         else throw new IllegalArgumentException("The author is not a contributor");
     }
 

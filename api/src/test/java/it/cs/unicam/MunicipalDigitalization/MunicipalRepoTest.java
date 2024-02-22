@@ -67,8 +67,9 @@ public class MunicipalRepoTest {
     public void testUpdateMunicipal(){
 
         //Get the Municipality and update it
-        municipality.setName("Municipal1");
-        municipalRepository.saveMunicipal(municipality);
+        Municipality municipality1 = municipalRepository.getMunicipalByName("Municipal").get();
+        municipality1.setName("Municipal1");
+        municipalRepository.saveMunicipal(municipality1);
 
         //Check if the Municipality is present
         assertTrue(municipalRepository.getMunicipalByName("Municipal1").isPresent());

@@ -32,7 +32,6 @@ public class UserRepoTest {
         AuthorizedContributor user = new AuthorizedContributor();
         user.setName("Alfredo");
         user.setPassword("Cappuccino");
-        user.setRole(UserRole.AUTHORIZED_CONTRIBUTOR);
         user.setMunicipality(muni);
 
         //Save the AuthorizedContributor
@@ -48,7 +47,6 @@ public class UserRepoTest {
         AuthorizedContributor user = new AuthorizedContributor();
         user.setName("To Remove");
         user.setPassword("Cappuccino");
-        user.setRole(UserRole.AUTHORIZED_CONTRIBUTOR);
         user.setMunicipality(muni);
         userService.saveUser(user);
 

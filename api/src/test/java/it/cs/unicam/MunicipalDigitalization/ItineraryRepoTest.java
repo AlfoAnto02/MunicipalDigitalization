@@ -3,15 +3,16 @@ package it.cs.unicam.MunicipalDigitalization;
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
 import it.cs.unicam.MunicipalDigitalization.api.model.actors.AuthorizedContributor;
 import it.cs.unicam.MunicipalDigitalization.api.util.Coordinate;
+import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 import it.cs.unicam.MunicipalDigitalization.api.util.POIType;
-import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;
-import it.cs.unicam.MunicipalDigitalization.api.util.controllers.dto.ItineraryDTO;
-import it.cs.unicam.MunicipalDigitalization.api.util.controllers.dto.POIDTO;
+import it.cs.unicam.MunicipalDigitalization.db.Services.uploadingServices.ItineraryUploadingService;
+import it.cs.unicam.MunicipalDigitalization.db.Services.uploadingServices.POIUploadingService;
+import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.ItineraryDTO;
+import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.POIDTO;
 import it.cs.unicam.MunicipalDigitalization.db.Repository.ItineraryRepository;
 import it.cs.unicam.MunicipalDigitalization.db.Repository.MunicipalRepository;
 import it.cs.unicam.MunicipalDigitalization.db.Repository.UserRepository;
 import it.cs.unicam.MunicipalDigitalization.db.Services.POIService;
-import it.cs.unicam.MunicipalDigitalization.db.Services.UploadingService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -39,7 +40,9 @@ public class ItineraryRepoTest {
     private UserRepository userService;
 
     @Autowired
-    private UploadingService uploadingService;
+    private ItineraryUploadingService uploadingService;
+    @Autowired
+    private POIUploadingService poiUploadingService;
 
     @Test
     public void createAuthorizedItinerary(){
@@ -50,7 +53,6 @@ public class ItineraryRepoTest {
 
         //Create a Contributor
         AuthorizedContributor user = new AuthorizedContributor();
-        user.setRole(UserRole.AUTHORIZED_CONTRIBUTOR);
         user.setMunicipality(municipality);
         userService.save(user);
 
@@ -58,10 +60,10 @@ public class ItineraryRepoTest {
         System.out.println(municipality.getId());
 
         //Create a POIs
-        POIDTO poi1 = new POIDTO("Monteleone", POIType.Cinema, user.getId(), municipality.getId(), new Coordinate(1,1));
-        POIDTO poi2 = new POIDTO("Ginevra", POIType.Cinema, user.getId(), municipality.getId(), new Coordinate(2,2));
-        uploadingService.uploadPOI(poi1);
-        uploadingService.uploadPOI(poi2);
+        POIDTO poi1 = new POIDTO("Monteleone", POIType.Cinema, user.getId(), municipality.getId(), new Coordinate(1,1), ElementStatus.PUBLISHED);
+        POIDTO poi2 = new POIDTO("Ginevra", POIType.Cinema, user.getId(), municipality.getId(), new Coordinate(2,2), ElementStatus.PUBLISHED);
+        poiUploadingService.uploadPOI(poi1);
+        poiUploadingService.uploadPOI(poi2);
 
         //Create an Itinerary
         ItineraryDTO itineraryDTO = new ItineraryDTO("Super itinerario", "Cinema", "Questo è un fantastico itinerario",

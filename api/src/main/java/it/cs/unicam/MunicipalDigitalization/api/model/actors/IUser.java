@@ -24,25 +24,4 @@ public interface IUser {
      * @return The municipality associated with the user.
      */
     Municipality getMunicipality();
-
-    /**
-     * This method is used to view the details of a POI present in the Platform.
-     */
-    void viewPOI();
-
-    /**
-     * This method is used to view the details of an Itinerary present in the Platform.
-     */
-    void viewItinerary();
-
-    /**
-     * This method is used to view the content of the Municipal Elements.
-     */
-    void viewContents(String id);
-
-    /**
-     * This method is used to get the map of the Municipality.
-     */
-   // void getMap(String id);
-
 }
