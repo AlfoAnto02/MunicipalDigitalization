@@ -1,9 +1,11 @@
 package it.cs.unicam.MunicipalDigitalization.db.Services.Mediators;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractPOI;
+import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;
 import it.cs.unicam.MunicipalDigitalization.db.Services.MunicipalService;
 import it.cs.unicam.MunicipalDigitalization.db.Services.POIService;
 import it.cs.unicam.MunicipalDigitalization.db.Services.UserService;
+import it.cs.unicam.MunicipalDigitalization.db.controllers.Requests.ValidateRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -42,6 +44,22 @@ public class POIMediator {
         //Check if the POI is already associated with the user
         if(!poi.getAuthor().getAuthoredPOIs().stream().anyMatch(p -> p.getId().equals(poi.getId()))){
             userService.addPOI(poi.getAuthor().getId(), poi);
+        }
+    }
+
+    /**
+     * This method validates a POI.
+     *
+     * @param request The request to validate.
+     */
+    public void validatePOI(ValidateRequest request){
+        if(userService.getUserById(request.getCuratorID()).getRole().contains(UserRole.CURATOR)){
+            poiService.validatePOI(request.getRequestID(),request.isValidated());
+            userService.updateUserPOIList(request.getRequestID(), request.isValidated());
+            municipalityService.updateMunicipalityPOIList(request.getRequestID(),request.isValidated());
+        }
+        else {
+            throw new IllegalArgumentException("The user is not authorized to validate the POI.");
         }
     }
 }

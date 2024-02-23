@@ -47,4 +47,10 @@ public class AuthorizedContent extends AbstractContent {
         super(name, referredItinerary, author, type, description, link, photo);
         this.setElementStatus(ElementStatus.PUBLISHED);
     }
+
+    public AuthorizedContent(AbstractPOI referredPOI, String name, AbstractAuthenticatedUser author, ElementStatus contentStatus, ContentType type, String description, String link, String photo) {
+    }
+
+    public AuthorizedContent(AbstractItinerary referredItinerary, String name, AbstractAuthenticatedUser author, ElementStatus contentStatus, ContentType type, String description, String link, String photo) {
+    }
 }

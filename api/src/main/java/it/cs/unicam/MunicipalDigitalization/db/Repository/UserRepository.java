@@ -52,4 +52,6 @@ public interface UserRepository extends JpaRepository<AbstractAuthenticatedUser,
     @Query("SELECT u FROM AbstractAuthenticatedUser u WHERE u.name = ?1")
     AbstractAuthenticatedUser findByName(String name);
 
+    @Query("SELECT u FROM AbstractAuthenticatedUser u JOIN u.authoredPOIs p WHERE p.id = :requestID")
+    AbstractAuthenticatedUser findByAuthoredPOIsId(long requestID);
 }

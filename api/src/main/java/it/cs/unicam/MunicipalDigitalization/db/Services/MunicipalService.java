@@ -5,6 +5,7 @@ import it.cs.unicam.MunicipalDigitalization.api.model.actors.AbstractAuthenticat
 import it.cs.unicam.MunicipalDigitalization.api.model.actors.AuthorizedContributor;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractItinerary;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractPOI;
+import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 import it.cs.unicam.MunicipalDigitalization.api.util.MatchingAlgorithms;
 import it.cs.unicam.MunicipalDigitalization.db.Repository.MunicipalRepository;
 import lombok.NonNull;
@@ -73,6 +74,28 @@ public class MunicipalService {
         Municipality municipality = municipalRepository.getReferenceById(municipalID);
         municipality.uploadItinerary(itinerary);
         municipalRepository.save(municipality);
+    }
+
+    /**
+     * Update the POI list of a municipality based on the validation request
+     *
+     * @param poiID ID of the POI
+     * @param isValidated Boolean value to determine if the POI is validated
+     */
+    public void updateMunicipalityPOIList(long poiID, boolean isValidated) {
+        Municipality municipality = municipalRepository.findByPOIinPOIList(poiID);
+        if (isValidated) {
+            municipality.getPOIList().stream().filter(p -> p.getId().equals(poiID)).
+                    forEach(p -> p.setElementStatus(ElementStatus.PUBLISHED));
+            municipalRepository.save(municipality);
+        } else {
+            municipality.getPOIList().remove(municipality.getPOIList()
+                    .stream()
+                    .filter(p -> p.getId().equals(poiID))
+                    .findFirst()
+                    .get());
+            municipalRepository.save(municipality);
+        }
     }
 
 

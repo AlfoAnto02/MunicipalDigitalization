@@ -34,4 +34,10 @@ public class PendingContent extends AbstractContent {
         super(name, referredItinerary, author, type, description, link, photo);
         this.setElementStatus(ElementStatus.PENDING);
     }
+
+    public PendingContent(AbstractPOI referredPOI, String name, AbstractAuthenticatedUser author, ElementStatus contentStatus, ContentType type, String description, String link, String photo) {
+    }
+
+    public PendingContent(AbstractItinerary referredItinerary, String name, AbstractAuthenticatedUser author, ElementStatus contentStatus, ContentType type, String description, String link, String photo) {
+    }
 }

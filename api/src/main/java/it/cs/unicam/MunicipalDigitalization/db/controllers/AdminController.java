@@ -91,6 +91,17 @@ public class AdminController {
         return new ResponseEntity<>("Role given", HttpStatus.OK);
     }
 
+    /**
+     * Removes a role from a user
+     * @param roleRequest the request containing the admin id, the user id and the role to remove
+     *
+     */
+    @RequestMapping(value = "/admin/remove/role", method = RequestMethod.POST)
+    public ResponseEntity<Object> removeRole(@RequestBody RoleRequest roleRequest){
+        adminServices.removeRole(roleRequest.getAdminID(), roleRequest.getUserID(), roleRequest.getRole());
+        return new ResponseEntity<>("Role removed", HttpStatus.OK);
+    }
+
 
 
 

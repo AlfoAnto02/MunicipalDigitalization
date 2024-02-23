@@ -42,7 +42,7 @@ public class ItineraryUploadingService {
      */
     public void uploadItinerary(ItineraryDTO itineraryDTO) {
         checkItinerary(itineraryDTO);
-        ItineraryBuilder builder = itineraryBuilderFactory.createBuilderForUser(userService.getUserById(itineraryDTO.author()));
+        ItineraryBuilder builder = itineraryBuilderFactory.createBuilderForUser(userService.getUserById(itineraryDTO.authorID()));
         buildItinerary(builder, itineraryDTO);
         this.itineraryMediator.saveItinerary(builder.build());
     }
@@ -55,11 +55,11 @@ public class ItineraryUploadingService {
      */
     private void buildItinerary(ItineraryBuilder itineraryBuilder, ItineraryDTO itineraryDTO) {
         itineraryBuilder.setItineraryName(itineraryDTO.name());
-        itineraryBuilder.setItineraryAuthor(userService.getUserById(itineraryDTO.author()));
+        itineraryBuilder.setItineraryAuthor(userService.getUserById(itineraryDTO.authorID()));
         itineraryBuilder.setItineraryDescription(itineraryDTO.description());
-        municipalService.findMunicipalByID(itineraryDTO.municipality()).ifPresent(itineraryBuilder::setItineraryMunicipality);
+        municipalService.findMunicipalByID(itineraryDTO.municipalityID()).ifPresent(itineraryBuilder::setItineraryMunicipality);
         itineraryBuilder.setItineraryCoordinates(itineraryDTO.coordinate());
-        itineraryBuilder.addPOIs(poiService.getPOIsByIds(itineraryDTO.pois()));
+        itineraryBuilder.addPOIs(poiService.getPOIsByIds(itineraryDTO.POIsIDs()));
         itineraryBuilder.setItineraryType();
         itineraryBuilder.setItineraryStatus();
     }

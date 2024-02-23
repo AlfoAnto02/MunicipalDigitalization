@@ -60,7 +60,7 @@ public class MatchingAlgorithms {
     public static boolean isPOISimilarToPoiList(AbstractPOI poi, List<AbstractPOI> poiList) {
         for (AbstractPOI p : poiList) {
             if(poi.getName().equalsIgnoreCase(p.getName()) && poi.getType().equals(p.getType())&&
-            poi.getMunicipality().equals(p.getMunicipality()) && poi.getCoordinate().equals(p.getCoordinate()) && !p.equals(poi))
+            poi.getMunicipality().equals(p.getMunicipality()) && poi.getCoordinate().equals(p.getCoordinate()) && p!=poi)
                 return true;
         }
         return false;
@@ -77,7 +77,7 @@ public class MatchingAlgorithms {
     public static boolean isItinerarySimilarToItineraryList(AbstractItinerary itinerary, List<AbstractItinerary> itineraryList) {
         for (AbstractItinerary i : itineraryList) {
             if(itinerary.getName().equalsIgnoreCase(i.getName()) && itinerary.getMunicipality().equals(i.getMunicipality()) &&
-            itinerary.getCoordinate().equals(i.getCoordinate()) && itinerary.getPOIs().equals(i.getPOIs()) && !i.equals(itinerary))
+            itinerary.getCoordinate().equals(i.getCoordinate()) && itinerary.getPOIs().equals(i.getPOIs()) && i!=itinerary)
                 return true;
         }
         return false;
@@ -97,7 +97,7 @@ public class MatchingAlgorithms {
                             content.getDescription().equals(c.getDescription())) &&
                     (content.getReferredItinerary().getId().equals(c.getReferredItinerary().getId()) &&
                                     content.getReferredPOI().getId().equals(c.getReferredPOI().getId())) &&
-            !c.equals(content)) return true;
+            c!=content) return true;
         }
         return false;
     }
@@ -112,7 +112,7 @@ public class MatchingAlgorithms {
     public static boolean isMunicipalSimilarToMunicipalityList(Municipality municipality, List<Municipality> municipalityList) {
         for (Municipality m : municipalityList) {
             if(municipality.getName().equalsIgnoreCase(m.getName()) && municipality.getTerritory().equals(m.getTerritory())&&
-            !m.equals(municipality))
+            m!=municipality)
                 return true;
         }
         return false;

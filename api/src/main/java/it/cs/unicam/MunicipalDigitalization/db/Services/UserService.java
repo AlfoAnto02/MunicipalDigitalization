@@ -4,6 +4,7 @@ import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
 import it.cs.unicam.MunicipalDigitalization.api.model.actors.AbstractAuthenticatedUser;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractItinerary;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractPOI;
+import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;
 import it.cs.unicam.MunicipalDigitalization.db.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +52,24 @@ public class UserService {
         userRepository.save(user);
     }
 
+    public void updateUserPOIList(long poiID, boolean validate) {
+        AbstractAuthenticatedUser user = userRepository.findByAuthoredPOIsId(poiID);
+        if(validate) {
+            user.getAuthoredPOIs()
+                    .stream()
+                    .filter(p -> p.getId().equals(poiID))
+                    .forEach(p -> p.setElementStatus(ElementStatus.PUBLISHED));
+            userRepository.save(user);
+        } else{
+            user.getAuthoredPOIs().remove(user.getAuthoredPOIs()
+                    .stream()
+                    .filter(p -> p.getId().equals(poiID))
+                    .findFirst()
+                    .get());
+            userRepository.save(user);
+        }
+    }
+
 
 
 
@@ -88,4 +107,5 @@ public class UserService {
     public List<AbstractAuthenticatedUser> getAllUsers() {
         return userRepository.findAll();
     }
+
 }

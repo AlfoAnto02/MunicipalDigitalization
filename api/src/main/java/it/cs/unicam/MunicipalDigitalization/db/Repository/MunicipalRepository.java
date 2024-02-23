@@ -43,4 +43,8 @@ public interface MunicipalRepository extends JpaRepository<Municipality,Long> {
      */
     @Query("SELECT m FROM Municipality m")
     List<Municipality> findAll();
+
+
+    @Query("SELECT m FROM Municipality m JOIN m.listOfPOIs p WHERE p.id = :requestID")
+    Municipality findByPOIinPOIList(long requestID);
 }

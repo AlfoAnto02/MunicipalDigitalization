@@ -48,6 +48,31 @@ public class POIService {
         poi.addContent(content);
         poiRepository.save(poi);
     }
+
+    /**
+     * Update a POI in the database
+     *
+     * @param id ID of the POI
+     */
+    public void validatePOI(Long id, boolean validated) {
+        AbstractPOI poi = poiRepository.getReferenceById(id);
+        if(validated) {
+            poi.setElementStatus(ElementStatus.PUBLISHED);
+            poiRepository.save(poi);
+        }else{
+            poiRepository.deleteById(id);
+        }
+    }
+
+    /**
+     * Invalidate a POI in the database
+     *
+     * @param id ID of the POI
+     */
+    public void invalidatePOI(Long id) {
+        poiRepository.deleteById(id);
+    }
+
     public AbstractMunicipalElement getPOIByID(Long id){
         return poiRepository.getReferenceById(id);
     }

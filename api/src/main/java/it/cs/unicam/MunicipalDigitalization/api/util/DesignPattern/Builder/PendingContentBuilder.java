@@ -111,7 +111,7 @@ public class PendingContentBuilder implements ContentBuilder{
         else if (this.referredPOI != null && this.referredItinerary != null) throw new IllegalArgumentException("Referred element must be unique");
         else if (this.referredPOI != null && this.referredItinerary==null) return new PendingContent(this.referredPOI, this.name,
                 this.author, this.contentStatus, this.type, this.description, this.link, this.photo);
-        else return new PendingContent(this.name, this.referredItinerary, this.author, this.contentStatus, this.type,
+        else return new PendingContent( this.referredItinerary,this.name, this.author, this.contentStatus, this.type,
                     this.description, this.link, this.photo);
     }
 }

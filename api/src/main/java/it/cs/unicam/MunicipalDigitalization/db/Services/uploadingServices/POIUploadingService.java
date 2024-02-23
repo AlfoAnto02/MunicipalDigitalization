@@ -53,7 +53,7 @@ public class POIUploadingService {
         poiBuilder.setPOIName(poidto.name());
         poiBuilder.setPOIType(poidto.poiType());
         poiBuilder.setPOIStatus();
-        municipalService.findMunicipalByID(poidto.municipality()).ifPresent(poiBuilder::setPOIMunicipality);
+        municipalService.findMunicipalByID(poidto.municipalityID()).ifPresent(poiBuilder::setPOIMunicipality);
     }
 
     /**

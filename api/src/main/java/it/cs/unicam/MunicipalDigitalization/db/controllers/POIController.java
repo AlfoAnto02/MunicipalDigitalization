@@ -1,4 +1,5 @@
 package it.cs.unicam.MunicipalDigitalization.db.controllers;
+import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 import it.cs.unicam.MunicipalDigitalization.db.Services.uploadingServices.POIUploadingService;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.POIDTO;
 import it.cs.unicam.MunicipalDigitalization.db.Services.POIService;
@@ -6,6 +7,7 @@ import it.cs.unicam.MunicipalDigitalization.db.mappers.POIDTOMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -37,6 +39,7 @@ public class POIController {
         return new ResponseEntity<>(poiService.getAllPOIs()
                 .stream()
                 .filter(poi -> poi.getMunicipality().getId().equals(id))
+                .filter(poi -> poi.getElementStatus().equals(ElementStatus.PUBLISHED))
                 .map(poiDTOMapper), HttpStatus.OK);
     }
 
@@ -51,6 +54,29 @@ public class POIController {
     public ResponseEntity<Object> uploadPOI(@RequestBody POIDTO poidto){
         uploadingService.uploadPOI(poidto);
         return new ResponseEntity<>("Product added :)", HttpStatus.OK);
+    }
+
+    /**
+     * Returns all the POIs in the database
+     *
+     * @return all the POIs in the database
+     */
+    @RequestMapping(value = "/pois", method = RequestMethod.GET)
+    public ResponseEntity<Object> getAllPublishedPOIs(){
+        return new ResponseEntity<>(poiService.getAllPOIs()
+                .stream()
+                .filter(poi -> poi.getElementStatus().equals(ElementStatus.PUBLISHED))
+                .map(poiDTOMapper),
+                HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/pois/pending", method = RequestMethod.GET)
+    public ResponseEntity<Object> getPendingPOIs(){
+        return new ResponseEntity<>(poiService.getAllPOIs()
+                .stream()
+                .filter(poi -> poi.getElementStatus().equals(ElementStatus.PENDING))
+                .map(poiDTOMapper),
+                HttpStatus.OK);
     }
 
 

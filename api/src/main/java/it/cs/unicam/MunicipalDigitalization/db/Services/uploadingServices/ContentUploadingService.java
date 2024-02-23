@@ -43,7 +43,7 @@ public class ContentUploadingService {
      */
     public void uploadContent(ContentDTO contentDTO) {
         checkContent(contentDTO);
-        ContentBuilder builder = contentBuilderFactory.createBuilderForUser(userService.getUserById(contentDTO.author()));
+        ContentBuilder builder = contentBuilderFactory.createBuilderForUser(userService.getUserById(contentDTO.author_id()));
         buildContent(builder, contentDTO);
         this.contentMediator.saveContent(builder.build());
     }
@@ -56,15 +56,15 @@ public class ContentUploadingService {
      */
 
     private void buildContent(ContentBuilder contentBuilder, ContentDTO contentDTO) {
-        contentBuilder.setContentAuthor(userService.getUserById(contentDTO.author()));
+        contentBuilder.setContentAuthor(userService.getUserById(contentDTO.author_id()));
         contentBuilder.setContentName(contentDTO.name());
-        contentBuilder.setContentType(contentDTO.type());
-        if(contentDTO.type().equals(ContentType.PHOTO)) contentBuilder.setContentPhoto(contentDTO.photo());
-        else if(contentDTO.type().equals(ContentType.LINK)) contentBuilder.setContentLink(contentDTO.link());
+        contentBuilder.setContentType(contentDTO.contentType());
+        if(contentDTO.contentType().equals(ContentType.PHOTO)) contentBuilder.setContentPhoto(contentDTO.photo());
+        else if(contentDTO.contentType().equals(ContentType.LINK)) contentBuilder.setContentLink(contentDTO.link());
         else contentBuilder.setContentDescription(contentDTO.description());
-        if(contentDTO.referredPOI() != null) contentBuilder.setContentReferredMunicipalElement(poiService.getPOIByID(contentDTO.referredPOI()));
-        else if(contentDTO.referredItinerary() != null) contentBuilder.setContentReferredMunicipalElement
-                (itineraryService.getItineraryById(contentDTO.referredItinerary()));
+        if(contentDTO.referredPOI_id() != null) contentBuilder.setContentReferredMunicipalElement(poiService.getPOIByID(contentDTO.referredPOI_id()));
+        else if(contentDTO.referredItinerary_id() != null) contentBuilder.setContentReferredMunicipalElement
+                (itineraryService.getItineraryById(contentDTO.referredItinerary_id()));
         contentBuilder.setContentStatus();
     }
 
