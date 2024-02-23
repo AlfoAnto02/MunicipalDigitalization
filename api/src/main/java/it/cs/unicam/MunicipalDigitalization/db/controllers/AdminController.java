@@ -102,7 +102,4 @@ public class AdminController {
         return new ResponseEntity<>("Role removed", HttpStatus.OK);
     }
 
-
-
-
 }

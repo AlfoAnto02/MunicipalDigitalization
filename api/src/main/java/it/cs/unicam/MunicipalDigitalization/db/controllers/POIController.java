@@ -1,5 +1,7 @@
 package it.cs.unicam.MunicipalDigitalization.db.controllers;
 import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
+import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;
+import it.cs.unicam.MunicipalDigitalization.db.Services.UserService;
 import it.cs.unicam.MunicipalDigitalization.db.Services.uploadingServices.POIUploadingService;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.POIDTO;
 import it.cs.unicam.MunicipalDigitalization.db.Services.POIService;
@@ -7,7 +9,6 @@ import it.cs.unicam.MunicipalDigitalization.db.mappers.POIDTOMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -20,12 +21,15 @@ public class POIController {
     private final POIUploadingService uploadingService;
     private final POIService poiService;
     private final POIDTOMapper poiDTOMapper;
+    private final UserService userService;
 
     @Autowired
-    public POIController(POIUploadingService uploadingService, POIService poiService, POIDTOMapper poiDTOMapper) {
+    public POIController(POIUploadingService uploadingService, POIService poiService, POIDTOMapper poiDTOMapper,
+                         UserService userService) {
         this.uploadingService = uploadingService;
         this.poiService = poiService;
         this.poiDTOMapper = poiDTOMapper;
+        this.userService = userService;
     }
 
     /**
@@ -70,16 +74,22 @@ public class POIController {
                 HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/pois/pending", method = RequestMethod.GET)
-    public ResponseEntity<Object> getPendingPOIs(){
+    /**
+     * Returns all the POIs in the database visible only by the curator
+     *
+     * @param curatorId the id of the curator
+     * @return all the Pending POIs in the database
+     */
+    @RequestMapping(value = "/pois/pending/{curatorId}", method = RequestMethod.GET)
+    public ResponseEntity<Object> getPendingPOIs(@PathVariable Long curatorId){
+        if(userService.getUserById(curatorId).getRole().contains(UserRole.CURATOR)){
         return new ResponseEntity<>(poiService.getAllPOIs()
                 .stream()
                 .filter(poi -> poi.getElementStatus().equals(ElementStatus.PENDING))
                 .map(poiDTOMapper),
                 HttpStatus.OK);
     }
-
-
-
+    return new ResponseEntity<>("You are not a curator", HttpStatus.FORBIDDEN);
+    }
 
 }

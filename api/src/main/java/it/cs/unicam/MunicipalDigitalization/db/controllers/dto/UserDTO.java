@@ -16,7 +16,8 @@ public record UserDTO(
         String password,
         Long municipalityID,
         String municipalityName,
-        List<UserRole> userRoles
+        List<UserRole> userRoles,
+        List<String> poisCreated
 )
 {
 }

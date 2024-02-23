@@ -1,6 +1,7 @@
 package it.cs.unicam.MunicipalDigitalization.db.Services.Mediators;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractPOI;
+import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;
 import it.cs.unicam.MunicipalDigitalization.db.Services.MunicipalService;
 import it.cs.unicam.MunicipalDigitalization.db.Services.POIService;
@@ -53,13 +54,16 @@ public class POIMediator {
      * @param request The request to validate.
      */
     public void validatePOI(ValidateRequest request){
-        if(userService.getUserById(request.getCuratorID()).getRole().contains(UserRole.CURATOR)){
+        if(userService.getUserById(request.getCuratorID()).getRole().contains(UserRole.CURATOR) && (poiService
+                .getPOIByID(request.getRequestID()).getElementStatus().equals(ElementStatus.PENDING))){
             poiService.validatePOI(request.getRequestID(),request.isValidated());
             userService.updateUserPOIList(request.getRequestID(), request.isValidated());
             municipalityService.updateMunicipalityPOIList(request.getRequestID(),request.isValidated());
         }
-        else {
-            throw new IllegalArgumentException("The user is not authorized to validate the POI.");
+        else if (poiService.getPOIByID(request.getRequestID()).getElementStatus().equals(ElementStatus.PUBLISHED)){
+            throw new IllegalArgumentException("This poi is already Published");
+        } else {
+            throw new IllegalArgumentException("You are not a curator");
         }
     }
 }
