@@ -9,7 +9,6 @@ import java.util.List;
  * DTO for Itinerary
  *
  * @param name name of the itinerary
- * @param types types of the itinerary
  * @param description description of the itinerary
  * @param authorID author id of the itinerary
  * @param municipalityID municipality id of the itinerary
