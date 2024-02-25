@@ -18,11 +18,11 @@ public class MunicipalityDTOMapper implements Function<Municipality, Municipalit
     public MunicipalityOutputDTO apply(Municipality municipality) {
         return new MunicipalityOutputDTO(
                 municipality.getId(),
+                municipality.getName(),
                 municipality.getTerritory(),
                 municipality.getPOIList(),
                 municipality.getListOfItineraries(),
-                municipality.getListOfIUsers().stream().map(AbstractAuthenticatedUser::getName).toList(),
-                municipality.getName()
+                municipality.getListOfIUsers().stream().map(AbstractAuthenticatedUser::getName).toList()
         );
     }
 }

@@ -54,4 +54,7 @@ public interface UserRepository extends JpaRepository<AbstractAuthenticatedUser,
 
     @Query("SELECT u FROM AbstractAuthenticatedUser u JOIN u.authoredPOIs p WHERE p.id = :requestID")
     AbstractAuthenticatedUser findByAuthoredPOIsId(long requestID);
+
+    @Query("SELECT u FROM AbstractAuthenticatedUser u JOIN u.authoredItineraries i WHERE i.id = :itineraryID")
+    AbstractAuthenticatedUser findByAuthoredItinerariesId(long itineraryID);
 }

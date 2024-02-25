@@ -5,6 +5,7 @@ import it.cs.unicam.MunicipalDigitalization.api.model.actors.AbstractAuthenticat
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractContent;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractItinerary;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractMunicipalElement;
+import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractPOI;
 import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 import it.cs.unicam.MunicipalDigitalization.api.util.MatchingAlgorithms;
 import it.cs.unicam.MunicipalDigitalization.db.Repository.ItineraryRepository;
@@ -35,7 +36,9 @@ public class ItineraryService {
      */
 
     public void saveItinerary(AbstractItinerary itinerary){
-        if(!MatchingAlgorithms.isItinerarySimilarToItineraryList(itinerary,itineraryRepository.findAll())) itineraryRepository.save(itinerary);
+        if(!MatchingAlgorithms.isItinerarySimilarToItineraryList(itinerary,itineraryRepository.findAll())) {
+            itineraryRepository.save(itinerary);
+        }
         else throw new IllegalArgumentException("Itinerary already exists");
     }
 
@@ -49,6 +52,22 @@ public class ItineraryService {
         AbstractItinerary itinerary = itineraryRepository.getReferenceById(id);
         itinerary.addContent(content);
         saveItinerary(itinerary);
+    }
+
+    /**
+     * Update an itinerary in the database
+     *
+     * @param id the id of the itinerary
+     * @param validated the status of the validation request
+     */
+    public void validateItinerary(Long id, boolean validated) {
+        AbstractItinerary itinerary = itineraryRepository.getReferenceById(id);
+        if(validated) {
+            itinerary.setElementStatus(ElementStatus.PUBLISHED);
+            this.itineraryRepository.save(itinerary);
+        } else {
+            this.itineraryRepository.delete(itinerary);
+        }
     }
 
     /**

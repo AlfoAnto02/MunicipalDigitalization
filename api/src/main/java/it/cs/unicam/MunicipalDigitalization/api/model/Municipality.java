@@ -95,6 +95,7 @@ public class Municipality {
         this.name = name;
         this.listOfPOIs = new ArrayList<>();
         this.listOfItineraries = new ArrayList<>();
+        this.listOfIUsers = new ArrayList<>();
         this.territory = territory;
         this.pendingManager = new PendingManager(this);
     }
@@ -102,6 +103,7 @@ public class Municipality {
     public Municipality() {
         this.listOfPOIs = new ArrayList<>();
         this.listOfItineraries = new ArrayList<>();
+        this.listOfIUsers = new ArrayList<>();
         this.pendingManager = new PendingManager(this);
     }
 
@@ -160,7 +162,7 @@ public class Municipality {
      * @param itinerary The itinerary to upload.
      */
     public void uploadItinerary(AbstractItinerary itinerary) {
-        if (!listOfItineraries.contains(itinerary)) listOfItineraries.add(itinerary);
+        listOfItineraries.add(itinerary);
     }
 
     /**

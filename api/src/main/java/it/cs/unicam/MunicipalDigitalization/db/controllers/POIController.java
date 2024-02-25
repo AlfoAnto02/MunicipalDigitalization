@@ -1,6 +1,7 @@
 package it.cs.unicam.MunicipalDigitalization.db.controllers;
 import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;
+import it.cs.unicam.MunicipalDigitalization.db.Services.MunicipalService;
 import it.cs.unicam.MunicipalDigitalization.db.Services.UserService;
 import it.cs.unicam.MunicipalDigitalization.db.Services.uploadingServices.POIUploadingService;
 import it.cs.unicam.MunicipalDigitalization.db.Services.POIService;
@@ -22,14 +23,16 @@ public class POIController {
     private final POIService poiService;
     private final POIDTOMapper poiDTOMapper;
     private final UserService userService;
+    private final MunicipalService municipalService;
 
     @Autowired
     public POIController(POIUploadingService uploadingService, POIService poiService, POIDTOMapper poiDTOMapper,
-                         UserService userService) {
+                         UserService userService, MunicipalService municipalService) {
         this.uploadingService = uploadingService;
         this.poiService = poiService;
         this.poiDTOMapper = poiDTOMapper;
         this.userService = userService;
+        this.municipalService = municipalService;
     }
 
     /**
@@ -60,11 +63,8 @@ public class POIController {
         return new ResponseEntity<>("Product added :)", HttpStatus.OK);
     }
 
-    /**
-     * Returns all the POIs in the database
-     *
-     * @return all the POIs in the database
-     */
+
+/*
     @RequestMapping(value = "/v1/pois", method = RequestMethod.GET)
     public ResponseEntity<Object> getPOIs(){
         return new ResponseEntity<>(poiService.getAllPOIs()
@@ -73,9 +73,26 @@ public class POIController {
                 .map(poiDTOMapper),
                 HttpStatus.OK);
     }
+*/
 
     /**
-     * Returns all the POIs in the database visible only by the curator
+     * Returns a POI of a Municipality by its ID
+     *
+     * @param municipalID id of the Municipality
+     * @param poiID id of the POI
+     * @return the POI with the given ID
+     */
+    @RequestMapping(value = "/v1/poi/{municipalID}/{poiID}", method = RequestMethod.GET)
+    public ResponseEntity<Object> getPOIByIds(@PathVariable Long municipalID, @PathVariable Long poiID){
+        return new ResponseEntity<>(municipalService.getMunicipalByID(municipalID).getPOIList()
+                .stream()
+                .filter(poi -> poi.getElementStatus().equals(ElementStatus.PUBLISHED))
+                .filter(poi -> poi.getId().equals(poiID))
+                .map(poiDTOMapper), HttpStatus.OK);
+    }
+
+    /**
+     * Returns all the POIs of the Municipality. Only the curator can do this Rest call
      *
      * @param curatorId the id of the curator
      * @return all the Pending POIs in the database
@@ -85,6 +102,7 @@ public class POIController {
         if(userService.getUserById(curatorId).getRole().contains(UserRole.CURATOR)){
             return new ResponseEntity<>(poiService.getAllPOIs()
                     .stream()
+                    .filter(poi -> poi.getMunicipality().equals(userService.getUserById(curatorId).getMunicipality()))
                     .filter(poi -> poi.getElementStatus().equals(ElementStatus.PENDING))
                     .map(poiDTOMapper),
                     HttpStatus.OK);

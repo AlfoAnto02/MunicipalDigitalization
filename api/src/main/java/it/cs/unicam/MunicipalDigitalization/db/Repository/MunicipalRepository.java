@@ -45,6 +45,21 @@ public interface MunicipalRepository extends JpaRepository<Municipality,Long> {
     List<Municipality> findAll();
 
 
+    /**
+     * This is a Method to find a Municipality by a POI in the POI List
+     *
+     * @param requestID of the POI
+     * @return a Municipality if exists
+     */
     @Query("SELECT m FROM Municipality m JOIN m.listOfPOIs p WHERE p.id = :requestID")
     Municipality findByPOIinPOIList(long requestID);
+
+    /**
+     * This is a Method to find a Municipality by an Itinerary in the Itinerary List
+     *
+     * @param itineraryID of the Itinerary
+     * @return a Municipality if exists
+     */
+    @Query("SELECT m FROM Municipality m JOIN m.listOfItineraries i WHERE i.id = :itineraryID")
+    Municipality findByItineraryInItineraryList(long itineraryID);
 }

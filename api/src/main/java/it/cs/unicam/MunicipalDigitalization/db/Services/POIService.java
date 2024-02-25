@@ -53,6 +53,7 @@ public class POIService {
      * Update a POI in the database
      *
      * @param id ID of the POI
+     * @param validated the status of the validation Request
      */
     public void validatePOI(Long id, boolean validated) {
         AbstractPOI poi = poiRepository.getReferenceById(id);

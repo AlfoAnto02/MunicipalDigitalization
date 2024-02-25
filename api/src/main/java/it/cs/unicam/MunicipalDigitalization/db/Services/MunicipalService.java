@@ -98,6 +98,28 @@ public class MunicipalService {
         }
     }
 
+    /**
+     * Update the itinerary list of a municipality based on the validation request
+     *
+     * @param itineraryID ID of the itinerary
+     * @param isValidated Boolean value to determine if the itinerary is validated
+     */
+    public void updateMunicipalityItineraryList(long itineraryID, boolean isValidated) {
+        Municipality municipality = municipalRepository.findByItineraryInItineraryList(itineraryID);
+        if (isValidated) {
+            municipality.getItineraryList().stream().filter(p -> p.getId().equals(itineraryID)).
+                    forEach(p -> p.setElementStatus(ElementStatus.PUBLISHED));
+            municipalRepository.save(municipality);
+        } else {
+            municipality.getItineraryList().remove(municipality.getItineraryList()
+                    .stream()
+                    .filter(p -> p.getId().equals(itineraryID))
+                    .findFirst()
+                    .get());
+            municipalRepository.save(municipality);
+        }
+    }
+
 
     public Municipality getMunicipalByID(Long id){
         return municipalRepository.getReferenceById(id);

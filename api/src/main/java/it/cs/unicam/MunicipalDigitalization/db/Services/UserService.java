@@ -52,6 +52,13 @@ public class UserService {
         userRepository.save(user);
     }
 
+    /**
+     * Update the user's list of authored POIs after the Validation of a POI
+     *
+     * @param poiID ID of the poi
+     * @param validate true if the poi is validated, false if it is not
+     */
+
     public void updateUserPOIList(long poiID, boolean validate) {
         AbstractAuthenticatedUser user = userRepository.findByAuthoredPOIsId(poiID);
         if(validate) {
@@ -64,6 +71,30 @@ public class UserService {
             user.getAuthoredPOIs().remove(user.getAuthoredPOIs()
                     .stream()
                     .filter(p -> p.getId().equals(poiID))
+                    .findFirst()
+                    .get());
+            userRepository.save(user);
+        }
+    }
+
+    /**
+     * Update the user's list of authored itineraries after the Validation of an itinerary
+     *
+     * @param itineraryID ID of the itinerary
+     * @param validate true if the itinerary is validated, false if it is not
+     */
+    public void updateUserItineraryList(long itineraryID, boolean validate) {
+        AbstractAuthenticatedUser user = userRepository.findByAuthoredItinerariesId(itineraryID);
+        if(validate) {
+            user.getAuthoredItineraries()
+                    .stream()
+                    .filter(p -> p.getId().equals(itineraryID))
+                    .forEach(p -> p.setElementStatus(ElementStatus.PUBLISHED));
+            userRepository.save(user);
+        } else{
+            user.getAuthoredItineraries().remove(user.getAuthoredItineraries()
+                    .stream()
+                    .filter(p -> p.getId().equals(itineraryID))
                     .findFirst()
                     .get());
             userRepository.save(user);

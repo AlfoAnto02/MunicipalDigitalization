@@ -10,6 +10,7 @@ import it.cs.unicam.MunicipalDigitalization.api.util.MatchingAlgorithms;
 import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static it.cs.unicam.MunicipalDigitalization.api.util.MatchingAlgorithms.containsSpecialCharacters;
@@ -28,12 +29,16 @@ public class AuthorizedItineraryBuilder implements ItineraryBuilder{
     private String type;
     private ElementStatus status;
 
+    public AuthorizedItineraryBuilder() {
+        this.poiList = new ArrayList<>();
+    }
+
     @Override
     public void addPOIs(List<AbstractPOI>  poi) {
         for(AbstractPOI p : poi){
             if(p.getElementStatus().equals(ElementStatus.PENDING)) throw new IllegalArgumentException("You can't select a Pending POI");
+            else this.poiList.add(p);
         }
-        this.poiList = poi;
     }
 
     @Override

@@ -5,8 +5,8 @@ import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
 import it.cs.unicam.MunicipalDigitalization.api.model.actors.AuthorizedContributor;
 import it.cs.unicam.MunicipalDigitalization.api.util.*;
 import it.cs.unicam.MunicipalDigitalization.db.Services.uploadingServices.POIUploadingService;
-import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.ContentDTO;
-import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.POIDTO;
+import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.input.ContentInputDTO;
+import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.input.POIDTO;
 import it.cs.unicam.MunicipalDigitalization.db.Repository.MunicipalRepository;
 import it.cs.unicam.MunicipalDigitalization.db.Repository.UserRepository;
 import it.cs.unicam.MunicipalDigitalization.db.Services.ContentService;
@@ -59,7 +59,7 @@ public class ContentRepoTest {
         poiUploadingService.uploadPOI(poiDTO);
 
         //Create a Content
-        ContentDTO contentDTO = new ContentDTO("Barcellona", 1L, null, user.getId(),
+        ContentInputDTO contentDTO = new ContentInputDTO("Barcellona", 1L, null, user.getId(),
                 ContentType.PHOTO, null, null, "barcellonaspettacolo.png");
 
         //Upload the Content
