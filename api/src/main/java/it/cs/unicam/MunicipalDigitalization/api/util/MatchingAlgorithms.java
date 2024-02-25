@@ -31,7 +31,7 @@ public class MatchingAlgorithms {
     }
 
     /*
-    * This method checks if a string contains special characters
+     * This method checks if a string contains special characters
      */
     public static boolean containsSpecialCharacters(String str){
         Pattern pattern = Pattern.compile("[^a-zA-Z0-9]+");
@@ -60,7 +60,7 @@ public class MatchingAlgorithms {
     public static boolean isPOISimilarToPoiList(AbstractPOI poi, List<AbstractPOI> poiList) {
         for (AbstractPOI p : poiList) {
             if(poi.getName().equalsIgnoreCase(p.getName()) && poi.getType().equals(p.getType())&&
-            poi.getMunicipality().equals(p.getMunicipality()) && poi.getCoordinate().equals(p.getCoordinate()) && p!=poi)
+                    poi.getMunicipality().equals(p.getMunicipality()) && poi.getCoordinate().equals(p.getCoordinate()) && p!=poi)
                 return true;
         }
         return false;
@@ -77,7 +77,7 @@ public class MatchingAlgorithms {
     public static boolean isItinerarySimilarToItineraryList(AbstractItinerary itinerary, List<AbstractItinerary> itineraryList) {
         for (AbstractItinerary i : itineraryList) {
             if(itinerary.getName().equalsIgnoreCase(i.getName()) && itinerary.getMunicipality().equals(i.getMunicipality()) &&
-            itinerary.getCoordinate().equals(i.getCoordinate()) && itinerary.getPOIs().equals(i.getPOIs()) && i!=itinerary)
+                    itinerary.getCoordinate().equals(i.getCoordinate()) && itinerary.getPOIs().equals(i.getPOIs()) && i!=itinerary)
                 return true;
         }
         return false;
@@ -96,8 +96,8 @@ public class MatchingAlgorithms {
                     (content.getPhoto().equals(c.getPhoto()) && content.getLink().equals(c.getLink()) &&
                             content.getDescription().equals(c.getDescription())) &&
                     (content.getReferredItinerary().getId().equals(c.getReferredItinerary().getId()) &&
-                                    content.getReferredPOI().getId().equals(c.getReferredPOI().getId())) &&
-            c!=content) return true;
+                            content.getReferredPOI().getId().equals(c.getReferredPOI().getId())) &&
+                    c!=content) return true;
         }
         return false;
     }
@@ -112,7 +112,7 @@ public class MatchingAlgorithms {
     public static boolean isMunicipalSimilarToMunicipalityList(Municipality municipality, List<Municipality> municipalityList) {
         for (Municipality m : municipalityList) {
             if(municipality.getName().equalsIgnoreCase(m.getName()) && municipality.getTerritory().equals(m.getTerritory())&&
-            m!=municipality)
+                    m!=municipality)
                 return true;
         }
         return false;

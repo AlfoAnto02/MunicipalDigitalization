@@ -20,13 +20,13 @@ public class AuthenticatedTourist  extends AbstractAuthenticatedUser{
      * @param password password of the AuthenticatedTourist
      * @param municipality municipality of the AuthenticatedTourist
      */
-        public AuthenticatedTourist(String name, String password, Municipality municipality) {
-            super(name, password, municipality);
-            super.addRole(UserRole.AUTHENTICATED_TOURIST);
-        }
+    public AuthenticatedTourist(String name, String password, Municipality municipality) {
+        super(name, password, municipality);
+        super.addRole(UserRole.AUTHENTICATED_TOURIST);
+    }
 
-        public AuthenticatedTourist() {
-            super();
-            super.addRole(UserRole.AUTHENTICATED_TOURIST);
-        }
+    public AuthenticatedTourist() {
+        super();
+        super.addRole(UserRole.AUTHENTICATED_TOURIST);
+    }
 }

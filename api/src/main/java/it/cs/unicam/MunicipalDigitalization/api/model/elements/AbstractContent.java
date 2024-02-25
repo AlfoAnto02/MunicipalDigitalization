@@ -36,7 +36,7 @@ public abstract class AbstractContent implements IContent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     /**
      * The municipal element referred by the content.
      */
@@ -56,21 +56,21 @@ public abstract class AbstractContent implements IContent {
     @ManyToOne
     @JoinColumn(name = "ReferredItinerary",nullable = true)
     private AbstractItinerary referredItinerary;
-    
+
     /**
      * The author of the content.
      */
     @ManyToOne
     @JoinColumn(name = "Author",nullable = false)
     private AbstractAuthenticatedUser author;
-    
+
     /**
      * The status of the Element, if it is Pending or Published.
      */
     @Getter
     @Column(name = "Status",nullable = false)
     private ElementStatus elementStatus;
-    
+
     /**
      * The type of the content.
      */
@@ -138,7 +138,7 @@ public abstract class AbstractContent implements IContent {
      */
 
     public AbstractContent(String name, AbstractItinerary referredItinerary, AbstractAuthenticatedUser author,
-                            ContentType type, String description, String link, String photo) {
+                           ContentType type, String description, String link, String photo) {
         this.name = name;
         this.referredItinerary = referredItinerary;
         this.author = author;

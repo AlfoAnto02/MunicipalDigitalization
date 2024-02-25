@@ -37,7 +37,7 @@ public class AuthorizedContent extends AbstractContent {
      * @param photo photo of the content
      */
     public AuthorizedContent(AbstractPOI referredPOI, String name, AbstractAuthenticatedUser author,
-                              ContentType type, String description, String link, String photo) {
+                             ContentType type, String description, String link, String photo) {
         super(referredPOI, name, author, type, description, link, photo);
         this.setElementStatus(ElementStatus.PUBLISHED);
     }

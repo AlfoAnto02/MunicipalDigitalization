@@ -1,23 +1,20 @@
-package it.cs.unicam.MunicipalDigitalization.db.controllers.dto;
+package it.cs.unicam.MunicipalDigitalization.db.controllers.dto.input;
 
 import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;
 
 import java.util.List;
 
 /**
- * DTO for User
+ * Input DTO for User
  *
  * @param username username
  * @param password password
  * @param municipalityID municipality
  */
-public record UserDTO(
+public record UserInputDTO(
         String username,
         String password,
-        Long municipalityID,
-        String municipalityName,
-        List<UserRole> userRoles,
-        List<String> poisCreated
+        Long municipalityID
 )
 {
 }

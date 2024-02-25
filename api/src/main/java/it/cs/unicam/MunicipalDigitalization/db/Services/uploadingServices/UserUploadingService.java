@@ -3,7 +3,7 @@ package it.cs.unicam.MunicipalDigitalization.db.Services.uploadingServices;
 import it.cs.unicam.MunicipalDigitalization.api.model.actors.AuthenticatedTourist;
 import it.cs.unicam.MunicipalDigitalization.db.Services.Mediators.UserMediator;
 import it.cs.unicam.MunicipalDigitalization.db.Services.MunicipalService;
-import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.UserDTO;
+import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.input.UserInputDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +27,7 @@ public class UserUploadingService {
      *
      * @param userDTO the user to upload
      */
-    public void uploadUser(UserDTO userDTO){
+    public void uploadUser(UserInputDTO userDTO){
         checkUser(userDTO);
         AuthenticatedTourist user = new AuthenticatedTourist();
         user.setName(userDTO.username());
@@ -41,7 +41,7 @@ public class UserUploadingService {
      *
      * @param userDTO the user to check
      */
-    private void checkUser(UserDTO userDTO) {
+    private void checkUser(UserInputDTO userDTO) {
         //TODO
     }
 }

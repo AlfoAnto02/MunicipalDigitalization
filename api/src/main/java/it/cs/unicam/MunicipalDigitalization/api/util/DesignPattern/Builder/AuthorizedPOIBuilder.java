@@ -60,9 +60,9 @@ public class AuthorizedPOIBuilder implements POIBuilder {
 
     @Override
     public void setPOIMunicipality(Municipality municipality) {
-       // if(municipality != null && municipality.checkCoordinates(this.coordinates))  this.municipality = municipality;
-       // else throw new IllegalArgumentException("The municipality must not be null and the coordinates must be inside the municipality");
-         this.municipality = municipality;
+        // if(municipality != null && municipality.checkCoordinates(this.coordinates))  this.municipality = municipality;
+        // else throw new IllegalArgumentException("The municipality must not be null and the coordinates must be inside the municipality");
+        this.municipality = municipality;
     }
 
     @Override

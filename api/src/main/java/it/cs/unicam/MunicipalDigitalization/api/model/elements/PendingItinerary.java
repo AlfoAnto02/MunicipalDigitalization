@@ -27,7 +27,7 @@ public class PendingItinerary extends AbstractItinerary {
         super();
     }
 
-/**
+    /**
      * Constructor for the PendingItinerary class used by the Builder
      *
      * @param municipality the municipality where the itinerary should be located

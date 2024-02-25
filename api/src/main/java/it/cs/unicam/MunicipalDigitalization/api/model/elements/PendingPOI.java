@@ -26,7 +26,7 @@ public class PendingPOI extends AbstractPOI {
         super();
     }
 
-/**
+    /**
      * Constructor for the PendingPOI class used by the Builder
      *
      * @param municipality the municipality where the POI is located

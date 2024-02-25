@@ -1,7 +1,7 @@
 package it.cs.unicam.MunicipalDigitalization.db.mappers;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractPOI;
-import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.POIDTO;
+import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.output.POIOutputDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.function.Function;
@@ -11,16 +11,17 @@ import java.util.function.Function;
  * It implements the Function interface.
  */
 @Service
-public class POIDTOMapper implements Function<AbstractPOI, POIDTO> {
+public class POIDTOMapper implements Function<AbstractPOI, POIOutputDTO> {
     @Override
-    public POIDTO apply(AbstractPOI poi) {
-        return new POIDTO(
+    public POIOutputDTO apply(AbstractPOI poi) {
+        return new POIOutputDTO(
+                poi.getId(),
                 poi.getName(),
-                poi.getPOIType(),
-                poi.getAuthor().getId(),
-                poi.getMunicipality().getId(),
+                poi.getMunicipality().getName(),
+                poi.getType(),
                 poi.getCoordinate(),
-                poi.getElementStatus()
+                poi.getCreationDate(),
+                poi.getListOfContents()
         );
     }
 }

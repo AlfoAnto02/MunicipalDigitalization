@@ -3,8 +3,8 @@ import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;
 import it.cs.unicam.MunicipalDigitalization.db.Services.UserService;
 import it.cs.unicam.MunicipalDigitalization.db.Services.uploadingServices.POIUploadingService;
-import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.POIDTO;
 import it.cs.unicam.MunicipalDigitalization.db.Services.POIService;
+import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.input.POIInputDTO;
 import it.cs.unicam.MunicipalDigitalization.db.mappers.POIDTOMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -38,7 +38,7 @@ public class POIController {
      * @param id the id of the municipality
      * @return all the POIs in the database
      */
-    @RequestMapping(value = "/pois/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/v1/pois/{id}", method = RequestMethod.GET)
     public ResponseEntity<Object> getPOIsByMunicipalityID(@PathVariable Long id){
         return new ResponseEntity<>(poiService.getAllPOIs()
                 .stream()
@@ -54,8 +54,8 @@ public class POIController {
      * @return a message indicating that the POI has been added
      */
 
-    @RequestMapping(value = "/poi/upload", method = RequestMethod.POST)
-    public ResponseEntity<Object> uploadPOI(@RequestBody POIDTO poidto){
+    @RequestMapping(value = "/v1/poi/upload", method = RequestMethod.POST)
+    public ResponseEntity<Object> uploadPOI(@RequestBody POIInputDTO poidto){
         uploadingService.uploadPOI(poidto);
         return new ResponseEntity<>("Product added :)", HttpStatus.OK);
     }
@@ -65,8 +65,8 @@ public class POIController {
      *
      * @return all the POIs in the database
      */
-    @RequestMapping(value = "/pois", method = RequestMethod.GET)
-    public ResponseEntity<Object> getAllPublishedPOIs(){
+    @RequestMapping(value = "/v1/pois", method = RequestMethod.GET)
+    public ResponseEntity<Object> getPOIs(){
         return new ResponseEntity<>(poiService.getAllPOIs()
                 .stream()
                 .filter(poi -> poi.getElementStatus().equals(ElementStatus.PUBLISHED))
@@ -80,16 +80,16 @@ public class POIController {
      * @param curatorId the id of the curator
      * @return all the Pending POIs in the database
      */
-    @RequestMapping(value = "/pois/pending/{curatorId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/v1/pois/pending/{curatorId}", method = RequestMethod.GET)
     public ResponseEntity<Object> getPendingPOIs(@PathVariable Long curatorId){
         if(userService.getUserById(curatorId).getRole().contains(UserRole.CURATOR)){
-        return new ResponseEntity<>(poiService.getAllPOIs()
-                .stream()
-                .filter(poi -> poi.getElementStatus().equals(ElementStatus.PENDING))
-                .map(poiDTOMapper),
-                HttpStatus.OK);
-    }
-    return new ResponseEntity<>("You are not a curator", HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>(poiService.getAllPOIs()
+                    .stream()
+                    .filter(poi -> poi.getElementStatus().equals(ElementStatus.PENDING))
+                    .map(poiDTOMapper),
+                    HttpStatus.OK);
+        }
+        return new ResponseEntity<>("You are not a curator", HttpStatus.FORBIDDEN);
     }
 
 }

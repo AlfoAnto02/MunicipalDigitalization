@@ -30,6 +30,9 @@ public class AuthorizedItineraryBuilder implements ItineraryBuilder{
 
     @Override
     public void addPOIs(List<AbstractPOI>  poi) {
+        for(AbstractPOI p : poi){
+            if(p.getElementStatus().equals(ElementStatus.PENDING)) throw new IllegalArgumentException("You can't select a Pending POI");
+        }
         this.poiList = poi;
     }
 

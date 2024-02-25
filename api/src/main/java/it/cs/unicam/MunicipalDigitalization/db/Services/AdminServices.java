@@ -5,7 +5,7 @@ import it.cs.unicam.MunicipalDigitalization.api.model.actors.AbstractAuthenticat
 import it.cs.unicam.MunicipalDigitalization.api.util.DesignPattern.Command.GiveRoleCommand;
 import it.cs.unicam.MunicipalDigitalization.api.util.DesignPattern.Command.RemoveRoleCommand;
 import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;
-import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.MunicipalityDTO;
+import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.input.MunicipalityInputDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -66,11 +66,9 @@ public class AdminServices {
      * @param municipalityDTO the municipality to be created
      */
 
-    public void createMunicipality(Long adminID, MunicipalityDTO municipalityDTO){
+    public void createMunicipality(Long adminID, MunicipalityInputDTO municipalityDTO){
         if(userService.getUserById(adminID).getRole().contains(UserRole.PLATFORM_GESTOR)){
-            Municipality municipality = new Municipality();
-            municipality.setName(municipalityDTO.name());
-            municipality.setTerritory(municipalityDTO.territory());
+            Municipality municipality = new Municipality(municipalityDTO.territory(),municipalityDTO.name());
             municipalService.saveMunicipal(municipality);
         } else throw new IllegalArgumentException("User not authorized to create municipality");
     }

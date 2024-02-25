@@ -1,4 +1,4 @@
-package it.cs.unicam.MunicipalDigitalization.db.controllers.dto;
+package it.cs.unicam.MunicipalDigitalization.db.controllers.dto.input;
 
 import it.cs.unicam.MunicipalDigitalization.api.util.Coordinate;
 import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
@@ -16,15 +16,14 @@ import java.util.List;
  * @param coordinate coordinate of the itinerary
  * @param POIsIDs list of poi ids of the itinerary
  */
-public record ItineraryDTO (
-    String name,
-    String types,
-    String description,
-    Long authorID,
-    Long municipalityID,
-    Coordinate coordinate,
-    List<Long> POIsIDs
+public record ItineraryInputDTO (
+        String name,
+        String description,
+        Long authorID,
+        Long municipalityID,
+        Coordinate coordinate,
+        List<Long> POIsIDs
 
-    )
+)
 {
 }

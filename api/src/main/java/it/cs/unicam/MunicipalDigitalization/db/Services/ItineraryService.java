@@ -11,6 +11,7 @@ import it.cs.unicam.MunicipalDigitalization.db.Repository.ItineraryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -56,8 +57,11 @@ public class ItineraryService {
      * @param id the id of the itinerary
      * @return the itinerary
      */
-    public AbstractMunicipalElement getItineraryById(Long id) {
+    public AbstractItinerary getItineraryById(Long id) {
         return itineraryRepository.getReferenceById(id);
     }
 
+    public List<AbstractItinerary> getAllItineraries() {
+        return itineraryRepository.findAll();
+    }
 }

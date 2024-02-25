@@ -1,4 +1,4 @@
-package it.cs.unicam.MunicipalDigitalization.db.controllers.dto;
+package it.cs.unicam.MunicipalDigitalization.db.controllers.dto.input;
 
 import it.cs.unicam.MunicipalDigitalization.api.util.Coordinate;
 
@@ -11,7 +11,7 @@ import java.util.List;
  * @param name name of the municipality
  * @param territory list of coordinates that represent the territory of the municipality
  */
-public record MunicipalityDTO(
+public record MunicipalityInputDTO(
         String name,
         List<Coordinate> territory
 

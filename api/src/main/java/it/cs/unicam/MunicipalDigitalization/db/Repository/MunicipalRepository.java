@@ -20,7 +20,7 @@ public interface MunicipalRepository extends JpaRepository<Municipality,Long> {
      * @return the Municipality if exists
      */
     @Query("SELECT m FROM Municipality m WHERE m.id=?1")
-   @NonNull Optional<Municipality> findById(@NonNull Long id);
+    @NonNull Optional<Municipality> findById(@NonNull Long id);
 
     /**
      * This is a Method to find a Municipality by a Name

@@ -1,6 +1,7 @@
 package it.cs.unicam.MunicipalDigitalization.db.controllers.Requests;
 
-import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.MunicipalityDTO;
+
+import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.input.MunicipalityInputDTO;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,7 +12,7 @@ import lombok.Setter;
 @Setter
 public class MunicipalityRequest {
     private Long adminID;
-    private MunicipalityDTO municipalityDTO;
+    private MunicipalityInputDTO municipalityDTO;
 
     /**
      * Constructor for the MunicipalityRequest
@@ -19,7 +20,7 @@ public class MunicipalityRequest {
      * @param adminID id of the admin that is creating the municipality
      * @param municipalityDTO DTO of the municipality to be created
      */
-    public MunicipalityRequest(Long adminID, MunicipalityDTO municipalityDTO) {
+    public MunicipalityRequest(Long adminID, MunicipalityInputDTO municipalityDTO) {
         this.adminID = adminID;
         this.municipalityDTO = municipalityDTO;
     }

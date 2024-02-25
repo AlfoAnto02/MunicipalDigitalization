@@ -1,15 +1,12 @@
 package it.cs.unicam.MunicipalDigitalization.db.Services.uploadingServices;
 import it.cs.unicam.MunicipalDigitalization.api.util.ContentType;
-import it.cs.unicam.MunicipalDigitalization.api.util.DesignPattern.Builder.AuthorizedContentBuilder;
 import it.cs.unicam.MunicipalDigitalization.api.util.DesignPattern.Builder.ContentBuilder;
-import it.cs.unicam.MunicipalDigitalization.api.util.DesignPattern.Builder.PendingContentBuilder;
 import it.cs.unicam.MunicipalDigitalization.api.util.DesignPattern.FactoryMethod.ContentBuilderFactory;
-import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;
 import it.cs.unicam.MunicipalDigitalization.db.Services.ItineraryService;
 import it.cs.unicam.MunicipalDigitalization.db.Services.Mediators.ContentMediator;
 import it.cs.unicam.MunicipalDigitalization.db.Services.POIService;
 import it.cs.unicam.MunicipalDigitalization.db.Services.UserService;
-import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.ContentDTO;
+import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.input.ContentInputDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,7 +38,7 @@ public class ContentUploadingService {
      *
      * @param contentDTO the content to be uploaded
      */
-    public void uploadContent(ContentDTO contentDTO) {
+    public void uploadContent(ContentInputDTO contentDTO) {
         checkContent(contentDTO);
         ContentBuilder builder = contentBuilderFactory.createBuilderForUser(userService.getUserById(contentDTO.author_id()));
         buildContent(builder, contentDTO);
@@ -55,7 +52,7 @@ public class ContentUploadingService {
      * @param contentDTO the content to be built
      */
 
-    private void buildContent(ContentBuilder contentBuilder, ContentDTO contentDTO) {
+    private void buildContent(ContentBuilder contentBuilder, ContentInputDTO contentDTO) {
         contentBuilder.setContentAuthor(userService.getUserById(contentDTO.author_id()));
         contentBuilder.setContentName(contentDTO.name());
         contentBuilder.setContentType(contentDTO.contentType());
@@ -73,7 +70,7 @@ public class ContentUploadingService {
      *
      * @param contentDTO the content to be checked
      */
-    private void checkContent(ContentDTO contentDTO) {
+    private void checkContent(ContentInputDTO contentDTO) {
         //TODO
     }
 }

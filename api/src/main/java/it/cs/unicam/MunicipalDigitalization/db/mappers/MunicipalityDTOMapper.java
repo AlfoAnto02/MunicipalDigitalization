@@ -1,7 +1,8 @@
 package it.cs.unicam.MunicipalDigitalization.db.mappers;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
-import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.MunicipalityDTO;
+import it.cs.unicam.MunicipalDigitalization.api.model.actors.AbstractAuthenticatedUser;
+import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.output.MunicipalityOutputDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.function.Function;
@@ -11,13 +12,17 @@ import java.util.function.Function;
  * It implements the Function interface.
  */
 @Service
-public class MunicipalityDTOMapper implements Function<Municipality, MunicipalityDTO> {
+public class MunicipalityDTOMapper implements Function<Municipality, MunicipalityOutputDTO> {
 
     @Override
-    public MunicipalityDTO apply(Municipality municipality) {
-        return new MunicipalityDTO(
-                municipality.getName(),
-                municipality.getTerritory()
+    public MunicipalityOutputDTO apply(Municipality municipality) {
+        return new MunicipalityOutputDTO(
+                municipality.getId(),
+                municipality.getTerritory(),
+                municipality.getPOIList(),
+                municipality.getListOfItineraries(),
+                municipality.getListOfIUsers().stream().map(AbstractAuthenticatedUser::getName).toList(),
+                municipality.getName()
         );
     }
 }

@@ -4,7 +4,7 @@ package it.cs.unicam.MunicipalDigitalization.db.controllers;
 import it.cs.unicam.MunicipalDigitalization.db.Services.MunicipalService;
 import it.cs.unicam.MunicipalDigitalization.db.Services.UserService;
 import it.cs.unicam.MunicipalDigitalization.db.Services.uploadingServices.UserUploadingService;
-import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.UserDTO;
+import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.input.UserInputDTO;
 import it.cs.unicam.MunicipalDigitalization.db.mappers.UserDTOMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,8 +35,8 @@ public class UserController {
      * @param userDTO the user to be registered
      * @return a ResponseEntity with the result of the operation
      */
-    @RequestMapping(value = "/user/register", method = RequestMethod.POST)
-    public ResponseEntity<Object> registerUser(@RequestBody UserDTO userDTO){
+    @RequestMapping(value = "/v1/user/register", method = RequestMethod.POST)
+    public ResponseEntity<Object> registerUser(@RequestBody UserInputDTO userDTO){
         uploadingService.uploadUser(userDTO);
         return new ResponseEntity<>("User added :)", HttpStatus.OK);
     }
@@ -46,7 +46,7 @@ public class UserController {
      *
      * @return a ResponseEntity with the list of all the users
      */
-    @RequestMapping(value = "/users", method = RequestMethod.GET)
+    @RequestMapping(value = "/v1/users", method = RequestMethod.GET)
     public ResponseEntity<Object> getUsers(){
         return new ResponseEntity<>(userService.getAllUsers()
                 .stream()
@@ -60,7 +60,7 @@ public class UserController {
      * @param id the id of the user
      * @return a ResponseEntity with the user
      */
-    @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/v1/user/{id}", method = RequestMethod.GET)
     public ResponseEntity<Object> getUserById(@PathVariable Long id){
         return new ResponseEntity<>(userDTOMapper.apply(userService.getUserById(id)), HttpStatus.OK);
     }
@@ -71,7 +71,7 @@ public class UserController {
      * @param id the id of the municipality
      * @return a ResponseEntity with the list of all the users in the municipality
      */
-    @RequestMapping(value = "/users/municipality/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/v1/users/municipality/{id}", method = RequestMethod.GET)
     public ResponseEntity<Object> getUserByMunicipality(@PathVariable Long id){
         return new ResponseEntity<>(userService.getAllUsers()
                 .stream()

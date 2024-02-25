@@ -1,4 +1,4 @@
-package it.cs.unicam.MunicipalDigitalization.db.controllers.dto;
+package it.cs.unicam.MunicipalDigitalization.db.controllers.dto.input;
 
 import it.cs.unicam.MunicipalDigitalization.api.util.ContentType;
 import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
@@ -15,7 +15,7 @@ import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
  * @param link link of the content
  * @param photo photo of the content
  */
-public record ContentDTO (
+public record ContentInputDTO (
         String name,
         Long referredPOI_id,
         Long referredItinerary_id,

@@ -18,7 +18,7 @@ public class ValidateController {
         this.validateService = validateService;
     }
 
-    @RequestMapping(value = "/validate/poi", method = RequestMethod.POST)
+    @RequestMapping(value = "/v1/validate/poi", method = RequestMethod.POST)
     public ResponseEntity<Object> validatePOI(@RequestBody ValidateRequest request){
         validateService.validatePOI(request);
         return new ResponseEntity<>("POI validated", HttpStatus.OK  );

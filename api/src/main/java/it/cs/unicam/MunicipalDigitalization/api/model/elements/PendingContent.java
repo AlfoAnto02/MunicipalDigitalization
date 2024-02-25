@@ -30,7 +30,7 @@ public class PendingContent extends AbstractContent {
     }
 
     public PendingContent(String name, AbstractItinerary referredItinerary, AbstractAuthenticatedUser author,
-                           ContentType type, String description, String link, String photo) {
+                          ContentType type, String description, String link, String photo) {
         super(name, referredItinerary, author, type, description, link, photo);
         this.setElementStatus(ElementStatus.PENDING);
     }

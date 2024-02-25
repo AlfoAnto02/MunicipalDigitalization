@@ -87,7 +87,7 @@ public abstract class AbstractItinerary extends AbstractMunicipalElement impleme
      */
     public AbstractItinerary(Municipality municipality, ElementStatus elementStatus, Coordinate coordinate,
                              String name, List<AbstractPOI> pois, String types, String description,
-                              AbstractAuthenticatedUser author) {
+                             AbstractAuthenticatedUser author) {
         super(municipality, elementStatus, coordinate, name);
         this.pois = pois;
         this.types = types;
