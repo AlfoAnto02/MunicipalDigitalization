@@ -86,12 +86,23 @@ public class ItineraryUploadingService {
     }
 
     /**
-     * Checks the validity of the itinerary
+     * Checks if the itinerary is valid
      *
      * @param itineraryDTO the itinerary to be checked
      */
     private void checkItinerary(ItineraryInputDTO itineraryDTO) {
+        checkItineraryName(itineraryDTO);
+        checkItineraryAuthor(itineraryDTO);
+        checkItineraryDescription(itineraryDTO);
+        checkItineraryPOIs(itineraryDTO);
+    }
 
+    /**
+     * Checks if the itinerary name is valid
+     *
+     * @param itineraryDTO the itinerary to be checked
+     */
+    private void checkItineraryName(ItineraryInputDTO itineraryDTO) {
         if (itineraryDTO.itinerary_name().length() > 40 || itineraryDTO.itinerary_name().length() < 10) {
             throw new IllegalArgumentException("The name must be between 10 and 40 characters");
         }
@@ -103,11 +114,25 @@ public class ItineraryUploadingService {
         if (containsSpecialCharacters(itineraryDTO.itinerary_name())) {
             throw new IllegalArgumentException("The name must not contain special characters");
         }
+    }
 
+    /**
+     * Checks if the itinerary author is valid
+     *
+     * @param itineraryDTO the itinerary to be checked
+     */
+    private void checkItineraryAuthor(ItineraryInputDTO itineraryDTO) {
         if (userService.getUserById(itineraryDTO.authorID()).getRole().contains(UserRole.CONTRIBUTOR) && userService.getUserById(itineraryDTO.authorID()).getRole().contains(UserRole.AUTHORIZED_CONTRIBUTOR) && userService.getUserById(itineraryDTO.authorID()).getRole().contains(UserRole.CURATOR)) {
             throw new IllegalArgumentException("The author is not authorized to upload an itinerary");
         }
+    }
 
+    /**
+     * Checks if the itinerary description is valid
+     *
+     * @param itineraryDTO the itinerary to be checked
+     */
+    private void checkItineraryDescription(ItineraryInputDTO itineraryDTO) {
         if (itineraryDTO.itinerary_description() == null) {
             throw new IllegalArgumentException("The description is null");
         }
@@ -119,7 +144,14 @@ public class ItineraryUploadingService {
         if (itineraryDTO.itinerary_description().length() < 10) {
             throw new IllegalArgumentException("The description is too short");
         }
+    }
 
+    /**
+     * Checks if the itinerary POIs are valid
+     *
+     * @param itineraryDTO the itinerary to be checked
+     */
+    private void checkItineraryPOIs(ItineraryInputDTO itineraryDTO) {
         if (userService.getUserById(itineraryDTO.authorID()).getMunicipality() == null) {
             throw new IllegalArgumentException("The author is not associated with a municipality");
         }
@@ -129,6 +161,5 @@ public class ItineraryUploadingService {
         }
 
         // TODO check if the coordinate is within the municipality coordinates
-
     }
 }

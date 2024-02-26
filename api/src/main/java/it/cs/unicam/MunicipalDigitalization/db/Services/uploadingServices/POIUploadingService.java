@@ -16,10 +16,28 @@ import static it.cs.unicam.MunicipalDigitalization.api.util.MatchingAlgorithms.c
  */
 @Service
 public class POIUploadingService {
+    /**
+     * UserService instance
+     */
     private final UserService userService;
+
+    /**
+     * POIMediator instance
+     */
     private final POIMediator poiMediator;
+
+    /**
+     * POIBuilderFactory instance
+     */
     private final POIBuilderFactory poiBuilderFactory;
 
+    /**
+     * Constructor for POIUploadingService
+     *
+     * @param userService       UserService instance
+     * @param poiMediator       POIMediator instance
+     * @param poiBuilderFactory POIBuilderFactory instance
+     */
     @Autowired
     public POIUploadingService(UserService userService, POIMediator poiMediator, POIBuilderFactory poiBuilderFactory) {
         this.userService = userService;
@@ -32,7 +50,6 @@ public class POIUploadingService {
      *
      * @param poiDTO the POI to be uploaded
      */
-
     public void uploadPOI(POIInputDTO poiDTO) {
         checkPOI(poiDTO);
         POIBuilder builder = poiBuilderFactory.createBuilderForUser(userService.getUserById(poiDTO.poi_author()));
@@ -56,22 +73,46 @@ public class POIUploadingService {
     }
 
     /**
-     * Checks if a POI is valid
+     * Checks if the POI is valid
      *
      * @param poiDTO the POI to be checked
      */
     private void checkPOI(POIInputDTO poiDTO) {
+        checkPOIAuthor(poiDTO);
+        checkPOICoordinates(poiDTO);
+        checkPOIName(poiDTO);
+        checkPOIType(poiDTO);
+    }
 
+    /**
+     * Checks if the POI author is valid
+     *
+     * @param poiDTO the POI to be checked
+     */
+    private void checkPOIAuthor(POIInputDTO poiDTO) {
         if (!userService.getUserById((poiDTO.poi_author())).getRole().contains(UserRole.CONTRIBUTOR) && !userService.getUserById((poiDTO.poi_author())).getRole().contains(UserRole.AUTHORIZED_CONTRIBUTOR) && !userService.getUserById((poiDTO.poi_author())).getRole().contains(UserRole.CURATOR)) {
             throw new IllegalArgumentException("The author is not authorized to upload a POI");
         }
-        
-        // TODO check if the poi is within the municipality coordinates
+    }
 
+    /**
+     * Checks if the POI coordinates are valid
+     *
+     * @param poiDTO the POI to be checked
+     */
+    private void checkPOICoordinates(POIInputDTO poiDTO) {
         if (poiDTO.poi_coordinate() == null) {
             throw new IllegalArgumentException("The coordinates must not be null");
         }
+        // TODO check if the poi is within the municipality coordinates
+    }
 
+    /**
+     * Checks if the POI name is valid
+     *
+     * @param poiDTO the POI to be checked
+     */
+    private void checkPOIName(POIInputDTO poiDTO) {
         if (poiDTO.poi_name().length() > 25 || poiDTO.poi_name().length() < 3) {
             throw new IllegalArgumentException("The name must be between 3 and 25 characters");
         }
@@ -83,7 +124,14 @@ public class POIUploadingService {
         if (poiDTO.poi_name().isBlank()) {
             throw new IllegalArgumentException("The name must not be null or blank");
         }
+    }
 
+    /**
+     * Checks if the POI type is valid
+     *
+     * @param poiDTO the POI to be checked
+     */
+    private void checkPOIType(POIInputDTO poiDTO) {
         if (poiDTO.poiType() == null) {
             throw new IllegalArgumentException("The type must not be null");
         }

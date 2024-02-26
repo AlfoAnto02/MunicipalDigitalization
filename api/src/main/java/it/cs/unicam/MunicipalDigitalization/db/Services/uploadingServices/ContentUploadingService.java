@@ -105,7 +105,17 @@ public class ContentUploadingService {
      * @param contentDTO the content to be checked
      */
     private void checkContent(ContentInputDTO contentDTO) {
+        checkAuthor(contentDTO);
+        checkName(contentDTO);
+        checkContentType(contentDTO);
+    }
 
+    /**
+     * Checks if the author is valid
+     *
+     * @param contentDTO the content to be checked
+     */
+    private void checkAuthor(ContentInputDTO contentDTO) {
         if (contentDTO.author_id() == null) {
             throw new IllegalArgumentException("Author cannot be null");
         }
@@ -113,7 +123,14 @@ public class ContentUploadingService {
         if (userService.getUserById(contentDTO.author_id()).getRole().contains(UserRole.CONTRIBUTOR) && userService.getUserById(contentDTO.author_id()).getRole().contains(UserRole.AUTHORIZED_CONTRIBUTOR) && userService.getUserById(contentDTO.author_id()).getRole().contains(UserRole.CURATOR)) {
             throw new IllegalArgumentException("Author is not authorized to upload content");
         }
+    }
 
+    /**
+     * Checks if the name is valid
+     *
+     * @param contentDTO the content to be checked
+     */
+    private void checkName(ContentInputDTO contentDTO) {
         if (contentDTO.content_name() == null) {
             throw new IllegalArgumentException("Name cannot be null");
         }
@@ -133,35 +150,66 @@ public class ContentUploadingService {
         if (contentDTO.content_name().isBlank()) {
             throw new IllegalArgumentException("Name cannot be blank");
         }
+    }
 
+    /**
+     * Checks if the content type is valid
+     *
+     * @param contentDTO the content to be checked
+     */
+    private void checkContentType(ContentInputDTO contentDTO) {
         if (contentDTO.contentType() == null) {
             throw new IllegalArgumentException("Type cannot be null");
         }
 
         if (contentDTO.contentType().equals(ContentType.PHOTO)) {
-
-            if (!((contentDTO.content_photo() == null) || contentDTO.content_photo().endsWith(".jpg") || contentDTO.content_photo().endsWith(".png") || contentDTO.content_photo().endsWith(".jpeg"))) {
-                throw new IllegalArgumentException("Photo must be a jpg, jpeg or png file");
-            }
+            checkPhoto(contentDTO);
         } else if (contentDTO.contentType().equals(ContentType.LINK)) {
-
-            if (contentDTO.content_link() == null) {
-                throw new IllegalArgumentException("Link cannot be null");
-            }
-            if (!isLink(contentDTO.content_link())) {
-                throw new IllegalArgumentException("Link must be a valid link");
-            }
+            checkLink(contentDTO);
         } else if (contentDTO.contentType().equals(ContentType.DESCRIPTION)) {
+            checkDescription(contentDTO);
+        }
+    }
 
-            if (contentDTO.content_description() == null) {
-                throw new IllegalArgumentException("Description cannot be null");
-            }
-            if (contentDTO.content_description().isBlank()) {
-                throw new IllegalArgumentException("Description cannot be blank");
-            }
-            if (contentDTO.content_description().length() > 200 || contentDTO.content_description().length() < 10) {
-                throw new IllegalArgumentException("Description must be between 10 and 200 characters");
-            }
+    /**
+     * Checks if the photo is valid
+     *
+     * @param contentDTO the content to be checked
+     */
+    private void checkPhoto(ContentInputDTO contentDTO) {
+        if (!((contentDTO.content_photo() == null) || contentDTO.content_photo().endsWith(".jpg") || contentDTO.content_photo().endsWith(".png") || contentDTO.content_photo().endsWith(".jpeg"))) {
+            throw new IllegalArgumentException("Photo must be a jpg, jpeg or png file");
+        }
+    }
+
+    /**
+     * Checks if the link is valid
+     *
+     * @param contentDTO the content to be checked
+     */
+    private void checkLink(ContentInputDTO contentDTO) {
+        if (contentDTO.content_link() == null) {
+            throw new IllegalArgumentException("Link cannot be null");
+        }
+        if (!isLink(contentDTO.content_link())) {
+            throw new IllegalArgumentException("Link must be a valid link");
+        }
+    }
+
+    /**
+     * Checks if the description is valid
+     *
+     * @param contentDTO the content to be checked
+     */
+    private void checkDescription(ContentInputDTO contentDTO) {
+        if (contentDTO.content_description() == null) {
+            throw new IllegalArgumentException("Description cannot be null");
+        }
+        if (contentDTO.content_description().isBlank()) {
+            throw new IllegalArgumentException("Description cannot be blank");
+        }
+        if (contentDTO.content_description().length() > 200 || contentDTO.content_description().length() < 10) {
+            throw new IllegalArgumentException("Description must be between 10 and 200 characters");
         }
     }
 }
