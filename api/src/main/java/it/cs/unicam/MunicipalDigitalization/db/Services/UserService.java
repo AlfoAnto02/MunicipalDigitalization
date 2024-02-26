@@ -1,7 +1,7 @@
 package it.cs.unicam.MunicipalDigitalization.db.Services;
 
-import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
-import it.cs.unicam.MunicipalDigitalization.api.model.actors.AbstractAuthenticatedUser;
+import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractContent;
+import it.cs.unicam.MunicipalDigitalization.api.model.users.*;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractItinerary;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractPOI;
 import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
@@ -49,6 +49,18 @@ public class UserService {
     public void addItinerary(Long userID, AbstractItinerary itinerary){
         AbstractAuthenticatedUser user = userRepository.getReferenceById(userID);
         user.addItinerary(itinerary);
+        userRepository.save(user);
+    }
+
+    /**
+     * Add a content to the user's list of authored contents
+     *
+     * @param id ID of the user
+     * @param content Content to be added
+     */
+    public void addContent(Long id, AbstractContent content) {
+        AbstractAuthenticatedUser user = userRepository.getReferenceById(id);
+        user.addContent(content);
         userRepository.save(user);
     }
 
@@ -104,17 +116,6 @@ public class UserService {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
     public void saveUser(AbstractAuthenticatedUser user){
         userRepository.save(user);
     }
@@ -138,5 +139,4 @@ public class UserService {
     public List<AbstractAuthenticatedUser> getAllUsers() {
         return userRepository.findAll();
     }
-
 }

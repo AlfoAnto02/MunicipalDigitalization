@@ -1,7 +1,7 @@
 package it.cs.unicam.MunicipalDigitalization.db.Services;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
-import it.cs.unicam.MunicipalDigitalization.api.model.users.AbstractAuthenticatedUser;
+import it.cs.unicam.MunicipalDigitalization.api.model.users.*;
 import it.cs.unicam.MunicipalDigitalization.api.util.DesignPattern.Command.GiveRoleCommand;
 import it.cs.unicam.MunicipalDigitalization.api.util.DesignPattern.Command.RemoveRoleCommand;
 import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;

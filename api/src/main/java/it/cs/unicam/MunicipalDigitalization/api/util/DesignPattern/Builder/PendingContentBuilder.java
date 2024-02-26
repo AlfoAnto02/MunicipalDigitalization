@@ -1,6 +1,6 @@
 package it.cs.unicam.MunicipalDigitalization.api.util.DesignPattern.Builder;
 
-import it.cs.unicam.MunicipalDigitalization.api.model.actors.AbstractAuthenticatedUser;
+import it.cs.unicam.MunicipalDigitalization.api.model.users.*;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractItinerary;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractMunicipalElement;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractPOI;
@@ -109,9 +109,7 @@ public class PendingContentBuilder implements ContentBuilder{
                 this.description == null) || this.contentStatus == null) throw new IllegalArgumentException("All fields must be set");
         else if (this.referredPOI == null && this.referredItinerary == null) throw new IllegalArgumentException("Referred element must be set");
         else if (this.referredPOI != null && this.referredItinerary != null) throw new IllegalArgumentException("Referred element must be unique");
-        else if (this.referredPOI != null && this.referredItinerary==null) return new PendingContent(this.referredPOI, this.name,
-                this.author, this.contentStatus, this.type, this.description, this.link, this.photo);
-        else return new PendingContent( this.referredItinerary,this.name, this.author, this.contentStatus, this.type,
-                    this.description, this.link, this.photo);
+        else if (this.referredPOI != null) return new PendingContent(this.referredPOI, this.name, this.author, this.type, this.description, this.link, this.photo);
+        else return new PendingContent(this.referredItinerary, this.name, this.author, this.type, this.description, this.link, this.photo);
     }
 }

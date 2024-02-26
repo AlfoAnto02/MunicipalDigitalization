@@ -2,11 +2,9 @@ package it.cs.unicam.MunicipalDigitalization.api.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import it.cs.unicam.MunicipalDigitalization.api.model.actors.AbstractAuthenticatedUser;
-import it.cs.unicam.MunicipalDigitalization.api.model.actors.AuthorizedContributor;
+import it.cs.unicam.MunicipalDigitalization.api.model.users.*;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.*;
 import it.cs.unicam.MunicipalDigitalization.api.util.Coordinate;
-import it.cs.unicam.MunicipalDigitalization.api.util.PendingManager;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -69,13 +67,6 @@ public class Municipality {
     @JsonBackReference
     private  List<AbstractItinerary> listOfItineraries;
 
-    /**
-     * The manager for pending operations in the municipality.
-     */
-    @Getter
-    @Transient
-    @JsonIgnore
-    private final PendingManager pendingManager;
 
     /**
      * The list of users in the municipality.
@@ -97,14 +88,12 @@ public class Municipality {
         this.listOfItineraries = new ArrayList<>();
         this.listOfIUsers = new ArrayList<>();
         this.territory = territory;
-        this.pendingManager = new PendingManager(this);
     }
 
     public Municipality() {
         this.listOfPOIs = new ArrayList<>();
         this.listOfItineraries = new ArrayList<>();
         this.listOfIUsers = new ArrayList<>();
-        this.pendingManager = new PendingManager(this);
     }
 
     /**
@@ -129,14 +118,6 @@ public class Municipality {
         throw new UnsupportedOperationException();
     }
 
-    /**
-     * This method is used to add a pending point of interest to the pending manager.
-     *
-     * @param pendingPOI The pending point of interest to add.
-     */
-    public void appendPOI(PendingPOI pendingPOI) {
-        this.pendingManager.addPendingPOI(pendingPOI);
-    }
 
     /**
      * This method is used to upload a point of interest to the municipality.
@@ -147,14 +128,6 @@ public class Municipality {
         if (!this.listOfPOIs.contains(poi)) this.listOfPOIs.add(poi);
     }
 
-    /**
-     * This method is used to add a pending itinerary to the pending manager.
-     *
-     * @param pendingItinerary The pending itinerary to add.
-     */
-    public void appendItinerary(PendingItinerary pendingItinerary) {
-        this.pendingManager.addPendingItinerary(pendingItinerary);
-    }
 
     /**
      * This method is used to upload an itinerary to the municipality.
@@ -165,14 +138,7 @@ public class Municipality {
         listOfItineraries.add(itinerary);
     }
 
-    /**
-     * This method is used to add a pending content to the pending manager.
-     *
-     * @param pendingContent The pending content to add.
-     */
-    public void appendContent(PendingContent pendingContent) {
-        this.pendingManager.addPendingContent(pendingContent);
-    }
+
 
     /**
      * This method is used to upload a content to the municipality.
