@@ -1,4 +1,4 @@
-package it.cs.unicam.MunicipalDigitalization;
+package it.cs.unicam.MunicipalDigitalization.tests;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
 import it.cs.unicam.MunicipalDigitalization.api.model.users.AuthorizedContributor;
