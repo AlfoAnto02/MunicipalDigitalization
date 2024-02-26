@@ -51,9 +51,9 @@ public class ItineraryUploadingService {
      * @param itineraryDTO the itinerary to be built
      */
     private void buildItinerary(ItineraryBuilder itineraryBuilder, ItineraryInputDTO itineraryDTO) {
-        itineraryBuilder.setItineraryName(itineraryDTO.name());
+        itineraryBuilder.setItineraryName(itineraryDTO.itinerary_name());
         itineraryBuilder.setItineraryAuthor(userService.getUserById(itineraryDTO.authorID()));
-        itineraryBuilder.setItineraryDescription(itineraryDTO.description());
+        itineraryBuilder.setItineraryDescription(itineraryDTO.itinerary_description());
         itineraryBuilder.setItineraryMunicipality(userService.getUserById(itineraryDTO.authorID()).getMunicipality());
         itineraryBuilder.setItineraryCoordinates(itineraryDTO.coordinate());
         itineraryBuilder.addPOIs(poiService.getPOIsByIds(itineraryDTO.POIsIDs()));

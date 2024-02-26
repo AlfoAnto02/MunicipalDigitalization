@@ -1,5 +1,6 @@
 package it.cs.unicam.MunicipalDigitalization.api.model.elements;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import it.cs.unicam.MunicipalDigitalization.api.model.users.*;
 import it.cs.unicam.MunicipalDigitalization.api.util.ContentType;
 import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
@@ -38,8 +39,9 @@ public abstract class AbstractContent implements IContent {
     /**
      * The municipal element referred by the content.
      */
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ReferredPOI",nullable = true)
+    @JsonBackReference
     private AbstractPOI referredPOI;
 
     /**
@@ -51,15 +53,17 @@ public abstract class AbstractContent implements IContent {
     /**
      * The municipal element referred by the content.
      */
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ReferredItinerary",nullable = true)
+    @JsonBackReference
     private AbstractItinerary referredItinerary;
 
     /**
      * The author of the content.
      */
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "Author",nullable = false)
+    @JsonBackReference
     private AbstractAuthenticatedUser author;
 
     /**

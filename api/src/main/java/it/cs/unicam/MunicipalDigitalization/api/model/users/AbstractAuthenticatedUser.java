@@ -1,6 +1,7 @@
 package it.cs.unicam.MunicipalDigitalization.api.model.users;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractContent;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractItinerary;
@@ -56,7 +57,7 @@ public abstract class AbstractAuthenticatedUser extends AbstractIUser implements
      * The list of Contents authored by the authenticated user.
      */
     @OneToMany(mappedBy = "author")
-    @JsonBackReference
+    @JsonManagedReference
     private List<AbstractContent> authoredContents;
 
     /**

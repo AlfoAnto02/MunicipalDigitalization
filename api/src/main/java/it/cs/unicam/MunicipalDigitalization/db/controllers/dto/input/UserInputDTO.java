@@ -9,12 +9,12 @@ import java.util.List;
  *
  * @param username username
  * @param password password
- * @param municipalityID municipality
+ * @param municipality_id municipality
  */
 public record UserInputDTO(
         String username,
         String password,
-        Long municipalityID
+        Long municipality_id
 )
 {
 }

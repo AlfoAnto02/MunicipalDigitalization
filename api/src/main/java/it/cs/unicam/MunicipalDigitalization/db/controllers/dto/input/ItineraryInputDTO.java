@@ -8,15 +8,15 @@ import java.util.List;
 /**
  * DTO for Itinerary
  *
- * @param name name of the itinerary
- * @param description description of the itinerary
+ * @param itinerary_name name of the itinerary
+ * @param itinerary_description description of the itinerary
  * @param authorID author id of the itinerary
  * @param coordinate coordinate of the itinerary
  * @param POIsIDs list of poi ids of the itinerary
  */
 public record ItineraryInputDTO (
-        String name,
-        String description,
+        String itinerary_name,
+        String itinerary_description,
         Long authorID,
         Coordinate coordinate,
         List<Long> POIsIDs

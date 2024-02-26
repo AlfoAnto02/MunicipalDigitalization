@@ -5,6 +5,7 @@ import it.cs.unicam.MunicipalDigitalization.db.Services.ItineraryService;
 import it.cs.unicam.MunicipalDigitalization.db.Services.POIService;
 import it.cs.unicam.MunicipalDigitalization.db.Services.uploadingServices.ContentUploadingService;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.input.ContentInputDTO;
+import it.cs.unicam.MunicipalDigitalization.db.mappers.ContentDTOMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,14 +17,16 @@ public class ContentController {
     private final ContentService contentService;
     private final POIService poiService;
     private final ItineraryService itineraryService;
+    private final ContentDTOMapper contentDTOMapper;
 
     @Autowired
-    public ContentController(ContentUploadingService contentUploadingService
+    public ContentController(ContentUploadingService contentUploadingService, ContentDTOMapper contentDTOMapper
             , ContentService contentService, POIService poiService, ItineraryService itineraryService) {
         this.contentUploadingService = contentUploadingService;
         this.contentService = contentService;
         this.poiService = poiService;
         this.itineraryService = itineraryService;
+        this.contentDTOMapper = contentDTOMapper;
     }
 
     /**
@@ -50,7 +53,7 @@ public class ContentController {
     public ResponseEntity<Object> getPOIContent(@PathVariable Long municipalityID, @PathVariable Long poiID,
                                                 @PathVariable Long contentID){
         if(poiService.getPOIByID(poiID).getMunicipality().getId().equals(municipalityID)){
-            return new ResponseEntity<>(contentService.getContentById(contentID), HttpStatus.OK);
+            return new ResponseEntity<>(contentDTOMapper.apply(contentService.getContentById(contentID)), HttpStatus.OK);
         }
         else return new ResponseEntity<>("The POI does not belong to the municipality", HttpStatus.BAD_REQUEST);
     }
@@ -67,7 +70,7 @@ public class ContentController {
     public ResponseEntity<Object> getItineraryContent(@PathVariable Long municipalityID, @PathVariable Long itineraryID,
                                                      @PathVariable Long contentID){
         if(itineraryService.getItineraryById(itineraryID).getMunicipality().getId().equals(municipalityID)){
-            return new ResponseEntity<>(contentService.getContentById(contentID), HttpStatus.OK);
+            return new ResponseEntity<>(contentDTOMapper.apply(contentService.getContentById(contentID)), HttpStatus.OK);
         }
         else return new ResponseEntity<>("The Itinerary does not belong to the municipality", HttpStatus.BAD_REQUEST);
     }

@@ -1,4 +1,12 @@
 package it.cs.unicam.MunicipalDigitalization.db.controllers.dto.output;
 
-public class ContentOutputDTO {
+import it.cs.unicam.MunicipalDigitalization.api.util.ContentType;
+
+public record ContentOutputDTO (
+        Long content_id,
+        String content_name,
+        ContentType content_type,
+        String content,
+        String author
+){
 }

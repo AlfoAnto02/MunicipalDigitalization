@@ -8,11 +8,11 @@ import java.util.List;
 /**
  * DTO for Municipality
  *
- * @param name name of the municipality
+ * @param municipality_name name of the municipality
  * @param territory list of coordinates that represent the territory of the municipality
  */
 public record MunicipalityInputDTO(
-        String name,
+        String municipality_name,
         List<Coordinate> territory
 
 )

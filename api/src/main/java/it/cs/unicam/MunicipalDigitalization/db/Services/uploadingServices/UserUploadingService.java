@@ -32,7 +32,7 @@ public class UserUploadingService {
         AuthenticatedTourist user = new AuthenticatedTourist();
         user.setName(userDTO.username());
         user.setPassword(userDTO.password());
-        user.setMunicipality(municipalService.getMunicipalByID(userDTO.municipalityID()));
+        user.setMunicipality(municipalService.getMunicipalByID(userDTO.municipality_id()));
         userMediator.registerUser(user);
     }
 

@@ -68,6 +68,7 @@ public abstract class AbstractMunicipalElement implements IMunicipalElement {
      * The list of contents of the MunicipalElement
      */
     @OneToMany
+    @JsonManagedReference
     private List<AbstractContent> listOfContents;
 
     /**

@@ -8,11 +8,11 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public record POIOutputDTO(
-        Long poi_ID,
-        String poiName,
-        String poiMunicipality,
+        Long poi_id,
+        String poi_name,
+        String poi_municipality,
         POIType poiType,
-        Coordinate location,
-        LocalDateTime poiCreationDate
+        Coordinate poi_location,
+        LocalDateTime poi_creationDate
 ) {
 }

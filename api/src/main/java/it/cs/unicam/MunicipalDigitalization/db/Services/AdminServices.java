@@ -68,7 +68,7 @@ public class AdminServices {
 
     public void createMunicipality(Long adminID, MunicipalityInputDTO municipalityDTO){
         if(userService.getUserById(adminID).getRole().contains(UserRole.PLATFORM_GESTOR)){
-            Municipality municipality = new Municipality(municipalityDTO.territory(),municipalityDTO.name());
+            Municipality municipality = new Municipality(municipalityDTO.territory(),municipalityDTO.municipality_name());
             municipalService.saveMunicipal(municipality);
         } else throw new IllegalArgumentException("User not authorized to create municipality");
     }

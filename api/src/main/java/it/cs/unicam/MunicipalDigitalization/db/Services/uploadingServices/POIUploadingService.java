@@ -34,7 +34,7 @@ public class POIUploadingService {
 
     public void uploadPOI(POIInputDTO poiDTO){
         checkPOI(poiDTO);
-        POIBuilder builder = poiBuilderFactory.createBuilderForUser(userService.getUserById(poiDTO.author()));
+        POIBuilder builder = poiBuilderFactory.createBuilderForUser(userService.getUserById(poiDTO.poi_author()));
         buildPOI(builder, poiDTO);
         poiMediator.savePOI(builder.build());
     }
@@ -46,10 +46,10 @@ public class POIUploadingService {
      * @param poidto the DTO to be used
      */
     private void buildPOI(POIBuilder poiBuilder, POIInputDTO poidto){
-        poiBuilder.setPOIAuthor(userService.getUserById(poidto.author()));
-        poiBuilder.setPOIMunicipality(userService.getUserById(poidto.author()).getMunicipality());
-        poiBuilder.setPOICoordinates(poidto.coordinate());
-        poiBuilder.setPOIName(poidto.name());
+        poiBuilder.setPOIAuthor(userService.getUserById(poidto.poi_author()));
+        poiBuilder.setPOIMunicipality(userService.getUserById(poidto.poi_author()).getMunicipality());
+        poiBuilder.setPOICoordinates(poidto.poi_coordinate());
+        poiBuilder.setPOIName(poidto.poi_name());
         poiBuilder.setPOIType(poidto.poiType());
         poiBuilder.setPOIStatus();
     }

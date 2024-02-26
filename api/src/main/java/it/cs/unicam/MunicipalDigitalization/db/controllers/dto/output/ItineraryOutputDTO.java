@@ -6,13 +6,13 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public record ItineraryOutputDTO (
-        Long itinerary_ID,
-        String itineraryName,
-        String itineraryMunicipality,
-        String itineraryType,
-        String itineraryDescription,
+        Long itinerary_id,
+        String itinerary_name,
+        String itinerary_municipality,
+        String itinerary_type,
+        String itinerary_description,
         Coordinate location,
-        LocalDateTime itineraryCreationDate,
+        LocalDateTime itinerary_creationDate,
         String listOfPOIs
 )
 {
