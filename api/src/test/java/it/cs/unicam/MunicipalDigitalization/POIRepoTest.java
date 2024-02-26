@@ -5,15 +5,18 @@ import it.cs.unicam.MunicipalDigitalization.api.model.users.AuthorizedContributo
 import it.cs.unicam.MunicipalDigitalization.api.util.Coordinate;
 import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 import it.cs.unicam.MunicipalDigitalization.api.util.POIType;
-import it.cs.unicam.MunicipalDigitalization.db.Services.uploadingServices.POIUploadingService;
 import it.cs.unicam.MunicipalDigitalization.db.Repository.MunicipalRepository;
 import it.cs.unicam.MunicipalDigitalization.db.Repository.POIRepository;
 import it.cs.unicam.MunicipalDigitalization.db.Repository.UserRepository;
+import it.cs.unicam.MunicipalDigitalization.db.Services.uploadingServices.POIUploadingService;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.input.POIInputDTO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -42,10 +45,15 @@ public class POIRepoTest {
      * This method tests the creation of a POI
      */
     @Test
-    public void createAuthorizedPOI(){
+    public void createAuthorizedPOI() {
         //Create a Municipality
         Municipality municipality = new Municipality();
-        municipality.setName("Municipality");
+        municipality.setName("Municipal");
+        List<Coordinate> coordinates = new ArrayList<>();
+        coordinates.add(new Coordinate(1, 1));
+        coordinates.add(new Coordinate(2, 2));
+        coordinates.add(new Coordinate(3, 3));
+        municipality.setTerritory(coordinates);
         municipalService.save(municipality);
 
         //Create a Contributor
@@ -57,7 +65,7 @@ public class POIRepoTest {
         System.out.println(municipality.getId());
 
         //Create a POI
-        POIInputDTO poiDTO = new POIInputDTO("Monteleone", POIType.Cinema, user.getId(), new Coordinate(1,1));
+        POIInputDTO poiDTO = new POIInputDTO("Monteleone", POIType.Cinema, user.getId(), new Coordinate(1, 1));
         uploadingService.uploadPOI(poiDTO);
 
         //Check if the POI present
@@ -79,5 +87,8 @@ public class POIRepoTest {
         assertEquals(poiService.findByName("Monteleone").get().getAuthor(), user);
         assertEquals(poiService.findByName("Monteleone").get().getMunicipality(), municipality);
 
+
+        // Check if a poi is within a municipality
+        assertTrue(poiService.findByName("Monteleone").get().isPointInPolygon(poiService.findByName("Monteleone").get().getCoordinates(), municipality.getTerritory()));
     }
 }
