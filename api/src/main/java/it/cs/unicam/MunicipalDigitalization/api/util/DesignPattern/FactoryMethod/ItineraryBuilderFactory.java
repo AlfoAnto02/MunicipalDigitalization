@@ -1,6 +1,6 @@
 package it.cs.unicam.MunicipalDigitalization.api.util.DesignPattern.FactoryMethod;
 
-import it.cs.unicam.MunicipalDigitalization.api.model.actors.AbstractAuthenticatedUser;
+import it.cs.unicam.MunicipalDigitalization.api.model.users.AbstractAuthenticatedUser;
 import it.cs.unicam.MunicipalDigitalization.api.util.DesignPattern.Builder.AuthorizedItineraryBuilder;
 import it.cs.unicam.MunicipalDigitalization.api.util.DesignPattern.Builder.ItineraryBuilder;
 import it.cs.unicam.MunicipalDigitalization.api.util.DesignPattern.Builder.PendingItineraryBuilder;

@@ -1,8 +1,7 @@
 package it.cs.unicam.MunicipalDigitalization;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
-import it.cs.unicam.MunicipalDigitalization.api.model.actors.AuthorizedContributor;
-import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;
+import it.cs.unicam.MunicipalDigitalization.api.model.users.AuthorizedContributor;
 import it.cs.unicam.MunicipalDigitalization.db.Services.MunicipalService;
 import it.cs.unicam.MunicipalDigitalization.db.Services.UserService;
 import org.junit.jupiter.api.AfterEach;

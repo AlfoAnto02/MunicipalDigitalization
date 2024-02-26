@@ -1,78 +1,70 @@
-package it.cs.unicam.MunicipalDigitalization.api.model.actors;
-
+package it.cs.unicam.MunicipalDigitalization.api.model.users;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractContent;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractItinerary;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractPOI;
-import it.cs.unicam.MunicipalDigitalization.api.model.elements.AuthorizedPOI;
-import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class Represent an Authenticated IUser.
- * Differently from a IUser, the Authenticated IUser has a name and a Password.
+ * This abstract class represents an authenticated user in the Municipal Digitalization API.
+ * An authenticated user has a name, password, and can author POIs, Itineraries, and Contents.
+ * This class extends the AbstractIUser class and implements the IAuthenticatedUser interface.
  */
 @Entity
 @Getter
 @Setter
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@Table(
-        name = "User",
-        uniqueConstraints = {
-                @UniqueConstraint(
-                        name = "Identification",
-                        columnNames = "id"
-                )
-        }
-)
+@Table(name = "User", uniqueConstraints = {@UniqueConstraint(name = "Identification", columnNames = "id")})
+@NoArgsConstructor
 public abstract class AbstractAuthenticatedUser extends AbstractIUser implements IAuthenticatedUser {
 
     /**
-     * Name of the IUser
+     * The name of the authenticated user.
      */
     @Column(name = "Name")
     private String name;
 
     /**
-     * Password of the IUser
+     * The password of the authenticated user.
      */
     @Column(name = "Password", length = 16)
     private String password;
 
     /**
-     * This is the list of Abstract POIs that the author created
+     * The list of POIs authored by the authenticated user.
      */
     @OneToMany(mappedBy = "author")
     @JsonBackReference
     private List<AbstractPOI> authoredPOIs;
 
     /**
-     * This is the List of Abstract Itineraries that the author created
+     * The list of Itineraries authored by the authenticated user.
      */
     @OneToMany(mappedBy = "author")
     @JsonBackReference
     private List<AbstractItinerary> authoredItineraries;
 
     /**
-     * This is the List of Abstract Contents that the author created
+     * The list of Contents authored by the authenticated user.
      */
     @OneToMany(mappedBy = "author")
     @JsonBackReference
     private List<AbstractContent> authoredContents;
 
     /**
-     * The Constructor for a general Authenticated IUser.
+     * Constructs a new authenticated user with the given name, password, and municipality.
      *
-     * @param name         name of the IUser
-     * @param password     password of the IUser
-     * @param municipality Municipality where the IUser will Operate
+     * @param name         the name of the authenticated user
+     * @param password     the password of the authenticated user
+     * @param municipality the municipality where the authenticated user will operate
      */
     public AbstractAuthenticatedUser(String name, String password, Municipality municipality) {
         super(municipality);
@@ -82,18 +74,12 @@ public abstract class AbstractAuthenticatedUser extends AbstractIUser implements
         this.authoredItineraries = new ArrayList<>();
         this.authoredContents = new ArrayList<>();
     }
-    public AbstractAuthenticatedUser() {
-        this.authoredPOIs = new ArrayList<>();
-        this.authoredItineraries = new ArrayList<>();
-        this.authoredContents = new ArrayList<>();
-    }
 
     /**
-     * The Constructor for a general Authenticated IUser that does not have a Municipality.
-     * It is used By the PlatformGestor because it does not have a Municipality.
+     * Constructs a new authenticated user with the given name and password.
      *
-     * @param name     name of the IUser
-     * @param password password of the IUser
+     * @param name     the name of the authenticated user
+     * @param password the password of the authenticated user
      */
     public AbstractAuthenticatedUser(String name, String password) {
         this.name = name;
@@ -104,7 +90,7 @@ public abstract class AbstractAuthenticatedUser extends AbstractIUser implements
     }
 
     /**
-     * This method is used to add a POI to the list of authored POIs
+     * Adds a POI to the list of POIs authored by the authenticated user.
      *
      * @param poi the POI to add
      */
@@ -113,33 +99,28 @@ public abstract class AbstractAuthenticatedUser extends AbstractIUser implements
     }
 
     /**
-     * This method is used to add an Itinerary to the list of authored Itineraries
+     * Adds an Itinerary to the list of Itineraries authored by the authenticated user.
      *
-     * @param itinerary itinerary to add
+     * @param itinerary the Itinerary to add
      */
-
     public void addItinerary(AbstractItinerary itinerary) {
         this.authoredItineraries.add(itinerary);
     }
 
     /**
-     * This method is used to add a Content to the list of authored Contents
+     * Adds a Content to the list of Contents authored by the authenticated user.
      *
-     * @param content content to add
+     * @param content the Content to add
      */
     public void addContent(AbstractContent content) {
         this.authoredContents.add(content);
     }
 
-    @Override
-    public String getName() {
-        return this.name;
-    }
-
     /**
-     * Setter for the name of the user.
+     * Sets the name of the authenticated user.
      *
-     * @param name The new name of the user.
+     * @param name the new name of the authenticated user
+     * @throws IllegalArgumentException if the name is null or empty
      */
     public void setName(String name) {
         if (name == null || name.isEmpty()) {
@@ -148,11 +129,12 @@ public abstract class AbstractAuthenticatedUser extends AbstractIUser implements
         this.name = name;
     }
 
-    @Override
-    public String getPassword() {
-        return this.password;
-    }
-
+    /**
+     * Sets the password of the authenticated user.
+     *
+     * @param password the new password of the authenticated user
+     * @throws IllegalArgumentException if the password is null or empty
+     */
     @Override
     public void setPassword(String password) {
         if (password == null || password.isEmpty()) {
@@ -160,5 +142,4 @@ public abstract class AbstractAuthenticatedUser extends AbstractIUser implements
         }
         this.password = password;
     }
-
 }

@@ -1,6 +1,6 @@
 package it.cs.unicam.MunicipalDigitalization.db.Services.Mediators;
 
-import it.cs.unicam.MunicipalDigitalization.api.model.actors.AbstractAuthenticatedUser;
+import it.cs.unicam.MunicipalDigitalization.api.model.users.AbstractAuthenticatedUser;
 import it.cs.unicam.MunicipalDigitalization.db.Services.MunicipalService;
 import it.cs.unicam.MunicipalDigitalization.db.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

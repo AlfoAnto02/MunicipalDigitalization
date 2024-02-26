@@ -1,6 +1,6 @@
 package it.cs.unicam.MunicipalDigitalization.db.Services.uploadingServices;
 
-import it.cs.unicam.MunicipalDigitalization.api.model.actors.AuthenticatedTourist;
+import it.cs.unicam.MunicipalDigitalization.api.model.users.AuthenticatedTourist;
 import it.cs.unicam.MunicipalDigitalization.db.Services.Mediators.UserMediator;
 import it.cs.unicam.MunicipalDigitalization.db.Services.MunicipalService;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.input.UserInputDTO;

@@ -1,10 +1,9 @@
 package it.cs.unicam.MunicipalDigitalization.api.util.DesignPattern.Builder;
 
-import it.cs.unicam.MunicipalDigitalization.api.model.actors.AbstractAuthenticatedUser;
+import it.cs.unicam.MunicipalDigitalization.api.model.users.AbstractAuthenticatedUser;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractContent;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractMunicipalElement;
 import it.cs.unicam.MunicipalDigitalization.api.util.ContentType;
-import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 
 /**
  * This interface represents the content builder. It is used to create the content step by step.

@@ -1,7 +1,7 @@
 package it.cs.unicam.MunicipalDigitalization.db.mappers;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
-import it.cs.unicam.MunicipalDigitalization.api.model.actors.AbstractAuthenticatedUser;
+import it.cs.unicam.MunicipalDigitalization.api.model.users.AbstractAuthenticatedUser;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.output.MunicipalityOutputDTO;
 import org.springframework.stereotype.Service;
 

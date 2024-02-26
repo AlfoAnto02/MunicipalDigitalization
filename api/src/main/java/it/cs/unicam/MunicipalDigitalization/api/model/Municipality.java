@@ -3,8 +3,10 @@ package it.cs.unicam.MunicipalDigitalization.api.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import it.cs.unicam.MunicipalDigitalization.api.model.actors.AbstractAuthenticatedUser;
+import it.cs.unicam.MunicipalDigitalization.api.model.actors.AuthorizedContributor;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.*;
 import it.cs.unicam.MunicipalDigitalization.api.util.Coordinate;
+import it.cs.unicam.MunicipalDigitalization.api.util.PendingManager;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -68,6 +70,14 @@ public class Municipality {
     private  List<AbstractItinerary> listOfItineraries;
 
     /**
+     * The manager for pending operations in the municipality.
+     */
+    @Getter
+    @Transient
+    @JsonIgnore
+    private final PendingManager pendingManager;
+
+    /**
      * The list of users in the municipality.
      */
     @OneToMany(mappedBy = "municipality", cascade = CascadeType.ALL)
@@ -87,12 +97,14 @@ public class Municipality {
         this.listOfItineraries = new ArrayList<>();
         this.listOfIUsers = new ArrayList<>();
         this.territory = territory;
+        this.pendingManager = new PendingManager(this);
     }
 
     public Municipality() {
         this.listOfPOIs = new ArrayList<>();
         this.listOfItineraries = new ArrayList<>();
         this.listOfIUsers = new ArrayList<>();
+        this.pendingManager = new PendingManager(this);
     }
 
     /**
@@ -107,6 +119,26 @@ public class Municipality {
     }
 
     /**
+     * This method is used to check if a name is valid for the municipality.
+     *
+     * @param name The name to check.
+     * @return True if the name is valid, false otherwise.
+     */
+    private boolean checkName(String name) {
+        // TODO - implement Municipality.checkName
+        throw new UnsupportedOperationException();
+    }
+
+    /**
+     * This method is used to add a pending point of interest to the pending manager.
+     *
+     * @param pendingPOI The pending point of interest to add.
+     */
+    public void appendPOI(PendingPOI pendingPOI) {
+        this.pendingManager.addPendingPOI(pendingPOI);
+    }
+
+    /**
      * This method is used to upload a point of interest to the municipality.
      *
      * @param poi The point of interest to upload.
@@ -115,6 +147,14 @@ public class Municipality {
         if (!this.listOfPOIs.contains(poi)) this.listOfPOIs.add(poi);
     }
 
+    /**
+     * This method is used to add a pending itinerary to the pending manager.
+     *
+     * @param pendingItinerary The pending itinerary to add.
+     */
+    public void appendItinerary(PendingItinerary pendingItinerary) {
+        this.pendingManager.addPendingItinerary(pendingItinerary);
+    }
 
     /**
      * This method is used to upload an itinerary to the municipality.
@@ -123,6 +163,15 @@ public class Municipality {
      */
     public void uploadItinerary(AbstractItinerary itinerary) {
         listOfItineraries.add(itinerary);
+    }
+
+    /**
+     * This method is used to add a pending content to the pending manager.
+     *
+     * @param pendingContent The pending content to add.
+     */
+    public void appendContent(PendingContent pendingContent) {
+        this.pendingManager.addPendingContent(pendingContent);
     }
 
     /**
@@ -156,6 +205,38 @@ public class Municipality {
         return this.listOfItineraries;
     }
 
+    /**
+     * This method is used to get full information about a point of interest in the municipality.
+     *
+     * @param id The id of the point of interest.
+     * @return Full information about the point of interest.
+     */
+    public String getPOIFullInfo(String id) {
+        // TODO - implement Municipality.getPOIFullInfo
+        throw new UnsupportedOperationException();
+    }
+
+    /**
+     * This method is used to get full information about an itinerary in the municipality.
+     *
+     * @param id The id of the itinerary.
+     * @return Full information about the itinerary.
+     */
+    public String getItineraryFullInfo(String id) {
+        // TODO - implement Municipality.getItineraryFullInfo
+        throw new UnsupportedOperationException();
+    }
+
+    /**
+     * This method is used to get full information about a content in the municipality.
+     *
+     * @param id The id of the content.
+     * @return Full information about the content.
+     */
+    public String getContentFullInfo(String id) {
+        // TODO - implement Municipality.getContentFullInfo
+        throw new UnsupportedOperationException();
+    }
 
     /**
      * This method is used to get a string representation of the points of interest in the municipality.
