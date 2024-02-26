@@ -1,10 +1,9 @@
-package it.cs.unicam.MunicipalDigitalization.api.model.actors;
+package it.cs.unicam.MunicipalDigitalization.api.model.users;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
-import it.cs.unicam.MunicipalDigitalization.api.util.ID;
 
 /**
- * This interface represents a user in the system.
+ * This interface represents a user in the Municipal Digitalization system.
  * It provides methods to get the id and the municipality associated with the IUser.
  * It also has the responsibility to permit the View of a POI or an Itinerary present
  * in the Municipality.

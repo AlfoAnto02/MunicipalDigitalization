@@ -1,12 +1,10 @@
 package it.cs.unicam.MunicipalDigitalization.api.model.elements;
 
-import it.cs.unicam.MunicipalDigitalization.api.model.actors.IAuthenticatedUser;
+import it.cs.unicam.MunicipalDigitalization.api.model.users.IAuthenticatedUser;
 import it.cs.unicam.MunicipalDigitalization.api.util.Coordinate;
 import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
-import it.cs.unicam.MunicipalDigitalization.api.util.ID;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 /**

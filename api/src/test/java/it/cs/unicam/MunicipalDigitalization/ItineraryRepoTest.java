@@ -1,7 +1,7 @@
 package it.cs.unicam.MunicipalDigitalization;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
-import it.cs.unicam.MunicipalDigitalization.api.model.actors.AuthorizedContributor;
+import it.cs.unicam.MunicipalDigitalization.api.model.users.AuthorizedContributor;
 import it.cs.unicam.MunicipalDigitalization.api.util.Coordinate;
 import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 import it.cs.unicam.MunicipalDigitalization.api.util.POIType;

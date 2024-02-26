@@ -1,6 +1,6 @@
 package it.cs.unicam.MunicipalDigitalization.db.controllers;
 
-import it.cs.unicam.MunicipalDigitalization.api.model.actors.PlatformGestor;
+import it.cs.unicam.MunicipalDigitalization.api.model.users.PlatformGestor;
 import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.Requests.MunicipalityRequest;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.Requests.RoleRequest;
