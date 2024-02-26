@@ -66,6 +66,28 @@ public class ItineraryService {
     }
 
     /**
+     * Update the content list of an itinerary if a content has been validated
+     *
+     * @param requestID the id of the request
+     * @param validated the status of the validation request
+     */
+
+    public void updateContentList(long requestID, boolean validated) {
+        AbstractItinerary itinerary = itineraryRepository.getItineraryByContentId(requestID);
+        if(validated) {
+            itinerary.getListOfContents()
+                    .stream()
+                    .filter(content -> content.getId().equals(requestID))
+                    .findFirst()
+                    .get()
+                    .setElementStatus(ElementStatus.PUBLISHED);
+        } else {
+            itinerary.removeContent(requestID);
+        }
+        this.itineraryRepository.save(itinerary);
+    }
+
+    /**
      * Get an itinerary by id
      *
      * @param id the id of the itinerary
@@ -78,4 +100,5 @@ public class ItineraryService {
     public List<AbstractItinerary> getAllItineraries() {
         return itineraryRepository.findAll();
     }
+
 }

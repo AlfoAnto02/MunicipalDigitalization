@@ -55,4 +55,12 @@ public interface ItineraryRepository extends JpaRepository<AbstractItinerary,Lon
      */
     @Query("SELECT i FROM AbstractItinerary i WHERE i.elementStatus = ?1")
     List<AbstractItinerary> findAllByElementStatus(ElementStatus elementStatus);
+
+    /**
+     * This method is used to find an Itinerary by the id of a content
+     * @param requestID the id of the content
+     * @return the itinerary with the given content id
+     */
+    @Query("SELECT i FROM AbstractItinerary i JOIN i.listOfContents c WHERE c.id = ?1")
+    AbstractItinerary getItineraryByContentId(long requestID);
 }

@@ -1,6 +1,7 @@
 package it.cs.unicam.MunicipalDigitalization.db.Services;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractContent;
+import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 import it.cs.unicam.MunicipalDigitalization.api.util.MatchingAlgorithms;
 import it.cs.unicam.MunicipalDigitalization.db.Repository.ContentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,22 @@ public class ContentService {
         else throw new IllegalArgumentException("Content already exists");
     }
 
-
+    /**
+     * Validate a content and set its status to PUBLISHED or delete it
+     *
+     * @param requestID the id of the content to validate
+     * @param validated true if the content is validated, false if it is not
+     */
+    public void validateContent(long requestID, boolean validated) {
+        AbstractContent content = contentRepository.getReferenceById(requestID);
+        if(validated) {
+            content.setElementStatus(ElementStatus.PUBLISHED);
+            contentRepository.save(content);
+        }
+        else {
+            contentRepository.delete(content);
+        }
+    }
 
     public AbstractContent getContentById(Long id) {
         return contentRepository.getReferenceById(id);
@@ -44,6 +60,8 @@ public class ContentService {
     }
 
 
-
+    public List<AbstractContent> getPendingContents() {
+        return contentRepository.findAllByElementStatus(ElementStatus.PENDING);
+    }
 }
 

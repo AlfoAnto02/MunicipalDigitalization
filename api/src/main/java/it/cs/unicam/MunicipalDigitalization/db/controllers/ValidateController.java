@@ -34,9 +34,28 @@ public class ValidateController {
         return new ResponseEntity<>("POI validated", HttpStatus.OK  );
     }
 
+    /**
+     * Validates an Itinerary
+     *
+     * @param request the request to validate the Itinerary
+     * @return a message indicating that the Itinerary has been validated
+     */
+    @RequestMapping(value = "/v1/validate/itinerary", method = RequestMethod.POST)
     public ResponseEntity<Object> validateItinerary(@RequestBody ValidateRequest request){
         validateService.validateItinerary(request);
         return new ResponseEntity<>("Itinerary validated", HttpStatus.OK  );
+    }
+
+    /**
+     * Validates a Content
+     *
+     * @param request the request to validate the Content
+     * @return a message indicating that the Content has been validated
+     */
+    @RequestMapping(value = "/v1/validate/content", method = RequestMethod.POST)
+    public ResponseEntity<Object> validateContent(@RequestBody ValidateRequest request){
+        validateService.validateContent(request);
+        return new ResponseEntity<>("Content validated", HttpStatus.OK  );
     }
 
 

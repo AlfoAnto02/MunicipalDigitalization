@@ -13,6 +13,7 @@ public record POIOutputDTO(
         String poi_municipality,
         POIType poiType,
         Coordinate poi_location,
+        String listOfContents,
         LocalDateTime poi_creationDate
 ) {
 }

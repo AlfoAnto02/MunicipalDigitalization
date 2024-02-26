@@ -178,4 +178,8 @@ public abstract class AbstractMunicipalElement implements IMunicipalElement {
     public void addContent(AbstractContent content) {
         this.listOfContents.add(content);
     }
+
+    public void removeContent(Long id) {
+        this.listOfContents.removeIf(content -> content.getId().equals(id));
+    }
 }

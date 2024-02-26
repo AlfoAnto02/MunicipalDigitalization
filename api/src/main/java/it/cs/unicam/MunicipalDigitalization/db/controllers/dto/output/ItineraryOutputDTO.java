@@ -12,8 +12,9 @@ public record ItineraryOutputDTO (
         String itinerary_type,
         String itinerary_description,
         Coordinate location,
-        LocalDateTime itinerary_creationDate,
-        String listOfPOIs
+        String listOfPOIs,
+        String listOfContents,
+        LocalDateTime itinerary_creationDate
 )
 {
 

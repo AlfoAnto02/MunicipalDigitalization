@@ -1,7 +1,9 @@
 package it.cs.unicam.MunicipalDigitalization.db.mappers;
 
+import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractContent;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractItinerary;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractMunicipalElement;
+import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.output.ItineraryOutputDTO;
 import org.springframework.stereotype.Service;
 
@@ -19,8 +21,18 @@ public class ItineraryDTOMapper implements Function<AbstractItinerary, Itinerary
                 abstractItinerary.getTypes(),
                 abstractItinerary.getDescription(),
                 abstractItinerary.getCoordinate(),
-                abstractItinerary.getCreationDate(),
-                abstractItinerary.getPOIs().stream().map(AbstractMunicipalElement::getName).toList().toString()
+                abstractItinerary.getPOIs()
+                        .stream()
+                        .map(AbstractMunicipalElement::getName)
+                        .toList()
+                        .toString(),
+                abstractItinerary.getListOfContents()
+                        .stream()
+                        .filter(c -> c.getElementStatus().equals(ElementStatus.PUBLISHED))
+                        .map(AbstractContent::getName)
+                        .toList()
+                        .toString(),
+                abstractItinerary.getCreationDate()
         );
     }
 }

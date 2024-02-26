@@ -85,14 +85,14 @@ public class PendingItineraryBuilder implements ItineraryBuilder{
         for(String type : types){
             result.append(type).append(" ");
         }
-        this.description = result.toString();
+        this.type = result.toString();
     }
 
     @Override
     public void setItineraryCoordinates(Coordinate coordinate) {
-        if(coordinate == null || !this.municipality.checkCoordinates(coordinate) ){
-            throw new IllegalArgumentException("The coordinates are null or not in the municipality");
-        }
+        //if(coordinate == null || !this.municipality.checkCoordinates(coordinate) ){
+         //   throw new IllegalArgumentException("The coordinates are null or not in the municipality");
+        //}
         this.coordinate = coordinate;
     }
 

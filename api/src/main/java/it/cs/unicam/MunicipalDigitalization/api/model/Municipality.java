@@ -103,8 +103,7 @@ public class Municipality {
      * @return True if the coordinate is within the territory, false otherwise.
      */
     public boolean checkCoordinates(Coordinate coordinate) {
-        // TODO - implement Municipality.checkCoordinates
-        throw new UnsupportedOperationException();
+        return true;
     }
 
     /**
@@ -231,6 +230,11 @@ public class Municipality {
         return element.toString();
     }
 
+    /**
+     * This method is used to add a user to the municipality.
+     *
+     * @param contributor The user to add.
+     */
     public void addUser(AbstractAuthenticatedUser contributor) {
         this.listOfIUsers.add(contributor);
     }

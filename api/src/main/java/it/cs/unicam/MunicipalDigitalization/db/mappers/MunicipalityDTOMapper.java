@@ -2,6 +2,7 @@ package it.cs.unicam.MunicipalDigitalization.db.mappers;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
 import it.cs.unicam.MunicipalDigitalization.api.model.users.AbstractAuthenticatedUser;
+import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.output.MunicipalityOutputDTO;
 import org.springframework.stereotype.Service;
 
@@ -20,9 +21,20 @@ public class MunicipalityDTOMapper implements Function<Municipality, Municipalit
                 municipality.getId(),
                 municipality.getName(),
                 municipality.getTerritory(),
-                municipality.getPOIList().stream().map(new POIDTOMapper()).toList(),
-                municipality.getListOfItineraries().stream().map(new ItineraryDTOMapper()).toList(),
-                municipality.getListOfIUsers().stream().map(AbstractAuthenticatedUser::getName).toList()
+                municipality.getPOIList()
+                        .stream()
+                        .filter(poi -> poi.getElementStatus().equals(ElementStatus.PUBLISHED))
+                        .map(new POIDTOMapper())
+                        .toList(),
+                municipality.getListOfItineraries()
+                        .stream()
+                        .filter(itinerary -> itinerary.getElementStatus().equals(ElementStatus.PUBLISHED))
+                        .map(new ItineraryDTOMapper())
+                        .toList(),
+                municipality.getListOfIUsers()
+                        .stream()
+                        .map(AbstractAuthenticatedUser::getName)
+                        .toList()
         );
     }
 }

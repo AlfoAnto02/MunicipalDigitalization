@@ -1,8 +1,11 @@
 package it.cs.unicam.MunicipalDigitalization.db.controllers;
 
+import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
+import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;
 import it.cs.unicam.MunicipalDigitalization.db.Services.ContentService;
 import it.cs.unicam.MunicipalDigitalization.db.Services.ItineraryService;
 import it.cs.unicam.MunicipalDigitalization.db.Services.POIService;
+import it.cs.unicam.MunicipalDigitalization.db.Services.UserService;
 import it.cs.unicam.MunicipalDigitalization.db.Services.uploadingServices.ContentUploadingService;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.input.ContentInputDTO;
 import it.cs.unicam.MunicipalDigitalization.db.mappers.ContentDTOMapper;
@@ -18,15 +21,18 @@ public class ContentController {
     private final POIService poiService;
     private final ItineraryService itineraryService;
     private final ContentDTOMapper contentDTOMapper;
+    private final UserService userService;
 
     @Autowired
     public ContentController(ContentUploadingService contentUploadingService, ContentDTOMapper contentDTOMapper
-            , ContentService contentService, POIService poiService, ItineraryService itineraryService) {
+            , ContentService contentService, POIService poiService, ItineraryService itineraryService,
+                             UserService userService) {
         this.contentUploadingService = contentUploadingService;
         this.contentService = contentService;
         this.poiService = poiService;
         this.itineraryService = itineraryService;
         this.contentDTOMapper = contentDTOMapper;
+        this.userService = userService;
     }
 
     /**
@@ -53,7 +59,10 @@ public class ContentController {
     public ResponseEntity<Object> getPOIContent(@PathVariable Long municipalityID, @PathVariable Long poiID,
                                                 @PathVariable Long contentID){
         if(poiService.getPOIByID(poiID).getMunicipality().getId().equals(municipalityID)){
-            return new ResponseEntity<>(contentDTOMapper.apply(contentService.getContentById(contentID)), HttpStatus.OK);
+            if(contentService.getContentById(contentID).getElementStatus().equals(ElementStatus.PUBLISHED)){
+                return new ResponseEntity<>(contentDTOMapper.apply(contentService.getContentById(contentID)), HttpStatus.OK);
+            }
+            else return new ResponseEntity<>("The content is not published or doesn't exists", HttpStatus.BAD_REQUEST);
         }
         else return new ResponseEntity<>("The POI does not belong to the municipality", HttpStatus.BAD_REQUEST);
     }
@@ -70,8 +79,31 @@ public class ContentController {
     public ResponseEntity<Object> getItineraryContent(@PathVariable Long municipalityID, @PathVariable Long itineraryID,
                                                      @PathVariable Long contentID){
         if(itineraryService.getItineraryById(itineraryID).getMunicipality().getId().equals(municipalityID)){
-            return new ResponseEntity<>(contentDTOMapper.apply(contentService.getContentById(contentID)), HttpStatus.OK);
+            if(contentService.getContentById(contentID).getElementStatus().equals(ElementStatus.PUBLISHED)){
+                return new ResponseEntity<>(contentDTOMapper.apply(contentService.getContentById(contentID)), HttpStatus.OK);
+            }
+            else return new ResponseEntity<>("The content is not published or doesn't exists", HttpStatus.BAD_REQUEST);
         }
         else return new ResponseEntity<>("The Itinerary does not belong to the municipality", HttpStatus.BAD_REQUEST);
     }
-}
+
+
+    /**
+     * Returns all the contents in the database
+     *
+     * @return a list of all the contents
+     */
+    @RequestMapping(value = "/v1/content/{curatorId}", method = RequestMethod.GET)
+    public ResponseEntity<Object> getPendingContents(@PathVariable Long curatorId){
+        if(userService.getUserById(curatorId).getRole().contains(UserRole.CURATOR)){
+            return new ResponseEntity<>(contentService.getAllContents()
+                    .stream()
+                    .filter(content -> content.getReferredPOI().getMunicipality().equals(userService.getUserById(curatorId).getMunicipality()) ||
+                            content.getReferredItinerary().getMunicipality().equals(userService.getUserById(curatorId).getMunicipality()))
+                    .filter(content -> content.getElementStatus().equals(ElementStatus.PENDING))
+                    .map(contentDTOMapper), HttpStatus.OK);
+        }
+        else return new ResponseEntity<>("You are not a curator", HttpStatus.BAD_REQUEST);
+        }
+    }
+

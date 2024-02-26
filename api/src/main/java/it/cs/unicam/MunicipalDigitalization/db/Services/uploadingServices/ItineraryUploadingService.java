@@ -55,8 +55,8 @@ public class ItineraryUploadingService {
         itineraryBuilder.setItineraryAuthor(userService.getUserById(itineraryDTO.authorID()));
         itineraryBuilder.setItineraryDescription(itineraryDTO.itinerary_description());
         itineraryBuilder.setItineraryMunicipality(userService.getUserById(itineraryDTO.authorID()).getMunicipality());
-        itineraryBuilder.setItineraryCoordinates(itineraryDTO.coordinate());
         itineraryBuilder.addPOIs(poiService.getPOIsByIds(itineraryDTO.POIsIDs()));
+        itineraryBuilder.setItineraryCoordinates(itineraryDTO.coordinate());
         itineraryBuilder.setItineraryType();
         itineraryBuilder.setItineraryStatus();
     }

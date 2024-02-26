@@ -11,6 +11,8 @@ import it.cs.unicam.MunicipalDigitalization.db.Repository.ItineraryRepository;
 import it.cs.unicam.MunicipalDigitalization.db.Repository.MunicipalRepository;
 import it.cs.unicam.MunicipalDigitalization.db.Repository.UserRepository;
 import it.cs.unicam.MunicipalDigitalization.db.Services.POIService;
+import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.input.ItineraryInputDTO;
+import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.input.POIInputDTO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -64,14 +66,14 @@ public class ItineraryRepoTest {
         System.out.println(municipality.getId());
 
         //Create a POIs
-        POIDTO poi1 = new POIDTO("Monteleone", POIType.Cinema, user.getId(), municipality.getId(), new Coordinate(1,1), ElementStatus.PUBLISHED);
-        POIDTO poi2 = new POIDTO("Ginevra", POIType.Cinema, user.getId(), municipality.getId(), new Coordinate(2,2), ElementStatus.PUBLISHED);
+        POIInputDTO poi1 = new POIInputDTO("Monteleone", POIType.Cinema, user.getId(),new Coordinate(1,1));
+        POIInputDTO poi2 = new POIInputDTO("Ginevra", POIType.Cinema, user.getId(), new Coordinate(2,2));
         poiUploadingService.uploadPOI(poi1);
         poiUploadingService.uploadPOI(poi2);
 
         //Create an Itinerary
-        ItineraryDTO itineraryDTO = new ItineraryDTO("Super itinerario", "Cinema", "Questo è un fantastico itinerario",
-                user.getId(), municipality.getId(), new Coordinate(1,1), new ArrayList<>
+        ItineraryInputDTO itineraryDTO = new ItineraryInputDTO("Super itinerario","Questo è un fantastico itinerario",
+                user.getId(), new Coordinate(1,1), new ArrayList<>
                 (List.of(poiService.getPOIbyName("Monteleone").get().getId(), poiService.getPOIbyName("Ginevra").get().getId())));
         uploadingService.uploadItinerary(itineraryDTO);
 

@@ -66,4 +66,11 @@ public interface POIRepository extends JpaRepository<AbstractPOI, Long> {
     @Query("SELECT p FROM AbstractPOI p WHERE p.POIType=?1")
     List<AbstractPOI> findAllByType(POIType type);
 
+    /**
+     * This Method is used to find a POI by the ID of a Content
+     * @param id of the Content
+     * @return the POI
+     */
+    @Query("SELECT p FROM AbstractPOI p JOIN p.listOfContents c WHERE c.id=?1")
+    AbstractPOI getPoiByContentID(Long id);
 }

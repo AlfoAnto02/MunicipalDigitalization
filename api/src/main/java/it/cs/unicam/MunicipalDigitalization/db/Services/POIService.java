@@ -64,12 +64,40 @@ public class POIService {
         }
     }
 
+    /**
+     * Add an itinerary to the POI
+     *
+     * @param poIs list of POIs
+     * @param id the itinerary to add
+     */
     public void addItinerary(List<AbstractPOI> poIs, AbstractItinerary id) {
         for(AbstractPOI poi : poIs){
             AbstractPOI poi1 = poiRepository.getReferenceById(poi.getId());
             poi1.addItinerary(id);
             poiRepository.save(poi);
         }
+    }
+
+    /**
+     * Update the list of contents of a POI after the validation of a content
+     *
+     * @param id ID of the content
+     * @param validated true if the content is validated, false if it is not
+     */
+    public void updateContentList(Long id, boolean validated) {
+        AbstractPOI poi = poiRepository.getPoiByContentID(id);
+        if(validated) {
+            poi.getListOfContents()
+                    .stream()
+                    .filter(content -> content.getId().equals(id))
+                    .findFirst()
+                    .get()
+                    .setElementStatus(ElementStatus.PUBLISHED);
+            poiRepository.save(poi);
+        } else {
+            poi.removeContent(id);
+        }
+        poiRepository.save(poi);
     }
 
 

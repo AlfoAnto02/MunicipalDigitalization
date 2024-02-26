@@ -1,6 +1,9 @@
 package it.cs.unicam.MunicipalDigitalization.db.mappers;
 
+import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractContent;
+import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractMunicipalElement;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractPOI;
+import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.output.POIOutputDTO;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +23,12 @@ public class POIDTOMapper implements Function<AbstractPOI, POIOutputDTO> {
                 poi.getMunicipality().getName(),
                 poi.getType(),
                 poi.getCoordinate(),
+                poi.getListOfContents()
+                        .stream()
+                        .filter(c -> c.getElementStatus().equals(ElementStatus.PUBLISHED))
+                        .map(AbstractContent::getName)
+                        .toList()
+                        .toString(),
                 poi.getCreationDate()
         );
     }
