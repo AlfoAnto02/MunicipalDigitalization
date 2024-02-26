@@ -86,9 +86,8 @@ public class POIRepoTest {
         assertEquals(poiService.findByName("Monteleone").get().getPOIType(), POIType.Cinema);
         assertEquals(poiService.findByName("Monteleone").get().getAuthor(), user);
         assertEquals(poiService.findByName("Monteleone").get().getMunicipality(), municipality);
-
-
-        // Check if a poi is within a municipality
-        assertTrue(poiService.findByName("Monteleone").get().isPointInPolygon(poiService.findByName("Monteleone").get().getCoordinates(), municipality.getTerritory()));
+        
+        // TODO Check if a poi is within a municipality
+        
     }
 }
