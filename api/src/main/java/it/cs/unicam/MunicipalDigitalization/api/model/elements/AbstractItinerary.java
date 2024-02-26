@@ -36,7 +36,12 @@ public abstract class AbstractItinerary extends AbstractMunicipalElement impleme
     /**
      * List of POIs that composed the Itinerary
      */
-    @OneToMany(mappedBy = "id")
+    @ManyToMany
+    @JoinTable(
+            name = "Itinerary_POIs",
+            joinColumns = @JoinColumn(name = "Itinerary_ID"),
+            inverseJoinColumns = @JoinColumn(name = "POI_ID")
+    )
     private final List<AbstractPOI> pois;
 
     /**

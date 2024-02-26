@@ -33,22 +33,6 @@ public enum ContentType {
      * The code associated with the type.
      */
     private final String code;
-
-    /**
-     * The description of the content.
-     */
-    private String description;
-
-    /**
-     * The link of the content.
-     */
-    private String link;
-
-    /**
-     * The image of the content.
-     */
-    private Image image;
-
     /**
      * Constructor for the ContentType enum.
      * It initializes the type with the provided code.

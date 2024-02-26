@@ -6,10 +6,10 @@ import it.cs.unicam.MunicipalDigitalization.api.util.Coordinate;
 import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 import it.cs.unicam.MunicipalDigitalization.api.util.POIType;
 import it.cs.unicam.MunicipalDigitalization.db.Services.uploadingServices.POIUploadingService;
-import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.input.POIDTO;
 import it.cs.unicam.MunicipalDigitalization.db.Repository.MunicipalRepository;
 import it.cs.unicam.MunicipalDigitalization.db.Repository.POIRepository;
 import it.cs.unicam.MunicipalDigitalization.db.Repository.UserRepository;
+import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.input.POIInputDTO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -57,7 +57,7 @@ public class POIRepoTest {
         System.out.println(municipality.getId());
 
         //Create a POI
-        POIDTO poiDTO = new POIDTO("Monteleone", POIType.Cinema, user.getId(), municipality.getId(), new Coordinate(1,1), ElementStatus.PUBLISHED);
+        POIInputDTO poiDTO = new POIInputDTO("Monteleone", POIType.Cinema, user.getId(), new Coordinate(1,1));
         uploadingService.uploadPOI(poiDTO);
 
         //Check if the POI present

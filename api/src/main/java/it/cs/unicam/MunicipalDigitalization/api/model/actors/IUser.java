@@ -1,7 +1,6 @@
 package it.cs.unicam.MunicipalDigitalization.api.model.actors;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
-import it.cs.unicam.MunicipalDigitalization.api.util.ID;
 
 /**
  * This interface represents a user in the system.

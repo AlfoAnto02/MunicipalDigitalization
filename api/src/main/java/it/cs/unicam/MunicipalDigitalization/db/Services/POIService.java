@@ -2,6 +2,7 @@ package it.cs.unicam.MunicipalDigitalization.db.Services;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.actors.AbstractAuthenticatedUser;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractContent;
+import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractItinerary;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractMunicipalElement;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractPOI;
 import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
@@ -65,16 +66,16 @@ public class POIService {
         }
     }
 
-    /**
-     * Invalidate a POI in the database
-     *
-     * @param id ID of the POI
-     */
-    public void invalidatePOI(Long id) {
-        poiRepository.deleteById(id);
+    public void addItinerary(List<AbstractPOI> poIs, AbstractItinerary id) {
+        for(AbstractPOI poi : poIs){
+            AbstractPOI poi1 = poiRepository.getReferenceById(poi.getId());
+            poi1.addItinerary(id);
+            poiRepository.save(poi);
+        }
     }
 
-    public AbstractMunicipalElement getPOIByID(Long id){
+
+    public AbstractPOI getPOIByID(Long id){
         return poiRepository.getReferenceById(id);
     }
 
@@ -89,4 +90,5 @@ public class POIService {
     public List<AbstractPOI> getAllPOIs() {
         return poiRepository.findAll();
     }
+
 }

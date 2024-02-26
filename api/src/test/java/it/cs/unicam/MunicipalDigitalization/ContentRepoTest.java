@@ -6,12 +6,12 @@ import it.cs.unicam.MunicipalDigitalization.api.model.actors.AuthorizedContribut
 import it.cs.unicam.MunicipalDigitalization.api.util.*;
 import it.cs.unicam.MunicipalDigitalization.db.Services.uploadingServices.POIUploadingService;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.input.ContentInputDTO;
-import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.input.POIDTO;
 import it.cs.unicam.MunicipalDigitalization.db.Repository.MunicipalRepository;
 import it.cs.unicam.MunicipalDigitalization.db.Repository.UserRepository;
 import it.cs.unicam.MunicipalDigitalization.db.Services.ContentService;
 import it.cs.unicam.MunicipalDigitalization.db.Services.POIService;
 import it.cs.unicam.MunicipalDigitalization.db.Services.uploadingServices.ContentUploadingService;
+import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.input.POIInputDTO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -55,7 +55,7 @@ public class ContentRepoTest {
         System.out.println(municipality.getId());
 
         //Create a POI
-        POIDTO poiDTO = new POIDTO("Monteleone", POIType.Cinema, user.getId(), municipality.getId(), new Coordinate(1,1), ElementStatus.PUBLISHED);
+        POIInputDTO poiDTO = new POIInputDTO("Monteleone", POIType.Cinema, user.getId(), new Coordinate(1,1));
         poiUploadingService.uploadPOI(poiDTO);
 
         //Create a Content

@@ -14,9 +14,6 @@ public record ItineraryOutputDTO (
         Coordinate location,
         LocalDateTime itineraryCreationDate,
         String listOfPOIs
-
-
-
 )
 {
 

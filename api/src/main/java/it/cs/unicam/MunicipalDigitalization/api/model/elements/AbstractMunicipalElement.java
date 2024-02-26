@@ -153,15 +153,7 @@ public abstract class AbstractMunicipalElement implements IMunicipalElement {
         this.listOfContents.add(content);
     }
 
-    /**
-     * Method to get a specific content from the MunicipalElement by its ID.
-     *
-     * @param id The ID of the content to retrieve.
-     * @return The content as a string.
-     */
-    public String getContent(String id) {
-        return this.listOfContents.stream().filter(content -> content.getID().equals(id)).findFirst().get().getContent();
-    }
+
 
     /**
      * Method to get full information about a specific content from the MunicipalElement by its ID.

@@ -20,8 +20,7 @@ public class POIDTOMapper implements Function<AbstractPOI, POIOutputDTO> {
                 poi.getMunicipality().getName(),
                 poi.getType(),
                 poi.getCoordinate(),
-                poi.getCreationDate(),
-                poi.getListOfContents()
+                poi.getCreationDate()
         );
     }
 }

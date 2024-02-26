@@ -23,12 +23,6 @@ public interface IContent {
      */
     void setType(ContentType type);
 
-    /**
-     * Getter for the ID of the content.
-     *
-     * @return The ID of the content.
-     */
-    String getID();
 
     /**
      * Setter for the description of the content.

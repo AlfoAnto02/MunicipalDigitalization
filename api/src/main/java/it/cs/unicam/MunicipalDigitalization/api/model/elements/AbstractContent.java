@@ -1,11 +1,8 @@
 package it.cs.unicam.MunicipalDigitalization.api.model.elements;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.actors.AbstractAuthenticatedUser;
-import it.cs.unicam.MunicipalDigitalization.api.model.actors.AbstractIUser;
-import it.cs.unicam.MunicipalDigitalization.api.model.actors.IAuthenticatedUser;
 import it.cs.unicam.MunicipalDigitalization.api.util.ContentType;
 import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
-import it.cs.unicam.MunicipalDigitalization.api.util.ID;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -146,11 +143,6 @@ public abstract class AbstractContent implements IContent {
         this.description = description;
         this.link = link;
         this.photo = photo;
-    }
-
-    @Override
-    public String getID() {
-        return this.id.toString();
     }
 
     @Override

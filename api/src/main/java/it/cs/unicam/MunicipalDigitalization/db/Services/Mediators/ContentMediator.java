@@ -5,6 +5,7 @@ import it.cs.unicam.MunicipalDigitalization.db.Repository.ContentRepository;
 import it.cs.unicam.MunicipalDigitalization.db.Services.ContentService;
 import it.cs.unicam.MunicipalDigitalization.db.Services.ItineraryService;
 import it.cs.unicam.MunicipalDigitalization.db.Services.POIService;
+import it.cs.unicam.MunicipalDigitalization.db.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,12 +17,15 @@ public class ContentMediator {
     private final ContentService contentService;
     private final POIService poiService;
     private final ItineraryService itineraryService;
+    private final UserService userService;
 
     @Autowired
-    public ContentMediator(ContentService contentRepository, POIService poiService, ItineraryService itineraryService) {
+    public ContentMediator(ContentService contentRepository, POIService poiService, ItineraryService itineraryService,
+                           UserService userService) {
         this.contentService = contentRepository;
         this.poiService = poiService;
         this.itineraryService = itineraryService;
+        this.userService = userService;
     }
 
     /**
@@ -35,5 +39,7 @@ public class ContentMediator {
             poiService.addContent(content.getReferredPOI().getId(), content);
         }
         else itineraryService.addContent(content.getReferredItinerary().getId(), content);
+        userService.addContent(content.getAuthor().getId(), content);
+
     }
 }

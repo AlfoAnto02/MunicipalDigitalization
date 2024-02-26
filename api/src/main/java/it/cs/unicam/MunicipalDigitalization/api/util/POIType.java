@@ -34,7 +34,7 @@ public enum POIType {
     /**
      * Represents a school POI.
      */
-    School("Cinema");
+    School("School");
 
     /**
      * The code associated with the type.

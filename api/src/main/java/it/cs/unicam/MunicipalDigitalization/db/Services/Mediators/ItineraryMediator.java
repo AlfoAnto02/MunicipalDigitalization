@@ -5,10 +5,7 @@ import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractMunicipal
 import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;
 import it.cs.unicam.MunicipalDigitalization.db.Repository.ItineraryRepository;
-import it.cs.unicam.MunicipalDigitalization.db.Services.ItineraryService;
-import it.cs.unicam.MunicipalDigitalization.db.Services.MunicipalService;
-import it.cs.unicam.MunicipalDigitalization.db.Services.UserService;
-import it.cs.unicam.MunicipalDigitalization.db.Services.ValidateService;
+import it.cs.unicam.MunicipalDigitalization.db.Services.*;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.Requests.ValidateRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -23,12 +20,14 @@ public class ItineraryMediator {
     private final MunicipalService municipalityService;
 
     private final UserService userService;
+    private final POIService poiService;
 
     @Autowired
-    public ItineraryMediator(ItineraryService itineraryService, MunicipalService municipalityService, UserService userService) {
+    public ItineraryMediator(ItineraryService itineraryService, MunicipalService municipalityService, UserService userService, POIService poiService) {
         this.itineraryService = itineraryService;
         this.municipalityService = municipalityService;
         this.userService = userService;
+        this.poiService = poiService;
     }
 
     /**
@@ -37,6 +36,7 @@ public class ItineraryMediator {
      * @param itinerary the itinerary to save
      */
     public void saveItinerary(AbstractItinerary itinerary){
+
         this.itineraryService.saveItinerary(itinerary);
 
         //Get the municipality id and the author Id
@@ -45,9 +45,7 @@ public class ItineraryMediator {
 
         municipalityService.addItinerary(itinerary.getMunicipality().getId(), itinerary);
         userService.addItinerary(itinerary.getAuthor().getId(), itinerary);
-        System.out.println(itineraryService.getItineraryById(itinerary.getId()).getPOIs().size());
-        System.out.println(itineraryService.getItineraryById(itinerary.getId()).getPOIs().stream().map(AbstractMunicipalElement::getName).toList().toString());
-        System.out.println(municipalityService.getMunicipalByID(municipalityId).getListOfItineraries().get(0).getPOIs().size());
+        poiService.addItinerary(itinerary.getPOIs(), itinerary);
     }
 
     /**

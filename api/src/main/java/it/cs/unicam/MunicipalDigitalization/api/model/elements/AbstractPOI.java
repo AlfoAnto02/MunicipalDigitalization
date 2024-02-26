@@ -9,6 +9,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -46,6 +48,12 @@ public abstract class AbstractPOI extends AbstractMunicipalElement implements IP
     private AbstractAuthenticatedUser author;
 
     /**
+     * The itinerary of the POI
+     */
+    @ManyToMany(mappedBy = "pois")
+    private List<AbstractItinerary> itineraryOfPOI;
+
+    /**
      * The constructor of the Class
      *
      */
@@ -68,6 +76,7 @@ public abstract class AbstractPOI extends AbstractMunicipalElement implements IP
         super(municipality, elementStatus, coordinate, name);
         this.POIType = POIType;
         this.author = author;
+        this.itineraryOfPOI = new ArrayList<>();
     }
 
     /**
@@ -111,5 +120,9 @@ public abstract class AbstractPOI extends AbstractMunicipalElement implements IP
     @Override
     public int hashCode() {
         return Objects.hash(super.getCoordinates(), super.getName(), POIType);
+    }
+
+    public void addItinerary(AbstractItinerary id) {
+        this.itineraryOfPOI.add(id);
     }
 }

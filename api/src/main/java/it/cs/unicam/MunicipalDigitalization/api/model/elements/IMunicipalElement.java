@@ -3,10 +3,8 @@ package it.cs.unicam.MunicipalDigitalization.api.model.elements;
 import it.cs.unicam.MunicipalDigitalization.api.model.actors.IAuthenticatedUser;
 import it.cs.unicam.MunicipalDigitalization.api.util.Coordinate;
 import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
-import it.cs.unicam.MunicipalDigitalization.api.util.ID;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -94,13 +92,6 @@ public interface IMunicipalElement {
      */
     void uploadContent(AbstractContent content);
 
-    /**
-     * get the content of the Municipal element using its id.
-     *
-     * @param id of the content
-     * @return the content with this id
-     */
-    String getContent(String id);
 
     /**
      * Get the content full info of the municipal element using its id.
