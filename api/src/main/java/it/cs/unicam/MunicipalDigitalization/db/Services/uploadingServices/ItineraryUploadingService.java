@@ -2,12 +2,15 @@ package it.cs.unicam.MunicipalDigitalization.db.Services.uploadingServices;
 
 import it.cs.unicam.MunicipalDigitalization.api.util.DesignPattern.Builder.ItineraryBuilder;
 import it.cs.unicam.MunicipalDigitalization.api.util.DesignPattern.FactoryMethod.ItineraryBuilderFactory;
+import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;
 import it.cs.unicam.MunicipalDigitalization.db.Services.Mediators.ItineraryMediator;
 import it.cs.unicam.MunicipalDigitalization.db.Services.POIService;
 import it.cs.unicam.MunicipalDigitalization.db.Services.UserService;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.input.ItineraryInputDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import static it.cs.unicam.MunicipalDigitalization.api.util.MatchingAlgorithms.containsSpecialCharacters;
 
 /**
  * This class is responsible for uploading an itinerary to the database
@@ -17,11 +20,34 @@ import org.springframework.stereotype.Service;
 @Service
 public class ItineraryUploadingService {
 
+    /**
+     * UserService instance
+     */
     private final UserService userService;
+
+    /**
+     * ItineraryMediator instance
+     */
     private final ItineraryMediator itineraryMediator;
+
+    /**
+     * POIService instance
+     */
     private final POIService poiService;
+
+    /**
+     * ItineraryBuilderFactory instance
+     */
     private final ItineraryBuilderFactory itineraryBuilderFactory;
 
+    /**
+     * Constructor for ItineraryUploadingService
+     *
+     * @param userService             UserService instance
+     * @param itineraryMediator       ItineraryMediator instance
+     * @param poiService              POIService instance
+     * @param itineraryBuilderFactory ItineraryBuilderFactory instance
+     */
     @Autowired
     public ItineraryUploadingService(UserService userService, ItineraryMediator itineraryMediator, POIService poiService, ItineraryBuilderFactory itineraryBuilderFactory) {
         this.userService = userService;
@@ -60,17 +86,49 @@ public class ItineraryUploadingService {
     }
 
     /**
-     * Checks if the itinerary is valid
+     * Checks the validity of the itinerary
      *
      * @param itineraryDTO the itinerary to be checked
      */
     private void checkItinerary(ItineraryInputDTO itineraryDTO) {
-        //TODO
 
         if (itineraryDTO.itinerary_name().length() > 40 || itineraryDTO.itinerary_name().length() < 10) {
             throw new IllegalArgumentException("The name must be between 10 and 40 characters");
         }
-        
-        
+
+        if (itineraryDTO.itinerary_name().isBlank()) {
+            throw new IllegalArgumentException("The name must not be null or blank");
+        }
+
+        if (containsSpecialCharacters(itineraryDTO.itinerary_name())) {
+            throw new IllegalArgumentException("The name must not contain special characters");
+        }
+
+        if (userService.getUserById(itineraryDTO.authorID()).getRole().contains(UserRole.CONTRIBUTOR) && userService.getUserById(itineraryDTO.authorID()).getRole().contains(UserRole.AUTHORIZED_CONTRIBUTOR) && userService.getUserById(itineraryDTO.authorID()).getRole().contains(UserRole.CURATOR)) {
+            throw new IllegalArgumentException("The author is not authorized to upload an itinerary");
+        }
+
+        if (itineraryDTO.itinerary_description() == null) {
+            throw new IllegalArgumentException("The description is null");
+        }
+
+        if (itineraryDTO.itinerary_description().length() > 1000) {
+            throw new IllegalArgumentException("The description is too long");
+        }
+
+        if (itineraryDTO.itinerary_description().length() < 10) {
+            throw new IllegalArgumentException("The description is too short");
+        }
+
+        if (userService.getUserById(itineraryDTO.authorID()).getMunicipality() == null) {
+            throw new IllegalArgumentException("The author is not associated with a municipality");
+        }
+
+        if (itineraryDTO.POIsIDs().isEmpty()) {
+            throw new IllegalArgumentException("The itinerary must contain at least one POI");
+        }
+
+        // TODO check if the coordinate is within the municipality coordinates
+
     }
 }

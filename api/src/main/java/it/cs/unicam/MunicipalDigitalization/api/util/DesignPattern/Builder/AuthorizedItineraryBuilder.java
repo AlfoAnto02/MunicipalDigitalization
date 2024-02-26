@@ -1,80 +1,112 @@
 package it.cs.unicam.MunicipalDigitalization.api.util.DesignPattern.Builder;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
-import it.cs.unicam.MunicipalDigitalization.api.model.users.AbstractAuthenticatedUser;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractPOI;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AuthorizedItinerary;
+import it.cs.unicam.MunicipalDigitalization.api.model.users.AbstractAuthenticatedUser;
 import it.cs.unicam.MunicipalDigitalization.api.util.Coordinate;
 import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 import it.cs.unicam.MunicipalDigitalization.api.util.MatchingAlgorithms;
-import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static it.cs.unicam.MunicipalDigitalization.api.util.MatchingAlgorithms.containsSpecialCharacters;
-
 /**
- * This class represents the building of an AuthorizedItinerary
+ * This class represents the Builder of an Authorized Itinerary.
+ * It is used to create an Authorized Itinerary step by step.
  */
 @Component
-public class AuthorizedItineraryBuilder implements ItineraryBuilder{
+public class AuthorizedItineraryBuilder implements ItineraryBuilder {
+
+    /**
+     * List of poi
+     */
     private List<AbstractPOI> poiList;
+
+    /**
+     * Name of the itinerary
+     */
     private String name;
+
+    /**
+     * Description of the itinerary
+     */
     private String description;
+
+    /**
+     * Author of the itinerary
+     */
     private AbstractAuthenticatedUser author;
+
+    /**
+     * Municipality of the itinerary
+     */
     private Municipality municipality;
+
+    /**
+     * Coordinates of the itinerary
+     */
     private Coordinate coordinate;
+
+    /**
+     * Type of the itinerary
+     */
     private String type;
+
+    /**
+     * Status of the itinerary
+     */
     private ElementStatus status;
 
     public AuthorizedItineraryBuilder() {
         this.poiList = new ArrayList<>();
     }
 
+    /**
+     * This method is used to check if the fields are not null
+     *
+     * @param poiList      the list of POIs
+     * @param name         the name of the itinerary
+     * @param description  the description of the itinerary
+     * @param author       the author of the itinerary
+     * @param municipality the municipality of the itinerary
+     * @param coordinate   the coordinates of the itinerary
+     * @param type         the type of the itinerary
+     * @param status       the status of the itinerary
+     */
+    static void checkNull(List<AbstractPOI> poiList, String name, String description, AbstractAuthenticatedUser author, Municipality municipality, Coordinate coordinate, String type, ElementStatus status) {
+        if (poiList == null || name == null || description == null || author == null || municipality == null || coordinate == null || type == null || status == null) {
+            throw new IllegalArgumentException("Some fields are null");
+        }
+    }
+
     @Override
-    public void addPOIs(List<AbstractPOI>  poi) {
-        for(AbstractPOI p : poi){
-            if(p.getElementStatus().equals(ElementStatus.PENDING)) throw new IllegalArgumentException("You can't select a Pending POI");
+    public void addPOIs(List<AbstractPOI> poi) {
+        for (AbstractPOI p : poi) {
+            if (p.getElementStatus().equals(ElementStatus.PENDING))
+                throw new IllegalArgumentException("You can't select a Pending POI");
             else this.poiList.add(p);
         }
     }
 
     @Override
     public void setItineraryName(String name) {
-        if(name.length() > 40) throw new IllegalArgumentException("The name must not be longer than 40 characters");
-        if(name.length()< 10) throw new IllegalArgumentException("The name must not be shorter than 10 characters");
-        if(containsSpecialCharacters(name)) throw new IllegalArgumentException("The name must not contain special characters");
-        if(!name.isBlank()) this.name = name;
-        else throw new IllegalArgumentException("The name must not be null or blank");
+        this.name = name;
     }
 
     @Override
     public void setItineraryDescription(String description) {
-        if(description == null){
-            throw new IllegalArgumentException("The description is null");
-        }
-        if(description.length() > 1000){
-            throw new IllegalArgumentException("The description is too long");
-        }
-        if(description.length() < 10){
-            throw new IllegalArgumentException("The description is too short");
-        }
         this.description = description;
     }
 
     @Override
     public void setItineraryAuthor(AbstractAuthenticatedUser author) {
-        if(author.getRole().contains(UserRole.AUTHORIZED_CONTRIBUTOR )|| author.getRole().contains(UserRole.CURATOR)) this.author = author;
-        else throw new IllegalArgumentException("The author is not a contributor");
+        this.author = author;
     }
 
     @Override
     public void setItineraryMunicipality(Municipality municipality) {
-        if(municipality == null){
-            throw new IllegalArgumentException("The municipality is null");
-        }
         this.municipality = municipality;
     }
 
@@ -82,7 +114,7 @@ public class AuthorizedItineraryBuilder implements ItineraryBuilder{
     public void setItineraryType() {
         List<String> types = MatchingAlgorithms.uniqueTypes(this.poiList);
         StringBuilder result = new StringBuilder();
-        for(String type : types){
+        for (String type : types) {
             result.append(type).append(" ");
         }
         this.type = result.toString();
@@ -90,9 +122,8 @@ public class AuthorizedItineraryBuilder implements ItineraryBuilder{
 
     @Override
     public void setItineraryCoordinates(Coordinate coordinate) {
-        /* if(coordinate == null || !this.municipality.checkCoordinates(coordinate) ){
-            throw new IllegalArgumentException("The coordinates are null or not in the municipality");
-        }*/
+        // TODO check if the coordinate is within the municipality coordinates
+
         this.coordinate = coordinate;
     }
 
@@ -114,21 +145,12 @@ public class AuthorizedItineraryBuilder implements ItineraryBuilder{
     }
 
     /**
-     * This method is used to build the Pending Itinerary.
-     * It checks if all the fields are not null and then creates the Pending Itinerary.
+     * This method is used to build the AuthorizedItinerary
      *
-     * @return the Pending Itinerary
+     * @return the AuthorizedItinerary
      */
-    public AuthorizedItinerary build(){
+    public AuthorizedItinerary build() {
         checkNull(this.poiList, this.name, this.description, this.author, this.municipality, this.coordinate, this.type, this.status);
-        return new AuthorizedItinerary(this.municipality, this.status, this.coordinate, this.name, this.poiList,
-                this.type, this.description, this.author);
-    }
-
-    static void checkNull(List<AbstractPOI> poiList, String name, String description, AbstractAuthenticatedUser author, Municipality municipality, Coordinate coordinate, String type, ElementStatus status) {
-        if(poiList == null || name == null || description == null || author == null ||
-                municipality == null || coordinate == null || type == null || status == null){
-            throw new IllegalArgumentException("Some fields are null");
-        }
+        return new AuthorizedItinerary(this.municipality, this.status, this.coordinate, this.name, this.poiList, this.type, this.description, this.author);
     }
 }
