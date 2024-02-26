@@ -3,7 +3,6 @@ package it.cs.unicam.MunicipalDigitalization.db.Services.uploadingServices;
 import it.cs.unicam.MunicipalDigitalization.api.util.DesignPattern.Builder.ItineraryBuilder;
 import it.cs.unicam.MunicipalDigitalization.api.util.DesignPattern.FactoryMethod.ItineraryBuilderFactory;
 import it.cs.unicam.MunicipalDigitalization.db.Services.Mediators.ItineraryMediator;
-import it.cs.unicam.MunicipalDigitalization.db.Services.MunicipalService;
 import it.cs.unicam.MunicipalDigitalization.db.Services.POIService;
 import it.cs.unicam.MunicipalDigitalization.db.Services.UserService;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.input.ItineraryInputDTO;
@@ -24,8 +23,7 @@ public class ItineraryUploadingService {
     private final ItineraryBuilderFactory itineraryBuilderFactory;
 
     @Autowired
-    public ItineraryUploadingService(UserService userService, ItineraryMediator itineraryMediator,
-                                     POIService poiService, ItineraryBuilderFactory itineraryBuilderFactory) {
+    public ItineraryUploadingService(UserService userService, ItineraryMediator itineraryMediator, POIService poiService, ItineraryBuilderFactory itineraryBuilderFactory) {
         this.userService = userService;
         this.itineraryMediator = itineraryMediator;
         this.poiService = poiService;
@@ -48,7 +46,7 @@ public class ItineraryUploadingService {
      * Builds an itinerary
      *
      * @param itineraryBuilder the builder to be used
-     * @param itineraryDTO the itinerary to be built
+     * @param itineraryDTO     the itinerary to be built
      */
     private void buildItinerary(ItineraryBuilder itineraryBuilder, ItineraryInputDTO itineraryDTO) {
         itineraryBuilder.setItineraryName(itineraryDTO.itinerary_name());
@@ -68,5 +66,11 @@ public class ItineraryUploadingService {
      */
     private void checkItinerary(ItineraryInputDTO itineraryDTO) {
         //TODO
+
+        if (itineraryDTO.itinerary_name().length() > 40 || itineraryDTO.itinerary_name().length() < 10) {
+            throw new IllegalArgumentException("The name must be between 10 and 40 characters");
+        }
+        
+        
     }
 }

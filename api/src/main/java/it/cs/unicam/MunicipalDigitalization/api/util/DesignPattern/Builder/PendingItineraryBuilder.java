@@ -43,8 +43,6 @@ public class PendingItineraryBuilder implements ItineraryBuilder{
 
     @Override
     public void setItineraryName(String name) {
-        if(name.length() > 40) throw new IllegalArgumentException("The name must not be longer than 40 characters");
-        if(name.length()< 10) throw new IllegalArgumentException("The name must not be shorter than 10 characters");
         if(containsSpecialCharacters(name)) throw new IllegalArgumentException("The name must not contain special characters");
         if(!name.isBlank()) this.name = name;
         else throw new IllegalArgumentException("The name must not be null or blank");

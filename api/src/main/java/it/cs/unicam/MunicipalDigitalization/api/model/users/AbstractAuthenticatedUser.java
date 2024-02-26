@@ -7,8 +7,8 @@ import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractContent;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractItinerary;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractPOI;
 import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
@@ -20,11 +20,10 @@ import java.util.List;
  * This class extends the AbstractIUser class and implements the IAuthenticatedUser interface.
  */
 @Entity
-@Getter
-@Setter
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Table(name = "User", uniqueConstraints = {@UniqueConstraint(name = "Identification", columnNames = "id")})
-@NoArgsConstructor
+@Getter
+@Setter
 public abstract class AbstractAuthenticatedUser extends AbstractIUser implements IAuthenticatedUser {
 
     /**
@@ -85,6 +84,15 @@ public abstract class AbstractAuthenticatedUser extends AbstractIUser implements
     public AbstractAuthenticatedUser(String name, String password) {
         this.name = name;
         this.password = password;
+        this.authoredPOIs = new ArrayList<>();
+        this.authoredItineraries = new ArrayList<>();
+        this.authoredContents = new ArrayList<>();
+    }
+
+    /**
+     * Default constructor for the AbstractAuthenticatedUser class.
+     */
+    public AbstractAuthenticatedUser() {
         this.authoredPOIs = new ArrayList<>();
         this.authoredItineraries = new ArrayList<>();
         this.authoredContents = new ArrayList<>();

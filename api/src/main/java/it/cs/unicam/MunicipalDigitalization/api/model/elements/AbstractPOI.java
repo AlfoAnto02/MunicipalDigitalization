@@ -1,4 +1,5 @@
 package it.cs.unicam.MunicipalDigitalization.api.model.elements;
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
 import it.cs.unicam.MunicipalDigitalization.api.model.users.AbstractAuthenticatedUser;
@@ -22,15 +23,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@Table(
-        name = "Pois",
-        uniqueConstraints = {
-                @UniqueConstraint(
-                        name = "Identification",
-                        columnNames = "id"
-                )
-        }
-)
+@Table(name = "Pois", uniqueConstraints = {@UniqueConstraint(name = "Identification", columnNames = "id")})
 public abstract class AbstractPOI extends AbstractMunicipalElement implements IPOI {
 
     /**
@@ -43,7 +36,7 @@ public abstract class AbstractPOI extends AbstractMunicipalElement implements IP
      * The author of the point of the MunicipalElement
      */
     @ManyToOne
-    @JoinColumn(name = "Author",nullable = false)
+    @JoinColumn(name = "Author", nullable = false)
     @JsonManagedReference
     private AbstractAuthenticatedUser author;
 
@@ -55,7 +48,6 @@ public abstract class AbstractPOI extends AbstractMunicipalElement implements IP
 
     /**
      * The constructor of the Class
-     *
      */
     public AbstractPOI() {
         super();
@@ -64,15 +56,14 @@ public abstract class AbstractPOI extends AbstractMunicipalElement implements IP
     /**
      * The constructor of the Class used by the Builder
      *
-     * @param municipality The municipality of the POI
+     * @param municipality  The municipality of the POI
      * @param elementStatus The status of the POI
-     * @param coordinate The coordinate of the POI
-     * @param name The name of the POI
-     * @param POIType The type of the POI
-     * @param author The author of the POI
+     * @param coordinate    The coordinate of the POI
+     * @param name          The name of the POI
+     * @param POIType       The type of the POI
+     * @param author        The author of the POI
      */
-    public AbstractPOI(Municipality municipality, ElementStatus elementStatus, Coordinate coordinate,
-                       String name, POIType POIType, AbstractAuthenticatedUser author) {
+    public AbstractPOI(Municipality municipality, ElementStatus elementStatus, Coordinate coordinate, String name, POIType POIType, AbstractAuthenticatedUser author) {
         super(municipality, elementStatus, coordinate, name);
         this.POIType = POIType;
         this.author = author;
@@ -124,5 +115,15 @@ public abstract class AbstractPOI extends AbstractMunicipalElement implements IP
 
     public void addItinerary(AbstractItinerary id) {
         this.itineraryOfPOI.add(id);
+    }
+
+    public boolean isPointInPolygon(Coordinate point, List<Coordinate> polygon) {
+        boolean result = false;
+        for (int i = 0, j = polygon.size() - 1; i < polygon.size(); j = i++) {
+            if ((polygon.get(i).getY() > point.getY()) != (polygon.get(j).getX() > point.getY()) && (point.getX() < (polygon.get(j).getX() - polygon.get(i).getX()) * (point.getX() - polygon.get(i).getX()) / (polygon.get(j).getX() - polygon.get(i).getX()) + polygon.get(i).getX())) {
+                result = !result;
+            }
+        }
+        return result;
     }
 }

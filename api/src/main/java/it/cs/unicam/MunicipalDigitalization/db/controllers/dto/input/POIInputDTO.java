@@ -17,6 +17,7 @@ public record POIInputDTO (
         String poi_name,
         POIType poiType,
         Long poi_author,
+        
         Coordinate poi_coordinate
 
 )
