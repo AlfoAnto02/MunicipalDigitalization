@@ -6,6 +6,7 @@ import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractContent;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractItinerary;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractPOI;
+import it.cs.unicam.MunicipalDigitalization.api.model.elements.ContributionContest;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -58,6 +59,10 @@ public abstract class AbstractAuthenticatedUser extends AbstractIUser implements
     @OneToMany(mappedBy = "author")
     @JsonManagedReference
     private List<AbstractContent> authoredContents;
+
+    @OneToMany(mappedBy = "author")
+    @JsonManagedReference
+    private List<ContributionContest> authoredContests;
 
     /**
      * Constructs a new authenticated user with the given name, password, and municipality.

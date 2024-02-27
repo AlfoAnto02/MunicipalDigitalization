@@ -71,6 +71,15 @@ public abstract class AbstractMunicipalElement implements IMunicipalElement {
     @JsonManagedReference
     private List<AbstractContent> listOfContents;
 
+
+    /**
+     * The contest of the MunicipalElement if it is part of a contest
+     */
+    @ManyToOne
+    @JsonManagedReference
+    @JoinColumn(name = "contest", nullable = true)
+    private ContributionContest contest;
+
     /**
      * Constructor for the AbstractMunicipalElement class.
      *

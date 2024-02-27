@@ -67,6 +67,10 @@ public class Municipality {
     @JsonBackReference
     private List<AbstractAuthenticatedUser> listOfIUsers;
 
+    @OneToMany(mappedBy = "municipality", cascade = CascadeType.ALL)
+    @JsonBackReference
+    private List<ContributionContest> contests;
+
     /**
      * Constructor for the Municipality class.
      *
