@@ -98,8 +98,6 @@ public class PendingItineraryBuilder implements ItineraryBuilder {
 
     @Override
     public void setItineraryCoordinates(Coordinate coordinate) {
-        // TODO check if the coordinate is within the municipality coordinates
-
         this.coordinate = coordinate;
     }
 

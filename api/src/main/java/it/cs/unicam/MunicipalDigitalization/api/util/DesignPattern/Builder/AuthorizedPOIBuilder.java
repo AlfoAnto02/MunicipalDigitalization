@@ -48,8 +48,6 @@ public class AuthorizedPOIBuilder implements POIBuilder {
 
     @Override
     public void setPOIMunicipality(Municipality municipality) {
-        // TODO check if the poi is within the municipality coordinates
-
         this.municipality = municipality;
     }
 

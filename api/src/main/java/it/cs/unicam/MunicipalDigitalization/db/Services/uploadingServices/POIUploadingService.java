@@ -1,13 +1,17 @@
 package it.cs.unicam.MunicipalDigitalization.db.Services.uploadingServices;
 
+import it.cs.unicam.MunicipalDigitalization.api.util.Coordinate;
 import it.cs.unicam.MunicipalDigitalization.api.util.DesignPattern.Builder.POIBuilder;
 import it.cs.unicam.MunicipalDigitalization.api.util.DesignPattern.FactoryMethod.POIBuilderFactory;
+import it.cs.unicam.MunicipalDigitalization.api.util.MatchingAlgorithms;
 import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;
 import it.cs.unicam.MunicipalDigitalization.db.Services.Mediators.POIMediator;
 import it.cs.unicam.MunicipalDigitalization.db.Services.UserService;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.input.POIInputDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 import static it.cs.unicam.MunicipalDigitalization.api.util.MatchingAlgorithms.containsSpecialCharacters;
 
@@ -101,10 +105,16 @@ public class POIUploadingService {
      * @param poiDTO the POI to be checked
      */
     private void checkPOICoordinates(POIInputDTO poiDTO) {
+
+        List<Coordinate> territory = userService.getUserById(poiDTO.poi_author()).getMunicipality().getTerritory();
+
         if (poiDTO.poi_coordinate() == null) {
             throw new IllegalArgumentException("The coordinates must not be null");
         }
-        // TODO check if the poi is within the municipality coordinates
+
+        if (!MatchingAlgorithms.isInsidePolygon(territory, poiDTO.poi_coordinate())) {
+            throw new IllegalArgumentException("The coordinates must be within the municipality territory");
+        }
     }
 
     /**

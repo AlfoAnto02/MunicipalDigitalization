@@ -116,14 +116,4 @@ public abstract class AbstractPOI extends AbstractMunicipalElement implements IP
     public void addItinerary(AbstractItinerary id) {
         this.itineraryOfPOI.add(id);
     }
-
-    public boolean isPointInPolygon(Coordinate point, List<Coordinate> polygon) {
-        boolean result = false;
-        for (int i = 0, j = polygon.size() - 1; i < polygon.size(); j = i++) {
-            if ((polygon.get(i).getY() > point.getY()) != (polygon.get(j).getX() > point.getY()) && (point.getX() < (polygon.get(j).getX() - polygon.get(i).getX()) * (point.getX() - polygon.get(i).getX()) / (polygon.get(j).getX() - polygon.get(i).getX()) + polygon.get(i).getX())) {
-                result = !result;
-            }
-        }
-        return result;
-    }
 }

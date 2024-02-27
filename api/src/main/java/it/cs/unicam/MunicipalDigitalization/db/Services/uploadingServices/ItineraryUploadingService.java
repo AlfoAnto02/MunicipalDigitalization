@@ -1,7 +1,9 @@
 package it.cs.unicam.MunicipalDigitalization.db.Services.uploadingServices;
 
+import it.cs.unicam.MunicipalDigitalization.api.util.Coordinate;
 import it.cs.unicam.MunicipalDigitalization.api.util.DesignPattern.Builder.ItineraryBuilder;
 import it.cs.unicam.MunicipalDigitalization.api.util.DesignPattern.FactoryMethod.ItineraryBuilderFactory;
+import it.cs.unicam.MunicipalDigitalization.api.util.MatchingAlgorithms;
 import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;
 import it.cs.unicam.MunicipalDigitalization.db.Services.Mediators.ItineraryMediator;
 import it.cs.unicam.MunicipalDigitalization.db.Services.POIService;
@@ -9,6 +11,8 @@ import it.cs.unicam.MunicipalDigitalization.db.Services.UserService;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.input.ItineraryInputDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 import static it.cs.unicam.MunicipalDigitalization.api.util.MatchingAlgorithms.containsSpecialCharacters;
 
@@ -152,6 +156,8 @@ public class ItineraryUploadingService {
      * @param itineraryDTO the itinerary to be checked
      */
     private void checkItineraryPOIs(ItineraryInputDTO itineraryDTO) {
+
+        
         if (userService.getUserById(itineraryDTO.authorID()).getMunicipality() == null) {
             throw new IllegalArgumentException("The author is not associated with a municipality");
         }
@@ -159,7 +165,5 @@ public class ItineraryUploadingService {
         if (itineraryDTO.POIsIDs().isEmpty()) {
             throw new IllegalArgumentException("The itinerary must contain at least one POI");
         }
-
-        // TODO check if the coordinate is within the municipality coordinates
     }
 }

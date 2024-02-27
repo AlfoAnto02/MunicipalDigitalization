@@ -1,14 +1,14 @@
 package it.cs.unicam.MunicipalDigitalization.api.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import it.cs.unicam.MunicipalDigitalization.api.model.users.*;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.*;
+import it.cs.unicam.MunicipalDigitalization.api.model.users.AbstractAuthenticatedUser;
 import it.cs.unicam.MunicipalDigitalization.api.util.Coordinate;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.awt.geom.Path2D;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,15 +20,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@Table(
-        name = "municipality",
-        uniqueConstraints = {
-                @UniqueConstraint(
-                        name = "Idintification",
-                        columnNames = "id"
-                )
-        }
-)
+@Table(name = "municipality", uniqueConstraints = {@UniqueConstraint(name = "Idintification", columnNames = "id")})
 public class Municipality {
 
     /**
@@ -58,14 +50,14 @@ public class Municipality {
      */
     @OneToMany(mappedBy = "municipality", cascade = CascadeType.ALL)
     @JsonBackReference
-    private  List<AbstractPOI> listOfPOIs;
+    private List<AbstractPOI> listOfPOIs;
 
     /**
      * The list of itineraries in the municipality.
      */
     @OneToMany(mappedBy = "municipality", cascade = CascadeType.ALL)
     @JsonBackReference
-    private  List<AbstractItinerary> listOfItineraries;
+    private List<AbstractItinerary> listOfItineraries;
 
 
     /**
@@ -82,7 +74,7 @@ public class Municipality {
      * @param name      The name of the municipality.
      */
     public Municipality(List<Coordinate> territory, String name) {
-        if(territory.size()<3) throw new IllegalArgumentException("The territory must have at least 3 coordinates");
+        if (territory.size() < 3) throw new IllegalArgumentException("The territory must have at least 3 coordinates");
         this.name = name;
         this.listOfPOIs = new ArrayList<>();
         this.listOfItineraries = new ArrayList<>();
@@ -94,16 +86,6 @@ public class Municipality {
         this.listOfPOIs = new ArrayList<>();
         this.listOfItineraries = new ArrayList<>();
         this.listOfIUsers = new ArrayList<>();
-    }
-
-    /**
-     * This method is used to check if a coordinate is within the territory of the municipality.
-     *
-     * @param coordinate The coordinate to check.
-     * @return True if the coordinate is within the territory, false otherwise.
-     */
-    public boolean checkCoordinates(Coordinate coordinate) {
-        return true;
     }
 
     /**
@@ -138,16 +120,15 @@ public class Municipality {
     }
 
 
-
     /**
      * This method is used to upload a content to the municipality.
      *
      * @param content The content to upload.
      */
     public void uploadContent(AbstractContent content) {
-        if(content.getReferredPOI()!=null && !content.getReferredPOI().getListOfContents().contains(content)){
+        if (content.getReferredPOI() != null && !content.getReferredPOI().getListOfContents().contains(content)) {
             content.getReferredPOI().getListOfContents().add(content);
-        } else if(content.getReferredItinerary()!=null && !content.getReferredItinerary().getListOfContents().contains(content)){
+        } else if (content.getReferredItinerary() != null && !content.getReferredItinerary().getListOfContents().contains(content)) {
             content.getReferredItinerary().getListOfContents().add(content);
         }
     }
