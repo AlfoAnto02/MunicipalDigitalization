@@ -4,6 +4,7 @@ import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractContent;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractItinerary;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractPOI;
+import it.cs.unicam.MunicipalDigitalization.api.model.elements.ContributionContest;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -76,6 +77,15 @@ public class MatchingAlgorithms {
     public static boolean isItinerarySimilarToItineraryList(AbstractItinerary itinerary, List<AbstractItinerary> itineraryList) {
         for (AbstractItinerary i : itineraryList) {
             if (itinerary.getName().equalsIgnoreCase(i.getName()) && itinerary.getMunicipality().equals(i.getMunicipality()) && itinerary.getCoordinate().equals(i.getCoordinate()) && itinerary.getPOIs().equals(i.getPOIs()) && i != itinerary)
+                return true;
+        }
+        return false;
+    }
+
+    public static boolean isContestSimilarToContestList(ContributionContest contest, List<ContributionContest> contestList) {
+        for (ContributionContest c : contestList) {
+            if (contest.getInvitationType().equals(c.getInvitationType())&& contest.getPois().equals(c.getPois()) &&
+                    contest.getItineraries().equals(c.getItineraries()) && contest.getContestType().equals(c.getContestType()) && c != contest)
                 return true;
         }
         return false;

@@ -3,6 +3,7 @@ package it.cs.unicam.MunicipalDigitalization.api.model.elements;
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
 import it.cs.unicam.MunicipalDigitalization.api.model.users.AbstractAuthenticatedUser;
 import it.cs.unicam.MunicipalDigitalization.api.model.users.Animator;
+import it.cs.unicam.MunicipalDigitalization.api.util.ContestStatus;
 import it.cs.unicam.MunicipalDigitalization.api.util.ContestType;
 import it.cs.unicam.MunicipalDigitalization.api.util.InvitationType;
 
@@ -70,5 +71,12 @@ public interface IContributionContest {
      * @return The municipality of the contribution contest.
      */
     Municipality getMunicipality();
+
+    /**
+     * This method returns the status of the contribution contest.
+     *
+     * @return The status of the contribution contest.
+     */
+    ContestStatus getContestStatus();
 
 }

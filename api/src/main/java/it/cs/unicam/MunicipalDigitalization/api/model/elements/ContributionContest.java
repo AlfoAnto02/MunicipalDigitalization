@@ -2,6 +2,7 @@ package it.cs.unicam.MunicipalDigitalization.api.model.elements;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
 import it.cs.unicam.MunicipalDigitalization.api.model.users.AbstractAuthenticatedUser;
+import it.cs.unicam.MunicipalDigitalization.api.util.ContestStatus;
 import it.cs.unicam.MunicipalDigitalization.api.util.ContestType;
 import it.cs.unicam.MunicipalDigitalization.api.util.InvitationType;
 import jakarta.persistence.*;
@@ -61,28 +62,36 @@ public class ContributionContest implements IContributionContest{
     /**
      * The author of the contest. It has the Role of an Animator.
      */
-    @Column(name = "Author", nullable = false)
+    @JoinColumn(name = "Author", nullable = false)
     @ManyToOne
     private AbstractAuthenticatedUser author;
+
+    @Column(name = "ContestStatus", nullable = false)
+    private ContestStatus contestStatus;
 
     /**
      * The list of itineraries that are part of the contest.
      */
-    @Column(name = "Itineraries", nullable = true)
-    @OneToMany
+
+    @ManyToMany(mappedBy = "contest")
     private List<AbstractItinerary> itineraries;
 
     /**
      * The list of POIs that are part of the contest.
      */
-    @Column(name = "POIs", nullable = true)
-    @OneToMany
+    @ManyToMany(mappedBy = "contest")
     private List<AbstractPOI> pois;
+
+    /**
+     * The list of participants to the contest.
+     */
+    @ManyToMany(mappedBy = "contestsParticipated")
+    private List<AbstractAuthenticatedUser> participants;
 
     /**
      * The municipality where the contest is taking place.
      */
-    @Column(name = "Municipality", nullable = false)
+    @JoinColumn(name = "Municipality", nullable = false)
     @ManyToOne
     private Municipality municipality;
 
@@ -119,6 +128,7 @@ public class ContributionContest implements IContributionContest{
         this.pois = pois;
         this.municipality = municipality;
         this.creationDate = LocalDateTime.now();
+        this.contestStatus = ContestStatus.OPEN;
     }
 
     public ContributionContest() {
@@ -127,14 +137,37 @@ public class ContributionContest implements IContributionContest{
         this.creationDate = LocalDateTime.now();
     }
 
+    /**
+     * Method to add a POI to the contest.
+     *
+     * @param poi The POI to be added to the contest.
+     */
     @Override
     public void addPOI(AbstractPOI poi) {
         this.pois.add(poi);
     }
 
+    /**
+     * Method to add an itinerary to the contest.
+     *
+     * @param itinerary The itinerary to be added to the contest.
+     */
     @Override
     public void addItinerary(AbstractItinerary itinerary) {
         this.itineraries.add(itinerary);
 
+    }
+
+    /**
+     * Method to add a participant to the contest.
+     *
+     * @param userById The user to be added to the contest.
+     */
+    public void addParticipant(AbstractAuthenticatedUser userById) {
+        this.participants.add(userById);
+    }
+
+    public int getActualNumberOfParticipants() {
+        return this.participants.size();
     }
 }

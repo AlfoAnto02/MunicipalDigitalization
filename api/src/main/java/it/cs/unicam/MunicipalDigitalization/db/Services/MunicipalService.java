@@ -1,6 +1,7 @@
 package it.cs.unicam.MunicipalDigitalization.db.Services;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
+import it.cs.unicam.MunicipalDigitalization.api.model.elements.ContributionContest;
 import it.cs.unicam.MunicipalDigitalization.api.model.users.AbstractAuthenticatedUser;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractItinerary;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractPOI;
@@ -75,6 +76,18 @@ public class MunicipalService {
     }
 
     /**
+     * Add a contest to a municipality
+     *
+     * @param municipalityId ID of the municipality
+     * @param contributionContest Contest to add
+     */
+    public void addContest(Long municipalityId, ContributionContest contributionContest) {
+        Municipality municipality = municipalRepository.getReferenceById(municipalityId);
+        municipality.uploadContest(contributionContest);
+        municipalRepository.save(municipality);
+    }
+
+    /**
      * Update the POI list of a municipality based on the validation request
      *
      * @param poiID ID of the POI
@@ -138,4 +151,5 @@ public class MunicipalService {
     public Optional<Municipality> findMunicipalByID(Long municipality) {
         return municipalRepository.findById(municipality);
     }
+
 }

@@ -75,10 +75,12 @@ public abstract class AbstractMunicipalElement implements IMunicipalElement {
     /**
      * The contest of the MunicipalElement if it is part of a contest
      */
-    @ManyToOne
+    @ManyToMany
     @JsonManagedReference
-    @JoinColumn(name = "contest", nullable = true)
-    private ContributionContest contest;
+    @JoinTable(name = "municipal_element_contest",
+            joinColumns = @JoinColumn(name = "municipal_element_id"),
+            inverseJoinColumns = @JoinColumn(name = "contest_id"))
+    private List<ContributionContest> contest;
 
     /**
      * Constructor for the AbstractMunicipalElement class.
@@ -87,6 +89,7 @@ public abstract class AbstractMunicipalElement implements IMunicipalElement {
     public AbstractMunicipalElement() {
         this.listOfContents= new ArrayList<>();
         this.creationDate=LocalDateTime.now();
+        this.contest=new ArrayList<>();
     }
 
     /**
@@ -104,6 +107,7 @@ public abstract class AbstractMunicipalElement implements IMunicipalElement {
         this.name = name;
         this.listOfContents= new ArrayList<>();
         this.creationDate=LocalDateTime.now();
+        this.contest=new ArrayList<>();
     }
 
     /**
@@ -190,5 +194,9 @@ public abstract class AbstractMunicipalElement implements IMunicipalElement {
 
     public void removeContent(Long id) {
         this.listOfContents.removeIf(content -> content.getId().equals(id));
+    }
+
+    public void addContest(ContributionContest contributionContest) {
+        this.contest.add(contributionContest);
     }
 }

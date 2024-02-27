@@ -2,6 +2,7 @@ package it.cs.unicam.MunicipalDigitalization.db.Services;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractContent;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractItinerary;
+import it.cs.unicam.MunicipalDigitalization.api.model.elements.ContributionContest;
 import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 import it.cs.unicam.MunicipalDigitalization.api.util.MatchingAlgorithms;
 import it.cs.unicam.MunicipalDigitalization.db.Repository.ItineraryRepository;
@@ -87,6 +88,14 @@ public class ItineraryService {
         this.itineraryRepository.save(itinerary);
     }
 
+    public void addContestToItineraries(List<AbstractItinerary> itineraries, ContributionContest contributionContest) {
+        for(AbstractItinerary itinerary : itineraries){
+            AbstractItinerary itinerary1 = itineraryRepository.getReferenceById(itinerary.getId());
+            itinerary1.addContest(contributionContest);
+            itineraryRepository.save(itinerary1);
+        }
+    }
+
     /**
      * Get an itinerary by id
      *
@@ -99,6 +108,11 @@ public class ItineraryService {
 
     public List<AbstractItinerary> getAllItineraries() {
         return itineraryRepository.findAll();
+    }
+
+    public List<AbstractItinerary> getItinerariesByIds(List<Long> longs) {
+        if (longs == null || longs.isEmpty()) return null;
+        return itineraryRepository.findAllById(longs);
     }
 
 }

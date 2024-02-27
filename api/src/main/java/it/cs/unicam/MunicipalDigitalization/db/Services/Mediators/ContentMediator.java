@@ -52,9 +52,10 @@ public class ContentMediator {
      * @param request the request to validate
      */
     public void validateContent(ValidateRequest request) {
-        if(userService.getUserById(request.getCuratorID()).getRole().contains(UserRole.CURATOR) && (contentService
+        if(userService.getUserById(request.getValidatorID()).getRole().contains(UserRole.CURATOR) && (contentService
                 .getContentById(request.getRequestID()).getElementStatus().equals(ElementStatus.PENDING))){
             contentService.validateContent(request.getRequestID(),request.isValidated());
+            userService.updateUserContentList(request.getRequestID(),request.isValidated());
             if(contentService.getContentById(request.getRequestID()).getReferredPOI()!=null){
                 poiService.updateContentList(request.getRequestID(),request.isValidated());
             }

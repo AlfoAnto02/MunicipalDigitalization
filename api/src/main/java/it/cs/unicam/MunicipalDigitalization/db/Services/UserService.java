@@ -1,9 +1,11 @@
 package it.cs.unicam.MunicipalDigitalization.db.Services;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractContent;
+import it.cs.unicam.MunicipalDigitalization.api.model.elements.ContributionContest;
 import it.cs.unicam.MunicipalDigitalization.api.model.users.*;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractItinerary;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractPOI;
+import it.cs.unicam.MunicipalDigitalization.api.util.ContestStatus;
 import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;
 import it.cs.unicam.MunicipalDigitalization.db.Repository.UserRepository;
@@ -11,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Service class for the User entity
@@ -80,11 +83,7 @@ public class UserService {
                     .forEach(p -> p.setElementStatus(ElementStatus.PUBLISHED));
             userRepository.save(user);
         } else{
-            user.getAuthoredPOIs().remove(user.getAuthoredPOIs()
-                    .stream()
-                    .filter(p -> p.getId().equals(poiID))
-                    .findFirst()
-                    .get());
+            user.getAuthoredPOIs().removeIf(p -> p.getId().equals(poiID));
             userRepository.save(user);
         }
     }
@@ -104,11 +103,61 @@ public class UserService {
                     .forEach(p -> p.setElementStatus(ElementStatus.PUBLISHED));
             userRepository.save(user);
         } else{
-            user.getAuthoredItineraries().remove(user.getAuthoredItineraries()
+            Optional<AbstractItinerary> itineraryToRemove = user.getAuthoredItineraries()
                     .stream()
                     .filter(p -> p.getId().equals(itineraryID))
-                    .findFirst()
-                    .get());
+                    .findFirst();
+            itineraryToRemove.ifPresent(user.getAuthoredItineraries()::remove);
+            userRepository.save(user);
+        }
+    }
+
+    /**
+     * Update the user's list of authored contests after the Validation of a Contest
+     *
+     * @param requestID ID of the request
+     * @param validated true if the contest is validated, false if it is not
+     */
+
+    public void updateUserContestList(long requestID, boolean validated) {
+        AbstractAuthenticatedUser user = userRepository.findByAuthoredContestsId(requestID);
+        if(validated){
+            user.getAuthoredContests()
+                    .stream()
+                    .filter(c -> c.getId().equals(requestID))
+                    .forEach(c -> c.setContestStatus(ContestStatus.ON_GOING));
+            userRepository.save(user);
+        } else{
+            Optional<ContributionContest> contestToRemove = user.getAuthoredContests()
+                    .stream()
+                    .filter(c -> c.getId().equals(requestID))
+                    .findFirst();
+            contestToRemove.ifPresent(user.getAuthoredContests()::remove);
+            userRepository.save(user);
+        }
+    }
+
+    /**
+     * Update the user's list of authored contents after the Validation of a Content
+     *
+     * @param requestID ID of the request
+     * @param validated true if the content is validated, false if it is not
+     */
+
+    public void updateUserContentList( long requestID, boolean validated) {
+        AbstractAuthenticatedUser user = userRepository.findByAuthoredContentsId(requestID);
+        if(validated){
+            user.getAuthoredContents()
+                    .stream()
+                    .filter(c -> c.getId().equals(requestID))
+                    .forEach(c -> c.setElementStatus(ElementStatus.PUBLISHED));
+            userRepository.save(user);
+        }else{
+            Optional<AbstractContent> contentToRemove = user.getAuthoredContents()
+                    .stream()
+                    .filter(c -> c.getId().equals(requestID))
+                    .findFirst();
+            contentToRemove.ifPresent(user.getAuthoredContents()::remove);
             userRepository.save(user);
         }
     }
@@ -136,4 +185,11 @@ public class UserService {
     public List<AbstractAuthenticatedUser> getAllUsers() {
         return userRepository.findAll();
     }
+
+    public void addContest(Long authorId, ContributionContest contributionContest) {
+        AbstractAuthenticatedUser user = userRepository.getReferenceById(authorId);
+        user.addAuthoredContest(contributionContest);
+        userRepository.save(user);
+    }
+
 }

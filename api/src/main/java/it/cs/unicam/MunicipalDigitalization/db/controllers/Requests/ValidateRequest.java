@@ -9,19 +9,19 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ValidateRequest {
-    long curatorID;
+    long validatorID;
     long requestID;
     boolean isValidated;
 
     /**
      * Constructor for the ValidateRequest class.
      *
-     * @param curatorID id of the curator that made the request
+     * @param validatorID id of the curator that made the request
      * @param requestID id of the request to validate
      * @param isValidated boolean that indicates if the request is validated
      */
-    public ValidateRequest(long curatorID, long requestID, boolean isValidated) {
-        this.curatorID = curatorID;
+    public ValidateRequest(long validatorID, long requestID, boolean isValidated) {
+        this.validatorID = validatorID;
         this.requestID = requestID;
         this.isValidated = isValidated;
     }

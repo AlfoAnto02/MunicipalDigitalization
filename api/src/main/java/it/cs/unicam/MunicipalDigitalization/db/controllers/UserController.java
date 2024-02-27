@@ -78,4 +78,6 @@ public class UserController {
                 .filter(user -> user.getMunicipality().getId().equals(id))
                 .map(userDTOMapper), HttpStatus.OK);
     }
+
 }
+

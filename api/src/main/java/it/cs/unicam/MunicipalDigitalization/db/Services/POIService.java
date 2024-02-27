@@ -1,9 +1,6 @@
 package it.cs.unicam.MunicipalDigitalization.db.Services;
 
-import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractContent;
-import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractItinerary;
-import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractMunicipalElement;
-import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractPOI;
+import it.cs.unicam.MunicipalDigitalization.api.model.elements.*;
 import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 import it.cs.unicam.MunicipalDigitalization.api.util.MatchingAlgorithms;
 import it.cs.unicam.MunicipalDigitalization.db.Repository.POIRepository;
@@ -117,4 +114,11 @@ public class POIService {
         return poiRepository.findAll();
     }
 
+    public void addContestToPOIs(List<AbstractPOI> pois, ContributionContest contributionContest) {
+        for(AbstractPOI poi : pois){
+            AbstractPOI poi1 = poiRepository.getReferenceById(poi.getId());
+            poi1.addContest(contributionContest);
+            poiRepository.save(poi1);
+        }
+    }
 }

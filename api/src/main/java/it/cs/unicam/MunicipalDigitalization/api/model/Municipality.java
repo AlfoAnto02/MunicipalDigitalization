@@ -84,12 +84,14 @@ public class Municipality {
         this.listOfItineraries = new ArrayList<>();
         this.listOfIUsers = new ArrayList<>();
         this.territory = territory;
+        this.contests = new ArrayList<>();
     }
 
     public Municipality() {
         this.listOfPOIs = new ArrayList<>();
         this.listOfItineraries = new ArrayList<>();
         this.listOfIUsers = new ArrayList<>();
+        this.contests = new ArrayList<>();
     }
 
     /**
@@ -222,5 +224,9 @@ public class Municipality {
      */
     public void addUser(AbstractAuthenticatedUser contributor) {
         this.listOfIUsers.add(contributor);
+    }
+
+    public void uploadContest(ContributionContest contributionContest) {
+        this.contests.add(contributionContest);
     }
 }

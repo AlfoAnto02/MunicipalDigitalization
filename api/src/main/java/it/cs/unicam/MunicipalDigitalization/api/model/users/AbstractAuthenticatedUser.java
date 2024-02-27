@@ -8,7 +8,6 @@ import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractItinerary
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractPOI;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.ContributionContest;
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -64,6 +63,14 @@ public abstract class AbstractAuthenticatedUser extends AbstractIUser implements
     @JsonManagedReference
     private List<ContributionContest> authoredContests;
 
+    @ManyToMany
+    @JoinTable(
+            name = "ContestParticipants",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "contest_id")
+    )
+    private List<ContributionContest> contestsParticipated;
+
     /**
      * Constructs a new authenticated user with the given name, password, and municipality.
      *
@@ -78,6 +85,7 @@ public abstract class AbstractAuthenticatedUser extends AbstractIUser implements
         this.authoredPOIs = new ArrayList<>();
         this.authoredItineraries = new ArrayList<>();
         this.authoredContents = new ArrayList<>();
+        this.authoredContests = new ArrayList<>();
     }
 
     /**
@@ -92,6 +100,7 @@ public abstract class AbstractAuthenticatedUser extends AbstractIUser implements
         this.authoredPOIs = new ArrayList<>();
         this.authoredItineraries = new ArrayList<>();
         this.authoredContents = new ArrayList<>();
+        this.authoredContests = new ArrayList<>();
     }
 
     /**
@@ -101,6 +110,7 @@ public abstract class AbstractAuthenticatedUser extends AbstractIUser implements
         this.authoredPOIs = new ArrayList<>();
         this.authoredItineraries = new ArrayList<>();
         this.authoredContents = new ArrayList<>();
+        this.authoredContests = new ArrayList<>();
     }
 
     /**
@@ -155,5 +165,13 @@ public abstract class AbstractAuthenticatedUser extends AbstractIUser implements
             throw new IllegalArgumentException("Password cannot be null or empty");
         }
         this.password = password;
+    }
+
+    public void addAuthoredContest(ContributionContest contributionContest) {
+        this.authoredContests.add(contributionContest);
+    }
+
+    public void addParticipatedContest(ContributionContest contributionContest) {
+        this.contestsParticipated.add(contributionContest);
     }
 }

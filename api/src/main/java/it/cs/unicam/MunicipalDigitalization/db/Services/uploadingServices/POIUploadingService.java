@@ -94,7 +94,9 @@ public class POIUploadingService {
      * @param poiDTO the POI to be checked
      */
     private void checkPOIAuthor(POIInputDTO poiDTO) {
-        if (!userService.getUserById((poiDTO.poi_author())).getRole().contains(UserRole.CONTRIBUTOR) && !userService.getUserById((poiDTO.poi_author())).getRole().contains(UserRole.AUTHORIZED_CONTRIBUTOR) && !userService.getUserById((poiDTO.poi_author())).getRole().contains(UserRole.CURATOR)) {
+        if (!userService.getUserById((poiDTO.poi_author())).getRole().contains(UserRole.CONTRIBUTOR) &&
+                !userService.getUserById((poiDTO.poi_author())).getRole().contains(UserRole.AUTHORIZED_CONTRIBUTOR) &&
+                !userService.getUserById((poiDTO.poi_author())).getRole().contains(UserRole.CURATOR)) {
             throw new IllegalArgumentException("The author is not authorized to upload a POI");
         }
     }
@@ -112,9 +114,9 @@ public class POIUploadingService {
             throw new IllegalArgumentException("The coordinates must not be null");
         }
 
-        if (!MatchingAlgorithms.isInsidePolygon(territory, poiDTO.poi_coordinate())) {
-            throw new IllegalArgumentException("The coordinates must be within the municipality territory");
-        }
+//        if (!MatchingAlgorithms.isInsidePolygon(territory, poiDTO.poi_coordinate())) {
+ //           throw new IllegalArgumentException("The coordinates must be within the municipality territory");
+  //      }
     }
 
     /**

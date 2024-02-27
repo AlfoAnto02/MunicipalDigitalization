@@ -54,7 +54,7 @@ public class POIMediator {
      * @param request The request to validate.
      */
     public void validatePOI(ValidateRequest request){
-        if(userService.getUserById(request.getCuratorID()).getRole().contains(UserRole.CURATOR) && (poiService
+        if(userService.getUserById(request.getValidatorID()).getRole().contains(UserRole.CURATOR) && (poiService
                 .getPOIByID(request.getRequestID()).getElementStatus().equals(ElementStatus.PENDING))){
             poiService.validatePOI(request.getRequestID(),request.isValidated());
             userService.updateUserPOIList(request.getRequestID(), request.isValidated());

@@ -9,6 +9,7 @@ import it.cs.unicam.MunicipalDigitalization.api.util.ContestType;
 import it.cs.unicam.MunicipalDigitalization.api.util.InvitationType;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -23,6 +24,10 @@ public class ContributionContestBuilder implements IContributionContestBuilder{
     private List<AbstractPOI> pois;
     private List<AbstractItinerary> itineraries;
 
+    public ContributionContestBuilder() {
+        this.pois = new ArrayList<>();
+        this.itineraries = new ArrayList<>();
+    }
 
     @Override
     public void setName(String title) {
@@ -61,12 +66,12 @@ public class ContributionContestBuilder implements IContributionContestBuilder{
 
     @Override
     public void setPOIs(List<AbstractPOI> pois) {
-        this.pois = pois;
+        this.pois.addAll(pois);
     }
 
     @Override
     public void setItineraries(List<AbstractItinerary> itineraries) {
-        this.itineraries = itineraries;
+        this.itineraries.addAll(itineraries);
     }
 
     @Override

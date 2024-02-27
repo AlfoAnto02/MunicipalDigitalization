@@ -55,7 +55,7 @@ public class ItineraryMediator {
      */
 
     public void validateItinerary(ValidateRequest request){
-        if(userService.getUserById(request.getCuratorID()).getRole().contains(UserRole.CURATOR) && (itineraryService
+        if(userService.getUserById(request.getValidatorID()).getRole().contains(UserRole.CURATOR) && (itineraryService
                 .getItineraryById(request.getRequestID()).getElementStatus().equals(ElementStatus.PENDING))){
             itineraryService.validateItinerary(request.getRequestID(),request.isValidated());
             userService.updateUserItineraryList(request.getRequestID(), request.isValidated());
