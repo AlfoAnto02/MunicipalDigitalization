@@ -108,6 +108,6 @@ public class PendingContentBuilder implements ContentBuilder {
         else if (this.referredPOI != null)
             return new PendingContent(this.referredPOI, this.name, this.author, this.type, this.content);
         else
-            return new PendingContent(this.referredItinerary, this.name, this.author, this.type,this.content);
+            return new PendingContent(this.referredItinerary, this.name, this.author, this.type, this.content);
     }
 }

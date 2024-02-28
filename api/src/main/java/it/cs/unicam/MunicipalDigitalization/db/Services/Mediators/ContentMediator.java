@@ -3,7 +3,6 @@ package it.cs.unicam.MunicipalDigitalization.db.Services.Mediators;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractContent;
 import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;
-import it.cs.unicam.MunicipalDigitalization.db.Repository.ContentRepository;
 import it.cs.unicam.MunicipalDigitalization.db.Services.ContentService;
 import it.cs.unicam.MunicipalDigitalization.db.Services.ItineraryService;
 import it.cs.unicam.MunicipalDigitalization.db.Services.POIService;
@@ -40,8 +39,7 @@ public class ContentMediator {
         contentService.saveContent(content);
         if (content.getReferredPOI() != null) {
             poiService.addContent(content.getReferredPOI().getId(), content);
-        }
-        else itineraryService.addContent(content.getReferredItinerary().getId(), content);
+        } else itineraryService.addContent(content.getReferredItinerary().getId(), content);
         userService.addContent(content.getAuthor().getId(), content);
 
     }
@@ -52,16 +50,15 @@ public class ContentMediator {
      * @param request the request to validate
      */
     public void validateContent(ValidateRequest request) {
-        if(userService.getUserById(request.getValidatorID()).getRole().contains(UserRole.CURATOR) && (contentService
+        if (userService.getUserById(request.getValidatorID()).getRole().contains(UserRole.CURATOR) && (contentService
                 .getContentById(request.getRequestID()).getElementStatus().equals(ElementStatus.PENDING)) &&
-                 userService.getUserById(request.getValidatorID()).getMunicipality().
-                         equals(contentService.getContentById(request.getRequestID()).getAuthor().getMunicipality())){
-            contentService.validateContent(request.getRequestID(),request.isValidated());
-            userService.updateUserContentList(request.getRequestID(),request.isValidated());
-            if(contentService.getContentById(request.getRequestID()).getReferredPOI()!=null){
-                poiService.updateContentList(request.getRequestID(),request.isValidated());
-            }
-            else itineraryService.updateContentList(request.getRequestID(),request.isValidated());
+                userService.getUserById(request.getValidatorID()).getMunicipality().
+                        equals(contentService.getContentById(request.getRequestID()).getAuthor().getMunicipality())) {
+            contentService.validateContent(request.getRequestID(), request.isValidated());
+            userService.updateUserContentList(request.getRequestID(), request.isValidated());
+            if (contentService.getContentById(request.getRequestID()).getReferredPOI() != null) {
+                poiService.updateContentList(request.getRequestID(), request.isValidated());
+            } else itineraryService.updateContentList(request.getRequestID(), request.isValidated());
         }
     }
 }

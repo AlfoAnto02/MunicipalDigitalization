@@ -8,14 +8,13 @@ import org.springframework.stereotype.Service;
 import java.util.function.Function;
 
 @Service
-public class ContentDTOMapper implements Function<AbstractContent, ContentOutputDTO>{
+public class ContentDTOMapper implements Function<AbstractContent, ContentOutputDTO> {
     @Override
     public ContentOutputDTO apply(AbstractContent abstractContent) {
         String content;
-        if(abstractContent.getType().equals(ContentType.LINK)){
+        if (abstractContent.getType().equals(ContentType.LINK)) {
             content = "Link: " + abstractContent.getContent();
-        }
-        else if (abstractContent.getType().equals(ContentType.PHOTO)){
+        } else if (abstractContent.getType().equals(ContentType.PHOTO)) {
             content = "Photo: " + abstractContent.getContent();
         } else {
             content = "Description: " + abstractContent.getContent();

@@ -2,7 +2,6 @@ package it.cs.unicam.MunicipalDigitalization.api.util;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.*;
-import it.cs.unicam.MunicipalDigitalization.db.Services.UserService;
 
 import java.util.ArrayList;
 import java.util.HashSet;

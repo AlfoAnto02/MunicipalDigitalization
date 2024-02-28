@@ -96,7 +96,7 @@ public class ContestTest {
         coordinates.add(new Coordinate(200, 1));
         return new Municipality(coordinates, "Ancona");
     }
-    
+
     // Secondo Comune per il secondo AuthorizedContributor
     /*private Municipality createSecondMunicipality() {
         List<Coordinate> coordinates = new ArrayList<>();
@@ -112,7 +112,7 @@ public class ContestTest {
         poiUploadingService.uploadPOI(new POIInputDTO("Luce verde", POIType.Cinema, authorizedContributor.getId(), new Coordinate(13, 13)));
         poiUploadingService.uploadPOI(new POIInputDTO("Falconara", POIType.Cinema, authorizedContributor.getId(), new Coordinate(14, 15)));
     }
-    
+
     // Secondo AuthorizedContributor
     /*private void createSecondPOIs(AuthorizedContributor authorizedContributor) {
         poiUploadingService.uploadPOI(new POIInputDTO("daje", POIType.Cinema, authorizedContributor.getId(), new Coordinate(12, 12)));
@@ -131,12 +131,12 @@ public class ContestTest {
         pois.add(poiService.getPOIbyName("Monteleone").get().getId());
         pois.add(poiService.getPOIbyName("Luce verde").get().getId());
         pois.add(poiService.getPOIbyName("Falconara").get().getId());
-        
+
         // Secondo AuthorizedContributor
         /*pois.add(poiService.getPOIbyName("daje").get().getId());
         pois.add(poiService.getPOIbyName("Luce roma").get().getId());
         pois.add(poiService.getPOIbyName("forza").get().getId());*/
-        
+
         // Contributor
         /*pois.add(poiService.getPOIbyName("primopoi").get().getId());
         pois.add(poiService.getPOIbyName("secondopoi").get().getId());

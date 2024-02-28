@@ -1,10 +1,9 @@
 package it.cs.unicam.MunicipalDigitalization.api.model.elements;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import it.cs.unicam.MunicipalDigitalization.api.model.users.*;
+import it.cs.unicam.MunicipalDigitalization.api.model.users.AbstractAuthenticatedUser;
 import it.cs.unicam.MunicipalDigitalization.api.util.ContentType;
 import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
-
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -40,7 +39,7 @@ public abstract class AbstractContent implements IContent {
      * The municipal element referred by the content.
      */
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "ReferredPOI",nullable = true)
+    @JoinColumn(name = "ReferredPOI", nullable = true)
     @JsonBackReference
     private AbstractPOI referredPOI;
 
@@ -54,7 +53,7 @@ public abstract class AbstractContent implements IContent {
      * The municipal element referred by the content.
      */
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "ReferredItinerary",nullable = true)
+    @JoinColumn(name = "ReferredItinerary", nullable = true)
     @JsonBackReference
     private AbstractItinerary referredItinerary;
 
@@ -62,7 +61,7 @@ public abstract class AbstractContent implements IContent {
      * The author of the content.
      */
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "Author",nullable = false)
+    @JoinColumn(name = "Author", nullable = false)
     @JsonBackReference
     private AbstractAuthenticatedUser author;
 
@@ -70,7 +69,7 @@ public abstract class AbstractContent implements IContent {
      * The status of the Element, if it is Pending or Published.
      */
     @Getter
-    @Column(name = "Status",nullable = false)
+    @Column(name = "Status", nullable = false)
     private ElementStatus elementStatus;
 
     /**
@@ -95,14 +94,14 @@ public abstract class AbstractContent implements IContent {
      * It has a referredPOI, name, author, elementStatus, type, description, link, photo.
      *
      * @param referredPOI the municipal element referred by the content.
-     * @param name the name of the content.
-     * @param author the author of the content.
-     * @param type the type of the content.
-     * @param content the content
+     * @param name        the name of the content.
+     * @param author      the author of the content.
+     * @param type        the type of the content.
+     * @param content     the content
      */
     public AbstractContent(AbstractPOI referredPOI, String name,
                            AbstractAuthenticatedUser author, ContentType type,
-                            String content) {
+                           String content) {
         this.referredPOI = referredPOI;
         this.name = name;
         this.author = author;
@@ -115,10 +114,10 @@ public abstract class AbstractContent implements IContent {
      * It has a referredItinerary, name, author, elementStatus, type, description, link, photo.
      *
      * @param referredItinerary the municipal element referred by the content.
-     * @param name the name of the content.
-     * @param author the author of the content.
-     * @param type the type of the content.
-     * @param content the content.
+     * @param name              the name of the content.
+     * @param author            the author of the content.
+     * @param type              the type of the content.
+     * @param content           the content.
      */
 
     public AbstractContent(String name, AbstractItinerary referredItinerary, AbstractAuthenticatedUser author,

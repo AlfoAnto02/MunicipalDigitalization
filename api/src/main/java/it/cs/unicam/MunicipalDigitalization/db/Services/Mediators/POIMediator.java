@@ -39,11 +39,11 @@ public class POIMediator {
         Long authorId = poi.getAuthor().getId();
 
         //Check if the POI is already associated with the municipality
-        if(poi.getMunicipality().getPOIList().stream().noneMatch(p -> p.getId().equals(poi.getId()))){
+        if (poi.getMunicipality().getPOIList().stream().noneMatch(p -> p.getId().equals(poi.getId()))) {
             municipalityService.addPOI(poi.getMunicipality().getId(), poi);
         }
         //Check if the POI is already associated with the user
-        if(poi.getAuthor().getAuthoredPOIs().stream().noneMatch(p -> p.getId().equals(poi.getId()))){
+        if (poi.getAuthor().getAuthoredPOIs().stream().noneMatch(p -> p.getId().equals(poi.getId()))) {
             userService.addPOI(poi.getAuthor().getId(), poi);
         }
     }
@@ -53,15 +53,14 @@ public class POIMediator {
      *
      * @param request The request to validate.
      */
-    public void validatePOI(ValidateRequest request){
-        if(userService.getUserById(request.getValidatorID()).getRole().contains(UserRole.CURATOR) && (poiService
+    public void validatePOI(ValidateRequest request) {
+        if (userService.getUserById(request.getValidatorID()).getRole().contains(UserRole.CURATOR) && (poiService
                 .getPOIByID(request.getRequestID()).getElementStatus().equals(ElementStatus.PENDING)) &&
-                userService.getUserById(request.getValidatorID()).getMunicipality().equals(poiService.getPOIByID(request.getRequestID()).getMunicipality())){
-            poiService.validatePOI(request.getRequestID(),request.isValidated());
+                userService.getUserById(request.getValidatorID()).getMunicipality().equals(poiService.getPOIByID(request.getRequestID()).getMunicipality())) {
+            poiService.validatePOI(request.getRequestID(), request.isValidated());
             userService.updateUserPOIList(request.getRequestID(), request.isValidated());
-            municipalityService.updateMunicipalityPOIList(request.getRequestID(),request.isValidated());
-        }
-        else if (poiService.getPOIByID(request.getRequestID()).getElementStatus().equals(ElementStatus.PUBLISHED)){
+            municipalityService.updateMunicipalityPOIList(request.getRequestID(), request.isValidated());
+        } else if (poiService.getPOIByID(request.getRequestID()).getElementStatus().equals(ElementStatus.PUBLISHED)) {
             throw new IllegalArgumentException("This poi is already Published");
         } else {
             throw new IllegalArgumentException("You are not a curator");

@@ -89,16 +89,13 @@ public class ContentUploadingService {
         contentBuilder.setContentType(contentDTO.contentType());
         contentBuilder.setContentField(contentDTO.content_field());
         if (contentDTO.referredPOI_id() != null) {
-            if(poiService.getPOIByID(contentDTO.referredPOI_id()).getMunicipality().equals(userService.getUserById(contentDTO.author_id()).getMunicipality())) {
+            if (poiService.getPOIByID(contentDTO.referredPOI_id()).getMunicipality().equals(userService.getUserById(contentDTO.author_id()).getMunicipality())) {
                 contentBuilder.setContentReferredMunicipalElement(poiService.getPOIByID(contentDTO.referredPOI_id()));
-            }
-            else throw new IllegalArgumentException("The POI does not belong to the municipality");
-        }
-        else if (contentDTO.referredItinerary_id() != null) {
-            if(itineraryService.getItineraryById(contentDTO.referredItinerary_id()).getMunicipality().equals(userService.getUserById(contentDTO.author_id()).getMunicipality())) {
+            } else throw new IllegalArgumentException("The POI does not belong to the municipality");
+        } else if (contentDTO.referredItinerary_id() != null) {
+            if (itineraryService.getItineraryById(contentDTO.referredItinerary_id()).getMunicipality().equals(userService.getUserById(contentDTO.author_id()).getMunicipality())) {
                 contentBuilder.setContentReferredMunicipalElement(itineraryService.getItineraryById(contentDTO.referredItinerary_id()));
-            }
-            else throw new IllegalArgumentException("The itinerary does not belong to the municipality");
+            } else throw new IllegalArgumentException("The itinerary does not belong to the municipality");
         }
         contentBuilder.setContentStatus();
     }
