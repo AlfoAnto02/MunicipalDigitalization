@@ -105,24 +105,24 @@ public class POIUploadingService {
     /**
      * Check if the coordinate is inside the perimeter area of the Municipality
      *
-     * @param coordinate the coordinate to check
      * @return true if the coordinate is inside the perimeter area of the Municipality, false otherwise
      */
-    public boolean checkCoordinate(Coordinate coordinate, POIInputDTO poiDTO) {
-        List<Coordinate> territory = userService.getUserById(poiDTO.poi_author()).getMunicipality().getTerritory();
+    public boolean checkCoordinate(Coordinate punto, POIInputDTO poiDTO) {
+        List<Coordinate> poligono = userService.getUserById(poiDTO.poi_author()).getMunicipality().getTerritory();
 
-        int intersections = 0;
+        int lati = poligono.size();
+        boolean dentro = false;
+        for (int i = 0, j = lati - 1; i < lati; j = i++) {
+            Coordinate puntoI = poligono.get(i);
+            Coordinate puntoJ = poligono.get(j);
 
-        for (int i = 0, j = territory.size() - 1; i < territory.size(); j = i++) {
-            Coordinate c1 = territory.get(i);
-            Coordinate c2 = territory.get(j);
-            if ((c1.getX() > coordinate.getX()) != (c2.getX() > coordinate.getX())) {
-                if (coordinate.getY() < (c2.getY() - c1.getY()) * (coordinate.getX() - c1.getX()) / (c2.getX() - c1.getX()) + c1.getY()) {
-                    intersections++;
-                }
+            if ((puntoI.getY() > punto.getY()) != (puntoJ.getY() > punto.getY()) &&
+                    (punto.getX() < (puntoJ.getX() - puntoI.getX()) * (punto.getY() - puntoI.getY()) /
+                            (puntoJ.getY() - puntoI.getY()) + puntoI.getX())) {
+                dentro = !dentro;
             }
         }
-        return intersections % 2 != 0;
+        return dentro;
     }
 
     /**

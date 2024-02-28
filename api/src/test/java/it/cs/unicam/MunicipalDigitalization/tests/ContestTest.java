@@ -11,11 +11,8 @@ import it.cs.unicam.MunicipalDigitalization.api.util.InvitationType;
 import it.cs.unicam.MunicipalDigitalization.api.util.POIType;
 import it.cs.unicam.MunicipalDigitalization.db.Repository.MunicipalRepository;
 import it.cs.unicam.MunicipalDigitalization.db.Repository.UserRepository;
-import it.cs.unicam.MunicipalDigitalization.db.Services.ContestService;
+import it.cs.unicam.MunicipalDigitalization.db.Services.*;
 import it.cs.unicam.MunicipalDigitalization.db.Services.Mediators.ContributionMediator;
-import it.cs.unicam.MunicipalDigitalization.db.Services.POIService;
-import it.cs.unicam.MunicipalDigitalization.db.Services.ParticipationService;
-import it.cs.unicam.MunicipalDigitalization.db.Services.ValidateService;
 import it.cs.unicam.MunicipalDigitalization.db.Services.uploadingServices.ContestUploadingService;
 import it.cs.unicam.MunicipalDigitalization.db.Services.uploadingServices.ContributionUploadingService;
 import it.cs.unicam.MunicipalDigitalization.db.Services.uploadingServices.POIUploadingService;
@@ -32,9 +29,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 @SpringBootTest
 @Transactional
 public class ContestTest {
+    @Autowired
+    private MunicipalService municipalService2;
     @Autowired
     private MunicipalRepository municipalService;
     @Autowired
@@ -59,7 +60,19 @@ public class ContestTest {
     @Test
     public void createContest() {
         Municipality municipality = createMunicipality();
-        municipalService.save(municipality);
+        municipalService2.saveMunicipal(municipality);
+
+        Municipality municipality1 = new Municipality();
+        municipality1.setName("Ancona");
+
+        List<Coordinate> coordinates = new ArrayList<>();
+        coordinates.add(new Coordinate(12, 14));
+        coordinates.add(new Coordinate(25, 21));
+        coordinates.add(new Coordinate(3, 30));
+
+        municipality1.setTerritory(coordinates);
+
+        assertThrows(IllegalArgumentException.class, () -> municipalService2.saveMunicipal(municipality1));
         
         /*Municipality municipality2 = createSecondMunicipality();
         municipalService.save(municipality2);*/
@@ -90,11 +103,11 @@ public class ContestTest {
 
     private Municipality createMunicipality() {
         List<Coordinate> coordinates = new ArrayList<>();
-        coordinates.add(new Coordinate(1, 1));
-        coordinates.add(new Coordinate(1, 200));
-        coordinates.add(new Coordinate(200, 200));
-        coordinates.add(new Coordinate(200, 1));
-        return new Municipality(coordinates, "Ancona");
+        coordinates.add(new Coordinate(0, 0));
+        coordinates.add(new Coordinate(100, 0));
+        coordinates.add(new Coordinate(0, 100));
+        coordinates.add(new Coordinate(100, 100));
+        return new Municipality(coordinates, "Anconaaa");
     }
 
     // Secondo Comune per il secondo AuthorizedContributor

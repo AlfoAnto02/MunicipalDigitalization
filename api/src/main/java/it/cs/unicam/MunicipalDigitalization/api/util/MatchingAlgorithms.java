@@ -2,11 +2,12 @@ package it.cs.unicam.MunicipalDigitalization.api.util;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.*;
+import org.apache.commons.math3.geometry.euclidean.twod.Vector2D;
+import org.apache.commons.math3.geometry.euclidean.twod.hull.ConvexHull2D;
 
-import java.util.ArrayList;
-import java.util.HashSet;
+import java.awt.*;
+import java.util.*;
 import java.util.List;
-import java.util.Set;
 import java.util.regex.Pattern;
 
 /**
@@ -125,5 +126,99 @@ public class MatchingAlgorithms {
                 return true;
         }
         return false;
+    }
+
+    public static void sortCoordinates(List<Coordinate> coordinates){
+        double totalX = 0;
+        double totalY = 0;
+        for(Coordinate c : coordinates){
+            totalX += c.getX();
+            totalY += c.getY();
+        }
+        double centerX = totalX / coordinates.size();
+        double centerY = totalY / coordinates.size();
+
+        Coordinate centroid = new Coordinate(centerX, centerY);
+        coordinates.sort(new Comparator<Coordinate>() {
+            public int compare(Coordinate c1, Coordinate c2) {
+                double angle1 = Math.atan2(c1.getY() - centroid.getY(), c1.getX() - centroid.getX());
+                double angle2 = Math.atan2(c2.getY() - centroid.getY(), c2.getX() - centroid.getX());
+                return Double.compare(angle1, angle2);
+            }
+        });
+    }
+
+
+    public static boolean isMunicipalityInsideAMunicipalityList(Municipality municipality, List<Municipality> municipalityList) {
+        Figura f1 = new Figura(municipality.getTerritory());
+        for (Municipality m : municipalityList) {
+            Figura f2 = new Figura(m.getTerritory());
+            if (f1.isInside(f2)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    /**
+     * This class is used to check if a Municipality collides with the Figure of another Municipality
+     */
+    static class Figura {
+        List<Coordinate> coordinates;
+        Rectangle boundingBox;
+
+        public Figura(List<Coordinate> coordinates) {
+            this.coordinates = coordinates;
+            this.boundingBox = calculateBoundingBox(coordinates);
+        }
+
+        private Rectangle calculateBoundingBox(List<Coordinate> coordinates) {
+            double minX = Double.MAX_VALUE;
+            double minY = Double.MAX_VALUE;
+            double maxX = Double.MIN_VALUE;
+            double maxY = Double.MIN_VALUE;
+
+            for (Coordinate c : coordinates) {
+                minX = Math.min(minX, c.getX());
+                minY = Math.min(minY, c.getY());
+                maxX = Math.max(maxX, c.getX());
+                maxY = Math.max(maxY, c.getY());
+            }
+            return new Rectangle((int) minX, (int) minY, (int) (maxX - minX), (int) (maxY - minY));
+        }
+
+        public boolean isInside(Figura f) {
+            if (!this.boundingBox.intersects(f.boundingBox)) {
+                return false;
+            }
+            return intersectionPoints(f) || f.intersectionPoints(this);
+        }
+
+        private boolean intersectionPoints(Figura f) {
+            for (Coordinate c : this.coordinates) {
+                if (f.pointInFigura(c)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private boolean pointInFigura(Coordinate c) {
+            int j = this.coordinates.size() - 1;
+            boolean inside = false;
+            for (int i = 0; i < this.coordinates.size(); i++) {
+                if ((this.coordinates.get(i).getY() < c.getY() && this.coordinates.get(j).getY() >= c.getY()
+                        || this.coordinates.get(j).getY() < c.getY() && this.coordinates.get(i).getY() >= c.getY()) &&
+                        (this.coordinates.get(i).getX() <= c.getX() || this.coordinates.get(j).getX() <= c.getX())) {
+                    inside ^= (this.coordinates.get(i).getX() + (c.getY() - this.coordinates.get(i).getY())
+                            / (this.coordinates.get(j).getY() - this.coordinates.get(i).getY()) * (this.coordinates.get(j).getX()
+                            - this.coordinates.get(i).getX()) < c.getX());
+                }
+                j = i;
+            }
+            return inside;
+        }
+
     }
 }

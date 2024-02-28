@@ -32,9 +32,14 @@ public class MunicipalService {
      * @param municipality Municipality to save
      */
     public void saveMunicipal(Municipality municipality) {
-        if (!MatchingAlgorithms.isMunicipalSimilarToMunicipalityList(municipality, municipalRepository.findAll()))
-            municipalRepository.save(municipality);
-        else throw new IllegalArgumentException("Municipality already exists");
+        if (MatchingAlgorithms.isMunicipalSimilarToMunicipalityList(municipality, municipalRepository.findAll())){
+            throw new IllegalArgumentException("Municipality already exists");
+        }
+        else if(MatchingAlgorithms.isMunicipalityInsideAMunicipalityList(municipality, municipalRepository.findAll())){
+            throw new IllegalArgumentException("Municipality collides with another municipality");
+        }
+        MatchingAlgorithms.sortCoordinates(municipality.getTerritory());
+        municipalRepository.save(municipality);
     }
 
     /**

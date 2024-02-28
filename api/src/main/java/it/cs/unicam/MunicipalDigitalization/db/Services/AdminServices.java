@@ -5,6 +5,7 @@ import it.cs.unicam.MunicipalDigitalization.api.model.users.AbstractAuthenticate
 import it.cs.unicam.MunicipalDigitalization.api.util.DesignPattern.Command.GiveRoleCommand;
 import it.cs.unicam.MunicipalDigitalization.api.util.DesignPattern.Command.RemoveRoleCommand;
 import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;
+import it.cs.unicam.MunicipalDigitalization.db.controllers.Requests.MunicipalityRequest;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.input.MunicipalityInputDTO;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,13 +59,13 @@ public class AdminServices {
     /**
      * Method to create a municipality by an admin
      *
-     * @param adminID         ID of the admin
-     * @param municipalityDTO the municipality to be created
+     * @param municipalityRequest the request containing the admin id and the municipality to add
      */
 
-    public void createMunicipality(Long adminID, MunicipalityInputDTO municipalityDTO) {
-        if (userService.getUserById(adminID).getRole().contains(UserRole.PLATFORM_GESTOR)) {
-            Municipality municipality = new Municipality(municipalityDTO.territory(), municipalityDTO.municipality_name());
+    public void createMunicipality(MunicipalityRequest municipalityRequest) {
+        if (userService.getUserById(municipalityRequest.getAdminID()).getRole().contains(UserRole.PLATFORM_GESTOR)) {
+            Municipality municipality = new Municipality(municipalityRequest.getMunicipalityDTO().territory(),
+                    municipalityRequest.getMunicipalityDTO().municipality_name());
             municipalService.saveMunicipal(municipality);
         } else throw new IllegalArgumentException("User not authorized to create municipality");
     }

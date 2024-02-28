@@ -53,9 +53,7 @@ public class AdminController {
 
     @RequestMapping(value = "/v1/admin/add/municipality", method = RequestMethod.POST)
     public ResponseEntity<Object> addMunicipality(@RequestBody MunicipalityRequest municipalityRequest) {
-        Long adminID = municipalityRequest.getAdminID();
-        MunicipalityInputDTO municipalityDTO = municipalityRequest.getMunicipalityDTO();
-        adminServices.createMunicipality(adminID, municipalityDTO);
+        adminServices.createMunicipality(municipalityRequest);
         return new ResponseEntity<>("Municipality added", HttpStatus.OK);
     }
 

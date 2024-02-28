@@ -33,11 +33,12 @@ public class MunicipalRepoTest {
         municipality = new Municipality();
         municipality.setName("Municipal");
         List<Coordinate> coordinates = new ArrayList<>();
-        coordinates.add(new Coordinate(1, 1));
-        coordinates.add(new Coordinate(2, 2));
-        coordinates.add(new Coordinate(3, 3));
+        coordinates.add(new Coordinate(100, 1));
+        coordinates.add(new Coordinate(2, 33));
+        coordinates.add(new Coordinate(34, 35));
         municipality.setTerritory(coordinates);
         municipalRepository.saveMunicipal(municipality);
+
     }
 
     @AfterEach
