@@ -1,28 +1,20 @@
 package it.cs.unicam.MunicipalDigitalization.db.controllers.Requests;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * This class is a class used for a request to validate a request.
  */
-@Getter
-@Setter
+@Data
+@AllArgsConstructor
 public class ValidateRequest {
+    
     long validatorID;
     long requestID;
     boolean isValidated;
 
-    /**
-     * Constructor for the ValidateRequest class.
-     *
-     * @param validatorID id of the curator that made the request
-     * @param requestID   id of the request to validate
-     * @param isValidated boolean that indicates if the request is validated
-     */
-    public ValidateRequest(long validatorID, long requestID, boolean isValidated) {
-        this.validatorID = validatorID;
-        this.requestID = requestID;
-        this.isValidated = isValidated;
-    }
 }

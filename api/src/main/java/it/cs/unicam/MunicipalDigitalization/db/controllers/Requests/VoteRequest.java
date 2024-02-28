@@ -1,16 +1,16 @@
 package it.cs.unicam.MunicipalDigitalization.db.controllers.Requests;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 
-@Getter
-@Setter
+@Data
+@AllArgsConstructor
 public class VoteRequest {
+    
     long voterID;
     long requestID;
 
-    public VoteRequest(long voterID, long requestID) {
-        this.voterID = voterID;
-        this.requestID = requestID;
-    }
 }
