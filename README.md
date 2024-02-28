@@ -1,6 +1,6 @@
 # Municipal Digitalization API
 
-This repository contains the API for the Municipal Digitalization project, a university project for the digitalization of a municipal area. The project is developed using Java and Kotlin, and is managed with Gradle.
+This repository contains the API for the Municipal Digitalization project, a university project for the digitalization of a municipal area. The project is developed using Java and is managed with Gradle.
 
 ## Project Structure
 
