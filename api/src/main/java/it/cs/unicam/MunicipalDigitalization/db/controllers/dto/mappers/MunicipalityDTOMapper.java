@@ -1,4 +1,4 @@
-package it.cs.unicam.MunicipalDigitalization.db.mappers;
+package it.cs.unicam.MunicipalDigitalization.db.controllers.dto.mappers;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
 import it.cs.unicam.MunicipalDigitalization.api.model.users.AbstractAuthenticatedUser;

@@ -1,5 +1,6 @@
 package it.cs.unicam.MunicipalDigitalization.db.Services.uploadingServices;
 
+import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractPOI;
 import it.cs.unicam.MunicipalDigitalization.api.util.ContestType;
 import it.cs.unicam.MunicipalDigitalization.api.util.DesignPattern.Builder.ContributionContestBuilder;
 import it.cs.unicam.MunicipalDigitalization.api.util.InvitationType;
@@ -69,6 +70,11 @@ public class ContestUploadingService {
      */
 
     private void checkContest(ContestInputDTO contestInputDTO) {
+    /*    for(AbstractPOI poi : poiService.getPOIsByIds(contestInputDTO.contest_pois())){
+            if(poi.getMunicipality().getId().equals(userService.getUserById(contestInputDTO.contest_author_id()).getMunicipality().getId())){
+                throw new IllegalArgumentException("POI is not in the same municipality");
+            }
+        }
         if(contestInputDTO.contest_name() == null || contestInputDTO.contest_name().length()>100 || contestInputDTO.contest_name().length()<10) {
             throw new IllegalArgumentException("Contest Name is null");
         }
@@ -84,6 +90,6 @@ public class ContestUploadingService {
                 .getMunicipality().getListOfIUsers().size()) / 10) || contestInputDTO.minParticipants()<1)
             throw new IllegalArgumentException("Min Participants is invalid");
         if(contestInputDTO.contestType() == null || !(contestInputDTO.contestType().equals(ContestType.PHOTO_CONTEST)
-                || contestInputDTO.contestType().equals(ContestType.WRITING_CONTEST))) throw new IllegalArgumentException("Contest Type is invalid");
+                || contestInputDTO.contestType().equals(ContestType.WRITING_CONTEST))) throw new IllegalArgumentException("Contest Type is invalid");*/
     }
 }

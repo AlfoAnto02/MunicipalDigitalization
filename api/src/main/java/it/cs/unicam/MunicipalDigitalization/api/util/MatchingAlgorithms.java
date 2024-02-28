@@ -1,10 +1,7 @@
 package it.cs.unicam.MunicipalDigitalization.api.util;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
-import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractContent;
-import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractItinerary;
-import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractPOI;
-import it.cs.unicam.MunicipalDigitalization.api.model.elements.ContributionContest;
+import it.cs.unicam.MunicipalDigitalization.api.model.elements.*;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -101,6 +98,15 @@ public class MatchingAlgorithms {
     public static boolean isContentSimilarToContentList(AbstractContent content, List<AbstractContent> contentList) {
         for (AbstractContent c : contentList) {
             if (content.getType().equals(c.getType()) && (content.getPhoto().equals(c.getPhoto()) && content.getLink().equals(c.getLink()) && content.getDescription().equals(c.getDescription())) && (content.getReferredItinerary().getId().equals(c.getReferredItinerary().getId()) && content.getReferredPOI().getId().equals(c.getReferredPOI().getId())) && c != content)
+                return true;
+        }
+        return false;
+    }
+
+    public static boolean isContributionSimilatrToAContributionList(Contribution contribution, List<Contribution> contributionList) {
+        for (Contribution c : contributionList) {
+            if (contribution.getContest().equals(c.getContest())
+                    && contribution.getContribution().equals(c.getContribution()) && c != contribution)
                 return true;
         }
         return false;

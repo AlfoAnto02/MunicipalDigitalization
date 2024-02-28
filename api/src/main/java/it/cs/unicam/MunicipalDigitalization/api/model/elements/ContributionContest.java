@@ -66,8 +66,14 @@ public class ContributionContest implements IContributionContest{
     @ManyToOne
     private AbstractAuthenticatedUser author;
 
+    /**
+     * The status of the contest.
+     */
     @Column(name = "ContestStatus", nullable = false)
     private ContestStatus contestStatus;
+
+    @OneToMany(mappedBy = "contest", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Contribution> contributions;
 
     /**
      * The list of itineraries that are part of the contest.
@@ -128,13 +134,17 @@ public class ContributionContest implements IContributionContest{
         this.pois = pois;
         this.municipality = municipality;
         this.creationDate = LocalDateTime.now();
+        this.contributions = new ArrayList<>();
         this.contestStatus = ContestStatus.OPEN;
+        this.participants = new ArrayList<>();
     }
 
     public ContributionContest() {
         this.itineraries = new ArrayList<>();
         this.pois = new ArrayList<>();
         this.creationDate = LocalDateTime.now();
+        this.contributions = new ArrayList<>();
+        this.participants = new ArrayList<>();
     }
 
     /**
@@ -167,7 +177,21 @@ public class ContributionContest implements IContributionContest{
         this.participants.add(userById);
     }
 
+    /**
+     * Method to get the actual number of participants to the contest.
+     *
+     * @return The actual number of participants to the contest.
+     */
     public int getActualNumberOfParticipants() {
         return this.participants.size();
+    }
+
+    /**
+     * Method to add a contribution to the contest.
+     *
+     * @param contribution The contribution to be added to the contest.
+     */
+    public void addContribution(Contribution contribution) {
+        this.contributions.add(contribution);
     }
 }

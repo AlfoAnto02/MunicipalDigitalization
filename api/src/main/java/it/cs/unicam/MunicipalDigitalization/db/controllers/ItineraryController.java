@@ -7,7 +7,7 @@ import it.cs.unicam.MunicipalDigitalization.db.Services.MunicipalService;
 import it.cs.unicam.MunicipalDigitalization.db.Services.UserService;
 import it.cs.unicam.MunicipalDigitalization.db.Services.uploadingServices.ItineraryUploadingService;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.input.ItineraryInputDTO;
-import it.cs.unicam.MunicipalDigitalization.db.mappers.ItineraryDTOMapper;
+import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.mappers.ItineraryDTOMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

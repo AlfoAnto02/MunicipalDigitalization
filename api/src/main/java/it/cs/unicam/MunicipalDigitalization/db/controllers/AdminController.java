@@ -8,7 +8,7 @@ import it.cs.unicam.MunicipalDigitalization.db.Services.AdminServices;
 import it.cs.unicam.MunicipalDigitalization.db.Services.MunicipalService;
 import it.cs.unicam.MunicipalDigitalization.db.Services.UserService;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.input.MunicipalityInputDTO;
-import it.cs.unicam.MunicipalDigitalization.db.mappers.MunicipalityDTOMapper;
+import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.mappers.MunicipalityDTOMapper;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -6,7 +6,7 @@ import it.cs.unicam.MunicipalDigitalization.db.Services.UserService;
 import it.cs.unicam.MunicipalDigitalization.db.Services.uploadingServices.POIUploadingService;
 import it.cs.unicam.MunicipalDigitalization.db.Services.POIService;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.input.POIInputDTO;
-import it.cs.unicam.MunicipalDigitalization.db.mappers.POIDTOMapper;
+import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.mappers.POIDTOMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

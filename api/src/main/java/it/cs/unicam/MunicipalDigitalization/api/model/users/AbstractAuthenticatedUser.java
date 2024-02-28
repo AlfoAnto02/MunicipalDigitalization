@@ -3,10 +3,7 @@ package it.cs.unicam.MunicipalDigitalization.api.model.users;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
-import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractContent;
-import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractItinerary;
-import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractPOI;
-import it.cs.unicam.MunicipalDigitalization.api.model.elements.ContributionContest;
+import it.cs.unicam.MunicipalDigitalization.api.model.elements.*;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -44,6 +41,17 @@ public abstract class AbstractAuthenticatedUser extends AbstractIUser implements
     @OneToMany(mappedBy = "author")
     @JsonBackReference
     private List<AbstractPOI> authoredPOIs;
+
+    @OneToMany(mappedBy = "author")
+    private List<Contribution> authoredContributions;
+
+    @ManyToMany
+    @JoinTable(
+            name = "VotedContributions",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "contribution_id")
+    )
+    private List<Contribution> votedContributions;
 
     /**
      * The list of Itineraries authored by the authenticated user.
@@ -86,6 +94,9 @@ public abstract class AbstractAuthenticatedUser extends AbstractIUser implements
         this.authoredItineraries = new ArrayList<>();
         this.authoredContents = new ArrayList<>();
         this.authoredContests = new ArrayList<>();
+        this.authoredContributions = new ArrayList<>();
+        this.contestsParticipated=new ArrayList<>();
+        this.votedContributions=new ArrayList<>();
     }
 
     /**
@@ -101,6 +112,9 @@ public abstract class AbstractAuthenticatedUser extends AbstractIUser implements
         this.authoredItineraries = new ArrayList<>();
         this.authoredContents = new ArrayList<>();
         this.authoredContests = new ArrayList<>();
+        this.authoredContributions = new ArrayList<>();
+        this.contestsParticipated=new ArrayList<>();
+        this.votedContributions=new ArrayList<>();
     }
 
     /**
@@ -111,6 +125,9 @@ public abstract class AbstractAuthenticatedUser extends AbstractIUser implements
         this.authoredItineraries = new ArrayList<>();
         this.authoredContents = new ArrayList<>();
         this.authoredContests = new ArrayList<>();
+        this.authoredContributions = new ArrayList<>();
+        this.contestsParticipated=new ArrayList<>();
+        this.votedContributions=new ArrayList<>();
     }
 
     /**
@@ -173,5 +190,12 @@ public abstract class AbstractAuthenticatedUser extends AbstractIUser implements
 
     public void addParticipatedContest(ContributionContest contributionContest) {
         this.contestsParticipated.add(contributionContest);
+    }
+
+    public void addContribution(Contribution contribution) {
+        this.authoredContributions.add(contribution);
+    }
+    public void voteContribution(Contribution contribution) {
+        this.votedContributions.add(contribution);
     }
 }

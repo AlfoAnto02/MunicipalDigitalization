@@ -2,14 +2,13 @@ package it.cs.unicam.MunicipalDigitalization.db.controllers;
 
 import it.cs.unicam.MunicipalDigitalization.api.util.ContestStatus;
 import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;
-import it.cs.unicam.MunicipalDigitalization.db.Services.MunicipalService;
-import it.cs.unicam.MunicipalDigitalization.db.Services.ParticipationService;
-import it.cs.unicam.MunicipalDigitalization.db.Services.UserService;
-import it.cs.unicam.MunicipalDigitalization.db.Services.ValidateService;
+import it.cs.unicam.MunicipalDigitalization.db.Services.*;
 import it.cs.unicam.MunicipalDigitalization.db.Services.uploadingServices.ContestUploadingService;
+import it.cs.unicam.MunicipalDigitalization.db.Services.uploadingServices.ContributionUploadingService;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.Requests.ValidateRequest;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.input.ContestInputDTO;
-import it.cs.unicam.MunicipalDigitalization.db.mappers.ContestDTOMapper;
+import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.input.ContributionInputDTO;
+import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.mappers.ContestDTOMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +22,6 @@ public class ContestController {
     private final ContestDTOMapper contestDTOMapper;
     private final ParticipationService participationService;
     private final ValidateService validateService;
-
     @Autowired
     public ContestController(ContestUploadingService contestUploadingService, MunicipalService municipalService,
                              UserService userService, ContestDTOMapper contestDTOMapper, ParticipationService participationService,
@@ -45,7 +43,7 @@ public class ContestController {
 
     @RequestMapping(value ="/v1/uploadContest", method = RequestMethod.POST)
     public ResponseEntity<Object> uploadContest(@RequestBody ContestInputDTO contestInputDTO) {
-        if(userService.getUserById(contestInputDTO.contest_author_id()).getRole().contains(UserRole.CURATOR)) {
+        if(userService.getUserById(contestInputDTO.contest_author_id()).getRole().contains(UserRole.ANIMATOR)) {
             contestUploadingService.uploadContest(contestInputDTO);
             return new ResponseEntity<>("Contest Uploaded", HttpStatus.OK);
         } else return new ResponseEntity<>("User is not Authorized", HttpStatus.FORBIDDEN);
@@ -80,10 +78,15 @@ public class ContestController {
         return new ResponseEntity<>("Participation added", HttpStatus.OK);
     }
 
+    /**
+     * This method permits an Animator to validate a contest
+     *
+     * @param validateRequest the request to validate a contest
+     * @return a message indicating that the contest has been validated
+     */
     @RequestMapping(value="/v1/contest/validate", method = RequestMethod.POST)
     public ResponseEntity<Object> validateContributionContest(@RequestBody ValidateRequest validateRequest){
         this.validateService.validateContest(validateRequest);
         return new ResponseEntity<>("Contest validated", HttpStatus.OK);
     }
-
 }

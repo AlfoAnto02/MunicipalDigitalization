@@ -1,5 +1,6 @@
 package it.cs.unicam.MunicipalDigitalization.db.Services;
 
+import it.cs.unicam.MunicipalDigitalization.api.model.elements.Contribution;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.ContributionContest;
 import it.cs.unicam.MunicipalDigitalization.api.util.ContestStatus;
 import it.cs.unicam.MunicipalDigitalization.api.util.MatchingAlgorithms;
@@ -63,4 +64,13 @@ public class ContestService {
         return contestRepository.findAll();
     }
 
+    public List<Contribution> getContestContributions(Long id) {
+        return contestRepository.findContributionByContestId(id);
+    }
+
+    public void addContribution(Long id, Contribution contribution) {
+        ContributionContest contest = contestRepository.getReferenceById(id);
+        contest.addContribution(contribution);
+        contestRepository.save(contest);
+    }
 }

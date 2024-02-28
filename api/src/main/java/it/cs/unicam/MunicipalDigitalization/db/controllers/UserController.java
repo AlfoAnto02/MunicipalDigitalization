@@ -1,11 +1,10 @@
 package it.cs.unicam.MunicipalDigitalization.db.controllers;
 
 
-import it.cs.unicam.MunicipalDigitalization.db.Services.MunicipalService;
 import it.cs.unicam.MunicipalDigitalization.db.Services.UserService;
 import it.cs.unicam.MunicipalDigitalization.db.Services.uploadingServices.UserUploadingService;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.input.UserInputDTO;
-import it.cs.unicam.MunicipalDigitalization.db.mappers.UserDTOMapper;
+import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.mappers.UserDTOMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

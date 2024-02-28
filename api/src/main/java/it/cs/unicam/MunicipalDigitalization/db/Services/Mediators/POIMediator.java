@@ -39,11 +39,11 @@ public class POIMediator {
         Long authorId = poi.getAuthor().getId();
 
         //Check if the POI is already associated with the municipality
-        if(!poi.getMunicipality().getPOIList().stream().anyMatch(p -> p.getId().equals(poi.getId()))){
+        if(poi.getMunicipality().getPOIList().stream().noneMatch(p -> p.getId().equals(poi.getId()))){
             municipalityService.addPOI(poi.getMunicipality().getId(), poi);
         }
         //Check if the POI is already associated with the user
-        if(!poi.getAuthor().getAuthoredPOIs().stream().anyMatch(p -> p.getId().equals(poi.getId()))){
+        if(poi.getAuthor().getAuthoredPOIs().stream().noneMatch(p -> p.getId().equals(poi.getId()))){
             userService.addPOI(poi.getAuthor().getId(), poi);
         }
     }

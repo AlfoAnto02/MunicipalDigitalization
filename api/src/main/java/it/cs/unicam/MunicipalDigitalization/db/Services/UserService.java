@@ -1,10 +1,7 @@
 package it.cs.unicam.MunicipalDigitalization.db.Services;
 
-import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractContent;
-import it.cs.unicam.MunicipalDigitalization.api.model.elements.ContributionContest;
+import it.cs.unicam.MunicipalDigitalization.api.model.elements.*;
 import it.cs.unicam.MunicipalDigitalization.api.model.users.*;
-import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractItinerary;
-import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractPOI;
 import it.cs.unicam.MunicipalDigitalization.api.util.ContestStatus;
 import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;
@@ -192,4 +189,15 @@ public class UserService {
         userRepository.save(user);
     }
 
+    public void addContribution(Long id, Contribution contribution) {
+        AbstractAuthenticatedUser user = userRepository.getReferenceById(id);
+        user.addContribution(contribution);
+        userRepository.save(user);
+    }
+
+    public void voteContribution(Contribution contribution, Long userId) {
+        AbstractAuthenticatedUser user = userRepository.getReferenceById(userId);
+        user.voteContribution(contribution);
+        userRepository.save(user);
+    }
 }

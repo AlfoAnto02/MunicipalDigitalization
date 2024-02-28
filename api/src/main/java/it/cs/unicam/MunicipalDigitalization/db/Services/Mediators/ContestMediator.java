@@ -58,7 +58,7 @@ public class ContestMediator {
      * @param validateRequest The request to validate.
      */
     public void validateContest(ValidateRequest validateRequest) {
-        if(userService.getUserById(validateRequest.getValidatorID()).getRole().contains(UserRole.CURATOR) && (contestService
+        if(userService.getUserById(validateRequest.getValidatorID()).getRole().contains(UserRole.ANIMATOR) && (contestService
                 .getContestById(validateRequest.getRequestID()).getContestStatus().equals(ContestStatus.OPEN))){
             if(contestService.getContestById(validateRequest.getRequestID()).getActualNumberOfParticipants()
                     >contestService.getContestById(validateRequest.getRequestID()).getMinParticipants()) {
