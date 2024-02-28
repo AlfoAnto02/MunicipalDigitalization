@@ -63,7 +63,7 @@ public class POIRepoTest {
         AuthorizedContributor user = createUser(municipality);
 
         assertThrows(IllegalArgumentException.class, () -> {
-            POIInputDTO poiDTO = new POIInputDTO("Monteleone", POIType.Cinema, user.getId(), new Coordinate(400, 400));
+            POIInputDTO poiDTO = new POIInputDTO("Monteleone", POIType.Cinema, user.getId(), new Coordinate(200, 200));
             uploadingService.uploadPOI(poiDTO);
         });
     }

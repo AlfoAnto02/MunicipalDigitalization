@@ -2,6 +2,7 @@ package it.cs.unicam.MunicipalDigitalization.api.util;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.*;
+import it.cs.unicam.MunicipalDigitalization.db.Services.UserService;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -81,8 +82,7 @@ public class MatchingAlgorithms {
 
     public static boolean isContestSimilarToContestList(ContributionContest contest, List<ContributionContest> contestList) {
         for (ContributionContest c : contestList) {
-            if (contest.getInvitationType().equals(c.getInvitationType()) && contest.getPois().equals(c.getPois()) &&
-                    contest.getItineraries().equals(c.getItineraries()) && contest.getContestType().equals(c.getContestType()) && c != contest)
+            if (contest.getInvitationType().equals(c.getInvitationType()) && contest.getPois().equals(c.getPois()) && contest.getItineraries().equals(c.getItineraries()) && contest.getContestType().equals(c.getContestType()) && c != contest)
                 return true;
         }
         return false;
@@ -107,8 +107,7 @@ public class MatchingAlgorithms {
 
     public static boolean isContributionSimilatrToAContributionList(Contribution contribution, List<Contribution> contributionList) {
         for (Contribution c : contributionList) {
-            if (contribution.getContest().equals(c.getContest())
-                    && contribution.getContribution().equals(c.getContribution()) && c != contribution)
+            if (contribution.getContest().equals(c.getContest()) && contribution.getContribution().equals(c.getContribution()) && c != contribution)
                 return true;
         }
         return false;
@@ -127,23 +126,5 @@ public class MatchingAlgorithms {
                 return true;
         }
         return false;
-    }
-
-    public static double crossProduct(Coordinate a, Coordinate b) {
-        return a.getX() * b.getY() - a.getY() * b.getX();
-    }
-
-    public static boolean isInsidePolygon(List<Coordinate> polygon, Coordinate p) {
-        int n = polygon.size();
-
-        double cross = crossProduct(new Coordinate(polygon.getFirst().getX() - p.getX(), polygon.getFirst().getY() - p.getY()), new Coordinate(polygon.get(1).getX() - p.getX(), polygon.get(1).getY() - p.getY()));
-
-        for (int i = 1; i < n; i++) {
-            double newCross = crossProduct(new Coordinate(polygon.get(i).getX() - p.getX(), polygon.get(i).getY() - p.getY()), new Coordinate(polygon.get((i + 1) % n).getX() - p.getX(), polygon.get((i + 1) % n).getY() - p.getY()));
-
-            if (cross * newCross < 0) return false;
-        }
-
-        return true;
     }
 }

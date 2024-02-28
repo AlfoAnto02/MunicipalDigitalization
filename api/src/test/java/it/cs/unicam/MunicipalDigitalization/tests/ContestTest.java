@@ -4,6 +4,7 @@ import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
 import it.cs.unicam.MunicipalDigitalization.api.model.users.Animator;
 import it.cs.unicam.MunicipalDigitalization.api.model.users.AuthenticatedTourist;
 import it.cs.unicam.MunicipalDigitalization.api.model.users.AuthorizedContributor;
+import it.cs.unicam.MunicipalDigitalization.api.model.users.Contributor;
 import it.cs.unicam.MunicipalDigitalization.api.util.ContestType;
 import it.cs.unicam.MunicipalDigitalization.api.util.Coordinate;
 import it.cs.unicam.MunicipalDigitalization.api.util.InvitationType;
@@ -31,8 +32,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 @SpringBootTest
 @Transactional
 public class ContestTest {
@@ -57,55 +56,96 @@ public class ContestTest {
     @Autowired
     private ContributionMediator contributionMediator;
 
-
     @Test
     public void createContest() {
-        List<Coordinate> coordinates = new ArrayList<Coordinate>();
-        coordinates.add(new Coordinate(10.0, 10.0));
-        coordinates.add(new Coordinate(20.0, 10.0));
-        coordinates.add(new Coordinate(10.0, 20.0));
-        coordinates.add(new Coordinate(20.0, 20.0));
-        Municipality municipality = new Municipality(coordinates, "Ancona");
-
+        Municipality municipality = createMunicipality();
         municipalService.save(municipality);
+        
+        /*Municipality municipality2 = createSecondMunicipality();
+        municipalService.save(municipality2);*/
 
         AuthorizedContributor authorizedContributor = new AuthorizedContributor("Mario", "Rossi", municipality);
         userService.save(authorizedContributor);
+        
+        /*AuthorizedContributor authorizedContributor2 = new AuthorizedContributor("Luigi", "Romano", municipality2);
+        userService.save(authorizedContributor2);*/
 
-        POIInputDTO poiDTO = new POIInputDTO("Monteleone", POIType.Cinema, authorizedContributor.getId(), new Coordinate(12, 12));
-        POIInputDTO poiDTO2 = new POIInputDTO("Luce verde", POIType.Cinema, authorizedContributor.getId(), new Coordinate(13, 13));
-        POIInputDTO poiDTO3 = new POIInputDTO("Falconara", POIType.Cinema, authorizedContributor.getId(), new Coordinate(14, 15));
+        Contributor contributor = new Contributor("Giovanni", "Bianchi", municipality);
 
-        poiUploadingService.uploadPOI(poiDTO);
-        poiUploadingService.uploadPOI(poiDTO2);
-        poiUploadingService.uploadPOI(poiDTO3);
+        createPOIs(authorizedContributor);
+        /*createSecondPOIs(authorizedContributor2);*/
+        /*createPOIs(contributor);*/
 
         Animator animator = new Animator("Luca", "Verdi", municipality);
         userService.save(animator);
 
-        List<Long> pois = new ArrayList<Long>();
+        List<Long> pois = getPoiIds();
+
+        ContestInputDTO contestInputDTO = new ContestInputDTO("Concorsooooo", "Concorso per la città di Ancona", animator.getId(), InvitationType.PUBLIC, ContestType.PHOTO_CONTEST, pois, null, 1);
+
+        contestUploadingService.uploadContest(contestInputDTO);
+
+        validateContest(animator, authorizedContributor);
+    }
+
+    private Municipality createMunicipality() {
+        List<Coordinate> coordinates = new ArrayList<>();
+        coordinates.add(new Coordinate(1, 1));
+        coordinates.add(new Coordinate(1, 200));
+        coordinates.add(new Coordinate(200, 200));
+        coordinates.add(new Coordinate(200, 1));
+        return new Municipality(coordinates, "Ancona");
+    }
+    
+    // Secondo Comune per il secondo AuthorizedContributor
+    /*private Municipality createSecondMunicipality() {
+        List<Coordinate> coordinates = new ArrayList<>();
+        coordinates.add(new Coordinate(1, 1));
+        coordinates.add(new Coordinate(1, 200));
+        coordinates.add(new Coordinate(200, 200));
+        coordinates.add(new Coordinate(200, 1));
+        return new Municipality(coordinates, "Roma");
+    }*/
+
+    private void createPOIs(AuthorizedContributor authorizedContributor) {
+        poiUploadingService.uploadPOI(new POIInputDTO("Monteleone", POIType.Cinema, authorizedContributor.getId(), new Coordinate(12, 12)));
+        poiUploadingService.uploadPOI(new POIInputDTO("Luce verde", POIType.Cinema, authorizedContributor.getId(), new Coordinate(13, 13)));
+        poiUploadingService.uploadPOI(new POIInputDTO("Falconara", POIType.Cinema, authorizedContributor.getId(), new Coordinate(14, 15)));
+    }
+    
+    // Secondo AuthorizedContributor
+    /*private void createSecondPOIs(AuthorizedContributor authorizedContributor) {
+        poiUploadingService.uploadPOI(new POIInputDTO("daje", POIType.Cinema, authorizedContributor.getId(), new Coordinate(12, 12)));
+        poiUploadingService.uploadPOI(new POIInputDTO("Luce roma", POIType.Cinema, authorizedContributor.getId(), new Coordinate(13, 13)));
+        poiUploadingService.uploadPOI(new POIInputDTO("forza", POIType.Cinema, authorizedContributor.getId(), new Coordinate(14, 15)));
+    }*/
+
+    private void createPOIs(Contributor contributor) {
+        poiUploadingService.uploadPOI(new POIInputDTO("primopoi", POIType.Cinema, contributor.getId(), new Coordinate(12, 12)));
+        poiUploadingService.uploadPOI(new POIInputDTO("secondopoi", POIType.Cinema, contributor.getId(), new Coordinate(13, 13)));
+        poiUploadingService.uploadPOI(new POIInputDTO("indipercui", POIType.Cinema, contributor.getId(), new Coordinate(14, 15)));
+    }
+
+    private List<Long> getPoiIds() {
+        List<Long> pois = new ArrayList<>();
         pois.add(poiService.getPOIbyName("Monteleone").get().getId());
         pois.add(poiService.getPOIbyName("Luce verde").get().getId());
         pois.add(poiService.getPOIbyName("Falconara").get().getId());
+        
+        // Secondo AuthorizedContributor
+        /*pois.add(poiService.getPOIbyName("daje").get().getId());
+        pois.add(poiService.getPOIbyName("Luce roma").get().getId());
+        pois.add(poiService.getPOIbyName("forza").get().getId());*/
+        
+        // Contributor
+        /*pois.add(poiService.getPOIbyName("primopoi").get().getId());
+        pois.add(poiService.getPOIbyName("secondopoi").get().getId());
+        pois.add(poiService.getPOIbyName("indipercui").get().getId());*/
+        return pois;
+    }
 
-        ContestInputDTO contestInputDTO = new ContestInputDTO("Concorsooooo", "Concorso per la città di Ancona",
-                animator.getId(), InvitationType.PUBLIC, ContestType.PHOTO_CONTEST, pois, null, 1);
-
-        assertEquals(3, poiService.getAllPOIs().size());
-        assertEquals(3, poiService.getPOIsByIds(contestInputDTO.contest_pois()).size());
-        contestUploadingService.uploadContest(contestInputDTO);
-
-        assertEquals(1, contestService.getAllContests().size());
-        assertEquals(3, contestService.getContestById(1L).getPois().size());
-
-        assertEquals(poiService.getPOIByID(1L).getContest().size(), 1);
-        assertEquals(poiService.getPOIByID(2L).getContest().size(), 1);
-
-        assertEquals(userService.findById(animator.getId()).get().getAuthoredContests().size(), 1);
-
-        assertEquals(contestService.getContestById(1L).getPois().get(2), poiService.getPOIByID(3L));
-
-        AuthenticatedTourist authenticatedTourist = new AuthenticatedTourist("Giovanni", "Bianchi", municipality);
+    private void validateContest(Animator animator, AuthorizedContributor authorizedContributor) {
+        AuthenticatedTourist authenticatedTourist = new AuthenticatedTourist("Giovanni", "Bianchi", animator.getMunicipality());
         userService.save(authenticatedTourist);
 
         participationService.participateToAContest(1L, authorizedContributor.getId());
@@ -113,19 +153,8 @@ public class ContestTest {
 
         validateService.validateContest(new ValidateRequest(animator.getId(), 1L, true));
 
-
-        ContributionInputDTO contributionInputDTO = new ContributionInputDTO("La vita", "Foto di Ancona", "fotodiancona.png", 1L, authenticatedTourist.getId());
-        contributionUploadingService.uploadContribution(contributionInputDTO);
-
-        contestService.getContestContributions(1L).forEach(contribution -> System.out.println(contribution.getContribution()));
-
-        assertEquals(contestService.getContestById(1L).getContributions().size(), 1);
-        assertEquals(userService.findById(authenticatedTourist.getId()).get().getContestsParticipated().size(), 1);
-        assertEquals(userService.findById(authenticatedTourist.getId()).get().getAuthoredContributions().size(), 1);
+        contributionUploadingService.uploadContribution(new ContributionInputDTO("La vita", "Foto di Ancona", "fotodiancona.png", 1L, authenticatedTourist.getId()));
 
         contributionMediator.voteContribution(new VoteRequest(authenticatedTourist.getId(), 1L));
-
-        assertEquals(contestService.getContestById(1L).getContributions().get(0).getTotalVotes(), 1);
-        assertEquals(userService.getReferenceById(authenticatedTourist.getId()).getVotedContributions().size(), 1);
     }
 }

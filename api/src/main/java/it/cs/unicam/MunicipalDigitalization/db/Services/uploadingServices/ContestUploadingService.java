@@ -1,6 +1,5 @@
 package it.cs.unicam.MunicipalDigitalization.db.Services.uploadingServices;
 
-import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractPOI;
 import it.cs.unicam.MunicipalDigitalization.api.util.ContestType;
 import it.cs.unicam.MunicipalDigitalization.api.util.DesignPattern.Builder.ContributionContestBuilder;
 import it.cs.unicam.MunicipalDigitalization.api.util.InvitationType;
@@ -68,7 +67,7 @@ public class ContestUploadingService {
      * @param contestInputDTO the contest in DTO to be uploaded
      */
     private void checkContest(ContestInputDTO contestInputDTO) {
-        checkPOIMunicipality(contestInputDTO);
+        checkPOIMunicipalityOfTheAnimator(contestInputDTO);
         checkContestName(contestInputDTO);
         checkContestDescription(contestInputDTO);
         checkContestInvitationType(contestInputDTO);
@@ -77,14 +76,14 @@ public class ContestUploadingService {
     }
 
     /**
-     * Checks if the POI's municipality matches the contest's municipality.
+     * Checks if the Animator's municipality matches the contest's municipality.
      *
      * @param contestInputDTO the contest in DTO to be uploaded
      */
-    private void checkPOIMunicipality(ContestInputDTO contestInputDTO) {
-        for (AbstractPOI poi : poiService.getPOIsByIds(contestInputDTO.contest_pois())) {
-            if (poi.getMunicipality().getId().equals(userService.getUserById(contestInputDTO.contest_author_id()).getMunicipality().getId())) {
-                throw new IllegalArgumentException("POI is not in the same municipality");
+    private void checkPOIMunicipalityOfTheAnimator(ContestInputDTO contestInputDTO) {
+        for (Long poiId : contestInputDTO.contest_pois()) {
+            if (!poiService.getPOIByID(poiId).getMunicipality().equals(userService.getUserById(contestInputDTO.contest_author_id()).getMunicipality())) {
+                throw new IllegalArgumentException("POI's municipality doesn't match the Animator's municipality");
             }
         }
     }
@@ -128,8 +127,9 @@ public class ContestUploadingService {
      * @param contestInputDTO the contest in DTO to be uploaded
      */
     private void checkMinParticipants(ContestInputDTO contestInputDTO) {
-        if ((contestInputDTO.minParticipants() > (userService.getUserById(contestInputDTO.contest_author_id()).getMunicipality().getListOfIUsers().size()) / 10) || contestInputDTO.minParticipants() < 1)
+        if ((contestInputDTO.minParticipants() > ((userService.getUserById(contestInputDTO.contest_author_id()).getMunicipality().getListOfIUsers().size()) / 10) || contestInputDTO.minParticipants() < 0)) {
             throw new IllegalArgumentException("Min Participants is invalid");
+        }
     }
 
     /**
@@ -138,7 +138,8 @@ public class ContestUploadingService {
      * @param contestInputDTO the contest in DTO to be uploaded
      */
     private void checkContestType(ContestInputDTO contestInputDTO) {
-        if (contestInputDTO.contestType() == null || !(contestInputDTO.contestType().equals(ContestType.PHOTO_CONTEST) || contestInputDTO.contestType().equals(ContestType.WRITING_CONTEST)))
+        if (contestInputDTO.contestType() == null || !(contestInputDTO.contestType().equals(ContestType.PHOTO_CONTEST) || contestInputDTO.contestType().equals(ContestType.WRITING_CONTEST))) {
             throw new IllegalArgumentException("Contest Type is invalid");
+        }
     }
 }

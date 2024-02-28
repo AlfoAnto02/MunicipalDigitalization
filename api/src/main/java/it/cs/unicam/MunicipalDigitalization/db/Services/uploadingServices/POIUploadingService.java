@@ -7,6 +7,7 @@ import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;
 import it.cs.unicam.MunicipalDigitalization.db.Services.Mediators.POIMediator;
 import it.cs.unicam.MunicipalDigitalization.db.Services.UserService;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.input.POIInputDTO;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ import static it.cs.unicam.MunicipalDigitalization.api.util.MatchingAlgorithms.c
  * Service class for uploading POIs to the database
  */
 @Service
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class POIUploadingService {
     /**
      * UserService instance
@@ -33,20 +35,6 @@ public class POIUploadingService {
      * POIBuilderFactory instance
      */
     private final POIBuilderFactory poiBuilderFactory;
-
-    /**
-     * Constructor for POIUploadingService
-     *
-     * @param userService       UserService instance
-     * @param poiMediator       POIMediator instance
-     * @param poiBuilderFactory POIBuilderFactory instance
-     */
-    @Autowired
-    public POIUploadingService(UserService userService, POIMediator poiMediator, POIBuilderFactory poiBuilderFactory) {
-        this.userService = userService;
-        this.poiMediator = poiMediator;
-        this.poiBuilderFactory = poiBuilderFactory;
-    }
 
     /**
      * Uploads a POI to the database
@@ -93,9 +81,7 @@ public class POIUploadingService {
      * @param poiDTO the POI to be checked
      */
     private void checkPOIAuthor(POIInputDTO poiDTO) {
-        if (!userService.getUserById((poiDTO.poi_author())).getRole().contains(UserRole.CONTRIBUTOR) &&
-                !userService.getUserById((poiDTO.poi_author())).getRole().contains(UserRole.AUTHORIZED_CONTRIBUTOR) &&
-                !userService.getUserById((poiDTO.poi_author())).getRole().contains(UserRole.CURATOR)) {
+        if (!userService.getUserById((poiDTO.poi_author())).getRole().contains(UserRole.CONTRIBUTOR) && !userService.getUserById((poiDTO.poi_author())).getRole().contains(UserRole.AUTHORIZED_CONTRIBUTOR) && !userService.getUserById((poiDTO.poi_author())).getRole().contains(UserRole.CURATOR)) {
             throw new IllegalArgumentException("The author is not authorized to upload a POI");
         }
     }
@@ -107,15 +93,36 @@ public class POIUploadingService {
      */
     private void checkPOICoordinates(POIInputDTO poiDTO) {
 
-        List<Coordinate> territory = userService.getUserById(poiDTO.poi_author()).getMunicipality().getTerritory();
-
         if (poiDTO.poi_coordinate() == null) {
             throw new IllegalArgumentException("The coordinates must not be null");
         }
 
-//        if (!MatchingAlgorithms.isInsidePolygon(territory, poiDTO.poi_coordinate())) {
-        //           throw new IllegalArgumentException("The coordinates must be within the municipality territory");
-        //      }
+        if (!checkCoordinate(poiDTO.poi_coordinate(), poiDTO)) {
+            throw new IllegalArgumentException("The coordinates must be inside the perimeter area of the Municipality");
+        }
+    }
+
+    /**
+     * Check if the coordinate is inside the perimeter area of the Municipality
+     *
+     * @param coordinate the coordinate to check
+     * @return true if the coordinate is inside the perimeter area of the Municipality, false otherwise
+     */
+    public boolean checkCoordinate(Coordinate coordinate, POIInputDTO poiDTO) {
+        List<Coordinate> territory = userService.getUserById(poiDTO.poi_author()).getMunicipality().getTerritory();
+
+        int intersections = 0;
+
+        for (int i = 0, j = territory.size() - 1; i < territory.size(); j = i++) {
+            Coordinate c1 = territory.get(i);
+            Coordinate c2 = territory.get(j);
+            if ((c1.getX() > coordinate.getX()) != (c2.getX() > coordinate.getX())) {
+                if (coordinate.getY() < (c2.getY() - c1.getY()) * (coordinate.getX() - c1.getX()) / (c2.getX() - c1.getX()) + c1.getY()) {
+                    intersections++;
+                }
+            }
+        }
+        return intersections % 2 != 0;
     }
 
     /**
