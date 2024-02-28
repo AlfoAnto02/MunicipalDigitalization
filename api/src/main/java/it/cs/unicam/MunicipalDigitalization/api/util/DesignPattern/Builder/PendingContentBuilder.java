@@ -31,19 +31,9 @@ public class PendingContentBuilder implements ContentBuilder {
     private ContentType type;
 
     /**
-     * The photo of the content
+     * The content field
      */
-    private String photo;
-
-    /**
-     * The link of the content
-     */
-    private String link;
-
-    /**
-     * The description of the content
-     */
-    private String description;
+    private String content;
 
     /**
      * The referred POI
@@ -76,18 +66,8 @@ public class PendingContentBuilder implements ContentBuilder {
     }
 
     @Override
-    public void setContentPhoto(String photo) {
-        this.photo = photo;
-    }
-
-    @Override
-    public void setContentLink(String link) {
-        this.link = link;
-    }
-
-    @Override
-    public void setContentDescription(String description) {
-        this.description = description;
+    public void setContentField(String content) {
+        this.content = content;
     }
 
     @Override
@@ -109,9 +89,7 @@ public class PendingContentBuilder implements ContentBuilder {
         this.author = null;
         this.name = null;
         this.type = null;
-        this.photo = null;
-        this.link = null;
-        this.description = null;
+        this.content = null;
         this.contentStatus = null;
     }
 
@@ -121,15 +99,15 @@ public class PendingContentBuilder implements ContentBuilder {
      * @return the pending content
      */
     public PendingContent build() {
-        if (this.author == null || this.name == null || this.type == null || (this.photo == null && this.link == null && this.description == null) || this.contentStatus == null)
+        if (this.author == null || this.name == null || this.type == null || this.content == null || this.contentStatus == null)
             throw new IllegalArgumentException("All fields must be set");
         else if (this.referredPOI == null && this.referredItinerary == null)
             throw new IllegalArgumentException("Referred element must be set");
         else if (this.referredPOI != null && this.referredItinerary != null)
             throw new IllegalArgumentException("Referred element must be unique");
         else if (this.referredPOI != null)
-            return new PendingContent(this.referredPOI, this.name, this.author, this.type, this.description, this.link, this.photo);
+            return new PendingContent(this.referredPOI, this.name, this.author, this.type, this.content);
         else
-            return new PendingContent(this.referredItinerary, this.name, this.author, this.type, this.description, this.link, this.photo);
+            return new PendingContent(this.referredItinerary, this.name, this.author, this.type,this.content);
     }
 }

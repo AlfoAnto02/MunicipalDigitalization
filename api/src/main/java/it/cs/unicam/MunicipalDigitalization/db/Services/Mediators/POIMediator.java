@@ -55,7 +55,8 @@ public class POIMediator {
      */
     public void validatePOI(ValidateRequest request){
         if(userService.getUserById(request.getValidatorID()).getRole().contains(UserRole.CURATOR) && (poiService
-                .getPOIByID(request.getRequestID()).getElementStatus().equals(ElementStatus.PENDING))){
+                .getPOIByID(request.getRequestID()).getElementStatus().equals(ElementStatus.PENDING)) &&
+                userService.getUserById(request.getValidatorID()).getMunicipality().equals(poiService.getPOIByID(request.getRequestID()).getMunicipality())){
             poiService.validatePOI(request.getRequestID(),request.isValidated());
             userService.updateUserPOIList(request.getRequestID(), request.isValidated());
             municipalityService.updateMunicipalityPOIList(request.getRequestID(),request.isValidated());

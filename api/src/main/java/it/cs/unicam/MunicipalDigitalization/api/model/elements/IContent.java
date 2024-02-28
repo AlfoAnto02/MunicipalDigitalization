@@ -23,27 +23,12 @@ public interface IContent {
      */
     void setType(ContentType type);
 
-
-    /**
-     * Setter for the description of the content.
-     *
-     * @param description The new description of the content.
-     */
-    void setDescription(String description);
-
-    /**
-     * Setter for the link of the content.
-     *
-     * @param link The new link of the content.
-     */
-    void setLink(String link);
-
     /**
      * Setter for the photo of the content.
      *
      * @param photo The new photo of the content.
      */
-    void setPhoto(String photo);
+    void setContent(String photo);
 
     /**
      * Getter for the Referred Municipal Element of the content.
@@ -72,11 +57,4 @@ public interface IContent {
      * @param status status of the Element
      */
     void setElementStatus(ElementStatus status);
-
-    /**
-     * This method is used to get the content description and type.
-     *
-     * @return A string representation of the content description and type.
-     */
-    String getContent();
 }

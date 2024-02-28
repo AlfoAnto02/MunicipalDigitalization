@@ -81,22 +81,10 @@ public abstract class AbstractContent implements IContent {
     private ContentType type;
 
     /**
-     * Description type to fill
-     */
-    @Column(name = "Description", nullable = true)
-    private String description;
-
-    /**
-     * Link POIType to fill
-     */
-    @Column(name = "Link", nullable = true)
-    private String link;
-
-    /**
-     * Photo type to fill
+     * Type to fill
      */
     @Column(name = "Photo", nullable = true)
-    private String photo;
+    private String content;
 
     public AbstractContent() {
 
@@ -110,20 +98,16 @@ public abstract class AbstractContent implements IContent {
      * @param name the name of the content.
      * @param author the author of the content.
      * @param type the type of the content.
-     * @param description the description of the content.
-     * @param link the link of the content.
-     * @param photo the photo of the content.
+     * @param content the content
      */
     public AbstractContent(AbstractPOI referredPOI, String name,
                            AbstractAuthenticatedUser author, ContentType type,
-                           String description, String link, String photo) {
+                            String content) {
         this.referredPOI = referredPOI;
         this.name = name;
         this.author = author;
         this.type = type;
-        this.description = description;
-        this.link = link;
-        this.photo = photo;
+        this.content = content;
     }
 
     /**
@@ -134,20 +118,16 @@ public abstract class AbstractContent implements IContent {
      * @param name the name of the content.
      * @param author the author of the content.
      * @param type the type of the content.
-     * @param description the description of the content.
-     * @param link the link of the content.
-     * @param photo the photo of the content.
+     * @param content the content.
      */
 
     public AbstractContent(String name, AbstractItinerary referredItinerary, AbstractAuthenticatedUser author,
-                           ContentType type, String description, String link, String photo) {
+                           ContentType type, String content) {
         this.name = name;
         this.referredItinerary = referredItinerary;
         this.author = author;
         this.type = type;
-        this.description = description;
-        this.link = link;
-        this.photo = photo;
+        this.content = content;
     }
 
 
@@ -163,18 +143,8 @@ public abstract class AbstractContent implements IContent {
     }
 
     @Override
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    @Override
-    public void setLink(String link) {
-        this.link = link;
-    }
-
-    @Override
-    public void setPhoto(String photo) {
-        this.photo = photo;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     /**
@@ -185,14 +155,5 @@ public abstract class AbstractContent implements IContent {
     public void setElementStatus(ElementStatus elementStatus) {
         if (elementStatus == null) throw new IllegalArgumentException("Element status invalid");
         this.elementStatus = elementStatus;
-    }
-
-    /**
-     * Method to get the content description and type.
-     *
-     * @return A string representation of the content description and type.
-     */
-    public String getContent() {
-        return "Content: " + this.description + " " + this.getType();
     }
 }

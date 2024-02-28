@@ -120,7 +120,7 @@ public class ContentRepoTest {
      * @param user The AuthorizedContributor who creates the Content.
      */
     private void createContent(AuthorizedContributor user) {
-        ContentInputDTO contentDTO = new ContentInputDTO("Barcellona", 1L, null, user.getId(), ContentType.PHOTO, null, null, "barcellonaspettacolo.png");
+        ContentInputDTO contentDTO = new ContentInputDTO("Barcellona", 1L, null, user.getId(), ContentType.PHOTO, "barcellonaspettacolo.png");
         uploadingService.uploadContent(contentDTO);
     }
 

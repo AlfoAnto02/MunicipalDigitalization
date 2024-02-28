@@ -33,25 +33,11 @@ public interface ContentBuilder {
     void setContentType(ContentType type);
 
     /**
-     * This method is used to set the photo of the content.
+     * This method is used to set the  content field
      *
-     * @param photo The photo of the content.
+     * @param content The Field of the content.
      */
-    void setContentPhoto(String photo);
-
-    /**
-     * This method is used to set the link of the content.
-     *
-     * @param link The link of the content.
-     */
-    void setContentLink(String link);
-
-    /**
-     * This method is used to set the description of the content.
-     *
-     * @param description The description of the content.
-     */
-    void setContentDescription(String description);
+    void setContentField(String content);
 
     /**
      * This method is used to set the referred municipal element of the content.

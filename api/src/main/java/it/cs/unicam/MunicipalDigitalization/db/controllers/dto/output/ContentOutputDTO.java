@@ -6,7 +6,7 @@ public record ContentOutputDTO (
         Long content_id,
         String content_name,
         ContentType content_type,
-        String content,
+        String content_field,
         String author
 ){
 }

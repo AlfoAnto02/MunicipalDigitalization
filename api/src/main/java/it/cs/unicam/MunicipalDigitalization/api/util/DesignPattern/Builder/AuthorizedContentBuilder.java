@@ -31,19 +31,9 @@ public class AuthorizedContentBuilder implements ContentBuilder {
     private ContentType type;
 
     /**
-     * The photo of the content
+     * The content field
      */
-    private String photo;
-
-    /**
-     * The link of the content
-     */
-    private String link;
-
-    /**
-     * The description of the content
-     */
-    private String description;
+    private String content;
 
     /**
      * The referred POI
@@ -76,18 +66,8 @@ public class AuthorizedContentBuilder implements ContentBuilder {
     }
 
     @Override
-    public void setContentPhoto(String photo) {
-        this.photo = photo;
-    }
-
-    @Override
-    public void setContentLink(String link) {
-        this.link = link;
-    }
-
-    @Override
-    public void setContentDescription(String description) {
-        this.description = description;
+    public void setContentField(String content) {
+        this.content = content;
     }
 
     @Override
@@ -110,9 +90,7 @@ public class AuthorizedContentBuilder implements ContentBuilder {
         this.author = null;
         this.name = null;
         this.type = null;
-        this.photo = null;
-        this.link = null;
-        this.description = null;
+        this.content = null;
         this.contentStatus = null;
     }
 
@@ -122,15 +100,15 @@ public class AuthorizedContentBuilder implements ContentBuilder {
      * @return the authorized content
      */
     public AuthorizedContent build() {
-        if (this.author == null || this.name == null || this.type == null || (this.photo == null && this.link == null && this.description == null) || this.contentStatus == null)
+        if (this.author == null || this.name == null || this.type == null || this.content == null  || this.contentStatus == null)
             throw new IllegalArgumentException("All fields must be set");
         else if (this.referredPOI == null && this.referredItinerary == null)
             throw new IllegalArgumentException("Referred element must be set");
         else if (this.referredPOI != null && this.referredItinerary != null)
             throw new IllegalArgumentException("Referred element must be unique");
         else if (this.referredPOI != null)
-            return new AuthorizedContent(this.referredPOI, this.name, this.author, this.type, this.description, this.link, this.photo);
+            return new AuthorizedContent(this.referredPOI, this.name, this.author, this.type,this.content);
         else
-            return new AuthorizedContent(this.name, this.referredItinerary, this.author, this.type, this.description, this.link, this.photo);
+            return new AuthorizedContent(this.name, this.referredItinerary, this.author, this.type,this.content);
     }
 }

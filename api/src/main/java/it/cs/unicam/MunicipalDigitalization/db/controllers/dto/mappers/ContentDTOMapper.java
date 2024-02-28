@@ -13,12 +13,12 @@ public class ContentDTOMapper implements Function<AbstractContent, ContentOutput
     public ContentOutputDTO apply(AbstractContent abstractContent) {
         String content;
         if(abstractContent.getType().equals(ContentType.LINK)){
-            content = "Link: " + abstractContent.getLink();
+            content = "Link: " + abstractContent.getContent();
         }
         else if (abstractContent.getType().equals(ContentType.PHOTO)){
-            content = "Photo: " + abstractContent.getPhoto();
+            content = "Photo: " + abstractContent.getContent();
         } else {
-            content = "Description: " + abstractContent.getDescription();
+            content = "Description: " + abstractContent.getContent();
         }
         return new ContentOutputDTO(
                 abstractContent.getId(),

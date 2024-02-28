@@ -97,7 +97,9 @@ public class MatchingAlgorithms {
      */
     public static boolean isContentSimilarToContentList(AbstractContent content, List<AbstractContent> contentList) {
         for (AbstractContent c : contentList) {
-            if (content.getType().equals(c.getType()) && (content.getPhoto().equals(c.getPhoto()) && content.getLink().equals(c.getLink()) && content.getDescription().equals(c.getDescription())) && (content.getReferredItinerary().getId().equals(c.getReferredItinerary().getId()) && content.getReferredPOI().getId().equals(c.getReferredPOI().getId())) && c != content)
+            if (content.getType().equals(c.getType()) && content.getContent().equals(c.getContent())
+                    && (content.getReferredItinerary().getId().equals(c.getReferredItinerary().getId())
+                    && content.getReferredPOI().getId().equals(c.getReferredPOI().getId())) && c != content)
                 return true;
         }
         return false;

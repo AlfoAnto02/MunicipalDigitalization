@@ -53,7 +53,9 @@ public class ContentMediator {
      */
     public void validateContent(ValidateRequest request) {
         if(userService.getUserById(request.getValidatorID()).getRole().contains(UserRole.CURATOR) && (contentService
-                .getContentById(request.getRequestID()).getElementStatus().equals(ElementStatus.PENDING))){
+                .getContentById(request.getRequestID()).getElementStatus().equals(ElementStatus.PENDING)) &&
+                 userService.getUserById(request.getValidatorID()).getMunicipality().
+                         equals(contentService.getContentById(request.getRequestID()).getAuthor().getMunicipality())){
             contentService.validateContent(request.getRequestID(),request.isValidated());
             userService.updateUserContentList(request.getRequestID(),request.isValidated());
             if(contentService.getContentById(request.getRequestID()).getReferredPOI()!=null){

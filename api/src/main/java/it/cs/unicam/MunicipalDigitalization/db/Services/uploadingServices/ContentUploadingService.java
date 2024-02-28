@@ -87,15 +87,19 @@ public class ContentUploadingService {
         contentBuilder.setContentAuthor(userService.getUserById(contentDTO.author_id()));
         contentBuilder.setContentName(contentDTO.content_name());
         contentBuilder.setContentType(contentDTO.contentType());
-        if (contentDTO.contentType().equals(ContentType.PHOTO))
-            contentBuilder.setContentPhoto(contentDTO.content_photo());
-        else if (contentDTO.contentType().equals(ContentType.LINK))
-            contentBuilder.setContentLink(contentDTO.content_link());
-        else contentBuilder.setContentDescription(contentDTO.content_description());
-        if (contentDTO.referredPOI_id() != null)
-            contentBuilder.setContentReferredMunicipalElement(poiService.getPOIByID(contentDTO.referredPOI_id()));
-        else if (contentDTO.referredItinerary_id() != null)
-            contentBuilder.setContentReferredMunicipalElement(itineraryService.getItineraryById(contentDTO.referredItinerary_id()));
+        contentBuilder.setContentField(contentDTO.content_field());
+        if (contentDTO.referredPOI_id() != null) {
+            if(poiService.getPOIByID(contentDTO.referredPOI_id()).getMunicipality().equals(userService.getUserById(contentDTO.author_id()).getMunicipality())) {
+                contentBuilder.setContentReferredMunicipalElement(poiService.getPOIByID(contentDTO.referredPOI_id()));
+            }
+            else throw new IllegalArgumentException("The POI does not belong to the municipality");
+        }
+        else if (contentDTO.referredItinerary_id() != null) {
+            if(itineraryService.getItineraryById(contentDTO.referredItinerary_id()).getMunicipality().equals(userService.getUserById(contentDTO.author_id()).getMunicipality())) {
+                contentBuilder.setContentReferredMunicipalElement(itineraryService.getItineraryById(contentDTO.referredItinerary_id()));
+            }
+            else throw new IllegalArgumentException("The itinerary does not belong to the municipality");
+        }
         contentBuilder.setContentStatus();
     }
 
@@ -161,14 +165,13 @@ public class ContentUploadingService {
         if (contentDTO.contentType() == null) {
             throw new IllegalArgumentException("Type cannot be null");
         }
-
         if (contentDTO.contentType().equals(ContentType.PHOTO)) {
             checkPhoto(contentDTO);
         } else if (contentDTO.contentType().equals(ContentType.LINK)) {
             checkLink(contentDTO);
         } else if (contentDTO.contentType().equals(ContentType.DESCRIPTION)) {
             checkDescription(contentDTO);
-        }
+        } else throw new IllegalArgumentException("Invalid content type");
     }
 
     /**
@@ -177,7 +180,8 @@ public class ContentUploadingService {
      * @param contentDTO the content to be checked
      */
     private void checkPhoto(ContentInputDTO contentDTO) {
-        if (!((contentDTO.content_photo() == null) || contentDTO.content_photo().endsWith(".jpg") || contentDTO.content_photo().endsWith(".png") || contentDTO.content_photo().endsWith(".jpeg"))) {
+        if (!((contentDTO.content_field() == null) || contentDTO.content_field().endsWith(".jpg")
+                || contentDTO.content_field().endsWith(".png") || contentDTO.content_field().endsWith(".jpeg"))) {
             throw new IllegalArgumentException("Photo must be a jpg, jpeg or png file");
         }
     }
@@ -188,10 +192,10 @@ public class ContentUploadingService {
      * @param contentDTO the content to be checked
      */
     private void checkLink(ContentInputDTO contentDTO) {
-        if (contentDTO.content_link() == null) {
+        if (contentDTO.content_field() == null) {
             throw new IllegalArgumentException("Link cannot be null");
         }
-        if (!isLink(contentDTO.content_link())) {
+        if (!isLink(contentDTO.content_field())) {
             throw new IllegalArgumentException("Link must be a valid link");
         }
     }
@@ -202,13 +206,13 @@ public class ContentUploadingService {
      * @param contentDTO the content to be checked
      */
     private void checkDescription(ContentInputDTO contentDTO) {
-        if (contentDTO.content_description() == null) {
+        if (contentDTO.content_field() == null) {
             throw new IllegalArgumentException("Description cannot be null");
         }
-        if (contentDTO.content_description().isBlank()) {
+        if (contentDTO.content_field().isBlank()) {
             throw new IllegalArgumentException("Description cannot be blank");
         }
-        if (contentDTO.content_description().length() > 200 || contentDTO.content_description().length() < 10) {
+        if (contentDTO.content_field().length() > 200 || contentDTO.content_field().length() < 10) {
             throw new IllegalArgumentException("Description must be between 10 and 200 characters");
         }
     }

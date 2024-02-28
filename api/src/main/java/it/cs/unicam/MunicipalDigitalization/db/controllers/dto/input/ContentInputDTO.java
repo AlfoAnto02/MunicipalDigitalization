@@ -11,9 +11,7 @@ import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
  * @param referredItinerary_id referred Itinerary id of the content
  * @param author_id author id of the content
  * @param contentType type of the content
- * @param content_description description of the content
- * @param content_link link of the content
- * @param content_photo photo of the content
+ * @param content_field the content
  */
 public record ContentInputDTO (
         String content_name,
@@ -21,9 +19,7 @@ public record ContentInputDTO (
         Long referredItinerary_id,
         Long author_id,
         ContentType contentType,
-        String content_description,
-        String content_link,
-        String content_photo
+        String content_field
 )
 {
 }

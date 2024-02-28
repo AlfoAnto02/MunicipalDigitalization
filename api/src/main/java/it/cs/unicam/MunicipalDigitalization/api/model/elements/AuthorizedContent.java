@@ -31,19 +31,17 @@ public class AuthorizedContent extends AbstractContent {
      * @param name name of the content
      * @param author author of the content
      * @param type type of the content
-     * @param description description of the content
-     * @param link link of the content
-     * @param photo photo of the content
+     * @param content content of the content
      */
     public AuthorizedContent(AbstractPOI referredPOI, String name, AbstractAuthenticatedUser author,
-                             ContentType type, String description, String link, String photo) {
-        super(referredPOI, name, author, type, description, link, photo);
+                             ContentType type, String content) {
+        super(referredPOI, name, author, type, content);
         this.setElementStatus(ElementStatus.PUBLISHED);
     }
 
     public AuthorizedContent(String name, AbstractItinerary referredItinerary, AbstractAuthenticatedUser author,
-                             ContentType type, String description, String link, String photo) {
-        super(name, referredItinerary, author, type, description, link, photo);
+                             ContentType type,String content) {
+        super(name, referredItinerary, author, type,content);
         this.setElementStatus(ElementStatus.PUBLISHED);
     }
 
