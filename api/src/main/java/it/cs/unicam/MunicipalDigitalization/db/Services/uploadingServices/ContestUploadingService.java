@@ -9,28 +9,27 @@ import it.cs.unicam.MunicipalDigitalization.db.Services.Mediators.ContestMediato
 import it.cs.unicam.MunicipalDigitalization.db.Services.POIService;
 import it.cs.unicam.MunicipalDigitalization.db.Services.UserService;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.input.ContestInputDTO;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * Service class for uploading contests to the database.
+ */
 @Service
+@AllArgsConstructor(onConstructor_ = @Autowired)
 public class ContestUploadingService {
 
     private final UserService userService;
+
     private final POIService poiService;
+
     private final ItineraryService itineraryService;
+
     private final ContestMediator contestMediator;
 
-    @Autowired
-    public ContestUploadingService(UserService userService, POIService poiService, ItineraryService itineraryService,
-                                   ContestMediator contestMediator) {
-        this.userService = userService;
-        this.poiService = poiService;
-        this.itineraryService = itineraryService;
-        this.contestMediator = contestMediator;
-    }
-
     /**
-     * Uploads a contest to the database
+     * Uploads a contest to the database.
      *
      * @param contestInputDTO the contest in DTO to be uploaded
      */
@@ -42,9 +41,9 @@ public class ContestUploadingService {
     }
 
     /**
-     * Builds a contest using the ContributionContestBuilder
+     * Builds a contest using the ContributionContestBuilder.
      *
-     * @param contestBuilder the builder to be used to build the contest
+     * @param contestBuilder  the builder to be used to build the contest
      * @param contestInputDTO the contest in DTO to be uploaded
      */
     private void buildContest(ContributionContestBuilder contestBuilder, ContestInputDTO contestInputDTO) {
@@ -55,41 +54,91 @@ public class ContestUploadingService {
         contestBuilder.setInvitationType(contestInputDTO.contest_invitationType());
         contestBuilder.setMinParticipants(contestInputDTO.minParticipants());
         contestBuilder.setContestType(contestInputDTO.contestType());
-        if(contestInputDTO.contest_pois()!=null && !contestInputDTO.contest_pois().isEmpty()) {
+        if (contestInputDTO.contest_pois() != null && !contestInputDTO.contest_pois().isEmpty()) {
             contestBuilder.setPOIs(poiService.getPOIsByIds(contestInputDTO.contest_pois()));
         }
-        if (contestInputDTO.contest_itineraries()!=null && !contestInputDTO.contest_itineraries().isEmpty()) {
+        if (contestInputDTO.contest_itineraries() != null && !contestInputDTO.contest_itineraries().isEmpty()) {
             contestBuilder.setItineraries(itineraryService.getItinerariesByIds(contestInputDTO.contest_itineraries()));
         }
     }
 
     /**
-     * Checks if the contest is valid
+     * Checks if the contest is valid.
      *
      * @param contestInputDTO the contest in DTO to be uploaded
      */
-
     private void checkContest(ContestInputDTO contestInputDTO) {
-    /*    for(AbstractPOI poi : poiService.getPOIsByIds(contestInputDTO.contest_pois())){
-            if(poi.getMunicipality().getId().equals(userService.getUserById(contestInputDTO.contest_author_id()).getMunicipality().getId())){
+        checkPOIMunicipality(contestInputDTO);
+        checkContestName(contestInputDTO);
+        checkContestDescription(contestInputDTO);
+        checkContestInvitationType(contestInputDTO);
+        checkMinParticipants(contestInputDTO);
+        checkContestType(contestInputDTO);
+    }
+
+    /**
+     * Checks if the POI's municipality matches the contest's municipality.
+     *
+     * @param contestInputDTO the contest in DTO to be uploaded
+     */
+    private void checkPOIMunicipality(ContestInputDTO contestInputDTO) {
+        for (AbstractPOI poi : poiService.getPOIsByIds(contestInputDTO.contest_pois())) {
+            if (poi.getMunicipality().getId().equals(userService.getUserById(contestInputDTO.contest_author_id()).getMunicipality().getId())) {
                 throw new IllegalArgumentException("POI is not in the same municipality");
             }
         }
-        if(contestInputDTO.contest_name() == null || contestInputDTO.contest_name().length()>100 || contestInputDTO.contest_name().length()<10) {
+    }
+
+    /**
+     * Checks if the contest name is valid.
+     *
+     * @param contestInputDTO the contest in DTO to be uploaded
+     */
+    private void checkContestName(ContestInputDTO contestInputDTO) {
+        if (contestInputDTO.contest_name() == null || contestInputDTO.contest_name().length() > 100 || contestInputDTO.contest_name().length() < 10) {
             throw new IllegalArgumentException("Contest Name is null");
         }
-        if(contestInputDTO.contest_description() == null || contestInputDTO.contest_description().length()>1000
-                || contestInputDTO.contest_description().length()<20) {
+    }
+
+    /**
+     * Checks if the contest description is valid.
+     *
+     * @param contestInputDTO the contest in DTO to be uploaded
+     */
+    private void checkContestDescription(ContestInputDTO contestInputDTO) {
+        if (contestInputDTO.contest_description() == null || contestInputDTO.contest_description().length() > 1000 || contestInputDTO.contest_description().length() < 20) {
             throw new IllegalArgumentException("Contest Description is invalid");
         }
-        if(contestInputDTO.contest_invitationType() == null || !(contestInputDTO.contest_invitationType().
-                equals(InvitationType.INVITE_ONLY) || contestInputDTO.contest_invitationType().equals(InvitationType.PUBLIC))){
+    }
+
+    /**
+     * Checks if the contest invitation type is valid.
+     *
+     * @param contestInputDTO the contest in DTO to be uploaded
+     */
+    private void checkContestInvitationType(ContestInputDTO contestInputDTO) {
+        if (contestInputDTO.contest_invitationType() == null || !(contestInputDTO.contest_invitationType().equals(InvitationType.INVITE_ONLY) || contestInputDTO.contest_invitationType().equals(InvitationType.PUBLIC))) {
             throw new IllegalArgumentException("Contest Invitation Type is invalid");
         }
-        if((contestInputDTO.minParticipants()>(userService.getUserById(contestInputDTO.contest_author_id())
-                .getMunicipality().getListOfIUsers().size()) / 10) || contestInputDTO.minParticipants()<1)
+    }
+
+    /**
+     * Checks if the minimum number of participants is valid.
+     *
+     * @param contestInputDTO the contest in DTO to be uploaded
+     */
+    private void checkMinParticipants(ContestInputDTO contestInputDTO) {
+        if ((contestInputDTO.minParticipants() > (userService.getUserById(contestInputDTO.contest_author_id()).getMunicipality().getListOfIUsers().size()) / 10) || contestInputDTO.minParticipants() < 1)
             throw new IllegalArgumentException("Min Participants is invalid");
-        if(contestInputDTO.contestType() == null || !(contestInputDTO.contestType().equals(ContestType.PHOTO_CONTEST)
-                || contestInputDTO.contestType().equals(ContestType.WRITING_CONTEST))) throw new IllegalArgumentException("Contest Type is invalid");*/
+    }
+
+    /**
+     * Checks if the contest type is valid.
+     *
+     * @param contestInputDTO the contest in DTO to be uploaded
+     */
+    private void checkContestType(ContestInputDTO contestInputDTO) {
+        if (contestInputDTO.contestType() == null || !(contestInputDTO.contestType().equals(ContestType.PHOTO_CONTEST) || contestInputDTO.contestType().equals(ContestType.WRITING_CONTEST)))
+            throw new IllegalArgumentException("Contest Type is invalid");
     }
 }
