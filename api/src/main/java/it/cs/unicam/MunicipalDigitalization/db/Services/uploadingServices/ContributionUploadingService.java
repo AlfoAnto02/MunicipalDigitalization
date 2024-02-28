@@ -70,7 +70,8 @@ public class ContributionUploadingService {
      * @param contributionInputDTO DTO of the Contribution.
      */
     private void checkMunicipality(ContributionInputDTO contributionInputDTO) {
-        if (!contestService.getContestById(contributionInputDTO.contributionContestId()).getMunicipality().equals(userService.getUserById(contributionInputDTO.authorId()).getMunicipality())) {
+        if (!contestService.getContestById(contributionInputDTO.contributionContestId()).getMunicipality()
+                .equals(userService.getUserById(contributionInputDTO.authorId()).getMunicipality())) {
             throw new IllegalArgumentException("You can't vote a Contest of another Municipality");
         }
     }
@@ -114,7 +115,8 @@ public class ContributionUploadingService {
      * @param contributionInputDTO DTO of the Contribution.
      */
     private void checkTitle(ContributionInputDTO contributionInputDTO) {
-        if (contributionInputDTO.title() == null || contributionInputDTO.title().isEmpty() || contributionInputDTO.title().length() < 5 || contributionInputDTO.title().length() > 50) {
+        if (contributionInputDTO.title() == null || contributionInputDTO.title().isEmpty()
+                || contributionInputDTO.title().length() < 5 || contributionInputDTO.title().length() > 50) {
             throw new IllegalArgumentException("Title Error");
         }
     }
@@ -125,7 +127,8 @@ public class ContributionUploadingService {
      * @param contributionInputDTO DTO of the Contribution.
      */
     private void checkDescription(ContributionInputDTO contributionInputDTO) {
-        if (contributionInputDTO.description() == null || contributionInputDTO.description().isEmpty() || contributionInputDTO.description().length() < 5 || contributionInputDTO.description().length() > 200) {
+        if (contributionInputDTO.description() == null || contributionInputDTO.description().isEmpty()
+                || contributionInputDTO.description().length() < 5 || contributionInputDTO.description().length() > 200) {
             throw new IllegalArgumentException("Description Error");
         }
     }
@@ -136,7 +139,10 @@ public class ContributionUploadingService {
      * @param contributionInputDTO DTO of the Contribution.
      */
     private void checkUserParticipation(ContributionInputDTO contributionInputDTO) {
-        if (!userService.getUserById(contributionInputDTO.authorId()).getContestsParticipated().contains(contestService.getContestById(contributionInputDTO.contributionContestId())) && !contestService.getContestById(contributionInputDTO.contributionContestId()).getParticipants().contains(userService.getUserById(contributionInputDTO.authorId()))) {
+        if (!userService.getUserById(contributionInputDTO.authorId()).getContestsParticipated()
+                .contains(contestService.getContestById(contributionInputDTO.contributionContestId())) &&
+                !contestService.getContestById(contributionInputDTO.contributionContestId()).getParticipants()
+                        .contains(userService.getUserById(contributionInputDTO.authorId()))) {
             throw new IllegalArgumentException("User Doesn't participate to the contest");
         }
     }

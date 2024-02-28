@@ -67,12 +67,27 @@ public class ContestUploadingService {
      * @param contestInputDTO the contest in DTO to be uploaded
      */
     private void checkContest(ContestInputDTO contestInputDTO) {
+        checkItineraryMunicipalityOfTheAnimator(contestInputDTO);
         checkPOIMunicipalityOfTheAnimator(contestInputDTO);
         checkContestName(contestInputDTO);
         checkContestDescription(contestInputDTO);
         checkContestInvitationType(contestInputDTO);
         checkMinParticipants(contestInputDTO);
         checkContestType(contestInputDTO);
+    }
+
+    /**
+     * Checks if the itinerary's municipality matches the Animator's municipality.
+     *
+     * @param contestInputDTO the contest in DTO to be uploaded
+     */
+
+    private void checkItineraryMunicipalityOfTheAnimator(ContestInputDTO contestInputDTO) {
+        for (Long itineraryId : contestInputDTO.contest_itineraries()) {
+            if (!itineraryService.getItineraryById(itineraryId).getMunicipality().equals(userService.getUserById(contestInputDTO.contest_author_id()).getMunicipality())) {
+                throw new IllegalArgumentException("Itinerary's municipality doesn't match the Animator's municipality");
+            }
+        }
     }
 
     /**

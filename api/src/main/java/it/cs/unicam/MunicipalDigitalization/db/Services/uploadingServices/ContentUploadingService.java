@@ -105,7 +105,9 @@ public class ContentUploadingService {
             throw new IllegalArgumentException("Author cannot be null");
         }
 
-        if (userService.getUserById(contentDTO.author_id()).getRole().contains(UserRole.CONTRIBUTOR) && userService.getUserById(contentDTO.author_id()).getRole().contains(UserRole.AUTHORIZED_CONTRIBUTOR) && userService.getUserById(contentDTO.author_id()).getRole().contains(UserRole.CURATOR)) {
+        if (!userService.getUserById(contentDTO.author_id()).getRole().contains(UserRole.CONTRIBUTOR)
+                && !userService.getUserById(contentDTO.author_id()).getRole().contains(UserRole.AUTHORIZED_CONTRIBUTOR)
+                && !userService.getUserById(contentDTO.author_id()).getRole().contains(UserRole.CURATOR)) {
             throw new IllegalArgumentException("Author is not authorized to upload content");
         }
     }

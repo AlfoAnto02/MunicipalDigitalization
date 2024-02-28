@@ -108,7 +108,9 @@ public class ItineraryUploadingService {
      * @param itineraryDTO the itinerary to be checked
      */
     private void checkItineraryAuthor(ItineraryInputDTO itineraryDTO) {
-        if (userService.getUserById(itineraryDTO.authorID()).getRole().contains(UserRole.CONTRIBUTOR) && userService.getUserById(itineraryDTO.authorID()).getRole().contains(UserRole.AUTHORIZED_CONTRIBUTOR) && userService.getUserById(itineraryDTO.authorID()).getRole().contains(UserRole.CURATOR)) {
+        if (!userService.getUserById(itineraryDTO.authorID()).getRole().contains(UserRole.CONTRIBUTOR)
+                && !userService.getUserById(itineraryDTO.authorID()).getRole().contains(UserRole.AUTHORIZED_CONTRIBUTOR)
+                && !userService.getUserById(itineraryDTO.authorID()).getRole().contains(UserRole.CURATOR)) {
             throw new IllegalArgumentException("The author is not authorized to upload an itinerary");
         }
     }
@@ -138,14 +140,16 @@ public class ItineraryUploadingService {
      * @param itineraryDTO the itinerary to be checked
      */
     private void checkItineraryPOIs(ItineraryInputDTO itineraryDTO) {
-
-
         if (userService.getUserById(itineraryDTO.authorID()).getMunicipality() == null) {
             throw new IllegalArgumentException("The author is not associated with a municipality");
         }
-
         if (itineraryDTO.POIsIDs().isEmpty()) {
             throw new IllegalArgumentException("The itinerary must contain at least one POI");
+        }
+        for(Long poiID : itineraryDTO.POIsIDs()){
+            if(poiService.getPOIByID(poiID).getMunicipality() != userService.getUserById(itineraryDTO.authorID()).getMunicipality()){
+                throw new IllegalArgumentException("At least one POI is not associated with the author's municipality");
+            }
         }
     }
 }

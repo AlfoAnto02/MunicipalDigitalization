@@ -81,7 +81,9 @@ public class POIUploadingService {
      * @param poiDTO the POI to be checked
      */
     private void checkPOIAuthor(POIInputDTO poiDTO) {
-        if (!userService.getUserById((poiDTO.poi_author())).getRole().contains(UserRole.CONTRIBUTOR) && !userService.getUserById((poiDTO.poi_author())).getRole().contains(UserRole.AUTHORIZED_CONTRIBUTOR) && !userService.getUserById((poiDTO.poi_author())).getRole().contains(UserRole.CURATOR)) {
+        if (!userService.getUserById((poiDTO.poi_author())).getRole().contains(UserRole.CONTRIBUTOR)
+                && !userService.getUserById((poiDTO.poi_author())).getRole().contains(UserRole.AUTHORIZED_CONTRIBUTOR)
+                && !userService.getUserById((poiDTO.poi_author())).getRole().contains(UserRole.CURATOR)) {
             throw new IllegalArgumentException("The author is not authorized to upload a POI");
         }
     }
@@ -108,21 +110,21 @@ public class POIUploadingService {
      * @return true if the coordinate is inside the perimeter area of the Municipality, false otherwise
      */
     public boolean checkCoordinate(Coordinate punto, POIInputDTO poiDTO) {
-        List<Coordinate> poligono = userService.getUserById(poiDTO.poi_author()).getMunicipality().getTerritory();
+        List<Coordinate> polygon = userService.getUserById(poiDTO.poi_author()).getMunicipality().getTerritory();
 
-        int lati = poligono.size();
-        boolean dentro = false;
-        for (int i = 0, j = lati - 1; i < lati; j = i++) {
-            Coordinate puntoI = poligono.get(i);
-            Coordinate puntoJ = poligono.get(j);
+        int side = polygon.size();
+        boolean inside = false;
+        for (int i = 0, j = side - 1; i < side; j = i++) {
+            Coordinate point1 = polygon.get(i);
+            Coordinate point2 = polygon.get(j);
 
-            if ((puntoI.getY() > punto.getY()) != (puntoJ.getY() > punto.getY()) &&
-                    (punto.getX() < (puntoJ.getX() - puntoI.getX()) * (punto.getY() - puntoI.getY()) /
-                            (puntoJ.getY() - puntoI.getY()) + puntoI.getX())) {
-                dentro = !dentro;
+            if ((point1.getY() > punto.getY()) != (point2.getY() > punto.getY()) &&
+                    (punto.getX() < (point2.getX() - point1.getX()) * (punto.getY() - point1.getY()) /
+                            (point2.getY() - point1.getY()) + point1.getX())) {
+                inside = !inside;
             }
         }
-        return dentro;
+        return inside;
     }
 
     /**
