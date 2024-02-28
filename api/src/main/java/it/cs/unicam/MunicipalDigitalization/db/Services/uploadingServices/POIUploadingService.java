@@ -19,7 +19,7 @@ import static it.cs.unicam.MunicipalDigitalization.api.util.MatchingAlgorithms.c
  * Service class for uploading POIs to the database
  */
 @Service
-@AllArgsConstructor(onConstructor = @__(@Autowired))
+@AllArgsConstructor(onConstructor_ = @Autowired)
 public class POIUploadingService {
     /**
      * UserService instance

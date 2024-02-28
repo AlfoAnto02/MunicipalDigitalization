@@ -4,6 +4,7 @@ import it.cs.unicam.MunicipalDigitalization.api.model.users.AuthenticatedTourist
 import it.cs.unicam.MunicipalDigitalization.db.Services.Mediators.UserMediator;
 import it.cs.unicam.MunicipalDigitalization.db.Services.MunicipalService;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.input.UserInputDTO;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,15 +13,10 @@ import org.springframework.stereotype.Service;
  * It checks if the user is valid and then uploads it.
  */
 @Service
+@AllArgsConstructor(onConstructor_ = @Autowired)
 public class UserUploadingService {
     private final UserMediator userMediator;
     private final MunicipalService municipalService;
-
-    @Autowired
-    public UserUploadingService(UserMediator userMediator, MunicipalService municipalService) {
-        this.userMediator = userMediator;
-        this.municipalService = municipalService;
-    }
 
     /**
      * This method is used to upload a user to the database.

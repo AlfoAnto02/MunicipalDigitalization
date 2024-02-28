@@ -7,6 +7,7 @@ import it.cs.unicam.MunicipalDigitalization.db.Services.Mediators.ItineraryMedia
 import it.cs.unicam.MunicipalDigitalization.db.Services.POIService;
 import it.cs.unicam.MunicipalDigitalization.db.Services.UserService;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.input.ItineraryInputDTO;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ import static it.cs.unicam.MunicipalDigitalization.api.util.MatchingAlgorithms.c
  * It uses the ItineraryBuilderFactory to create the itinerary
  */
 @Service
+@AllArgsConstructor(onConstructor_ = @Autowired)
 public class ItineraryUploadingService {
 
     /**
@@ -39,22 +41,6 @@ public class ItineraryUploadingService {
      * ItineraryBuilderFactory instance
      */
     private final ItineraryBuilderFactory itineraryBuilderFactory;
-
-    /**
-     * Constructor for ItineraryUploadingService
-     *
-     * @param userService             UserService instance
-     * @param itineraryMediator       ItineraryMediator instance
-     * @param poiService              POIService instance
-     * @param itineraryBuilderFactory ItineraryBuilderFactory instance
-     */
-    @Autowired
-    public ItineraryUploadingService(UserService userService, ItineraryMediator itineraryMediator, POIService poiService, ItineraryBuilderFactory itineraryBuilderFactory) {
-        this.userService = userService;
-        this.itineraryMediator = itineraryMediator;
-        this.poiService = poiService;
-        this.itineraryBuilderFactory = itineraryBuilderFactory;
-    }
 
     /**
      * Uploads an itinerary to the database

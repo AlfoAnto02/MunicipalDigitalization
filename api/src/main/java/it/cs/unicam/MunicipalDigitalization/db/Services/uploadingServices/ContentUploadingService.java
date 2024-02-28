@@ -9,6 +9,7 @@ import it.cs.unicam.MunicipalDigitalization.db.Services.Mediators.ContentMediato
 import it.cs.unicam.MunicipalDigitalization.db.Services.POIService;
 import it.cs.unicam.MunicipalDigitalization.db.Services.UserService;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.input.ContentInputDTO;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,7 @@ import static it.cs.unicam.MunicipalDigitalization.api.util.MatchingAlgorithms.i
  * It uses the ContentBuilderFactory to create the correct builder for the user that is uploading the content.
  */
 @Service
+@AllArgsConstructor(onConstructor_ = @Autowired)
 public class ContentUploadingService {
 
     /**
@@ -46,24 +48,6 @@ public class ContentUploadingService {
      * The content builder factory
      */
     private final ContentBuilderFactory contentBuilderFactory;
-
-    /**
-     * Creates a new ContentUploadingService
-     *
-     * @param userService           the user service
-     * @param contentMediator       the content mediator
-     * @param poiService            the POI service
-     * @param itineraryService      the itinerary service
-     * @param contentBuilderFactory the content builder factory
-     */
-    @Autowired
-    public ContentUploadingService(UserService userService, ContentMediator contentMediator, POIService poiService, ItineraryService itineraryService, ContentBuilderFactory contentBuilderFactory) {
-        this.userService = userService;
-        this.contentMediator = contentMediator;
-        this.poiService = poiService;
-        this.itineraryService = itineraryService;
-        this.contentBuilderFactory = contentBuilderFactory;
-    }
 
     /**
      * Uploads a content to the system

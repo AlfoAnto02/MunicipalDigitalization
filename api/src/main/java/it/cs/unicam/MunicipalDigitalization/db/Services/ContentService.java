@@ -4,6 +4,7 @@ import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractContent;
 import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 import it.cs.unicam.MunicipalDigitalization.api.util.MatchingAlgorithms;
 import it.cs.unicam.MunicipalDigitalization.db.Repository.ContentRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,15 +14,11 @@ import java.util.List;
  * This class is a service for the ContentRepository. It provides methods to save and retrieve contents from the database.
  */
 @Service
+@AllArgsConstructor(onConstructor_ = @Autowired)
 public class ContentService {
 
 
     private final ContentRepository contentRepository;
-
-    @Autowired
-    public ContentService(ContentRepository contentRepository) {
-        this.contentRepository = contentRepository;
-    }
 
     /**
      * Save a content in the database and add it to the POI or Itinerary it refers to

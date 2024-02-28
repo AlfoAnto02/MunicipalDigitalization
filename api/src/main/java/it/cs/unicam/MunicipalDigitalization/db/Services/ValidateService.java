@@ -5,6 +5,7 @@ import it.cs.unicam.MunicipalDigitalization.db.Services.Mediators.ContestMediato
 import it.cs.unicam.MunicipalDigitalization.db.Services.Mediators.ItineraryMediator;
 import it.cs.unicam.MunicipalDigitalization.db.Services.Mediators.POIMediator;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.Requests.ValidateRequest;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,20 +13,12 @@ import org.springframework.stereotype.Service;
  * This class is a service for the validation of pending Contents, POIs and Itineraries.
  */
 @Service
+@AllArgsConstructor(onConstructor_ = @Autowired)
 public class ValidateService {
     private final POIMediator poiMediator;
     private final ItineraryMediator itineraryMediator;
     private final ContentMediator contentMediator;
     private final ContestMediator contestMediator;
-
-    @Autowired
-    public ValidateService(POIMediator poiService, ItineraryMediator itineraryService, ContentMediator contentMediator,
-                           ContestMediator contestMediator) {
-        this.poiMediator = poiService;
-        this.itineraryMediator = itineraryService;
-        this.contentMediator = contentMediator;
-        this.contestMediator = contestMediator;
-    }
 
     /**
      * method to validate a POI

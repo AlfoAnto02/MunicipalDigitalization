@@ -8,6 +8,7 @@ import it.cs.unicam.MunicipalDigitalization.api.model.users.AbstractAuthenticate
 import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 import it.cs.unicam.MunicipalDigitalization.api.util.MatchingAlgorithms;
 import it.cs.unicam.MunicipalDigitalization.db.Repository.MunicipalRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,15 +20,11 @@ import java.util.Optional;
  * It provides methods to interact with the database
  */
 @Service
+@AllArgsConstructor(onConstructor_ = @Autowired)
 public class MunicipalService {
 
 
     private final MunicipalRepository municipalRepository;
-
-    @Autowired
-    public MunicipalService(MunicipalRepository municipalRepository) {
-        this.municipalRepository = municipalRepository;
-    }
 
     /**
      * Save a municipality to the database if it does not already exist

@@ -2,20 +2,16 @@ package it.cs.unicam.MunicipalDigitalization.db.Services;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.ContributionContest;
 import it.cs.unicam.MunicipalDigitalization.api.model.users.AbstractAuthenticatedUser;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@AllArgsConstructor(onConstructor_ = @Autowired)
 public class ParticipationService {
 
     private final ContestService contestService;
     private final UserService userService;
-
-    @Autowired
-    public ParticipationService(ContestService contestService, UserService userService) {
-        this.contestService = contestService;
-        this.userService = userService;
-    }
 
     public void participateToAContest(Long contestId, Long userId) {
         ContributionContest contest = contestService.getContestById(contestId);

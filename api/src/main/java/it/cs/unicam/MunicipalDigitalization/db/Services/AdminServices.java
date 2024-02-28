@@ -6,6 +6,7 @@ import it.cs.unicam.MunicipalDigitalization.api.util.DesignPattern.Command.GiveR
 import it.cs.unicam.MunicipalDigitalization.api.util.DesignPattern.Command.RemoveRoleCommand;
 import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.input.MunicipalityInputDTO;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,16 +15,11 @@ import org.springframework.stereotype.Service;
  * It contains methods to remove and add roles to users and to create municipalities.
  */
 @Service
+@AllArgsConstructor(onConstructor_ = @Autowired)
 public class AdminServices {
     private final UserService userService;
 
     private final MunicipalService municipalService;
-
-    @Autowired
-    public AdminServices(UserService userService, MunicipalService municipalService) {
-        this.userService = userService;
-        this.municipalService = municipalService;
-    }
 
     /**
      * Method to remove a role from a user by an admin

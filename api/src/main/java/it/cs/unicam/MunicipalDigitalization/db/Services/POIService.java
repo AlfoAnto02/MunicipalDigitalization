@@ -7,6 +7,7 @@ import it.cs.unicam.MunicipalDigitalization.api.model.elements.ContributionConte
 import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 import it.cs.unicam.MunicipalDigitalization.api.util.MatchingAlgorithms;
 import it.cs.unicam.MunicipalDigitalization.db.Repository.POIRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,13 +20,9 @@ import java.util.Optional;
  * it also contains the logic to add a content to a POI
  */
 @Service
+@AllArgsConstructor(onConstructor_ = @Autowired)
 public class POIService {
     private final POIRepository poiRepository;
-
-    @Autowired
-    public POIService(POIRepository poiRepository) {
-        this.poiRepository = poiRepository;
-    }
 
     /**
      * Save a POI in the database and update the references in the municipality and user
