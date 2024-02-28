@@ -8,12 +8,14 @@ import it.cs.unicam.MunicipalDigitalization.db.Services.UserService;
 import it.cs.unicam.MunicipalDigitalization.db.Services.uploadingServices.ItineraryUploadingService;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.input.ItineraryInputDTO;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.mappers.ItineraryDTOMapper;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@AllArgsConstructor(onConstructor_ = @Autowired)
 public class ItineraryController {
     private final ItineraryUploadingService itineraryUploadingService;
     private final MunicipalService municipalService;
@@ -21,24 +23,12 @@ public class ItineraryController {
     private final UserService userService;
     private final ItineraryService itineraryService;
 
-    @Autowired
-    public ItineraryController(ItineraryUploadingService itineraryUploadingService, UserService userService,
-                               MunicipalService municipalService, ItineraryDTOMapper itineraryDTOMapper,
-                               ItineraryService itineraryService) {
-        this.itineraryUploadingService = itineraryUploadingService;
-        this.municipalService = municipalService;
-        this.itineraryDTOMapper = itineraryDTOMapper;
-        this.userService = userService;
-        this.itineraryService = itineraryService;
-    }
-
     /**
      * Returns all the itineraries in a municipality
      *
      * @param id the id of the municipality
      * @return all the itineraries in the database
      */
-
     @RequestMapping(value = "/v1/itineraries/{id}", method = RequestMethod.GET)
     public ResponseEntity<Object> getItinerariesByMunicipalityID(@PathVariable Long id) {
         return new ResponseEntity<>(itineraryService.getAllItineraries()

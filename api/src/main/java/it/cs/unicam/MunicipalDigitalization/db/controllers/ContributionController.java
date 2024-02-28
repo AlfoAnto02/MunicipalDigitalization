@@ -7,12 +7,14 @@ import it.cs.unicam.MunicipalDigitalization.db.Services.uploadingServices.Contri
 import it.cs.unicam.MunicipalDigitalization.db.controllers.Requests.VoteRequest;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.input.ContributionInputDTO;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.mappers.ContributionDTOMapper;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@AllArgsConstructor(onConstructor_ = @Autowired)
 public class ContributionController {
 
     private final ContributionUploadingService contributionUploadingService;
@@ -20,17 +22,6 @@ public class ContributionController {
     private final ContributionDTOMapper contributionDTOMapper;
     private final ContributionMediator contributionMediator;
     private final ContributionService contributionService;
-
-    @Autowired
-    public ContributionController(ContributionUploadingService contributionUploadingService, ContestService contestService,
-                                  ContributionDTOMapper contributionDTOMapper, ContributionMediator contributionMediator,
-                                  ContributionService contributionService) {
-        this.contributionUploadingService = contributionUploadingService;
-        this.contestService = contestService;
-        this.contributionDTOMapper = contributionDTOMapper;
-        this.contributionMediator = contributionMediator;
-        this.contributionService = contributionService;
-    }
 
     /**
      * This method permits a user to contribute to a contest

@@ -10,6 +10,7 @@ import it.cs.unicam.MunicipalDigitalization.db.controllers.Requests.RoleRequest;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.input.MunicipalityInputDTO;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.mappers.MunicipalityDTOMapper;
 import jakarta.annotation.PostConstruct;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
  * This class represents the Rest Controller for the admin operations
  */
 @RestController
+@AllArgsConstructor(onConstructor_ = @Autowired)
 public class AdminController {
     private final AdminServices adminServices;
 
@@ -30,15 +32,6 @@ public class AdminController {
     private final MunicipalService municipalService;
 
     private final MunicipalityDTOMapper municipalityDTOMapper;
-
-    @Autowired
-    public AdminController(AdminServices adminServices, UserService userService, MunicipalService municipalService,
-                           MunicipalityDTOMapper municipalityDTOMapper) {
-        this.adminServices = adminServices;
-        this.userService = userService;
-        this.municipalService = municipalService;
-        this.municipalityDTOMapper = municipalityDTOMapper;
-    }
 
     /**
      * Initializes the platform gestor if it is not present in the database.

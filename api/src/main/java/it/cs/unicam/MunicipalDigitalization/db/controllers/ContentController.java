@@ -9,12 +9,14 @@ import it.cs.unicam.MunicipalDigitalization.db.Services.UserService;
 import it.cs.unicam.MunicipalDigitalization.db.Services.uploadingServices.ContentUploadingService;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.input.ContentInputDTO;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.mappers.ContentDTOMapper;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@AllArgsConstructor(onConstructor_ = @Autowired)
 public class ContentController {
     private final ContentUploadingService contentUploadingService;
     private final ContentService contentService;
@@ -22,18 +24,6 @@ public class ContentController {
     private final ItineraryService itineraryService;
     private final ContentDTOMapper contentDTOMapper;
     private final UserService userService;
-
-    @Autowired
-    public ContentController(ContentUploadingService contentUploadingService, ContentDTOMapper contentDTOMapper
-            , ContentService contentService, POIService poiService, ItineraryService itineraryService,
-                             UserService userService) {
-        this.contentUploadingService = contentUploadingService;
-        this.contentService = contentService;
-        this.poiService = poiService;
-        this.itineraryService = itineraryService;
-        this.contentDTOMapper = contentDTOMapper;
-        this.userService = userService;
-    }
 
     /**
      * Uploads a content to the database

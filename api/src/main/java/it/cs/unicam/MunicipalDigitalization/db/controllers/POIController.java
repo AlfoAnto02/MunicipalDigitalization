@@ -8,6 +8,7 @@ import it.cs.unicam.MunicipalDigitalization.db.Services.UserService;
 import it.cs.unicam.MunicipalDigitalization.db.Services.uploadingServices.POIUploadingService;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.input.POIInputDTO;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.mappers.POIDTOMapper;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,8 +17,8 @@ import org.springframework.web.bind.annotation.*;
 /**
  * This class is a RestController that handles the requests related to the POI entity.
  */
-
 @RestController
+@AllArgsConstructor(onConstructor_ = @Autowired)
 public class POIController {
 
     private final POIUploadingService uploadingService;
@@ -25,16 +26,6 @@ public class POIController {
     private final POIDTOMapper poiDTOMapper;
     private final UserService userService;
     private final MunicipalService municipalService;
-
-    @Autowired
-    public POIController(POIUploadingService uploadingService, POIService poiService, POIDTOMapper poiDTOMapper,
-                         UserService userService, MunicipalService municipalService) {
-        this.uploadingService = uploadingService;
-        this.poiService = poiService;
-        this.poiDTOMapper = poiDTOMapper;
-        this.userService = userService;
-        this.municipalService = municipalService;
-    }
 
     /**
      * Returns all the POIs in the database

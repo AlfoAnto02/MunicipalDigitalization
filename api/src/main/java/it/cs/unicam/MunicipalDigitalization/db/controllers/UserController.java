@@ -5,6 +5,7 @@ import it.cs.unicam.MunicipalDigitalization.db.Services.UserService;
 import it.cs.unicam.MunicipalDigitalization.db.Services.uploadingServices.UserUploadingService;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.input.UserInputDTO;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.mappers.UserDTOMapper;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,19 +16,12 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @CrossOrigin(origins = "http://localhost:63342")
+@AllArgsConstructor(onConstructor_ = @Autowired)
 public class UserController {
 
     private final UserUploadingService uploadingService;
     private final UserService userService;
     private final UserDTOMapper userDTOMapper;
-
-    @Autowired
-    public UserController(UserUploadingService uploadingService, UserService userService,
-                          UserDTOMapper userDTOMapper) {
-        this.uploadingService = uploadingService;
-        this.userService = userService;
-        this.userDTOMapper = userDTOMapper;
-    }
 
     /**
      * This method is used to register a new user in the system.

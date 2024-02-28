@@ -2,6 +2,7 @@ package it.cs.unicam.MunicipalDigitalization.db.controllers;
 
 import it.cs.unicam.MunicipalDigitalization.db.Services.ValidateService;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.Requests.ValidateRequest;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,13 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
  * This class is a RestController that handles the requests related to the validation of the Entities.
  */
 @RestController
+@AllArgsConstructor(onConstructor_ = @Autowired)
 public class ValidateController {
     private final ValidateService validateService;
-
-    @Autowired
-    public ValidateController(ValidateService validateService) {
-        this.validateService = validateService;
-    }
 
     /**
      * Validates a POI

@@ -10,12 +10,14 @@ import it.cs.unicam.MunicipalDigitalization.db.Services.uploadingServices.Contes
 import it.cs.unicam.MunicipalDigitalization.db.controllers.Requests.ValidateRequest;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.input.ContestInputDTO;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.mappers.ContestDTOMapper;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@AllArgsConstructor(onConstructor_ = @Autowired)
 public class ContestController {
     private final ContestUploadingService contestUploadingService;
     private final MunicipalService municipalService;
@@ -23,18 +25,6 @@ public class ContestController {
     private final ContestDTOMapper contestDTOMapper;
     private final ParticipationService participationService;
     private final ValidateService validateService;
-
-    @Autowired
-    public ContestController(ContestUploadingService contestUploadingService, MunicipalService municipalService,
-                             UserService userService, ContestDTOMapper contestDTOMapper, ParticipationService participationService,
-                             ValidateService validateService) {
-        this.contestUploadingService = contestUploadingService;
-        this.municipalService = municipalService;
-        this.userService = userService;
-        this.contestDTOMapper = contestDTOMapper;
-        this.participationService = participationService;
-        this.validateService = validateService;
-    }
 
     /**
      * Uploads a contest to the database only if the Animator perform this action
