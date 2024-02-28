@@ -5,22 +5,17 @@ import it.cs.unicam.MunicipalDigitalization.db.Services.ContestService;
 import it.cs.unicam.MunicipalDigitalization.db.Services.ContributionService;
 import it.cs.unicam.MunicipalDigitalization.db.Services.UserService;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.Requests.VoteRequest;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
+@AllArgsConstructor(onConstructor_ = @Autowired)
 public class ContributionMediator {
 
     private final UserService userService;
     private final ContestService contestService;
     private final ContributionService contributionService;
-
-    @Autowired
-    public ContributionMediator(UserService userService, ContestService contestService, ContributionService contributionService) {
-        this.userService = userService;
-        this.contestService = contestService;
-        this.contributionService = contributionService;
-    }
 
     /**
      * This method saves a contribution and associates it with the author and the contest.

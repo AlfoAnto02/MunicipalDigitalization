@@ -5,10 +5,12 @@ import it.cs.unicam.MunicipalDigitalization.api.util.ContestStatus;
 import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;
 import it.cs.unicam.MunicipalDigitalization.db.Services.*;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.Requests.ValidateRequest;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
+@AllArgsConstructor(onConstructor_ = @Autowired)
 public class ContestMediator {
     private final UserService userService;
     private final POIService poiService;
@@ -16,16 +18,6 @@ public class ContestMediator {
     private final ContestService contestService;
 
     private final ItineraryService itineraryService;
-
-    @Autowired
-    public ContestMediator(UserService userService, POIService poiService, MunicipalService municipalService,
-                           ContestService contestService, ItineraryService itineraryService) {
-        this.userService = userService;
-        this.poiService = poiService;
-        this.municipalService = municipalService;
-        this.contestService = contestService;
-        this.itineraryService = itineraryService;
-    }
 
     /**
      * Saves a contest to the database changing the associations with the municipality, the author and the pois/itineraries

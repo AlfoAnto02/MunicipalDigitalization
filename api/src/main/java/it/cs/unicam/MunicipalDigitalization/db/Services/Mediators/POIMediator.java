@@ -7,6 +7,7 @@ import it.cs.unicam.MunicipalDigitalization.db.Services.MunicipalService;
 import it.cs.unicam.MunicipalDigitalization.db.Services.POIService;
 import it.cs.unicam.MunicipalDigitalization.db.Services.UserService;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.Requests.ValidateRequest;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,17 +15,11 @@ import org.springframework.stereotype.Component;
  * This class is a mediator for the POI service, the municipality service and the user service.
  */
 @Component
+@AllArgsConstructor(onConstructor_ = @Autowired)
 public class POIMediator {
     private final POIService poiService;
     private final MunicipalService municipalityService;
     private final UserService userService;
-
-    @Autowired
-    public POIMediator(POIService poiService, MunicipalService municipalService, UserService userService) {
-        this.poiService = poiService;
-        this.municipalityService = municipalService;
-        this.userService = userService;
-    }
 
     /**
      * This method saves a POI and associates it with the municipality and the author.
