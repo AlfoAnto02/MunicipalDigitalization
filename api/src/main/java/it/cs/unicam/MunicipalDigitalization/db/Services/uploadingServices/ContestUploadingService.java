@@ -67,8 +67,15 @@ public class ContestUploadingService {
      * @param contestInputDTO the contest in DTO to be uploaded
      */
     private void checkContest(ContestInputDTO contestInputDTO) {
-        checkItineraryMunicipalityOfTheAnimator(contestInputDTO);
-        checkPOIMunicipalityOfTheAnimator(contestInputDTO);
+
+        if ((contestInputDTO.contest_pois() == null || contestInputDTO.contest_pois().isEmpty()) && (contestInputDTO.contest_itineraries() == null || contestInputDTO.contest_itineraries().isEmpty())) {
+            throw new IllegalArgumentException("Contest must have at least one POI or one Itinerary");
+        } else if (contestInputDTO.contest_pois() != null && !contestInputDTO.contest_pois().isEmpty()) {
+            checkPOIMunicipalityOfTheAnimator(contestInputDTO);
+        } else {
+            checkItineraryMunicipalityOfTheAnimator(contestInputDTO);
+        }
+
         checkContestName(contestInputDTO);
         checkContestDescription(contestInputDTO);
         checkContestInvitationType(contestInputDTO);
