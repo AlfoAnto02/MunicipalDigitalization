@@ -1,9 +1,7 @@
 package it.cs.unicam.MunicipalDigitalization.db.Services.uploadingServices;
 
-import it.cs.unicam.MunicipalDigitalization.api.util.Coordinate;
 import it.cs.unicam.MunicipalDigitalization.api.util.DesignPattern.Builder.ItineraryBuilder;
 import it.cs.unicam.MunicipalDigitalization.api.util.DesignPattern.FactoryMethod.ItineraryBuilderFactory;
-import it.cs.unicam.MunicipalDigitalization.api.util.MatchingAlgorithms;
 import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;
 import it.cs.unicam.MunicipalDigitalization.db.Services.Mediators.ItineraryMediator;
 import it.cs.unicam.MunicipalDigitalization.db.Services.POIService;
@@ -11,8 +9,6 @@ import it.cs.unicam.MunicipalDigitalization.db.Services.UserService;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.input.ItineraryInputDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 import static it.cs.unicam.MunicipalDigitalization.api.util.MatchingAlgorithms.containsSpecialCharacters;
 
@@ -157,7 +153,7 @@ public class ItineraryUploadingService {
      */
     private void checkItineraryPOIs(ItineraryInputDTO itineraryDTO) {
 
-        
+
         if (userService.getUserById(itineraryDTO.authorID()).getMunicipality() == null) {
             throw new IllegalArgumentException("The author is not associated with a municipality");
         }

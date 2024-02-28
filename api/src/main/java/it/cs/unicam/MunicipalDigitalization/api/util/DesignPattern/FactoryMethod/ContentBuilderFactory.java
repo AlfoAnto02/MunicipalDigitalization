@@ -19,7 +19,7 @@ public class ContentBuilderFactory {
      * Constructor for the ContentBuilderFactory
      *
      * @param authorizedContentBuilder an authorizedContentBuilder for building authorized content
-     * @param pendingContentBuilder a pendingContentBuilder for building pending content
+     * @param pendingContentBuilder    a pendingContentBuilder for building pending content
      */
     public ContentBuilderFactory(AuthorizedContentBuilder authorizedContentBuilder, PendingContentBuilder pendingContentBuilder) {
         this.authorizedContentBuilder = authorizedContentBuilder;
@@ -33,9 +33,9 @@ public class ContentBuilderFactory {
      * @return the right builder for the user role
      */
     public ContentBuilder createBuilderForUser(AbstractAuthenticatedUser user) {
-        if(user.getRole().contains(UserRole.CURATOR) || user.getRole().contains(UserRole.AUTHORIZED_CONTRIBUTOR)) {
+        if (user.getRole().contains(UserRole.CURATOR) || user.getRole().contains(UserRole.AUTHORIZED_CONTRIBUTOR)) {
             return authorizedContentBuilder;
-        } else if(user.getRole().contains(UserRole.CONTRIBUTOR)) {
+        } else if (user.getRole().contains(UserRole.CONTRIBUTOR)) {
             return pendingContentBuilder;
         } else throw new IllegalArgumentException("User role not suopported for Content Creation");
     }

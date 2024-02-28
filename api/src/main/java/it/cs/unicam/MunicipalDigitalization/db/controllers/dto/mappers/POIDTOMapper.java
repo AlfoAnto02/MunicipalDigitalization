@@ -1,7 +1,6 @@
 package it.cs.unicam.MunicipalDigitalization.db.controllers.dto.mappers;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractContent;
-import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractMunicipalElement;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractPOI;
 import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.output.POIOutputDTO;

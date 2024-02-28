@@ -1,4 +1,5 @@
 package it.cs.unicam.MunicipalDigitalization.api.model.elements;
+
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
 import it.cs.unicam.MunicipalDigitalization.api.model.users.AbstractAuthenticatedUser;
 import it.cs.unicam.MunicipalDigitalization.api.util.Coordinate;
@@ -20,7 +21,6 @@ public class PendingPOI extends AbstractPOI {
      * Constructor for the PendingPOI class.
      * It initializes the PendingPOI with the provided user and the Municipality
      * where the Poi should be located
-     *
      */
     public PendingPOI() {
         super();
@@ -29,12 +29,12 @@ public class PendingPOI extends AbstractPOI {
     /**
      * Constructor for the PendingPOI class used by the Builder
      *
-     * @param municipality the municipality where the POI is located
+     * @param municipality  the municipality where the POI is located
      * @param elementStatus the status of the POI
-     * @param coordinate the coordinates of the POI
-     * @param name the name of the POI
-     * @param POIType the type of the POI
-     * @param author the author of the POI
+     * @param coordinate    the coordinates of the POI
+     * @param name          the name of the POI
+     * @param POIType       the type of the POI
+     * @param author        the author of the POI
      */
 
     public PendingPOI(Municipality municipality, ElementStatus elementStatus,

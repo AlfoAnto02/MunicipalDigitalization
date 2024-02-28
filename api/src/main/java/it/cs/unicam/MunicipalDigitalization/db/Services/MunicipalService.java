@@ -1,10 +1,10 @@
 package it.cs.unicam.MunicipalDigitalization.db.Services;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
-import it.cs.unicam.MunicipalDigitalization.api.model.elements.ContributionContest;
-import it.cs.unicam.MunicipalDigitalization.api.model.users.AbstractAuthenticatedUser;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractItinerary;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractPOI;
+import it.cs.unicam.MunicipalDigitalization.api.model.elements.ContributionContest;
+import it.cs.unicam.MunicipalDigitalization.api.model.users.AbstractAuthenticatedUser;
 import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 import it.cs.unicam.MunicipalDigitalization.api.util.MatchingAlgorithms;
 import it.cs.unicam.MunicipalDigitalization.db.Repository.MunicipalRepository;
@@ -34,8 +34,9 @@ public class MunicipalService {
      *
      * @param municipality Municipality to save
      */
-    public void saveMunicipal(Municipality municipality){
-        if (!MatchingAlgorithms.isMunicipalSimilarToMunicipalityList(municipality,municipalRepository.findAll())) municipalRepository.save(municipality);
+    public void saveMunicipal(Municipality municipality) {
+        if (!MatchingAlgorithms.isMunicipalSimilarToMunicipalityList(municipality, municipalRepository.findAll()))
+            municipalRepository.save(municipality);
         else throw new IllegalArgumentException("Municipality already exists");
     }
 
@@ -43,9 +44,9 @@ public class MunicipalService {
      * Add a POI to a municipality
      *
      * @param municipalID ID of the municipality
-     * @param poi POI to add
+     * @param poi         POI to add
      */
-    public void addPOI(Long municipalID, AbstractPOI poi){
+    public void addPOI(Long municipalID, AbstractPOI poi) {
         Municipality municipality = municipalRepository.getReferenceById(municipalID);
         municipality.uploadPOI(poi);
         municipalRepository.save(municipality);
@@ -54,7 +55,7 @@ public class MunicipalService {
     /**
      * Add a user to a municipality
      *
-     * @param id ID of the municipality
+     * @param id   ID of the municipality
      * @param user User to add
      */
     public void addUser(Long id, AbstractAuthenticatedUser user) {
@@ -67,9 +68,9 @@ public class MunicipalService {
      * Add an itinerary to a municipality
      *
      * @param municipalID ID of the municipality
-     * @param itinerary Itinerary to add
+     * @param itinerary   Itinerary to add
      */
-    public void addItinerary(Long municipalID, AbstractItinerary itinerary){
+    public void addItinerary(Long municipalID, AbstractItinerary itinerary) {
         Municipality municipality = municipalRepository.getReferenceById(municipalID);
         municipality.uploadItinerary(itinerary);
         municipalRepository.save(municipality);
@@ -78,7 +79,7 @@ public class MunicipalService {
     /**
      * Add a contest to a municipality
      *
-     * @param municipalityId ID of the municipality
+     * @param municipalityId      ID of the municipality
      * @param contributionContest Contest to add
      */
     public void addContest(Long municipalityId, ContributionContest contributionContest) {
@@ -90,7 +91,7 @@ public class MunicipalService {
     /**
      * Update the POI list of a municipality based on the validation request
      *
-     * @param poiID ID of the POI
+     * @param poiID       ID of the POI
      * @param isValidated Boolean value to determine if the POI is validated
      */
     public void updateMunicipalityPOIList(long poiID, boolean isValidated) {
@@ -132,19 +133,19 @@ public class MunicipalService {
     }
 
 
-    public Municipality getMunicipalByID(Long id){
+    public Municipality getMunicipalByID(Long id) {
         return municipalRepository.getReferenceById(id);
     }
 
-    public Optional<Municipality> getMunicipalByName(String name){
+    public Optional<Municipality> getMunicipalByName(String name) {
         return municipalRepository.findByName(name);
     }
 
-    public void deleteMunicipalById(Long id){
+    public void deleteMunicipalById(Long id) {
         municipalRepository.deleteById(id);
     }
 
-    public List<Municipality> getAllMunicipals(){
+    public List<Municipality> getAllMunicipals() {
         return municipalRepository.findAll();
     }
 

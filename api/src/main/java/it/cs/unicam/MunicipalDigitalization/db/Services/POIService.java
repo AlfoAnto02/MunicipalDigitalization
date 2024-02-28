@@ -1,6 +1,9 @@
 package it.cs.unicam.MunicipalDigitalization.db.Services;
 
-import it.cs.unicam.MunicipalDigitalization.api.model.elements.*;
+import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractContent;
+import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractItinerary;
+import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractPOI;
+import it.cs.unicam.MunicipalDigitalization.api.model.elements.ContributionContest;
 import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 import it.cs.unicam.MunicipalDigitalization.api.util.MatchingAlgorithms;
 import it.cs.unicam.MunicipalDigitalization.db.Repository.POIRepository;
@@ -18,6 +21,7 @@ import java.util.Optional;
 @Service
 public class POIService {
     private final POIRepository poiRepository;
+
     @Autowired
     public POIService(POIRepository poiRepository) {
         this.poiRepository = poiRepository;
@@ -28,18 +32,18 @@ public class POIService {
      *
      * @param poi the POI to save
      */
-    public void savePOI(AbstractPOI poi){
-        if(!MatchingAlgorithms.isPOISimilarToPoiList(poi, poiRepository.findAll())) poiRepository.save(poi);
+    public void savePOI(AbstractPOI poi) {
+        if (!MatchingAlgorithms.isPOISimilarToPoiList(poi, poiRepository.findAll())) poiRepository.save(poi);
         else throw new IllegalArgumentException("POI already exists");
     }
 
     /**
      * Add a content to a POI
      *
-     * @param id ID of the POI
+     * @param id      ID of the POI
      * @param content the content to add
      */
-    public void addContent(Long id, AbstractContent content){
+    public void addContent(Long id, AbstractContent content) {
         AbstractPOI poi = poiRepository.getReferenceById(id);
         poi.addContent(content);
         poiRepository.save(poi);
@@ -48,15 +52,15 @@ public class POIService {
     /**
      * Update a POI in the database
      *
-     * @param id ID of the POI
+     * @param id        ID of the POI
      * @param validated the status of the validation Request
      */
     public void validatePOI(Long id, boolean validated) {
         AbstractPOI poi = poiRepository.getReferenceById(id);
-        if(validated) {
+        if (validated) {
             poi.setElementStatus(ElementStatus.PUBLISHED);
             poiRepository.save(poi);
-        }else{
+        } else {
             poiRepository.deleteById(id);
         }
     }
@@ -65,10 +69,10 @@ public class POIService {
      * Add an itinerary to the POI
      *
      * @param poIs list of POIs
-     * @param id the itinerary to add
+     * @param id   the itinerary to add
      */
     public void addItinerary(List<AbstractPOI> poIs, AbstractItinerary id) {
-        for(AbstractPOI poi : poIs){
+        for (AbstractPOI poi : poIs) {
             AbstractPOI poi1 = poiRepository.getReferenceById(poi.getId());
             poi1.addItinerary(id);
             poiRepository.save(poi);
@@ -78,12 +82,12 @@ public class POIService {
     /**
      * Update the list of contents of a POI after the validation of a content
      *
-     * @param id ID of the content
+     * @param id        ID of the content
      * @param validated true if the content is validated, false if it is not
      */
     public void updateContentList(Long id, boolean validated) {
         AbstractPOI poi = poiRepository.getPoiByContentID(id);
-        if(validated) {
+        if (validated) {
             poi.getListOfContents()
                     .stream()
                     .filter(content -> content.getId().equals(id))
@@ -98,11 +102,11 @@ public class POIService {
     }
 
 
-    public AbstractPOI getPOIByID(Long id){
+    public AbstractPOI getPOIByID(Long id) {
         return poiRepository.getReferenceById(id);
     }
 
-    public Optional<AbstractPOI> getPOIbyName(String name){
+    public Optional<AbstractPOI> getPOIbyName(String name) {
         return poiRepository.findByName(name);
     }
 
@@ -115,7 +119,7 @@ public class POIService {
     }
 
     public void addContestToPOIs(List<AbstractPOI> pois, ContributionContest contributionContest) {
-        for(AbstractPOI poi : pois){
+        for (AbstractPOI poi : pois) {
             AbstractPOI poi1 = poiRepository.getReferenceById(poi.getId());
             poi1.addContest(contributionContest);
             poiRepository.save(poi1);

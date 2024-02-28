@@ -31,17 +31,16 @@ public class ItineraryService {
      * @param itinerary the itinerary to save
      */
 
-    public void saveItinerary(AbstractItinerary itinerary){
-        if(!MatchingAlgorithms.isItinerarySimilarToItineraryList(itinerary,itineraryRepository.findAll())) {
+    public void saveItinerary(AbstractItinerary itinerary) {
+        if (!MatchingAlgorithms.isItinerarySimilarToItineraryList(itinerary, itineraryRepository.findAll())) {
             itineraryRepository.save(itinerary);
-        }
-        else throw new IllegalArgumentException("Itinerary already exists");
+        } else throw new IllegalArgumentException("Itinerary already exists");
     }
 
     /**
      * Add a content to an itinerary
      *
-     * @param id the id of the itinerary
+     * @param id      the id of the itinerary
      * @param content the content to add
      */
     public void addContent(Long id, AbstractContent content) {
@@ -53,12 +52,12 @@ public class ItineraryService {
     /**
      * Update an itinerary in the database
      *
-     * @param id the id of the itinerary
+     * @param id        the id of the itinerary
      * @param validated the status of the validation request
      */
     public void validateItinerary(Long id, boolean validated) {
         AbstractItinerary itinerary = itineraryRepository.getReferenceById(id);
-        if(validated) {
+        if (validated) {
             itinerary.setElementStatus(ElementStatus.PUBLISHED);
             this.itineraryRepository.save(itinerary);
         } else {
@@ -75,7 +74,7 @@ public class ItineraryService {
 
     public void updateContentList(long requestID, boolean validated) {
         AbstractItinerary itinerary = itineraryRepository.getItineraryByContentId(requestID);
-        if(validated) {
+        if (validated) {
             itinerary.getListOfContents()
                     .stream()
                     .filter(content -> content.getId().equals(requestID))
@@ -89,7 +88,7 @@ public class ItineraryService {
     }
 
     public void addContestToItineraries(List<AbstractItinerary> itineraries, ContributionContest contributionContest) {
-        for(AbstractItinerary itinerary : itineraries){
+        for (AbstractItinerary itinerary : itineraries) {
             AbstractItinerary itinerary1 = itineraryRepository.getReferenceById(itinerary.getId());
             itinerary1.addContest(contributionContest);
             itineraryRepository.save(itinerary1);

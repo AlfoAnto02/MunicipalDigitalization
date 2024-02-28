@@ -17,7 +17,7 @@ public class MunicipalityRequest {
     /**
      * Constructor for the MunicipalityRequest
      *
-     * @param adminID id of the admin that is creating the municipality
+     * @param adminID         id of the admin that is creating the municipality
      * @param municipalityDTO DTO of the municipality to be created
      */
     public MunicipalityRequest(Long adminID, MunicipalityInputDTO municipalityDTO) {

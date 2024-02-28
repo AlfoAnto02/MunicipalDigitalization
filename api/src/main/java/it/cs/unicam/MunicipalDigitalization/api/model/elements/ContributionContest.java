@@ -21,9 +21,9 @@ import java.util.List;
         uniqueConstraints = {
                 @UniqueConstraint(name = "Identification",
                         columnNames = "id")
-            }
-        )
-public class ContributionContest implements IContributionContest{
+        }
+)
+public class ContributionContest implements IContributionContest {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -111,15 +111,15 @@ public class ContributionContest implements IContributionContest{
     /**
      * Constructor for the ContributionContest class used by the Builder.
      *
-     * @param contestName The name of the contest.
+     * @param contestName        The name of the contest.
      * @param contestDescription The description of the contest.
-     * @param invitationType The type of invitation for the contest.
-     * @param minParticipants  The minimum number of participants for the contest set by the Animator
-     * @param contestType The type of contest.
-     * @param author The author of the contest. It has the Role of an Animator.
-     * @param itineraries The list of itineraries that are part of the contest.
-     * @param pois The list of POIs that are part of the contest.
-     * @param municipality The municipality where the contest is taking place.
+     * @param invitationType     The type of invitation for the contest.
+     * @param minParticipants    The minimum number of participants for the contest set by the Animator
+     * @param contestType        The type of contest.
+     * @param author             The author of the contest. It has the Role of an Animator.
+     * @param itineraries        The list of itineraries that are part of the contest.
+     * @param pois               The list of POIs that are part of the contest.
+     * @param municipality       The municipality where the contest is taking place.
      */
     public ContributionContest(String contestName, String contestDescription, InvitationType invitationType,
                                int minParticipants, ContestType contestType, AbstractAuthenticatedUser author,

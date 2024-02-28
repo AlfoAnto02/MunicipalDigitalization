@@ -3,12 +3,10 @@ package it.cs.unicam.MunicipalDigitalization.db.Services;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.Contribution;
 import it.cs.unicam.MunicipalDigitalization.api.model.users.AbstractAuthenticatedUser;
 import it.cs.unicam.MunicipalDigitalization.api.util.MatchingAlgorithms;
-import it.cs.unicam.MunicipalDigitalization.db.Repository.ContestRepository;
 import it.cs.unicam.MunicipalDigitalization.db.Repository.ContributionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
 import java.util.List;
 
 @Service

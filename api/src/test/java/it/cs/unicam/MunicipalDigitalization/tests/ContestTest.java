@@ -12,7 +12,6 @@ import it.cs.unicam.MunicipalDigitalization.db.Repository.MunicipalRepository;
 import it.cs.unicam.MunicipalDigitalization.db.Repository.UserRepository;
 import it.cs.unicam.MunicipalDigitalization.db.Services.ContestService;
 import it.cs.unicam.MunicipalDigitalization.db.Services.Mediators.ContributionMediator;
-import it.cs.unicam.MunicipalDigitalization.db.Services.Mediators.POIMediator;
 import it.cs.unicam.MunicipalDigitalization.db.Services.POIService;
 import it.cs.unicam.MunicipalDigitalization.db.Services.ParticipationService;
 import it.cs.unicam.MunicipalDigitalization.db.Services.ValidateService;
@@ -66,7 +65,7 @@ public class ContestTest {
         coordinates.add(new Coordinate(20.0, 10.0));
         coordinates.add(new Coordinate(10.0, 20.0));
         coordinates.add(new Coordinate(20.0, 20.0));
-        Municipality municipality = new Municipality(coordinates,"Ancona");
+        Municipality municipality = new Municipality(coordinates, "Ancona");
 
         municipalService.save(municipality);
 
@@ -90,43 +89,43 @@ public class ContestTest {
         pois.add(poiService.getPOIbyName("Falconara").get().getId());
 
         ContestInputDTO contestInputDTO = new ContestInputDTO("Concorsooooo", "Concorso per la città di Ancona",
-                animator.getId(), InvitationType.PUBLIC, ContestType.PHOTO_CONTEST,pois, null, 1);
+                animator.getId(), InvitationType.PUBLIC, ContestType.PHOTO_CONTEST, pois, null, 1);
 
-        assertEquals(3,poiService.getAllPOIs().size());
-        assertEquals(3,poiService.getPOIsByIds(contestInputDTO.contest_pois()).size());
+        assertEquals(3, poiService.getAllPOIs().size());
+        assertEquals(3, poiService.getPOIsByIds(contestInputDTO.contest_pois()).size());
         contestUploadingService.uploadContest(contestInputDTO);
 
-        assertEquals(1,contestService.getAllContests().size());
-        assertEquals(3,contestService.getContestById(1L).getPois().size());
+        assertEquals(1, contestService.getAllContests().size());
+        assertEquals(3, contestService.getContestById(1L).getPois().size());
 
-        assertEquals(poiService.getPOIByID(1L).getContest().size(),1);
-        assertEquals(poiService.getPOIByID(2L).getContest().size(),1);
+        assertEquals(poiService.getPOIByID(1L).getContest().size(), 1);
+        assertEquals(poiService.getPOIByID(2L).getContest().size(), 1);
 
-        assertEquals(userService.findById(animator.getId()).get().getAuthoredContests().size(),1);
+        assertEquals(userService.findById(animator.getId()).get().getAuthoredContests().size(), 1);
 
-        assertEquals(contestService.getContestById(1L).getPois().get(2),poiService.getPOIByID(3L));
+        assertEquals(contestService.getContestById(1L).getPois().get(2), poiService.getPOIByID(3L));
 
         AuthenticatedTourist authenticatedTourist = new AuthenticatedTourist("Giovanni", "Bianchi", municipality);
         userService.save(authenticatedTourist);
 
-        participationService.participateToAContest(1L,authorizedContributor.getId());
-        participationService.participateToAContest(1L,authenticatedTourist.getId());
+        participationService.participateToAContest(1L, authorizedContributor.getId());
+        participationService.participateToAContest(1L, authenticatedTourist.getId());
 
-        validateService.validateContest(new ValidateRequest(animator.getId(),1L,true));
+        validateService.validateContest(new ValidateRequest(animator.getId(), 1L, true));
 
 
-        ContributionInputDTO contributionInputDTO = new ContributionInputDTO("La vita", "Foto di Ancona","fotodiancona.png" ,1L, authenticatedTourist.getId());
+        ContributionInputDTO contributionInputDTO = new ContributionInputDTO("La vita", "Foto di Ancona", "fotodiancona.png", 1L, authenticatedTourist.getId());
         contributionUploadingService.uploadContribution(contributionInputDTO);
 
         contestService.getContestContributions(1L).forEach(contribution -> System.out.println(contribution.getContribution()));
 
-        assertEquals(contestService.getContestById(1L).getContributions().size(),1);
-        assertEquals(userService.findById(authenticatedTourist.getId()).get().getContestsParticipated().size(),1);
-        assertEquals(userService.findById(authenticatedTourist.getId()).get().getAuthoredContributions().size(),1);
+        assertEquals(contestService.getContestById(1L).getContributions().size(), 1);
+        assertEquals(userService.findById(authenticatedTourist.getId()).get().getContestsParticipated().size(), 1);
+        assertEquals(userService.findById(authenticatedTourist.getId()).get().getAuthoredContributions().size(), 1);
 
-        contributionMediator.voteContribution(new VoteRequest(authenticatedTourist.getId(),1L));
+        contributionMediator.voteContribution(new VoteRequest(authenticatedTourist.getId(), 1L));
 
-        assertEquals(contestService.getContestById(1L).getContributions().get(0).getTotalVotes(),1);
-        assertEquals(userService.getReferenceById(authenticatedTourist.getId()).getVotedContributions().size(),1);
+        assertEquals(contestService.getContestById(1L).getContributions().get(0).getTotalVotes(), 1);
+        assertEquals(userService.getReferenceById(authenticatedTourist.getId()).getVotedContributions().size(), 1);
     }
 }

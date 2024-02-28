@@ -19,13 +19,12 @@ public class ParticipationService {
 
     public void participateToAContest(Long contestId, Long userId) {
         ContributionContest contest = contestService.getContestById(contestId);
-        if(!contest.getParticipants().contains(userService.getUserById(userId))) {
+        if (!contest.getParticipants().contains(userService.getUserById(userId))) {
             contest.addParticipant(userService.getUserById(userId));
             contestService.saveContest(contest);
             AbstractAuthenticatedUser user = userService.getUserById(userId);
             user.addParticipatedContest(contest);
             userService.saveUser(user);
-        }
-        else throw new IllegalArgumentException("User already participated to the contest");
+        } else throw new IllegalArgumentException("User already participated to the contest");
     }
 }

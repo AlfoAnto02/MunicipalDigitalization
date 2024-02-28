@@ -5,7 +5,6 @@ import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractItinerary
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractPOI;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.ContributionContest;
 import it.cs.unicam.MunicipalDigitalization.api.model.users.AbstractAuthenticatedUser;
-import it.cs.unicam.MunicipalDigitalization.api.model.users.IAuthenticatedUser;
 import it.cs.unicam.MunicipalDigitalization.api.util.ContestType;
 import it.cs.unicam.MunicipalDigitalization.api.util.InvitationType;
 

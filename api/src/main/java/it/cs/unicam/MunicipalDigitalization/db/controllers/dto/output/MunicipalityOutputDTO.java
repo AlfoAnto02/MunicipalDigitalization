@@ -1,7 +1,5 @@
 package it.cs.unicam.MunicipalDigitalization.db.controllers.dto.output;
 
-import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractItinerary;
-import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractPOI;
 import it.cs.unicam.MunicipalDigitalization.api.util.Coordinate;
 
 import java.util.List;

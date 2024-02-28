@@ -38,7 +38,7 @@ public class ContributionController {
      * @param contributionInputDTO the contribution to be added
      * @return a message indicating that the contribution has been added
      */
-    @RequestMapping(value="/v1/contest/contribute", method = RequestMethod.POST)
+    @RequestMapping(value = "/v1/contest/contribute", method = RequestMethod.POST)
     public ResponseEntity<Object> contributeToAContest(@RequestBody ContributionInputDTO contributionInputDTO) {
         this.contributionUploadingService.uploadContribution(contributionInputDTO);
         return new ResponseEntity<>("Contribution added", HttpStatus.OK);
@@ -50,12 +50,12 @@ public class ContributionController {
      * @param contest_id the contest
      * @return the contributions
      */
-    @RequestMapping(value="/v1/contest/{contest_id}/contributions", method = RequestMethod.GET)
+    @RequestMapping(value = "/v1/contest/{contest_id}/contributions", method = RequestMethod.GET)
     public ResponseEntity<Object> getContributions(@PathVariable Long contest_id) {
         return new ResponseEntity<>(contestService.getContestById(contest_id).getContributions()
                 .stream()
                 .map(contributionDTOMapper)
-                ,HttpStatus.OK);
+                , HttpStatus.OK);
     }
 
     /**
@@ -64,7 +64,7 @@ public class ContributionController {
      * @param voteRequest the vote
      * @return a message indicating that the contribution has been voted
      */
-    @RequestMapping(value="/v1/contest/vote", method = RequestMethod.POST)
+    @RequestMapping(value = "/v1/contest/vote", method = RequestMethod.POST)
     public ResponseEntity<Object> voteContribution(@RequestBody VoteRequest voteRequest) {
         this.contributionMediator.voteContribution(voteRequest);
         return new ResponseEntity<>("ContributionVoted", HttpStatus.OK);

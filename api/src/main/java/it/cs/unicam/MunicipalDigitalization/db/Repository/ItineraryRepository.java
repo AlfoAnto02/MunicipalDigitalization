@@ -1,8 +1,8 @@
 package it.cs.unicam.MunicipalDigitalization.db.Repository;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
-import it.cs.unicam.MunicipalDigitalization.api.model.users.AbstractAuthenticatedUser;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractItinerary;
+import it.cs.unicam.MunicipalDigitalization.api.model.users.AbstractAuthenticatedUser;
 import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 import lombok.NonNull;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,10 +14,11 @@ import java.util.Optional;
 /**
  * This is the Repository of the itineraries
  */
-public interface ItineraryRepository extends JpaRepository<AbstractItinerary,Long> {
+public interface ItineraryRepository extends JpaRepository<AbstractItinerary, Long> {
 
     /**
      * This method is used to find an itinerary by its id
+     *
      * @param id the id of the itinerary
      * @return the itinerary with the given id
      */
@@ -26,6 +27,7 @@ public interface ItineraryRepository extends JpaRepository<AbstractItinerary,Lon
 
     /**
      * This method is used to find an itinerary by its name
+     *
      * @param name the name of the itinerary
      * @return the itinerary with the given name
      */
@@ -34,6 +36,7 @@ public interface ItineraryRepository extends JpaRepository<AbstractItinerary,Lon
 
     /**
      * This method is used to find all the itineraries of a specific author
+     *
      * @param author the author of the itineraries
      * @return the list of itineraries of the given author
      */
@@ -42,6 +45,7 @@ public interface ItineraryRepository extends JpaRepository<AbstractItinerary,Lon
 
     /**
      * This method is used to find all the itineraries of a specific municipality
+     *
      * @param municipality the municipality of the itineraries
      * @return the list of itineraries of the given municipality
      */
@@ -50,6 +54,7 @@ public interface ItineraryRepository extends JpaRepository<AbstractItinerary,Lon
 
     /**
      * This method is used to find all the itineraries with a specific status
+     *
      * @param elementStatus the status of the itineraries
      * @return the list of itineraries with the given status
      */
@@ -58,6 +63,7 @@ public interface ItineraryRepository extends JpaRepository<AbstractItinerary,Lon
 
     /**
      * This method is used to find an Itinerary by the id of a content
+     *
      * @param requestID the id of the content
      * @return the itinerary with the given content id
      */

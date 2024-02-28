@@ -11,7 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
  * This class tests the UserRepo class.
@@ -32,7 +33,7 @@ public class UserRepoTest {
      * This method tests the addUser method of the UserRepo class.
      */
     @Test
-    public void testAddUser(){
+    public void testAddUser() {
         //Create a new AuthorizedContributor
         AuthorizedContributor user = new AuthorizedContributor();
         user.setName("Alfredo");
@@ -50,7 +51,7 @@ public class UserRepoTest {
      * This method tests the removeUser method of the UserRepo class.
      */
     @Test
-    public void testRemoveUser(){
+    public void testRemoveUser() {
         //Create a new AuthorizedContributor
         AuthorizedContributor user = new AuthorizedContributor();
         user.setName("To Remove");
@@ -67,14 +68,14 @@ public class UserRepoTest {
     }
 
     @BeforeEach
-    public void setUp(){
+    public void setUp() {
         muni = new Municipality();
         muni.setName("Municipality");
         municipalityService.saveMunicipal(muni);
     }
 
     @AfterEach
-    public void tearDown(){
+    public void tearDown() {
         municipalityService.deleteMunicipalById(muni.getId());
     }
 

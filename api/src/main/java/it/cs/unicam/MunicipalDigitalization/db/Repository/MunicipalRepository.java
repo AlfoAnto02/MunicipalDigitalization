@@ -11,7 +11,7 @@ import java.util.Optional;
 /**
  * This is the Repository of the Municipality
  */
-public interface MunicipalRepository extends JpaRepository<Municipality,Long> {
+public interface MunicipalRepository extends JpaRepository<Municipality, Long> {
 
     /**
      * This is a Method to find a Municipality by an ID

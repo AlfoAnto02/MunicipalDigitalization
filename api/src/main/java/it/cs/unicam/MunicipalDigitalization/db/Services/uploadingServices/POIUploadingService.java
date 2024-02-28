@@ -3,7 +3,6 @@ package it.cs.unicam.MunicipalDigitalization.db.Services.uploadingServices;
 import it.cs.unicam.MunicipalDigitalization.api.util.Coordinate;
 import it.cs.unicam.MunicipalDigitalization.api.util.DesignPattern.Builder.POIBuilder;
 import it.cs.unicam.MunicipalDigitalization.api.util.DesignPattern.FactoryMethod.POIBuilderFactory;
-import it.cs.unicam.MunicipalDigitalization.api.util.MatchingAlgorithms;
 import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;
 import it.cs.unicam.MunicipalDigitalization.db.Services.Mediators.POIMediator;
 import it.cs.unicam.MunicipalDigitalization.db.Services.UserService;
@@ -115,8 +114,8 @@ public class POIUploadingService {
         }
 
 //        if (!MatchingAlgorithms.isInsidePolygon(territory, poiDTO.poi_coordinate())) {
- //           throw new IllegalArgumentException("The coordinates must be within the municipality territory");
-  //      }
+        //           throw new IllegalArgumentException("The coordinates must be within the municipality territory");
+        //      }
     }
 
     /**

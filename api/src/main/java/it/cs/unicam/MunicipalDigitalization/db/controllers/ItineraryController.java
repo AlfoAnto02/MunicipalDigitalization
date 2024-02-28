@@ -40,7 +40,7 @@ public class ItineraryController {
      */
 
     @RequestMapping(value = "/v1/itineraries/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Object> getItinerariesByMunicipalityID(@PathVariable Long id){
+    public ResponseEntity<Object> getItinerariesByMunicipalityID(@PathVariable Long id) {
         return new ResponseEntity<>(itineraryService.getAllItineraries()
                 .stream()
                 .filter(itinerary -> itinerary.getMunicipality().getId().equals(id))
@@ -55,7 +55,7 @@ public class ItineraryController {
      * @return a message indicating that the itinerary has been added
      */
     @RequestMapping(value = "/v1/itinerary/upload", method = RequestMethod.POST)
-    public ResponseEntity<Object> uploadItinerary(@RequestBody ItineraryInputDTO itineraryDTO){
+    public ResponseEntity<Object> uploadItinerary(@RequestBody ItineraryInputDTO itineraryDTO) {
         itineraryUploadingService.uploadItinerary(itineraryDTO);
         return new ResponseEntity<>("Itinerary added :)", HttpStatus.OK);
     }
@@ -68,7 +68,7 @@ public class ItineraryController {
      * @return the itinerary with the given id
      */
     @RequestMapping(value = "/v1/itinerary/{municipalID}/{itineraryID}", method = RequestMethod.GET)
-    public ResponseEntity<Object> getItineraryByIds(@PathVariable Long municipalID, @PathVariable Long itineraryID){
+    public ResponseEntity<Object> getItineraryByIds(@PathVariable Long municipalID, @PathVariable Long itineraryID) {
         return new ResponseEntity<>(municipalService.getMunicipalByID(municipalID).getListOfItineraries()
                 .stream()
                 .filter(itinerary -> itinerary.getElementStatus().equals(ElementStatus.PUBLISHED))
@@ -83,8 +83,8 @@ public class ItineraryController {
      * @return all the pending itineraries of the Municipality
      */
     @RequestMapping(value = "/v1/itinerary/pending/{curatorID}", method = RequestMethod.GET)
-    public ResponseEntity<Object> getPendingItineraries(@PathVariable Long curatorID){
-        if(userService.getUserById(curatorID).getRole().contains(UserRole.CURATOR)){
+    public ResponseEntity<Object> getPendingItineraries(@PathVariable Long curatorID) {
+        if (userService.getUserById(curatorID).getRole().contains(UserRole.CURATOR)) {
             return new ResponseEntity<>(itineraryService.getAllItineraries()
                     .stream()
                     .filter(itinerary -> itinerary.getMunicipality().equals(userService.getUserById(curatorID).getMunicipality()))

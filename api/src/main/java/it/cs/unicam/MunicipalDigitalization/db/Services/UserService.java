@@ -1,7 +1,7 @@
 package it.cs.unicam.MunicipalDigitalization.db.Services;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.*;
-import it.cs.unicam.MunicipalDigitalization.api.model.users.*;
+import it.cs.unicam.MunicipalDigitalization.api.model.users.AbstractAuthenticatedUser;
 import it.cs.unicam.MunicipalDigitalization.api.util.ContestStatus;
 import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;
@@ -31,9 +31,9 @@ public class UserService {
      * Add a POI to the user's list of authored POIs
      *
      * @param userID ID of the user
-     * @param poi POI to be added
+     * @param poi    POI to be added
      */
-    public void addPOI(Long userID, AbstractPOI poi){
+    public void addPOI(Long userID, AbstractPOI poi) {
         AbstractAuthenticatedUser user = userRepository.getReferenceById(userID);
         user.addPOI(poi);
         userRepository.save(user);
@@ -42,11 +42,11 @@ public class UserService {
     /**
      * Add an itinerary to the user's list of authored itineraries
      *
-     * @param userID ID of the user
+     * @param userID    ID of the user
      * @param itinerary Itinerary to be added
      */
 
-    public void addItinerary(Long userID, AbstractItinerary itinerary){
+    public void addItinerary(Long userID, AbstractItinerary itinerary) {
         AbstractAuthenticatedUser user = userRepository.getReferenceById(userID);
         user.addItinerary(itinerary);
         userRepository.save(user);
@@ -55,7 +55,7 @@ public class UserService {
     /**
      * Add a content to the user's list of authored contents
      *
-     * @param id ID of the user
+     * @param id      ID of the user
      * @param content Content to be added
      */
     public void addContent(Long id, AbstractContent content) {
@@ -67,19 +67,19 @@ public class UserService {
     /**
      * Update the user's list of authored POIs after the Validation of a POI
      *
-     * @param poiID ID of the poi
+     * @param poiID    ID of the poi
      * @param validate true if the poi is validated, false if it is not
      */
 
     public void updateUserPOIList(long poiID, boolean validate) {
         AbstractAuthenticatedUser user = userRepository.findByAuthoredPOIsId(poiID);
-        if(validate) {
+        if (validate) {
             user.getAuthoredPOIs()
                     .stream()
                     .filter(p -> p.getId().equals(poiID))
                     .forEach(p -> p.setElementStatus(ElementStatus.PUBLISHED));
             userRepository.save(user);
-        } else{
+        } else {
             user.getAuthoredPOIs().removeIf(p -> p.getId().equals(poiID));
             userRepository.save(user);
         }
@@ -89,17 +89,17 @@ public class UserService {
      * Update the user's list of authored itineraries after the Validation of an itinerary
      *
      * @param itineraryID ID of the itinerary
-     * @param validate true if the itinerary is validated, false if it is not
+     * @param validate    true if the itinerary is validated, false if it is not
      */
     public void updateUserItineraryList(long itineraryID, boolean validate) {
         AbstractAuthenticatedUser user = userRepository.findByAuthoredItinerariesId(itineraryID);
-        if(validate) {
+        if (validate) {
             user.getAuthoredItineraries()
                     .stream()
                     .filter(p -> p.getId().equals(itineraryID))
                     .forEach(p -> p.setElementStatus(ElementStatus.PUBLISHED));
             userRepository.save(user);
-        } else{
+        } else {
             Optional<AbstractItinerary> itineraryToRemove = user.getAuthoredItineraries()
                     .stream()
                     .filter(p -> p.getId().equals(itineraryID))
@@ -118,13 +118,13 @@ public class UserService {
 
     public void updateUserContestList(long requestID, boolean validated) {
         AbstractAuthenticatedUser user = userRepository.findByAuthoredContestsId(requestID);
-        if(validated){
+        if (validated) {
             user.getAuthoredContests()
                     .stream()
                     .filter(c -> c.getId().equals(requestID))
                     .forEach(c -> c.setContestStatus(ContestStatus.ON_GOING));
             userRepository.save(user);
-        } else{
+        } else {
             Optional<ContributionContest> contestToRemove = user.getAuthoredContests()
                     .stream()
                     .filter(c -> c.getId().equals(requestID))
@@ -141,15 +141,15 @@ public class UserService {
      * @param validated true if the content is validated, false if it is not
      */
 
-    public void updateUserContentList( long requestID, boolean validated) {
+    public void updateUserContentList(long requestID, boolean validated) {
         AbstractAuthenticatedUser user = userRepository.findByAuthoredContentsId(requestID);
-        if(validated){
+        if (validated) {
             user.getAuthoredContents()
                     .stream()
                     .filter(c -> c.getId().equals(requestID))
                     .forEach(c -> c.setElementStatus(ElementStatus.PUBLISHED));
             userRepository.save(user);
-        }else{
+        } else {
             Optional<AbstractContent> contentToRemove = user.getAuthoredContents()
                     .stream()
                     .filter(c -> c.getId().equals(requestID))
@@ -159,22 +159,23 @@ public class UserService {
         }
     }
 
-    public void saveUser(AbstractAuthenticatedUser user){
+    public void saveUser(AbstractAuthenticatedUser user) {
         userRepository.save(user);
     }
-    public AbstractAuthenticatedUser getUserById(Long id){
+
+    public AbstractAuthenticatedUser getUserById(Long id) {
         return userRepository.getReferenceById(id);
     }
 
-    public List<AbstractAuthenticatedUser> getUsersByRole(UserRole role){
+    public List<AbstractAuthenticatedUser> getUsersByRole(UserRole role) {
         return userRepository.findAllByRole(role);
     }
 
-    public void deleteUserById(Long id){
+    public void deleteUserById(Long id) {
         userRepository.deleteById(id);
     }
 
-    public AbstractAuthenticatedUser getUserByName(String name){
+    public AbstractAuthenticatedUser getUserByName(String name) {
         return userRepository.findByName(name);
     }
 

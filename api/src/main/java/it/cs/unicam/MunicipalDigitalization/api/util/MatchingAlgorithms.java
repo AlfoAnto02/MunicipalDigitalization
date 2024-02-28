@@ -81,7 +81,7 @@ public class MatchingAlgorithms {
 
     public static boolean isContestSimilarToContestList(ContributionContest contest, List<ContributionContest> contestList) {
         for (ContributionContest c : contestList) {
-            if (contest.getInvitationType().equals(c.getInvitationType())&& contest.getPois().equals(c.getPois()) &&
+            if (contest.getInvitationType().equals(c.getInvitationType()) && contest.getPois().equals(c.getPois()) &&
                     contest.getItineraries().equals(c.getItineraries()) && contest.getContestType().equals(c.getContestType()) && c != contest)
                 return true;
         }

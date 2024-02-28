@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.function.Function;
 
 @Service
-public class ContributionDTOMapper implements Function<Contribution, ContributionOutputDTO>{
+public class ContributionDTOMapper implements Function<Contribution, ContributionOutputDTO> {
 
     @Override
     public ContributionOutputDTO apply(Contribution contribution) {

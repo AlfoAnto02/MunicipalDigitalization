@@ -1,4 +1,5 @@
 package it.cs.unicam.MunicipalDigitalization.api.model.elements;
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
 import it.cs.unicam.MunicipalDigitalization.api.model.users.AbstractAuthenticatedUser;
@@ -48,30 +49,28 @@ public abstract class AbstractItinerary extends AbstractMunicipalElement impleme
      * The types of the Itinerary. The types depend on the Types of the POIs
      * that composed the Itinerary
      * -- GETTER --
-     *  Getter for the types of the itinerary.
-     *
+     * Getter for the types of the itinerary.
      */
     @Getter
-    @Column(name = "Type",nullable = false)
+    @Column(name = "Type", nullable = false)
     private String types;
 
     /**
      * A general Description of the Itinerary
      */
-    @Column(name = "Description",nullable = false)
+    @Column(name = "Description", nullable = false)
     private String description;
 
     /**
      * The author of the point of the MunicipalElement
      */
     @ManyToOne
-    @JoinColumn(name = "Author",nullable = false)
+    @JoinColumn(name = "Author", nullable = false)
     @JsonManagedReference
     private AbstractAuthenticatedUser author;
 
     /**
      * The constructor of the class
-     *
      */
     public AbstractItinerary() {
         super();
@@ -81,14 +80,14 @@ public abstract class AbstractItinerary extends AbstractMunicipalElement impleme
     /**
      * The constructor of the class used by the Builder
      *
-     * @param municipality The municipality of the Itinerary
+     * @param municipality  The municipality of the Itinerary
      * @param elementStatus The status of the Itinerary
-     * @param coordinate The coordinate of the Itinerary
-     * @param name The name of the Itinerary
-     * @param pois The list of POIs that composed the Itinerary
-     * @param types The types of the Itinerary
-     * @param description The description of the Itinerary
-     * @param author The author of the Itinerary
+     * @param coordinate    The coordinate of the Itinerary
+     * @param name          The name of the Itinerary
+     * @param pois          The list of POIs that composed the Itinerary
+     * @param types         The types of the Itinerary
+     * @param description   The description of the Itinerary
+     * @param author        The author of the Itinerary
      */
     public AbstractItinerary(Municipality municipality, ElementStatus elementStatus, Coordinate coordinate,
                              String name, List<AbstractPOI> pois, String types, String description,

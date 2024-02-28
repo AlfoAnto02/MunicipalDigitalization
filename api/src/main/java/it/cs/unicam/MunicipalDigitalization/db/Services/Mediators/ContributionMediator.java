@@ -30,10 +30,10 @@ public class ContributionMediator {
     public void saveContribution(Contribution contribution) {
         this.contributionService.saveContribution(contribution);
 
-        if(contribution.getAuthor().getAuthoredContributions().stream().noneMatch(c -> c.getId().equals(contribution.getId()))){
+        if (contribution.getAuthor().getAuthoredContributions().stream().noneMatch(c -> c.getId().equals(contribution.getId()))) {
             userService.addContribution(contribution.getAuthor().getId(), contribution);
         }
-        if(contribution.getContest().getContributions().stream().noneMatch(c -> c.getId().equals(contribution.getId()))){
+        if (contribution.getContest().getContributions().stream().noneMatch(c -> c.getId().equals(contribution.getId()))) {
             contestService.addContribution(contribution.getContest().getId(), contribution);
         }
     }

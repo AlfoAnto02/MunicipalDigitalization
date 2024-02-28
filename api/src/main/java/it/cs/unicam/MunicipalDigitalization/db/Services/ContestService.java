@@ -35,7 +35,8 @@ public class ContestService {
      * @param contest The contest to save.
      */
     public void saveContest(ContributionContest contest) {
-        if (!MatchingAlgorithms.isContestSimilarToContestList(contest, contestRepository.findAll())) contestRepository.save(contest);
+        if (!MatchingAlgorithms.isContestSimilarToContestList(contest, contestRepository.findAll()))
+            contestRepository.save(contest);
         else throw new IllegalArgumentException("Contest already exists");
     }
 

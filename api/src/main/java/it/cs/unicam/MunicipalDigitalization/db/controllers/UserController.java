@@ -20,6 +20,7 @@ public class UserController {
     private final UserUploadingService uploadingService;
     private final UserService userService;
     private final UserDTOMapper userDTOMapper;
+
     @Autowired
     public UserController(UserUploadingService uploadingService, UserService userService,
                           UserDTOMapper userDTOMapper) {
@@ -35,7 +36,7 @@ public class UserController {
      * @return a ResponseEntity with the result of the operation
      */
     @RequestMapping(value = "/v1/user/register", method = RequestMethod.POST)
-    public ResponseEntity<Object> registerUser(@RequestBody UserInputDTO userDTO){
+    public ResponseEntity<Object> registerUser(@RequestBody UserInputDTO userDTO) {
         uploadingService.uploadUser(userDTO);
         return new ResponseEntity<>("User added :)", HttpStatus.OK);
     }
@@ -46,7 +47,7 @@ public class UserController {
      * @return a ResponseEntity with the list of all the users
      */
     @RequestMapping(value = "/v1/users", method = RequestMethod.GET)
-    public ResponseEntity<Object> getUsers(){
+    public ResponseEntity<Object> getUsers() {
         return new ResponseEntity<>(userService.getAllUsers()
                 .stream()
                 .map(userDTOMapper),
@@ -60,7 +61,7 @@ public class UserController {
      * @return a ResponseEntity with the user
      */
     @RequestMapping(value = "/v1/user/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Object> getUserById(@PathVariable Long id){
+    public ResponseEntity<Object> getUserById(@PathVariable Long id) {
         return new ResponseEntity<>(userDTOMapper.apply(userService.getUserById(id)), HttpStatus.OK);
     }
 
@@ -71,7 +72,7 @@ public class UserController {
      * @return a ResponseEntity with the list of all the users in the municipality
      */
     @RequestMapping(value = "/v1/users/municipality/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Object> getUserByMunicipality(@PathVariable Long id){
+    public ResponseEntity<Object> getUserByMunicipality(@PathVariable Long id) {
         return new ResponseEntity<>(userService.getAllUsers()
                 .stream()
                 .filter(user -> user.getMunicipality().getId().equals(id))

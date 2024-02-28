@@ -17,7 +17,7 @@ public class UserUploadingService {
     private final MunicipalService municipalService;
 
     @Autowired
-    public UserUploadingService(UserMediator userMediator,  MunicipalService municipalService) {
+    public UserUploadingService(UserMediator userMediator, MunicipalService municipalService) {
         this.userMediator = userMediator;
         this.municipalService = municipalService;
     }
@@ -27,7 +27,7 @@ public class UserUploadingService {
      *
      * @param userDTO the user to upload
      */
-    public void uploadUser(UserInputDTO userDTO){
+    public void uploadUser(UserInputDTO userDTO) {
         checkUser(userDTO);
         AuthenticatedTourist user = new AuthenticatedTourist();
         user.setName(userDTO.username());

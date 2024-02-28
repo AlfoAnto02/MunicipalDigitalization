@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class ContributionContestBuilder implements IContributionContestBuilder{
+public class ContributionContestBuilder implements IContributionContestBuilder {
     private String title;
     private String description;
     private Municipality municipality;

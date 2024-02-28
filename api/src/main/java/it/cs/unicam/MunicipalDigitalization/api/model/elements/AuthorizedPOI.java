@@ -20,7 +20,6 @@ public class AuthorizedPOI extends AbstractPOI {
      * Constructor for the AuthorizedPOI class.
      * It initializes the AuthorizedPOI with the provided user and the Municipality
      * where the POI should be located
-     *
      */
     public AuthorizedPOI() {
         super();
@@ -28,15 +27,16 @@ public class AuthorizedPOI extends AbstractPOI {
 
     /**
      * Constructor for the AuthorizedPOI class used by the Builder
-     * @param municipality the municipality where the POI is located
+     *
+     * @param municipality  the municipality where the POI is located
      * @param elementStatus the status of the POI
-     * @param coordinate the coordinates of the POI
-     * @param name the name of the POI
-     * @param POIType the type of the POI
-     * @param author the author of the POI
+     * @param coordinate    the coordinates of the POI
+     * @param name          the name of the POI
+     * @param POIType       the type of the POI
+     * @param author        the author of the POI
      */
     public AuthorizedPOI(Municipality municipality, ElementStatus elementStatus,
-                         Coordinate coordinate, String name,POIType POIType, AbstractAuthenticatedUser author) {
+                         Coordinate coordinate, String name, POIType POIType, AbstractAuthenticatedUser author) {
         super(municipality, elementStatus, coordinate, name, POIType, author);
     }
 }

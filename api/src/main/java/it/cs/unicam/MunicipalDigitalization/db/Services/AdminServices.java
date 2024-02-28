@@ -1,7 +1,7 @@
 package it.cs.unicam.MunicipalDigitalization.db.Services;
 
 import it.cs.unicam.MunicipalDigitalization.api.model.Municipality;
-import it.cs.unicam.MunicipalDigitalization.api.model.users.*;
+import it.cs.unicam.MunicipalDigitalization.api.model.users.AbstractAuthenticatedUser;
 import it.cs.unicam.MunicipalDigitalization.api.util.DesignPattern.Command.GiveRoleCommand;
 import it.cs.unicam.MunicipalDigitalization.api.util.DesignPattern.Command.RemoveRoleCommand;
 import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;
@@ -29,12 +29,12 @@ public class AdminServices {
      * Method to remove a role from a user by an admin
      *
      * @param adminID ID of the admin
-     * @param userID ID of the user
-     * @param role Role to remove
+     * @param userID  ID of the user
+     * @param role    Role to remove
      */
 
-    public void removeRole(Long adminID, Long userID, UserRole role){
-        if(userService.getUserById(adminID).getRole().contains(UserRole.PLATFORM_GESTOR)){
+    public void removeRole(Long adminID, Long userID, UserRole role) {
+        if (userService.getUserById(adminID).getRole().contains(UserRole.PLATFORM_GESTOR)) {
             AbstractAuthenticatedUser user = userService.getUserById(userID);
             RemoveRoleCommand removeRoleCommand = new RemoveRoleCommand(role, userService.getUserById(userID));
             removeRoleCommand.execute();
@@ -46,12 +46,12 @@ public class AdminServices {
      * Method to add a role to a user by an admin
      *
      * @param adminID ID of the admin
-     * @param userID ID of the user
-     * @param role Role to add
+     * @param userID  ID of the user
+     * @param role    Role to add
      */
 
-    public void addRole(Long adminID, Long userID, UserRole role){
-        if(userService.getUserById(adminID).getRole().contains(UserRole.PLATFORM_GESTOR)){
+    public void addRole(Long adminID, Long userID, UserRole role) {
+        if (userService.getUserById(adminID).getRole().contains(UserRole.PLATFORM_GESTOR)) {
             AbstractAuthenticatedUser user = userService.getUserById(userID);
             GiveRoleCommand giveRoleCommand = new GiveRoleCommand(role, userService.getUserById(userID));
             giveRoleCommand.execute();
@@ -62,13 +62,13 @@ public class AdminServices {
     /**
      * Method to create a municipality by an admin
      *
-     * @param adminID ID of the admin
+     * @param adminID         ID of the admin
      * @param municipalityDTO the municipality to be created
      */
 
-    public void createMunicipality(Long adminID, MunicipalityInputDTO municipalityDTO){
-        if(userService.getUserById(adminID).getRole().contains(UserRole.PLATFORM_GESTOR)){
-            Municipality municipality = new Municipality(municipalityDTO.territory(),municipalityDTO.municipality_name());
+    public void createMunicipality(Long adminID, MunicipalityInputDTO municipalityDTO) {
+        if (userService.getUserById(adminID).getRole().contains(UserRole.PLATFORM_GESTOR)) {
+            Municipality municipality = new Municipality(municipalityDTO.territory(), municipalityDTO.municipality_name());
             municipalService.saveMunicipal(municipality);
         } else throw new IllegalArgumentException("User not authorized to create municipality");
     }

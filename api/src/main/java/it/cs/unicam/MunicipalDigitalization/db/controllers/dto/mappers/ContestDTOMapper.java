@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.function.Function;
 
 @Service
-public class ContestDTOMapper implements Function<ContributionContest, ContestOutputDTO>{
+public class ContestDTOMapper implements Function<ContributionContest, ContestOutputDTO> {
 
     @Override
     public ContestOutputDTO apply(ContributionContest contributionContest) {

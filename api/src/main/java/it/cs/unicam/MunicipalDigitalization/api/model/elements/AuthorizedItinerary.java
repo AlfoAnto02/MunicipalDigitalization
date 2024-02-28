@@ -27,14 +27,14 @@ public class AuthorizedItinerary extends AbstractItinerary {
     /**
      * Constructor for the AuthorizedItinerary class used by the Builder
      *
-     * @param municipality the municipality where the itinerary should be located
+     * @param municipality  the municipality where the itinerary should be located
      * @param elementStatus the status of the itinerary
-     * @param coordinate the coordinate of the itinerary
-     * @param name the name of the itinerary
-     * @param pois the list of points of interest (POIs) that compose the itinerary
-     * @param types the types of the itinerary
-     * @param description the description of the itinerary
-     * @param author the author of the itinerary
+     * @param coordinate    the coordinate of the itinerary
+     * @param name          the name of the itinerary
+     * @param pois          the list of points of interest (POIs) that compose the itinerary
+     * @param types         the types of the itinerary
+     * @param description   the description of the itinerary
+     * @param author        the author of the itinerary
      */
     public AuthorizedItinerary(Municipality municipality, ElementStatus elementStatus, Coordinate coordinate,
                                String name, List<AbstractPOI> pois, String types, String description,

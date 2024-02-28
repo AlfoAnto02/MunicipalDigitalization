@@ -11,11 +11,11 @@ import java.util.function.Function;
  * This class is used to map the UserDTO to the User entity and vice versa.
  */
 @Service
-public class UserDTOMapper implements Function<AbstractAuthenticatedUser, UserOutputDTO>{
+public class UserDTOMapper implements Function<AbstractAuthenticatedUser, UserOutputDTO> {
 
     @Override
     public UserOutputDTO apply(AbstractAuthenticatedUser abstractAuthenticatedUser) {
-        if(abstractAuthenticatedUser.getRole().contains(UserRole.PLATFORM_GESTOR)){
+        if (abstractAuthenticatedUser.getRole().contains(UserRole.PLATFORM_GESTOR)) {
             return new UserOutputDTO(
                     abstractAuthenticatedUser.getId(),
                     abstractAuthenticatedUser.getName(),

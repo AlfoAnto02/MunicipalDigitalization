@@ -17,8 +17,8 @@ public class RoleRequest {
     /**
      * Constructor for the RoleRequest class.
      *
-     * @param userID id of the user to change the role
-     * @param role new role for the user
+     * @param userID  id of the user to change the role
+     * @param role    new role for the user
      * @param adminID id of the admin that made the request
      */
     public RoleRequest(Long userID, UserRole role, Long adminID) {

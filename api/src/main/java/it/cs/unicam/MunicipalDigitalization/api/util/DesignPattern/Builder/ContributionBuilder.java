@@ -6,7 +6,7 @@ import it.cs.unicam.MunicipalDigitalization.api.model.users.AbstractAuthenticate
 import org.springframework.stereotype.Component;
 
 @Component
-public class ContributionBuilder implements IContributionBuilder{
+public class ContributionBuilder implements IContributionBuilder {
     private AbstractAuthenticatedUser author;
     private String contribution;
     private String description;

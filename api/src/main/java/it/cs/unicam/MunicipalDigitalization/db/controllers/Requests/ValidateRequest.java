@@ -17,7 +17,7 @@ public class ValidateRequest {
      * Constructor for the ValidateRequest class.
      *
      * @param validatorID id of the curator that made the request
-     * @param requestID id of the request to validate
+     * @param requestID   id of the request to validate
      * @param isValidated boolean that indicates if the request is validated
      */
     public ValidateRequest(long validatorID, long requestID, boolean isValidated) {

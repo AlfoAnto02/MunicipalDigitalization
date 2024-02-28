@@ -1,7 +1,7 @@
 package it.cs.unicam.MunicipalDigitalization.db.Repository;
 
-import it.cs.unicam.MunicipalDigitalization.api.model.users.AbstractAuthenticatedUser;
 import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractPOI;
+import it.cs.unicam.MunicipalDigitalization.api.model.users.AbstractAuthenticatedUser;
 import it.cs.unicam.MunicipalDigitalization.api.util.ElementStatus;
 import it.cs.unicam.MunicipalDigitalization.api.util.POIType;
 import lombok.NonNull;
@@ -28,6 +28,7 @@ public interface POIRepository extends JpaRepository<AbstractPOI, Long> {
 
     /**
      * This Method is used to find a List of POIs by a Status
+     *
      * @param status of the POI
      * @return a List of POI
      */
@@ -36,6 +37,7 @@ public interface POIRepository extends JpaRepository<AbstractPOI, Long> {
 
     /**
      * This Method is used to find a List of POIs created by an Author
+     *
      * @param user author of the POIs
      * @return a List of POIs
      */
@@ -44,6 +46,7 @@ public interface POIRepository extends JpaRepository<AbstractPOI, Long> {
 
     /**
      * This Method is used to find the List of POIs of a Municipality
+     *
      * @param id of the Municipality
      * @return a List of POIs
      */
@@ -52,6 +55,7 @@ public interface POIRepository extends JpaRepository<AbstractPOI, Long> {
 
     /**
      * This Method is used to find a POI by its name
+     *
      * @param name of the POI
      * @return the Name of the POI
      */
@@ -60,6 +64,7 @@ public interface POIRepository extends JpaRepository<AbstractPOI, Long> {
 
     /**
      * This Method is used to find a List of POIs by a Type
+     *
      * @param type of the POIs
      * @return a List of POIs
      */
@@ -68,6 +73,7 @@ public interface POIRepository extends JpaRepository<AbstractPOI, Long> {
 
     /**
      * This Method is used to find a POI by the ID of a Content
+     *
      * @param id of the Content
      * @return the POI
      */

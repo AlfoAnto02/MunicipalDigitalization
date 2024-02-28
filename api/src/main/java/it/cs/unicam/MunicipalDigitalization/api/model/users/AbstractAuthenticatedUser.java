@@ -95,8 +95,8 @@ public abstract class AbstractAuthenticatedUser extends AbstractIUser implements
         this.authoredContents = new ArrayList<>();
         this.authoredContests = new ArrayList<>();
         this.authoredContributions = new ArrayList<>();
-        this.contestsParticipated=new ArrayList<>();
-        this.votedContributions=new ArrayList<>();
+        this.contestsParticipated = new ArrayList<>();
+        this.votedContributions = new ArrayList<>();
     }
 
     /**
@@ -113,8 +113,8 @@ public abstract class AbstractAuthenticatedUser extends AbstractIUser implements
         this.authoredContents = new ArrayList<>();
         this.authoredContests = new ArrayList<>();
         this.authoredContributions = new ArrayList<>();
-        this.contestsParticipated=new ArrayList<>();
-        this.votedContributions=new ArrayList<>();
+        this.contestsParticipated = new ArrayList<>();
+        this.votedContributions = new ArrayList<>();
     }
 
     /**
@@ -126,8 +126,8 @@ public abstract class AbstractAuthenticatedUser extends AbstractIUser implements
         this.authoredContents = new ArrayList<>();
         this.authoredContests = new ArrayList<>();
         this.authoredContributions = new ArrayList<>();
-        this.contestsParticipated=new ArrayList<>();
-        this.votedContributions=new ArrayList<>();
+        this.contestsParticipated = new ArrayList<>();
+        this.votedContributions = new ArrayList<>();
     }
 
     /**
@@ -195,6 +195,7 @@ public abstract class AbstractAuthenticatedUser extends AbstractIUser implements
     public void addContribution(Contribution contribution) {
         this.authoredContributions.add(contribution);
     }
+
     public void voteContribution(Contribution contribution) {
         this.votedContributions.add(contribution);
     }

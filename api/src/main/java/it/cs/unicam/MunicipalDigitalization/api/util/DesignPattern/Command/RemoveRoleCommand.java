@@ -6,7 +6,7 @@ import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;
 /**
  * This class is used to remove a role from a user.
  */
-public class RemoveRoleCommand implements ICommand{
+public class RemoveRoleCommand implements ICommand {
     private final UserRole role;
     private final AbstractAuthenticatedUser user;
 

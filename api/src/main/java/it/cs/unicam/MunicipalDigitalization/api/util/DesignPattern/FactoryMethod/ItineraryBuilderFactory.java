@@ -19,7 +19,7 @@ public class ItineraryBuilderFactory {
      * Constructor for the ItineraryBuilderFactory
      *
      * @param authorizedItineraryBuilder an authorizedItineraryBuilder for creating authorized itineraries
-     * @param pendingItineraryBuilder a pendingItineraryBuilder for creating pending itineraries
+     * @param pendingItineraryBuilder    a pendingItineraryBuilder for creating pending itineraries
      */
 
     public ItineraryBuilderFactory(AuthorizedItineraryBuilder authorizedItineraryBuilder, PendingItineraryBuilder pendingItineraryBuilder) {
@@ -34,9 +34,9 @@ public class ItineraryBuilderFactory {
      * @return the created ItineraryBuilder
      */
     public ItineraryBuilder createBuilderForUser(AbstractAuthenticatedUser user) {
-        if(user.getRole().contains(UserRole.CURATOR) || user.getRole().contains(UserRole.AUTHORIZED_CONTRIBUTOR)) {
+        if (user.getRole().contains(UserRole.CURATOR) || user.getRole().contains(UserRole.AUTHORIZED_CONTRIBUTOR)) {
             return authorizedItineraryBuilder;
-        } else if(user.getRole().contains(UserRole.CONTRIBUTOR)) {
+        } else if (user.getRole().contains(UserRole.CONTRIBUTOR)) {
             return pendingItineraryBuilder;
         } else throw new IllegalArgumentException("User role not suopported for Itinerary Creation");
     }

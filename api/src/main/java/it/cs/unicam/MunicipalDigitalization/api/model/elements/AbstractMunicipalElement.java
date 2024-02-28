@@ -34,7 +34,7 @@ public abstract class AbstractMunicipalElement implements IMunicipalElement {
      * Municipality of the Element
      */
     @ManyToOne
-    @JoinColumn(name = "municipality",nullable = false)
+    @JoinColumn(name = "municipality", nullable = false)
     @JsonManagedReference
     private Municipality municipality;
     /**
@@ -84,30 +84,29 @@ public abstract class AbstractMunicipalElement implements IMunicipalElement {
 
     /**
      * Constructor for the AbstractMunicipalElement class.
-     *
      */
     public AbstractMunicipalElement() {
-        this.listOfContents= new ArrayList<>();
-        this.creationDate=LocalDateTime.now();
-        this.contest=new ArrayList<>();
+        this.listOfContents = new ArrayList<>();
+        this.creationDate = LocalDateTime.now();
+        this.contest = new ArrayList<>();
     }
 
     /**
      * Constructor for the AbstractMunicipalElement class that will be used from the Builder
      *
-     * @param municipality The municipality of the MunicipalElement
+     * @param municipality  The municipality of the MunicipalElement
      * @param elementStatus The status of the MunicipalElement
-     * @param coordinate The coordinate of the MunicipalElement
-     * @param name The name of the MunicipalElement
+     * @param coordinate    The coordinate of the MunicipalElement
+     * @param name          The name of the MunicipalElement
      */
     public AbstractMunicipalElement(Municipality municipality, ElementStatus elementStatus, Coordinate coordinate, String name) {
         this.municipality = municipality;
         this.elementStatus = elementStatus;
         this.coordinate = coordinate;
         this.name = name;
-        this.listOfContents= new ArrayList<>();
-        this.creationDate=LocalDateTime.now();
-        this.contest=new ArrayList<>();
+        this.listOfContents = new ArrayList<>();
+        this.creationDate = LocalDateTime.now();
+        this.contest = new ArrayList<>();
     }
 
     /**
@@ -168,7 +167,6 @@ public abstract class AbstractMunicipalElement implements IMunicipalElement {
     }
 
 
-
     /**
      * Method to get full information about a specific content from the MunicipalElement by its ID.
      *
@@ -180,7 +178,7 @@ public abstract class AbstractMunicipalElement implements IMunicipalElement {
     }
 
     public void setStatus(ElementStatus status) {
-        this.elementStatus=status;
+        this.elementStatus = status;
     }
 
     /**

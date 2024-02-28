@@ -1,9 +1,10 @@
 package it.cs.unicam.MunicipalDigitalization.db.Services;
 
-import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;
-import it.cs.unicam.MunicipalDigitalization.db.Services.Mediators.*;
+import it.cs.unicam.MunicipalDigitalization.db.Services.Mediators.ContentMediator;
+import it.cs.unicam.MunicipalDigitalization.db.Services.Mediators.ContestMediator;
+import it.cs.unicam.MunicipalDigitalization.db.Services.Mediators.ItineraryMediator;
+import it.cs.unicam.MunicipalDigitalization.db.Services.Mediators.POIMediator;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.Requests.ValidateRequest;
-import org.apache.commons.lang3.Validate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +32,7 @@ public class ValidateService {
      *
      * @param request The request to validate.
      */
-    public void validatePOI(ValidateRequest request){
+    public void validatePOI(ValidateRequest request) {
         poiMediator.validatePOI(request);
     }
 
@@ -40,7 +41,7 @@ public class ValidateService {
      *
      * @param request The request to validate.
      */
-    public void validateItinerary(ValidateRequest request){
+    public void validateItinerary(ValidateRequest request) {
         itineraryMediator.validateItinerary(request);
     }
 

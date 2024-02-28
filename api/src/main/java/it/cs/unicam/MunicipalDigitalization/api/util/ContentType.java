@@ -1,6 +1,5 @@
 package it.cs.unicam.MunicipalDigitalization.api.util;
 
-import java.awt.*;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -33,6 +32,7 @@ public enum ContentType {
      * The code associated with the type.
      */
     private final String code;
+
     /**
      * Constructor for the ContentType enum.
      * It initializes the type with the provided code.

@@ -50,7 +50,7 @@ public class MunicipalRepoTest {
      * Test the add of a Municipality in the Municipality repository.
      */
     @Test
-    public void testAddMunicipal(){
+    public void testAddMunicipal() {
 
         //Check if the Municipality is present
         assertTrue(municipalRepository.getMunicipalByName("Municipal").isPresent());
@@ -63,7 +63,7 @@ public class MunicipalRepoTest {
      * Test the remove of a municipality in the Municipality repository.
      */
     @Test
-    public void testRemoveMunicipal(){
+    public void testRemoveMunicipal() {
 
         //Check if the Municipality is present and remove it
         municipalRepository.deleteMunicipalById(municipality.getId());
@@ -76,7 +76,7 @@ public class MunicipalRepoTest {
      * Test the update of a Municipality in the Municipality repository.
      */
     @Test
-    public void testUpdateMunicipal(){
+    public void testUpdateMunicipal() {
 
         //Get the Municipality and update it
         Municipality municipality1 = municipalRepository.getMunicipalByName("Municipal").get();

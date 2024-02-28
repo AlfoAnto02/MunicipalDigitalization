@@ -19,7 +19,7 @@ public class POIBuilderFactory {
      * Constructor
      *
      * @param authorizedPOIBuilder an authorizedPOIBuilder for creating authorized POIs
-     * @param pendingPOIBuilder a pendingPOIBuilder for creating pending POIs
+     * @param pendingPOIBuilder    a pendingPOIBuilder for creating pending POIs
      */
     public POIBuilderFactory(AuthorizedPOIBuilder authorizedPOIBuilder, PendingPOIBuilder pendingPOIBuilder) {
         this.authorizedPOIBuilder = authorizedPOIBuilder;
@@ -33,9 +33,9 @@ public class POIBuilderFactory {
      * @return the correct POIBuilder based on the user role
      */
     public POIBuilder createBuilderForUser(AbstractAuthenticatedUser user) {
-        if(user.getRole().contains(UserRole.CURATOR) || user.getRole().contains(UserRole.AUTHORIZED_CONTRIBUTOR)) {
+        if (user.getRole().contains(UserRole.CURATOR) || user.getRole().contains(UserRole.AUTHORIZED_CONTRIBUTOR)) {
             return authorizedPOIBuilder;
-        } else if(user.getRole().contains(UserRole.CONTRIBUTOR)) {
+        } else if (user.getRole().contains(UserRole.CONTRIBUTOR)) {
             return pendingPOIBuilder;
         } else throw new IllegalArgumentException("User role not suopported for POI Creation");
     }

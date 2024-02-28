@@ -6,12 +6,13 @@ import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;
 /**
  * This class is the concrete command for giving a role to a user.
  */
-public class GiveRoleCommand implements ICommand{
+public class GiveRoleCommand implements ICommand {
     private final UserRole role;
     private final AbstractAuthenticatedUser user;
 
     /**
      * this is the constructor of the class.
+     *
      * @param role the role to give to the user
      * @param user the user to give the role to
      */

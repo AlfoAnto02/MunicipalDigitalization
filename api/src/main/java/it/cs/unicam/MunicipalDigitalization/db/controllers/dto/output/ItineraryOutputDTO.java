@@ -3,9 +3,8 @@ package it.cs.unicam.MunicipalDigitalization.db.controllers.dto.output;
 import it.cs.unicam.MunicipalDigitalization.api.util.Coordinate;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
-public record ItineraryOutputDTO (
+public record ItineraryOutputDTO(
         Long itinerary_id,
         String itinerary_name,
         String itinerary_municipality,
@@ -15,7 +14,6 @@ public record ItineraryOutputDTO (
         String listOfPOIs,
         String listOfContents,
         LocalDateTime itinerary_creationDate
-)
-{
+) {
 
 }

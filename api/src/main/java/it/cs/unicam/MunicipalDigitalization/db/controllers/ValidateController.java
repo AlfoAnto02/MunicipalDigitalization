@@ -1,4 +1,5 @@
 package it.cs.unicam.MunicipalDigitalization.db.controllers;
+
 import it.cs.unicam.MunicipalDigitalization.db.Services.ValidateService;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.Requests.ValidateRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +30,9 @@ public class ValidateController {
      */
 
     @RequestMapping(value = "/v1/validate/poi", method = RequestMethod.POST)
-    public ResponseEntity<Object> validatePOI(@RequestBody ValidateRequest request){
+    public ResponseEntity<Object> validatePOI(@RequestBody ValidateRequest request) {
         validateService.validatePOI(request);
-        return new ResponseEntity<>("POI validated", HttpStatus.OK  );
+        return new ResponseEntity<>("POI validated", HttpStatus.OK);
     }
 
     /**
@@ -41,9 +42,9 @@ public class ValidateController {
      * @return a message indicating that the Itinerary has been validated
      */
     @RequestMapping(value = "/v1/validate/itinerary", method = RequestMethod.POST)
-    public ResponseEntity<Object> validateItinerary(@RequestBody ValidateRequest request){
+    public ResponseEntity<Object> validateItinerary(@RequestBody ValidateRequest request) {
         validateService.validateItinerary(request);
-        return new ResponseEntity<>("Itinerary validated", HttpStatus.OK  );
+        return new ResponseEntity<>("Itinerary validated", HttpStatus.OK);
     }
 
     /**
@@ -53,9 +54,9 @@ public class ValidateController {
      * @return a message indicating that the Content has been validated
      */
     @RequestMapping(value = "/v1/validate/content", method = RequestMethod.POST)
-    public ResponseEntity<Object> validateContent(@RequestBody ValidateRequest request){
+    public ResponseEntity<Object> validateContent(@RequestBody ValidateRequest request) {
         validateService.validateContent(request);
-        return new ResponseEntity<>("Content validated", HttpStatus.OK  );
+        return new ResponseEntity<>("Content validated", HttpStatus.OK);
     }
 
 

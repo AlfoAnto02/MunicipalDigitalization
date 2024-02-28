@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface ContestRepository extends JpaRepository<ContributionContest, Long>{
+public interface ContestRepository extends JpaRepository<ContributionContest, Long> {
 
     @Query("SELECT cc.contributions FROM ContributionContest cc WHERE cc.id = :contestId")
     List<Contribution> findContributionByContestId(@Param("contestId") Long id);

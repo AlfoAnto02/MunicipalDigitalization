@@ -9,16 +9,16 @@ import java.util.List;
  * DTO used to output a contest
  */
 public record ContestOutputDTO(
-    Long contest_id,
-    String contest_name,
-    String contest_description,
-    ContestType contestType,
-    ContestStatus contestStatus,
-    List<String> contest_pois,
-    List<String> contest_itineraries,
-    int minParticipants,
-    int actualNumberOfParticipants,
-    String contest_author
-){
+        Long contest_id,
+        String contest_name,
+        String contest_description,
+        ContestType contestType,
+        ContestStatus contestStatus,
+        List<String> contest_pois,
+        List<String> contest_itineraries,
+        int minParticipants,
+        int actualNumberOfParticipants,
+        String contest_author
+) {
 
 }

@@ -13,7 +13,7 @@ import java.util.List;
 @Getter
 @Setter
 @EqualsAndHashCode
-public class Contribution implements IContribution{
+public class Contribution implements IContribution {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,6 +41,7 @@ public class Contribution implements IContribution{
     public Contribution() {
         this.contribution_voters = new ArrayList<>();
     }
+
     public Contribution(String title, String description, String contribution, ContributionContest contest,
                         AbstractAuthenticatedUser author) {
         this.title = title;
@@ -50,12 +51,13 @@ public class Contribution implements IContribution{
         this.author = author;
         this.contribution_voters = new ArrayList<>();
     }
+
     public void addVote(AbstractAuthenticatedUser userById) {
-        if(!this.contribution_voters.contains(userById)) this.contribution_voters.add(userById);
+        if (!this.contribution_voters.contains(userById)) this.contribution_voters.add(userById);
         else throw new IllegalArgumentException("User already voted");
     }
 
-    public int getTotalVotes(){
+    public int getTotalVotes() {
         return this.contribution_voters.size();
     }
 

@@ -41,11 +41,11 @@ public class ContestMediator {
         Long authorId = contributionContest.getAuthor().getId();
 
         //Check if the contest is already associated with the municipality
-        if(municipalService.getMunicipalByID(municipalityId).getContests().stream().noneMatch(c -> c.getId().equals(contributionContest.getId()))){
+        if (municipalService.getMunicipalByID(municipalityId).getContests().stream().noneMatch(c -> c.getId().equals(contributionContest.getId()))) {
             municipalService.addContest(municipalityId, contributionContest);
         }
         //Check if the contest is already associated with the author
-        if(userService.getUserById(authorId).getAuthoredContests().stream().noneMatch(c -> c.getId().equals(contributionContest.getId()))){
+        if (userService.getUserById(authorId).getAuthoredContests().stream().noneMatch(c -> c.getId().equals(contributionContest.getId()))) {
             userService.addContest(authorId, contributionContest);
         }
         this.poiService.addContestToPOIs(contributionContest.getPois(), contributionContest);
@@ -58,16 +58,14 @@ public class ContestMediator {
      * @param validateRequest The request to validate.
      */
     public void validateContest(ValidateRequest validateRequest) {
-        if(userService.getUserById(validateRequest.getValidatorID()).getRole().contains(UserRole.ANIMATOR) && (contestService
-                .getContestById(validateRequest.getRequestID()).getContestStatus().equals(ContestStatus.OPEN))){
-            if(contestService.getContestById(validateRequest.getRequestID()).getActualNumberOfParticipants()
-                    >contestService.getContestById(validateRequest.getRequestID()).getMinParticipants()) {
+        if (userService.getUserById(validateRequest.getValidatorID()).getRole().contains(UserRole.ANIMATOR) && (contestService
+                .getContestById(validateRequest.getRequestID()).getContestStatus().equals(ContestStatus.OPEN))) {
+            if (contestService.getContestById(validateRequest.getRequestID()).getActualNumberOfParticipants()
+                    > contestService.getContestById(validateRequest.getRequestID()).getMinParticipants()) {
                 contestService.validateContest(validateRequest.getRequestID(), validateRequest.isValidated());
                 userService.updateUserContestList(validateRequest.getRequestID(), validateRequest.isValidated());
-            }
-            else throw new IllegalArgumentException("The contest has not enough participants");
-        }
-        else throw new IllegalArgumentException("The user is not an Animator or the contest is not open");
+            } else throw new IllegalArgumentException("The contest has not enough participants");
+        } else throw new IllegalArgumentException("The user is not an Animator or the contest is not open");
     }
 }
 

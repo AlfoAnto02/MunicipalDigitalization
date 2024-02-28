@@ -29,7 +29,8 @@ public class ContentService {
      * @param content the content to save
      */
     public void saveContent(AbstractContent content) {
-        if (!MatchingAlgorithms.isContentSimilarToContentList(content,contentRepository.findAll())) contentRepository.save(content);
+        if (!MatchingAlgorithms.isContentSimilarToContentList(content, contentRepository.findAll()))
+            contentRepository.save(content);
         else throw new IllegalArgumentException("Content already exists");
     }
 
@@ -41,11 +42,10 @@ public class ContentService {
      */
     public void validateContent(long requestID, boolean validated) {
         AbstractContent content = contentRepository.getReferenceById(requestID);
-        if(validated) {
+        if (validated) {
             content.setElementStatus(ElementStatus.PUBLISHED);
             contentRepository.save(content);
-        }
-        else {
+        } else {
             contentRepository.delete(content);
         }
     }

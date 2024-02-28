@@ -13,7 +13,7 @@ import java.util.Optional;
 /**
  * This repository represents the User Repository
  */
-public interface UserRepository extends JpaRepository<AbstractAuthenticatedUser,Long> {
+public interface UserRepository extends JpaRepository<AbstractAuthenticatedUser, Long> {
 
     /**
      * Method used to find a user by its ID.
