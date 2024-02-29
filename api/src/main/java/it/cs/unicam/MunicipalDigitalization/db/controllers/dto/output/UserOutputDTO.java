@@ -10,9 +10,9 @@ public record UserOutputDTO(
         String username,
         String password,
         String municipality_name,
-        List<UserRole> user_roles
-        //List<AbstractPOI> poisCreated
-        //List<AbstractItinerary> itinerariesCreated,
-        //List<AbstractContent> contentsCreated
+        List<UserRole> user_roles,
+        List<String> poisCreated,
+        List<String> itinerariesCreated,
+        List<String> contentsCreated
 ) {
 }

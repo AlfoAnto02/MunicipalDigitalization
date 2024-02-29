@@ -1,5 +1,9 @@
 package it.cs.unicam.MunicipalDigitalization.db.controllers.dto.mappers;
 
+import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractContent;
+import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractItinerary;
+import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractMunicipalElement;
+import it.cs.unicam.MunicipalDigitalization.api.model.elements.AbstractPOI;
 import it.cs.unicam.MunicipalDigitalization.api.model.users.AbstractAuthenticatedUser;
 import it.cs.unicam.MunicipalDigitalization.api.util.UserRole;
 import it.cs.unicam.MunicipalDigitalization.db.controllers.dto.output.UserOutputDTO;
@@ -21,12 +25,10 @@ public class UserDTOMapper implements Function<AbstractAuthenticatedUser, UserOu
                     abstractAuthenticatedUser.getName(),
                     abstractAuthenticatedUser.getPassword(),
                     "Platform Gestor does not have a municipality",
-                    abstractAuthenticatedUser.getRole()
-
-                    //null
-                    //null,
-
-                    //null
+                    abstractAuthenticatedUser.getRole(),
+                    null,
+                    null,
+                    null
             );
         }
         return new UserOutputDTO(
@@ -34,10 +36,10 @@ public class UserDTOMapper implements Function<AbstractAuthenticatedUser, UserOu
                 abstractAuthenticatedUser.getName(),
                 abstractAuthenticatedUser.getPassword(),
                 abstractAuthenticatedUser.getMunicipality().getName(),
-                abstractAuthenticatedUser.getRole()
-                //abstractAuthenticatedUser.getAuthoredPOIs()
-                //abstractAuthenticatedUser.getAuthoredItineraries(),
-                //abstractAuthenticatedUser.getAuthoredContents()
+                abstractAuthenticatedUser.getRole(),
+                abstractAuthenticatedUser.getAuthoredPOIs().stream().map(AbstractPOI::getName).toList(),
+                abstractAuthenticatedUser.getAuthoredItineraries().stream().map(AbstractItinerary::getName).toList(),
+                abstractAuthenticatedUser.getAuthoredContents().stream().map(AbstractContent::getName).toList()
         );
     }
 }

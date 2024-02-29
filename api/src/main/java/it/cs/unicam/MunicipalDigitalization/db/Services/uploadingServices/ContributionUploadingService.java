@@ -1,6 +1,7 @@
 package it.cs.unicam.MunicipalDigitalization.db.Services.uploadingServices;
 
 import it.cs.unicam.MunicipalDigitalization.api.util.ContestStatus;
+import it.cs.unicam.MunicipalDigitalization.api.util.ContestType;
 import it.cs.unicam.MunicipalDigitalization.api.util.DesignPattern.Builder.ContributionBuilder;
 import it.cs.unicam.MunicipalDigitalization.db.Services.ContestService;
 import it.cs.unicam.MunicipalDigitalization.db.Services.Mediators.ContributionMediator;
@@ -62,6 +63,27 @@ public class ContributionUploadingService {
         checkTitle(contributionInputDTO);
         checkDescription(contributionInputDTO);
         checkUserParticipation(contributionInputDTO);
+        checkContributionType(contributionInputDTO);
+    }
+
+    /**
+     * Check if the contribution is valid for the contest type.
+     *
+     * @param contributionInputDTO DTO of the Contribution.
+     */
+    private void checkContributionType(ContributionInputDTO contributionInputDTO) {
+        if (contributionInputDTO.content() == null || contributionInputDTO.content().isEmpty()) {
+            throw new IllegalArgumentException("Contribution field is empty");
+        }
+        if(contestService.getContestById(contributionInputDTO.contributionContestId()).getContestType().equals(ContestType.PHOTO_CONTEST)
+                && !(contributionInputDTO.content().endsWith("png") || (contributionInputDTO.content().endsWith("jpg")) ||
+                (contributionInputDTO.content().endsWith("jpeg")))){
+            throw new IllegalArgumentException("Contribution is not a photo for photo contest");
+        }
+        if(contestService.getContestById(contributionInputDTO.contributionContestId()).getContestType().equals(ContestType.WRITING_CONTEST)
+                && !(contributionInputDTO.content().length()<10 || (contributionInputDTO.content().length()>1000))){
+            throw new IllegalArgumentException("Contribution description error for writing contest");
+        }
     }
 
     /**

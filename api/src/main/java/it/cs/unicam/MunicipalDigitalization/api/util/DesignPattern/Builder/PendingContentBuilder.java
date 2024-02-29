@@ -83,17 +83,6 @@ public class PendingContentBuilder implements ContentBuilder {
     }
 
     /**
-     * This method resets the builder
-     */
-    public void reset() {
-        this.author = null;
-        this.name = null;
-        this.type = null;
-        this.content = null;
-        this.contentStatus = null;
-    }
-
-    /**
      * This method builds the pending content
      *
      * @return the pending content

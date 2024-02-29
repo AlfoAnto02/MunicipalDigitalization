@@ -83,16 +83,6 @@ public class AuthorizedContentBuilder implements ContentBuilder {
         this.contentStatus = ElementStatus.PUBLISHED;
     }
 
-    /**
-     * This method resets the builder
-     */
-    public void reset() {
-        this.author = null;
-        this.name = null;
-        this.type = null;
-        this.content = null;
-        this.contentStatus = null;
-    }
 
     /**
      * This method builds the authorized content

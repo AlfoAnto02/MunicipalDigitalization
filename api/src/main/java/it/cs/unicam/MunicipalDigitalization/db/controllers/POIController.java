@@ -52,7 +52,7 @@ public class POIController {
     @RequestMapping(value = "/v1/poi/upload", method = RequestMethod.POST)
     public ResponseEntity<Object> uploadPOI(@RequestBody POIInputDTO poidto) {
         uploadingService.uploadPOI(poidto);
-        return new ResponseEntity<>("Product added :)", HttpStatus.OK);
+        return new ResponseEntity<>("Product added ", HttpStatus.OK);
     }
 
 

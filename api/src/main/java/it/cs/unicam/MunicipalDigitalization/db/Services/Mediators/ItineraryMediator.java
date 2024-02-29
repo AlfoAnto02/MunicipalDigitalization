@@ -34,9 +34,6 @@ public class ItineraryMediator {
 
         this.itineraryService.saveItinerary(itinerary);
 
-        //Get the municipality id and the author Id
-        Long municipalityId = itinerary.getMunicipality().getId();
-        Long authorId = itinerary.getAuthor().getId();
 
         municipalityService.addItinerary(itinerary.getMunicipality().getId(), itinerary);
         userService.addItinerary(itinerary.getAuthor().getId(), itinerary);

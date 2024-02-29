@@ -97,8 +97,14 @@ public class PendingItineraryBuilder implements ItineraryBuilder {
     }
 
     @Override
-    public void setItineraryCoordinates(Coordinate coordinate) {
-        this.coordinate = coordinate;
+    public void setItineraryCoordinates() {
+        double totalx = 0;
+        double totaly = 0;
+        for(AbstractPOI p : this.poiList){
+            totalx += p.getCoordinate().getX();
+            totaly += p.getCoordinate().getY();
+        }
+        this.coordinate = new Coordinate(totalx/this.poiList.size(), totaly/this.poiList.size());
     }
 
     @Override
@@ -114,18 +120,6 @@ public class PendingItineraryBuilder implements ItineraryBuilder {
     @Override
     public void setItineraryStatus() {
         this.status = ElementStatus.PENDING;
-    }
-
-    @Override
-    public void reset() {
-        this.poiList = null;
-        this.name = null;
-        this.description = null;
-        this.author = null;
-        this.municipality = null;
-        this.coordinate = null;
-        this.type = null;
-        this.status = null;
     }
 
     /**

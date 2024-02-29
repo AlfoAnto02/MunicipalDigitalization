@@ -57,16 +57,6 @@ public class PendingPOIBuilder implements POIBuilder {
         this.status = ElementStatus.PENDING;
     }
 
-    @Override
-    public void reset() {
-        this.author = null;
-        this.coordinates = null;
-        this.name = null;
-        this.type = null;
-        this.municipality = null;
-        this.status = null;
-    }
-
     /**
      * This method is used to build the Pending POI.
      *

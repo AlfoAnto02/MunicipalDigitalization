@@ -54,8 +54,10 @@ public class ContestMediator {
                 .getContestById(validateRequest.getRequestID()).getContestStatus().equals(ContestStatus.OPEN))) {
             if (contestService.getContestById(validateRequest.getRequestID()).getActualNumberOfParticipants()
                     > contestService.getContestById(validateRequest.getRequestID()).getMinParticipants()) {
-                contestService.validateContest(validateRequest.getRequestID(), validateRequest.isValidated());
-                userService.updateUserContestList(validateRequest.getRequestID(), validateRequest.isValidated());
+                if(userService.getUserById(validateRequest.getValidatorID()).getMunicipality().getId().equals(contestService.getContestById(validateRequest.getRequestID()).getMunicipality().getId())) {
+                    contestService.validateContest(validateRequest.getRequestID(), validateRequest.isValidated());
+                    userService.updateUserContestList(validateRequest.getRequestID(), validateRequest.isValidated());
+                } else throw new IllegalArgumentException("The user is not an Animator of the contest's municipality");
             } else throw new IllegalArgumentException("The contest has not enough participants");
         } else throw new IllegalArgumentException("The user is not an Animator or the contest is not open");
     }

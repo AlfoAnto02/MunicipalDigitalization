@@ -56,20 +56,14 @@ public interface ItineraryBuilder {
 
     /**
      * This method is used to set the coordinates of the Itinerary.
-     *
-     * @param coordinate The coordinates of the Itinerary.
+     * based on the selected POIs.
      */
-    void setItineraryCoordinates(Coordinate coordinate);
+    void setItineraryCoordinates();
 
     /**
      * This method is used to set the status of the Itinerary.
      */
     void setItineraryStatus();
-
-    /**
-     * This method is used to build the Itinerary.
-     */
-    void reset();
 
     /**
      * This method is used to build the Itinerary.

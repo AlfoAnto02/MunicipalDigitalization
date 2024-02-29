@@ -149,7 +149,7 @@ public class ContestUploadingService {
      * @param contestInputDTO the contest in DTO to be uploaded
      */
     private void checkMinParticipants(ContestInputDTO contestInputDTO) {
-        if ((contestInputDTO.minParticipants() > ((userService.getUserById(contestInputDTO.contest_author_id()).getMunicipality().getListOfIUsers().size()) / 10) || contestInputDTO.minParticipants() < 0)) {
+        if (contestInputDTO.minParticipants() < 0) {
             throw new IllegalArgumentException("Min Participants is invalid");
         }
     }

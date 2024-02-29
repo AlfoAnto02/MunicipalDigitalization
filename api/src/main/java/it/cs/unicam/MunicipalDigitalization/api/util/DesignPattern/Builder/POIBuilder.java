@@ -53,11 +53,6 @@ public interface POIBuilder {
     void setPOIStatus();
 
     /**
-     * This method resets the builder.
-     */
-    void reset();
-
-    /**
      * This method builds the POI.
      *
      * @return the POI.

@@ -34,7 +34,7 @@ public class ContentController {
     @RequestMapping(value = "/v1/content/upload", method = RequestMethod.POST)
     public ResponseEntity<Object> uploadContent(@RequestBody ContentInputDTO contentDTO) {
         contentUploadingService.uploadContent(contentDTO);
-        return ResponseEntity.ok("Content added :)");
+        return ResponseEntity.ok("Content added ");
     }
 
     /**

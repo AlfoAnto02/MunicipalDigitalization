@@ -29,10 +29,6 @@ public class POIMediator {
     public void savePOI(AbstractPOI poi) {
         poiService.savePOI(poi);
 
-        //Get the municipality id and the author Id
-        Long municipalityId = poi.getMunicipality().getId();
-        Long authorId = poi.getAuthor().getId();
-
         //Check if the POI is already associated with the municipality
         if (poi.getMunicipality().getPOIList().stream().noneMatch(p -> p.getId().equals(poi.getId()))) {
             municipalityService.addPOI(poi.getMunicipality().getId(), poi);
